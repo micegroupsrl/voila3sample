@@ -1,0 +1,25 @@
+<div>
+    <!--Form-->
+    <form [formGroup]="categoriaOrdineForm">
+        <mat-card class="mat-elevation-z8">
+            <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
+                <!--Id Categoria Ordine-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <!--In new mode show the ID as required field-->
+                        <label *ngIf="pageStatus | hasPageStatus: 'new'">ID*</label>
+                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">ID</label>
+                    </div>
+                    <rsd-input-number formControlName="idCategoriaOrdine"></rsd-input-number>
+                </div>
+                <!--End Id Categoria Ordine-->
+
+                <!--Tabs categoriaOrdine -->
+                <div class="tabs">
+                    <app-tabs-categoria-ordine [formGroup]="categoriaOrdineForm" [entity]="categoriaOrdine" [pageStatus]="pageStatus"></app-tabs-categoria-ordine>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

@@ -1,0 +1,36 @@
+<div>
+    <mat-card class="mat-elevation-z8">
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Role -->
+            <div *ngIf="privilegePerRole?.theRoleObjectKey">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.PrivilegePerRole.theRoleObjectKey' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ privilegePerRole!.theRoleObjectTitle }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Privilege -->
+            <div *ngIf="privilegePerRole?.thePrivilegeObjectKey">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.PrivilegePerRole.thePrivilegeObjectKey' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ privilegePerRole!.thePrivilegeObjectTitle }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tabs privilegePerRole -->
+            <app-tabs-privilege-per-role [formGroup]="privilegePerRoleForm" [entity]="privilegePerRole" [pageStatus]="pageStatus"></app-tabs-privilege-per-role>
+        </mat-card-content>
+    </mat-card>
+</div>

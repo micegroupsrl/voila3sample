@@ -1,0 +1,57 @@
+<div>
+    <!--Form-->
+    <form [formGroup]="rigaOrdineForm">
+        <mat-card class="mat-elevation-z8">
+            <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
+                <!--Quantita-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.RigaOrdine.quantita' | translate }}</label>
+                    </div>
+                    <!--Input-->
+
+                    <rsd-input-number formControlName="quantita"></rsd-input-number>
+                </div>
+                <!--End Quantita-->
+                <!-- Prodotto-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <mat-label>{{ 'voila3sample.detail.RigaOrdine.theProdottoObjectKey' | translate }}*</mat-label>
+                    </div>
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>{{ 'voila3sample.detail.RigaOrdine.theProdottoObjectKey' | translate }}</mat-label>
+                        <!--Input-->
+                        <mat-select formControlName="theProdottoObjectKey">
+                            <mat-option *ngFor="let prodotto of prodottoList" [value]="prodotto.objectKey">
+                                {{ prodotto.objectTitle }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- Ordine-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <mat-label>{{ 'voila3sample.detail.RigaOrdine.theOrdineObjectKey' | translate }}*</mat-label>
+                    </div>
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>{{ 'voila3sample.detail.RigaOrdine.theOrdineObjectKey' | translate }}</mat-label>
+                        <!--Input-->
+                        <mat-select formControlName="theOrdineObjectKey">
+                            <mat-option *ngFor="let ordine of ordineList" [value]="ordine.objectKey">
+                                {{ ordine.objectTitle }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!--Tabs rigaOrdine -->
+                <div class="tabs">
+                    <app-tabs-riga-ordine [formGroup]="rigaOrdineForm" [entity]="rigaOrdine" [pageStatus]="pageStatus"></app-tabs-riga-ordine>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

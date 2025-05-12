@@ -1,0 +1,44 @@
+package it.micegroup.voila3sample.mapper;
+
+import it.micegroup.voila3sample.dto.EditRigaOrdineDto;
+import it.micegroup.voila3sample.dto.ViewRigaOrdineDto;
+import it.micegroup.voila3sample.domain.primary.RigaOrdine;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
+import java.util.Optional;
+
+/**
+ * Interface used to map DTO Classes to Entity Classes. Usefull to manage object
+ * transfered through this application.
+ */
+@Mapper
+public interface RigaOrdineMapper {
+	/**
+	 * Maps an EditRigaOrdineDto to an entity getEntityClassName(aClass)/]
+	 */
+
+	@Mapping(source = "entityState", target = "entityState")
+	RigaOrdine map(EditRigaOrdineDto rigaOrdineDto);
+
+	/**
+	 * Maps an entity RigaOrdine to a ViewRigaOrdineDto
+	 */
+	ViewRigaOrdineDto map(RigaOrdine rigaOrdine);
+
+	/**
+	 * Maps a Page<RigaOrdine> to a Page<ViewRigaOrdineDto>
+	 */
+	default Page<ViewRigaOrdineDto> map(Page<RigaOrdine> page) {
+		return page.map(this::map);
+	}
+
+	/*
+	 * Maps an Optional<RigaOrdine> to an Optional<ViewRigaOrdineDto>
+	 */
+	default Optional<ViewRigaOrdineDto> map(Optional<RigaOrdine> read) {
+		return read.map(this::map);
+	}
+}

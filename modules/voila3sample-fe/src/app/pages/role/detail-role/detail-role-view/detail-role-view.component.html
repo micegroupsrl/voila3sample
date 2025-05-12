@@ -1,0 +1,50 @@
+<div>
+    <mat-card class="mat-elevation-z8">
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Name -->
+            <div *ngIf="role?.name">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Role.name' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ role!.name }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Role Id -->
+            <div *ngIf="role?.roleId">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <div fxLayout="column" fxFlex="30">
+                        <!-- Label -->
+                        <label>{{ 'voila3sample.detail.Role.roleId' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ role!.roleId }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Role Role Group -->
+            <div *ngIf="role?.theRoleRoleGroupObjectKey">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Role.theRoleRoleGroupObjectKey' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ role!.theRoleRoleGroupObjectTitle }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tabs role -->
+            <app-tabs-role [formGroup]="roleForm" [entity]="role" [pageStatus]="pageStatus"></app-tabs-role>
+        </mat-card-content>
+    </mat-card>
+</div>

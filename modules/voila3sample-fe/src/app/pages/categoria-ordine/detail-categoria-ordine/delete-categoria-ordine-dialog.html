@@ -1,0 +1,21 @@
+<div fxLayout="column">
+    <!-- Toolbar -->
+    <mat-toolbar>
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span>Elimina CategoriaOrdine</span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <!-- Body -->
+    <div mat-dialog-content class="mat-dialog-content">Sicuro di eliminare questo CategoriaOrdine?</div>
+
+    <!-- Buttons -->
+    <div mat-dialog-actions fxLayoutAlign="space-between center">
+        <!--Cancel Button-->
+        <button mat-flat-button (click)="close()" class="button-reset-white">No</button>
+        <!-- Cancel -->
+        <!--Confirm Button-->
+        <button type="submit" mat-dialog-close (click)="onSubmit()" mat-flat-button color="primary">Si</button>
+        <!-- Confirm -->
+    </div>
+</div>

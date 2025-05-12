@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-title>Registration</mat-card-title>
+    <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+        <form (keydown.enter)="$event.preventDefault()" th:action="@{/register}" class="auth-form" [formGroup]="userForm">
+            <p>
+                <mat-form-field>
+                    <mat-icon matPrefix fontIcon="perm_identity"></mat-icon>
+                    <input matInput maxlength="10" placeholder="Username" formControlName="username" />
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <mat-icon matPrefix fontIcon="lock_outline"></mat-icon>
+                    <input matInput #password maxlength="10" type="password" placeholder="Password" formControlName="password" />
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <mat-icon matPrefix fontIcon="mail_outline"></mat-icon>
+                    <input matInput maxlength="30" placeholder="Email" formControlName="email" />
+                </mat-form-field>
+            </p>
+            <div class="button">
+                <button mat-button color="primary" routerLink="/login">Sign in</button>
+                <button mat-button color="primary" (click)="register()">Submit</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

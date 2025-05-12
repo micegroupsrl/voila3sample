@@ -1,0 +1,13 @@
+<mat-card-content>
+    <div>
+        <label class="example-label" *ngIf="control.value; else elseBlock">Value: {{ labelName[control.value] }}</label>
+        <ng-template #elseBlock>
+            <label class="example-label">Value: {{ labelName[0] }}</label>
+        </ng-template>
+    </div>
+    <div class="custom-slider">
+        <mat-slider [max]="value" [min]="0" [step]="1" [showTickMarks]="true">
+            <input matSliderThumb [formControl]="control" />
+        </mat-slider>
+    </div>
+</mat-card-content>

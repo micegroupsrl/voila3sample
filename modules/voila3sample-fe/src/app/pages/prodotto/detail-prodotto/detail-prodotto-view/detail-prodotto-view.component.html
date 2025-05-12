@@ -1,0 +1,37 @@
+<div>
+    <mat-card class="mat-elevation-z8">
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Nome Prodotto -->
+            <div *ngIf="prodotto?.nomeProdotto">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Prodotto.nomeProdotto' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ prodotto!.nomeProdotto }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Id Prodotto -->
+            <div *ngIf="prodotto?.idProdotto">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <div fxLayout="column" fxFlex="30">
+                        <!-- Label -->
+                        <label>ID</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ prodotto!.idProdotto }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tabs prodotto -->
+            <app-tabs-prodotto [formGroup]="prodottoForm" [entity]="prodotto" [pageStatus]="pageStatus"></app-tabs-prodotto>
+        </mat-card-content>
+    </mat-card>
+</div>

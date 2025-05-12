@@ -1,0 +1,100 @@
+<div fxLayout="column">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span>Filtra Ordine</span>
+            <button mat-icon-button color="basic" mat-dialog-close (click)="close()"><mat-icon>close</mat-icon></button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="mat-dialog-content" fxLayout="column">
+        <form name="searchOrdineForm" [formGroup]="searchOrdineForm" (keyup.enter)="onSubmit()" fxLayout="column" fxLayoutGap="20" fxFlex>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- idOrdine From -->
+                <rsd-input-number formControlName="idOrdineDa" label="Id Ordine {{ 'search.from' | translate }}..."></rsd-input-number>
+                <!-- idOrdine To -->
+                <rsd-input-number formControlName="idOrdineA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- dataOrdine From -->
+                <rsd-input-data formControlName="dataOrdineDa" label="Data Ordine {{ 'search.from' | translate }}..."></rsd-input-data>
+                <!-- Data Ordine To -->
+                <rsd-input-data formControlName="dataOrdineA" label="...{{ 'search.to' | translate }}"></rsd-input-data>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- tempoOrdine From -->
+                <mat-label class="lbl">Tempo Ordine {{ 'search.from' | translate }}...</mat-label>
+                <timepicker formControlName="tempoOrdineDa"></timepicker>
+                <!-- Tempo Ordine To -->
+                <mat-label class="lbl">...{{ 'search.to' | translate }}</mat-label>
+                <timepicker formControlName="tempoOrdineA"></timepicker>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Created By -->
+                <rsd-input-text formControlName="createdBy"></rsd-input-text>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Last Modified By -->
+                <rsd-input-text formControlName="lastModifiedBy"></rsd-input-text>
+            </div>
+
+            <!-- Created Date From -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <datetimepicker formControlName="createdDateDa" label="Created Date {{ 'search.from' | translate }}..."></datetimepicker>
+                <!-- Created Date To -->
+                <datetimepicker formControlName="createdDateA" label="...{{ 'search.to' | translate }}"></datetimepicker>
+            </div>
+
+            <!-- Last Modified Date From -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <datetimepicker formControlName="lastModifiedDateDa" label="Last Modified Date {{ 'search.from' | translate }}..."></datetimepicker>
+                <!-- Last Modified Date To -->
+                <datetimepicker formControlName="lastModifiedDateA" label="...{{ 'search.to' | translate }}"></datetimepicker>
+            </div>
+
+            <!-- Cliente -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Cliente</mat-label>
+                    <mat-select formControlName="theCliente">
+                        <mat-option *ngFor="let cliente of clienteList" [value]="cliente.objectKey">
+                            {{ cliente.objectTitle }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- Tipo Ordine -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Tipo Ordine</mat-label>
+                    <mat-select formControlName="theTipoOrdine">
+                        <mat-option *ngFor="let tipoOrdine of tipoOrdineList" [value]="tipoOrdine.objectKey">
+                            {{ tipoOrdine.objectTitle }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- Ordine Aggregato -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Ordine Aggregato</mat-label>
+                    <mat-select formControlName="theOrdineAggregato">
+                        <mat-option *ngFor="let ordineAggregato of ordineList" [value]="ordineAggregato.objectKey">
+                            {{ ordineAggregato.objectTitle }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div mat-dialog-actions fxLayoutAlign="space-between center">
+        <!-- Reset button -->
+        <button type="reset" mat-raised-button (click)="clear()" class="button-reset-white">Reset</button>
+        <!-- Search button -->
+        <button type="submit" [mat-dialog-close]="data" (click)="onSubmit()" mat-raised-button color="primary">Cerca</button>
+    </div>
+</div>

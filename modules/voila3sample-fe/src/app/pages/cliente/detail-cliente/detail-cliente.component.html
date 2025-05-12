@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="header" fxLayout="row" fxLayoutAlign="start center">
+        <!--Back Button-->
+        <button *ngIf="(pageStatus | hasPageStatus: 'edit') || (pageStatus | hasPageStatus: 'new')" mat-icon-button (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+        <!--List Button-->
+        <button *ngIf="pageStatus | hasPageStatus: 'view'" mat-icon-button (click)="goList()"><mat-icon>arrow_back</mat-icon></button>
+        <!--Title-->
+        <!-- Title will change with PageStatus -->
+        <mat-card-title *ngIf="pageStatus | hasPageStatus: 'view'">{{ 'voila3sample.detail.Cliente.labelDetail' | translate }}</mat-card-title>
+        <mat-card-title *ngIf="pageStatus | hasPageStatus: 'edit'">{{ 'voila3sample.detail.Cliente.labelEdit' | translate }}</mat-card-title>
+        <mat-card-title *ngIf="pageStatus | hasPageStatus: 'new'">{{ 'voila3sample.detail.Cliente.labelNew' | translate }}</mat-card-title>
+    </div>
+    <div class="content">
+        <!-- View Component -->
+        <app-detail-cliente-view *ngIf="pageStatus | hasPageStatus: 'view'" [cliente]="cliente" [pageStatus]="pageStatus" [clienteForm]="clienteForm"></app-detail-cliente-view>
+        <!-- Edit/New Component -->
+        <app-detail-cliente-edit
+            *ngIf="pageStatus | hasPageStatus: ['edit', 'new']"
+            [cliente]="cliente"
+            [pageStatus]="pageStatus"
+            [clienteForm]="clienteForm"
+        ></app-detail-cliente-edit>
+    </div>
+    <div class="footer" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="15px">
+        <!--New Button-->
+
+        <!--Edit Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'view') && (Privileges?.CLIENTE_UPDATE | Permission)"
+            (click)="editCliente()"
+        >
+            {{ 'buttons.edit' | translate }}
+        </button>
+        <!--Delete Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'view') && (Privileges?.CLIENTE_DELETE | Permission)"
+            (click)="confirmDeleteCliente()"
+        >
+            {{ 'buttons.delete' | translate }}
+        </button>
+        <!--Save Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'new') && (Privileges?.CLIENTE_CREATE | Permission)"
+            (click)="insertCliente()"
+        >
+            {{ 'buttons.save' | translate }}
+        </button>
+        <!--Update Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'edit') && (Privileges?.CLIENTE_UPDATE | Permission)"
+            (click)="updateCliente()"
+        >
+            {{ 'buttons.update' | translate }}
+        </button>
+        <!--PDF Export Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'view') && (Privileges?.CLIENTE_REPORT | Permission)"
+            (click)="printPdfReport()"
+        >
+            {{ 'buttons.export.pdf' | translate }}
+        </button>
+    </div>
+</div>

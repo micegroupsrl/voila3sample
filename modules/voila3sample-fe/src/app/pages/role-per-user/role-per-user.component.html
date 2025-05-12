@@ -1,0 +1,77 @@
+<!-- First Page for RolePerUser -->
+<!-- Here you can view element list and use searches to filter them -->
+<div class="container">
+    <div class="content">
+        <!-- Mat Card -->
+        <mat-card>
+            <!-- Card Header -->
+            <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-card-title>{{ 'voila3sample.detail.RolePerUser.label' | translate }}</mat-card-title>
+                <!-- Search Dialog Button -->
+                <button mat-icon-button (click)="openDialogResid()" matTooltip="Ricerca Avanzata con Resid" [color]="filters === '' ? 'basic' : 'warn'">
+                    <mat-icon matBadgeSize="small" [matBadge]="filters === '' ? '' : '!'" matBadgeColor="accent"> filter_list </mat-icon>
+                </button>
+                <!-- Advanced Search Dialog Button -->
+                <button mat-icon-button (click)="openDialogResidAdvanced()" matTooltip="Ricerca Avanzata con Resid Avanzata" [color]="filters === '' ? 'basic' : 'warn'">
+                    <mat-icon matBadgeSize="small" [matBadge]="filters === '' ? '' : '!'" matBadgeColor="accent"> filter_list </mat-icon>
+                </button>
+            </mat-card-header>
+
+            <mat-card-content class="overflow" autosize>
+                <!-- Numero theRolePerUser trovati -->
+                <!-- Elementi totali: {{totalRows}} -->
+                <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
+                <!-- Tabella tipo rolePerUser -->
+                <table aria-label="rolePerUser's table" mat-table [dataSource]="dataSource" matSort>
+                    <!-- Role-->
+                    <ng-container matColumnDef="theRole.idRole">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RolePerUser.theRoleObjectKey' | translate }}</th>
+                        <td mat-cell *matCellDef="let rolePerUser">{{ rolePerUser.theRoleObjectTitle }}</td>
+                    </ng-container>
+                    <!-- User-->
+                    <ng-container matColumnDef="theUser.idUser">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RolePerUser.theUserObjectKey' | translate }}</th>
+                        <td mat-cell *matCellDef="let rolePerUser">{{ rolePerUser.theUserObjectTitle }}</td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row (click)="isClickable(Privileges?.ROLE_PER_USER_READ) && navigateToView(row.objectKey)" *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+            </mat-card-content>
+
+            <!-- Card Footer -->
+            <mat-card-footer>
+                <!-- Pagination component -->
+                <mat-paginator
+                    #paginator
+                    [length]="totalRows"
+                    [pageIndex]="currentPage"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageChanged($event)"
+                    aria-label="Select page"
+                    showFirstLastButtons
+                >
+                </mat-paginator>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+    <div class="footer" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+        <!-- Redirect to Selected Element -->
+        <button
+            *ngIf="Privileges?.ROLE_PER_USER_CREATE | Permission"
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            routerLink="/pages/voila3sample/role-per-user/detail-role-per-user/new"
+        >
+            {{ 'buttons.new' | translate: { '0': '' | translate } }}
+        </button>
+        <!--Export xlxs-->
+        <button *ngIf="Privileges?.ROLE_PER_USER_REPORT | Permission" mat-raised-button color="primary" class="margin-8" (click)="printXlsxReport()">
+            {{ 'buttons.export.xlxs' | translate }}
+        </button>
+    </div>
+</div>

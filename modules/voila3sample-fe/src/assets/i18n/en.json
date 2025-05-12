@@ -1,0 +1,69 @@
+{
+    "messages": {
+        "success": {
+            "insert": "The resource: {{0}} with identifier: {{1}} has been successfully registered in the archive",
+            "update": "The resource: {{0}} with identifier: {{1}} has been successfully updated in the archive",
+            "delete": "The resource: {{0}} with identifier: {{1}} has been deleted from the archive"
+        },
+        "confirm": {
+            "delete": "Are you sure you want to delete the current resource?"
+        }
+    },
+    "errors": {
+        "NotFoundException": "The resource: {{resource}} with identifier: {{id}} is not present in the archive",
+        "AlreadyFoundException": "The resource: {{resource}} with identifier: {{id}} is already in the archive",
+        "NotNull": "The field {{0}} is required",
+        "NotEmpty": "The field {{0}} is required",
+        "NotBlank": "The field {{0}} is required",
+        "Length": "The field length {{0}} must be between {{2}} and {{1}}",
+        "Size": "The field length {{0}} must be between {{2}} and {{1}}",
+        "Email": "The field {{0}} is not a valid email address",
+
+        "required": "The field {{0}} is required",
+        "maxlength": "The field length {{0}} must be between {{2}} and {{1}}",
+        "email": "The field {{0}} is not a valid email address"
+    },
+    "paginationHeader": {
+        "found": "found",
+        "from": "from",
+        "to": "to",
+        "displayed": "displayed"
+    },
+    "search": {
+        "from": "From",
+        "to": "To"
+    },
+    "buttons": {
+        "element": "Element",
+        "new": "New {{0}}",
+        "save": "Save",
+        "update": "Update",
+        "edit": "Modify",
+        "delete": "Delete",
+        "goBack": "Back",
+        "search": "Search",
+        "restore": "Restore",
+        "next": "Next",
+        "export": {
+            "pdf": "Print PDF",
+            "xlxs": "Print XLXS"
+        },
+        "api": "Select API",
+        "filter": "Select filter",
+        "addFilter": "Add filter",
+        "value": "Value"
+    },
+    "table": {
+        "noRecordFound": "There are no values into {{0}}",
+        "countSummary": "Only 1 element found",
+        "countSummaries": "{{totalElements}} elements found, displaying from {{start}} to {{end}}"
+    },
+    "header": {
+        "list": "List {{name}}",
+        "search": "Search parameters",
+        "detail": "Detail {{name}}"
+    },
+    "label": {
+        "obligatoryValues": "its obligatory"
+    }
+}

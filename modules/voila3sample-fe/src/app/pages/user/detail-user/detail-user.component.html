@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="header" fxLayout="row" fxLayoutAlign="start center">
+        <!--Back Button-->
+        <button *ngIf="(pageStatus | hasPageStatus: 'edit') || (pageStatus | hasPageStatus: 'new')" mat-icon-button (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+        <!--List Button-->
+        <button *ngIf="pageStatus | hasPageStatus: 'view'" mat-icon-button (click)="goList()"><mat-icon>arrow_back</mat-icon></button>
+        <!--Title-->
+        <!-- Title will change with PageStatus -->
+        <mat-card-title *ngIf="pageStatus | hasPageStatus: 'view'">{{ 'voila3sample.detail.User.labelDetail' | translate }}</mat-card-title>
+        <mat-card-title *ngIf="pageStatus | hasPageStatus: 'edit'">{{ 'voila3sample.detail.User.labelEdit' | translate }}</mat-card-title>
+        <mat-card-title *ngIf="pageStatus | hasPageStatus: 'new'">{{ 'voila3sample.detail.User.labelNew' | translate }}</mat-card-title>
+    </div>
+    <div class="content">
+        <!-- View Component -->
+        <app-detail-user-view *ngIf="pageStatus | hasPageStatus: 'view'" [user]="user" [pageStatus]="pageStatus" [userForm]="userForm"></app-detail-user-view>
+        <!-- Edit/New Component -->
+        <app-detail-user-edit *ngIf="pageStatus | hasPageStatus: ['edit', 'new']" [user]="user" [pageStatus]="pageStatus" [userForm]="userForm"></app-detail-user-edit>
+    </div>
+    <div class="footer" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="15px">
+        <!--New Button-->
+
+        <!--Edit Button-->
+        <button mat-raised-button color="primary" class="margin-8" *ngIf="(pageStatus | hasPageStatus: 'view') && (Privileges?.USER_UPDATE | Permission)" (click)="editUser()">
+            {{ 'buttons.edit' | translate }}
+        </button>
+        <!--Delete Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'view') && (Privileges?.USER_DELETE | Permission)"
+            (click)="confirmDeleteUser()"
+        >
+            {{ 'buttons.delete' | translate }}
+        </button>
+        <!--Save Button-->
+        <button mat-raised-button color="primary" class="margin-8" *ngIf="(pageStatus | hasPageStatus: 'new') && (Privileges?.USER_CREATE | Permission)" (click)="insertUser()">
+            {{ 'buttons.save' | translate }}
+        </button>
+        <!--Update Button-->
+        <button mat-raised-button color="primary" class="margin-8" *ngIf="(pageStatus | hasPageStatus: 'edit') && (Privileges?.USER_UPDATE | Permission)" (click)="updateUser()">
+            {{ 'buttons.update' | translate }}
+        </button>
+        <!--PDF Export Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'view') && (Privileges?.USER_REPORT | Permission)"
+            (click)="printPdfReport()"
+        >
+            {{ 'buttons.export.pdf' | translate }}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<!-- All the tabs of Tipo Ordine -->
+
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" #tabgroup>
+    <!-- theOrdine -->
+    <mat-tab label="Ordine">
+        <!-- View -->
+        <app-tab-ordine-view [entity]="entity" *ngIf="pageStatus | hasPageStatus: 'view'"></app-tab-ordine-view>
+        <!-- Edit -->
+        <app-tab-ordine-edit-fe
+            [formGroup]="formGroup"
+            [entity]="entity"
+            [tab]="activeTab"
+            *ngIf="pageStatus | hasPageStatus: ['new', 'edit']"
+            #tabeditordine
+        ></app-tab-ordine-edit-fe>
+    </mat-tab>
+</mat-tab-group>

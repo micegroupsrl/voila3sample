@@ -1,0 +1,24 @@
+<div>
+    <!--Form-->
+    <form [formGroup]="prodottoForm">
+        <mat-card class="mat-elevation-z8">
+            <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
+                <!--Nome Prodotto-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Prodotto.nomeProdotto' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="nomeProdotto"></rsd-input-text>
+                </div>
+                <!--End Nome Prodotto-->
+
+                <!--Tabs prodotto -->
+                <div class="tabs">
+                    <app-tabs-prodotto [formGroup]="prodottoForm" [entity]="prodotto" [pageStatus]="pageStatus"></app-tabs-prodotto>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

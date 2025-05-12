@@ -1,0 +1,84 @@
+<!-- Advanced Search Page -->
+<div fxLayout="column">
+    <!-- ToolBar -->
+    <mat-toolbar color="primary">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span>Filtra Categoria Ordine</span>
+            <button mat-icon-button color="basic" mat-dialog-close (click)="close()"><mat-icon>close</mat-icon></button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <!-- Search Form -->
+    <div mat-dialog-content class="mat-dialog-content">
+        <form name="searchForm" [formGroup]="searchForm" (keyup.enter)="onSubmit()">
+            <div formArrayName="filters">
+                <!-- Filters -->
+                <div *ngFor="let filter of filtersFormArray.controls; let i = index">
+                    <div
+                        [formGroupName]="i"
+                        class="container padding-top-bottom-5"
+                        fxLayout="row"
+                        fxLayoutAlign="space-between center"
+                        fxLayout.sm="column"
+                        fxLayoutAlign.sm="center stretch"
+                        fxLayout.md="column"
+                        fxLayoutAlign.md="center stretch"
+                        fxLayout.xs="column"
+                        fxLayoutAlign.xs="center stretch"
+                        fxLayoutGap="10"
+                    >
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutAlign.xs="center stretch" fxLayoutGap="10" fxFlex="grow">
+                            <rsd-toggle formControlName="orAnd" [hidden]="i == 0" labelOn="AND" labelOff="OR" fxFlex="nogrow" class="padding-top-bottom-5"></rsd-toggle>
+
+                            <mat-form-field appearance="outline" class="padding-top-bottom-5" fxFlex="grow">
+                                <mat-label>{{ 'buttons.filter' | translate }}</mat-label>
+                                <mat-select formControlName="filterType">
+                                    <!-- Parent Options -->
+                                    <mat-option *ngFor="let attribute of attributeList" [value]="attribute.name" (click)="setSelected(attribute, i)">
+                                        {{ attribute.name | camelCaseToText }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- Api -->
+                            <mat-form-field *ngIf="getTypeSelected(i)" appearance="outline" class="padding-top-bottom-5" fxFlex="grow">
+                                <mat-label>{{ 'buttons.api' | translate }}</mat-label>
+                                <mat-select (selectionChange)="selectedAPIChanged(i)" #apiField formControlName="apiType">
+                                    <div *ngFor="let api of getTypeSelected(i).api">
+                                        <!-- Parent Options -->
+                                        <mat-option [value]="api">
+                                            {{ api | camelCaseToText }}
+                                        </mat-option>
+                                    </div>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutAlign.xs="center stretch" fxLayoutGap="10" fxFlex="grow">
+                            <div *ngIf="filter.get('value')" class="padding-top-bottom-5" fxLayout.xs="column" fxFlex="grow">
+                                <!-- Input number -->
+                                <rsd-input-number *ngIf="getTypeSelected(i).type == 'number'" formControlName="value" label="{{ 'buttons.value' | translate }}"></rsd-input-number>
+                            </div>
+                            <!-- Remove Filters -->
+                            <button mat-icon-button color="warn" (click)="removeFilterFromFiltersFormArray(i)" fxFlex="nogrow" class="padding-top-bottom-5">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="20" class="padding-top-bottom-5">
+                    <button mat-raised-button color="primary" type="button" (click)="addFilterToFiltersFormArray()" class="padding-top-bottom-5">
+                        {{ 'buttons.addFilter' | translate }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Buttons -->
+    <div mat-dialog-actions fxLayoutAlign="space-between center">
+        <!-- Reset button -->
+        <button mat-raised-button (click)="clear()" class="button-reset-white">Reset</button>
+        <!-- Search button -->
+        <button type="submit" [mat-dialog-close]="data" (click)="onSubmit()" mat-raised-button color="primary">Cerca</button>
+    </div>
+</div>

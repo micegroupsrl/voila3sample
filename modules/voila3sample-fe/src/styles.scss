@@ -1,0 +1,144 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+// Padding di 3px e margine di 5px applicato a cliente, prodotto, homepage ed elementi della sidenav
+.p3-m5 {
+    margin: 5px;
+    padding: 3px;
+}
+
+.margin-r-10 {
+    margin-right: 10px;
+}
+
+// "overflow" permette al contenuto della card di scorrere con una barra orizzontale (utile per la tabella)
+.overflow {
+    max-width: 100%;
+    overflow: auto;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    flex-shrink: 0;
+    flex-grow: 0;
+    // background: #039be5;
+    padding: 8px 5px;
+    border-bottom: 3px solid rgb(230, 230, 230);
+}
+
+.content {
+    flex-shrink: 1;
+    flex-grow: 1;
+    padding: 8px;
+    position: relative;
+    overflow-y: auto;
+}
+
+.footer {
+    flex-shrink: 0;
+    flex-grow: 0;
+    background: #eee;
+    padding: 5px 15px;
+    border-top: 3px solid rgb(230, 230, 230);
+}
+
+.margin-8 {
+    margin: 5px 0px;
+}
+
+// Stile personalizzato per l'header delle card
+mat-card-header {
+    border-bottom: 3px solid #edf1f7;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+// Padding all'interno delle card (tabelle, componenti home, etc..)
+mat-card-content {
+    padding: 3px !important;
+}
+
+// Contenuto all'inizio e alla fine, colore del bordo superiore
+.mat-mdc-paginator-container {
+    justify-content: space-between !important;
+    border-top: 3px solid #edf1f7;
+}
+
+// Colore del bottone di reset nella form di ricerca
+.button-reset-white {
+    background-color: white;
+}
+
+// Sfondo grigio, padding esterno ai bottoni, applicato ai footer delle dialog di ricerca
+.mat-mdc-dialog-actions {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    background-color: whitesmoke;
+}
+
+// Padding per il footer delle mat-card (utilizzato dal footer contenente il paginatore delle tabelle)
+mat-card-footer {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+// Stile alle righe delle tabelle
+.mat-mdc-row .mat-mdc-cell {
+    border-bottom: 1px solid transparent; // bordo trasparente
+    border-top: 1px solid transparent;
+    cursor: pointer; // evidenzia riga al passaggio del mouse
+    white-space: nowrap; // contenuto su un'unica riga
+}
+
+// Stile alle righe delle tabelle quando si passa il mouse
+.mat-mdc-row:hover .mat-mdc-cell {
+    background-color: whitesmoke; // sfondo più scuro
+    color: rgb(0, 90, 225); // testo colorato
+}
+
+.row-is-clicked {
+    font-weight: bold;
+}
+
+// Per togliere sfondo agli input della form
+mat-form-field .mat-mdc-form-field-focus-overlay,
+.mdc-text-field--filled {
+    background-color: unset !important;
+}
+
+.padding-top-bottom-5 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.bootstrap-style {
+    /* Importing Bootstrap SCSS file. */
+    @import 'bootstrap/scss/bootstrap';
+}
+
+.border-radius-0 {
+    border-radius: 0px;
+}
+
+.border-radius-4 {
+    border-radius: var(--mdc-elevated-card-container-shape, var(--mdc-shape-medium, 4px));
+}
+

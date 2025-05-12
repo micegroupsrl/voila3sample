@@ -1,0 +1,72 @@
+.custom-tree-invisible {
+    display: none;
+}
+
+.custom-tree ul,
+.custom-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    list-style-type: none;
+}
+
+.custom-tree ul {
+    padding-left: 0px;
+}
+
+// Colorazione del testo quando si passa sull'elemento
+.txtColor:hover,
+.txtColor:hover * {
+    color: rgb(0, 90, 225);
+}
+
+// Colorazione dello sfondo dell'elemento e cambio del puntatore quando si passa sull'elemento
+.txtColor:hover {
+    background-color: rgba(220, 220, 220, 0.493);
+    cursor: pointer;
+}
+
+// Colorazione dell'elemento selezionato
+.background-highlight {
+    background: rgba(165, 196, 255, 0.597);
+    // border-radius: 0 23px 23px 0;
+}
+
+// Inscurimento dello sfondo del gruppo di elementi selezionato
+.background-highlight-ul {
+    background: rgba(223, 223, 223, 0.207);
+}
+
+// Padding sinistro di 5px ai componenti della navbar
+.nav-link-title {
+    padding-left: 5px;
+}
+
+// Nessuna sottolineatura ai componenti della navbar
+.no-underline {
+    text-decoration: none;
+}
+
+// Ridimensionamento delle icone dei componenti della navbar
+.icon-dimension-small {
+    font-size: 18px;
+}
+
+.icon-dimension-medium {
+    font-size: 22px;
+}
+
+// MatTree trasparente
+.mat-tree {
+    background: #fff0;
+}
+
+// 0 padding superiore e inferiore alla navlist laterale
+.mat-mdc-nav-list {
+    padding: 0;
+}
+
+.butt-width {
+width: 100%;
+}
+// You can add your scss style here

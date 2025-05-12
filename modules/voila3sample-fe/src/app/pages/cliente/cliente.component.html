@@ -1,0 +1,111 @@
+<!-- First Page for Cliente -->
+<!-- Here you can view element list and use searches to filter them -->
+<div class="container">
+    <div class="content">
+        <!-- Mat Card -->
+        <mat-card>
+            <!-- Card Header -->
+            <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-card-title>{{ 'voila3sample.detail.Cliente.label' | translate }}</mat-card-title>
+                <!-- Quick Filter -->
+                <form class="quick" name="searchClienteForm" [formGroup]="searchClienteForm" (keyup)="onUp()" fxLayout="column" fxLayoutGap="20" fxFlex>
+                    <!-- Full Text Search based on Email -->
+                    <rsd-input-text formControlName="email" iconSuffix="search"></rsd-input-text>
+                </form>
+                <!-- Search Dialog Button -->
+                <button mat-icon-button (click)="openDialogResid()" matTooltip="Ricerca Avanzata con Resid" [color]="filters === '' ? 'basic' : 'warn'">
+                    <mat-icon matBadgeSize="small" [matBadge]="filters === '' ? '' : '!'" matBadgeColor="accent"> filter_list </mat-icon>
+                </button>
+                <!-- Advanced Search Dialog Button -->
+                <button mat-icon-button (click)="openDialogResidAdvanced()" matTooltip="Ricerca Avanzata con Resid Avanzata" [color]="filters === '' ? 'basic' : 'warn'">
+                    <mat-icon matBadgeSize="small" [matBadge]="filters === '' ? '' : '!'" matBadgeColor="accent"> filter_list </mat-icon>
+                </button>
+            </mat-card-header>
+
+            <mat-card-content class="overflow" autosize>
+                <!-- Numero theCliente trovati -->
+                <!-- Elementi totali: {{totalRows}} -->
+                <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
+                <!-- Tabella tipo cliente -->
+                <table aria-label="cliente's table" mat-table [dataSource]="dataSource" matSort>
+                    <!-- Id Persona -->
+                    <ng-container matColumnDef="idPersona.idPersona">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Cliente.idPersona' | translate }}</th>
+                        <td mat-cell *matCellDef="let cliente">{{ cliente.idPersona }}</td>
+                    </ng-container>
+                    <!-- Codice Fiscale -->
+                    <ng-container matColumnDef="idPersona.codiceFiscale">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Cliente.codiceFiscale' | translate }}</th>
+                        <td mat-cell *matCellDef="let cliente">{{ cliente.codiceFiscale }}</td>
+                    </ng-container>
+                    <!-- Email -->
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Cliente.email' | translate }}</th>
+                        <td mat-cell *matCellDef="let cliente">{{ cliente.email }}</td>
+                    </ng-container>
+                    <!-- Telefono -->
+                    <ng-container matColumnDef="telefono">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Cliente.telefono' | translate }}</th>
+                        <td mat-cell *matCellDef="let cliente">{{ cliente.telefono }}</td>
+                    </ng-container>
+                    <!-- Indirizzo -->
+                    <ng-container matColumnDef="indirizzo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Cliente.indirizzo' | translate }}</th>
+                        <td mat-cell *matCellDef="let cliente">{{ cliente.indirizzo }}</td>
+                    </ng-container>
+                    <!-- Created By -->
+                    <ng-container matColumnDef="createdBy">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Cliente.createdBy' | translate }}</th>
+                        <td mat-cell *matCellDef="let cliente">{{ cliente.createdBy }}</td>
+                    </ng-container>
+                    <!-- Last Modified By -->
+                    <ng-container matColumnDef="lastModifiedBy">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Cliente.lastModifiedBy' | translate }}</th>
+                        <td mat-cell *matCellDef="let cliente">{{ cliente.lastModifiedBy }}</td>
+                    </ng-container>
+                    <!-- Created Date -->
+                    <ng-container matColumnDef="createdDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Cliente.createdDate' | translate }}</th>
+                        <td mat-cell *matCellDef="let cliente">{{ cliente.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                    </ng-container>
+                    <!-- Last Modified Date -->
+                    <ng-container matColumnDef="lastModifiedDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Cliente.lastModifiedDate' | translate }}</th>
+                        <td mat-cell *matCellDef="let cliente">{{ cliente.lastModifiedDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row (click)="isClickable(Privileges?.CLIENTE_READ) && navigateToView(row.objectKey)" *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+            </mat-card-content>
+
+            <!-- Card Footer -->
+            <mat-card-footer>
+                <!-- Pagination component -->
+                <mat-paginator
+                    #paginator
+                    [length]="totalRows"
+                    [pageIndex]="currentPage"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageChanged($event)"
+                    aria-label="Select page"
+                    showFirstLastButtons
+                >
+                </mat-paginator>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+    <div class="footer" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+        <!-- Redirect to Selected Element -->
+        <button *ngIf="Privileges?.CLIENTE_CREATE | Permission" mat-raised-button color="primary" class="margin-8" routerLink="/pages/voila3sample/cliente/detail-cliente/new">
+            {{ 'buttons.new' | translate: { '0': '' | translate } }}
+        </button>
+        <!--Export xlxs-->
+        <button *ngIf="Privileges?.CLIENTE_REPORT | Permission" mat-raised-button color="primary" class="margin-8" (click)="printXlsxReport()">
+            {{ 'buttons.export.xlxs' | translate }}
+        </button>
+    </div>
+</div>

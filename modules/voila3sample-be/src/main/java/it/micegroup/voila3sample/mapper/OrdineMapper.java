@@ -1,0 +1,64 @@
+package it.micegroup.voila3sample.mapper;
+
+import it.micegroup.voila3sample.dto.EditOrdineDto;
+import it.micegroup.voila3sample.dto.ViewOrdineDto;
+import it.micegroup.voila3sample.domain.primary.Ordine;
+import it.micegroup.voila3sample.domain.primary.RigaOrdine;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
+import java.util.Optional;
+
+/**
+ * Interface used to map DTO Classes to Entity Classes. Usefull to manage object
+ * transfered through this application.
+ */
+@Mapper
+public interface OrdineMapper {
+	/**
+	 * Maps an EditOrdineDto to an entity getEntityClassName(aClass)/]
+	 */
+
+	@Mapping(source = "entityState", target = "entityState")
+	Ordine map(EditOrdineDto ordineDto);
+
+	/**
+	 * Maps an entity Ordine to a ViewOrdineDto
+	 */
+	ViewOrdineDto map(Ordine ordine);
+
+	/**
+	 * Maps a Page<Ordine> to a Page<ViewOrdineDto>
+	 */
+	default Page<ViewOrdineDto> map(Page<Ordine> page) {
+		return page.map(this::map);
+	}
+
+	/*
+	 * Maps an Optional<Ordine> to an Optional<ViewOrdineDto>
+	 */
+	default Optional<ViewOrdineDto> map(Optional<Ordine> read) {
+		return read.map(this::map);
+	}
+
+	/**
+	 * After mapping a Ordine, it propagates the object key of the entity in each
+	 * child
+	 */
+	@AfterMapping
+	default void propagateKeyInChildren(@MappingTarget Ordine bean) {
+		String key = bean.getObjectKey();
+		if (bean.getTheRigaOrdine() != null) {
+			for (RigaOrdine item : bean.getTheRigaOrdine()) {
+				item.setTheOrdineObjectKey(key);
+			}
+		}
+		if (bean.getTheOrdineFiglio() != null) {
+			for (Ordine item : bean.getTheOrdineFiglio()) {
+				item.setTheOrdineAggregatoObjectKey(key);
+			}
+		}
+	}
+}

@@ -1,0 +1,67 @@
+<div>
+    <!--Form-->
+    <form [formGroup]="clienteForm">
+        <mat-card class="mat-elevation-z8">
+            <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
+                <!--Id Persona-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <!--In new mode show the ID as required field-->
+                        <label *ngIf="pageStatus | hasPageStatus: 'new'">ID*</label>
+                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">ID</label>
+                    </div>
+                    <rsd-input-number formControlName="idPersona"></rsd-input-number>
+                </div>
+                <!--End Id Persona-->
+                <!--Codice Fiscale-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <!--In new mode show codiceFiscale as required field-->
+                        <label *ngIf="pageStatus | hasPageStatus: 'new'">{{ 'voila3sample.detail.Cliente.codiceFiscale' | translate }}*</label>
+                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">{{ 'voila3sample.detail.Cliente.codiceFiscale' | translate }}</label>
+                    </div>
+                    <rsd-input-text formControlName="codiceFiscale"></rsd-input-text>
+                </div>
+                <!--End Codice Fiscale-->
+
+                <!--Email-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Cliente.email' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="email"></rsd-input-text>
+                </div>
+                <!--End Email-->
+                <!--Telefono-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Cliente.telefono' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="telefono"></rsd-input-text>
+                </div>
+                <!--End Telefono-->
+                <!--Indirizzo-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Cliente.indirizzo' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="indirizzo"></rsd-input-text>
+                </div>
+                <!--End Indirizzo-->
+
+                <!--Tabs cliente -->
+                <div class="tabs">
+                    <app-tabs-cliente [formGroup]="clienteForm" [entity]="cliente" [pageStatus]="pageStatus"></app-tabs-cliente>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

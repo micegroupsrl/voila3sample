@@ -1,0 +1,69 @@
+{
+    "messages": {
+        "success": {
+            "insert": "La risorsa: {{0}} con identificativo: {{1}} è stata correttamente registrata in archivio",
+            "update": "La risorsa: {{0}} con identificativo: {{1}} è stata correttamente aggiornata in archivio",
+            "delete": "La risorsa: {{0}} con identificativo: {{1}} è stata eliminata dall'archivio"
+        },
+        "confirm": {
+            "delete": "Sicuro di voler eliminare la risorsa corrente?"
+        }
+    },
+    "errors": {
+        "NotFoundException": "La risorsa: {{resource}} con identificativo: {{id}} non è presente in archivio",
+        "AlreadyFoundException": "La risorsa: {{resource}} con identificativo: {{id}} è già presente in archivio",
+        "NotNull": "Il campo {{0}} è obbligatorio",
+        "NotEmpty": "Il campo {{0}} è obbligatorio",
+        "NotBlank": "Il campo {{0}} è obbligatorio",
+        "Length": "La lunghezza del campo {{0}} deve essere massimo {{1}}",
+        "Size": "La lunghezza del campo {{0}} deve essere massimo {{1}}",
+        "Email": "Il campo {{0}} deve essere un indirizzo email valido",
+
+        "required": "Il campo {{0}} è obbligatorio",
+        "maxlength": "La lunghezza del campo {{0}} deve essere massimo {{1}}",
+        "email": "Il campo {{0}} deve essere un indirizzo email valido"
+    },
+    "paginationHeader": {
+        "found": "trovato/i",
+        "from": "da",
+        "to": "a",
+        "displayed": "visualizzati"
+    },
+    "search": {
+        "from": "da",
+        "to": "a"
+    },
+    "buttons": {
+        "element": "Elemento",
+        "new": "Nuovo {{0}}",
+        "save": "Salva",
+        "update": "Aggiorna",
+        "edit": "Modifica",
+        "delete": "Elimina",
+        "goBack": "Indietro",
+        "search": "Cerca",
+        "restore": "Ripristina",
+        "next": "Avanti",
+        "export": {
+            "pdf": "Stampa PDF",
+            "xlxs": "Stampa XLXS"
+        },
+        "api": "Seleziona API",
+        "filter": "Seleziona Filtro",
+        "addFilter": "Aggiungi filtro",
+        "value": "Valore"
+    },
+    "table": {
+        "noRecordFound": "Non sono presenti elementi {{0}}",
+        "countSummary": "1 solo elemento trovato",
+        "countSummaries": "{{totalElements}} elementi trovati, visualizzati da {{start}} a {{end}}"
+    },
+    "header": {
+        "list": "Elenco {{name}}",
+        "search": "Parametri di ricerca",
+        "detail": "Dettaglio {{name}}"
+    },
+    "label": {
+        "obligatoryValues": "è obbligatorio"
+    }
+}

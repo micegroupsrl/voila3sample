@@ -1,0 +1,42 @@
+<div class="content" fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px" ngClass.gt-xs="ml-10">
+    <!-- Card Example -->
+    <mat-card class="example-card" fxFlex.sm="1 1 calc(50%-10px)" fxFlex.md="1 1 calc(33%-10px)" fxFlex.gt-md="1 1 calc(25%-10px)">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-card-title>Nuovi Clienti</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="text" fxLayout="row" fxLayoutAlign="center center"> 321 </mat-card-content>
+        <mat-card-content class="desc" fxLayout="row" fxLayoutAlign="center center"> +8% </mat-card-content>
+        <mat-card-content class="sub" fxLayout="row" fxLayoutAlign="center center"> (ultimi 30 giorni) </mat-card-content>
+        <app-client-age class="content"></app-client-age>
+    </mat-card>
+
+    <!-- Card Example 2-->
+    <mat-card fxFlex.sm="1 1 calc(50%-10px)" fxFlex.md="1 1 calc(33%-10px)" fxFlex.gt-md="1 1 calc(25%-10px)">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-card-title>Ultime Vendite</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="overflow" autosize>
+            <app-list-last-sales></app-list-last-sales>
+        </mat-card-content>
+    </mat-card>
+
+    <!-- Diagram Example -->
+    <mat-card fxFlex.sm="1 1 calc(50%-10px)" fxFlex.md="1 1 calc(33%-10px)" fxFlex.gt-md="1 1 calc(25%-10px)">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-card-title>Visite Store</mat-card-title>
+        </mat-card-header>
+        <app-sales-overview></app-sales-overview>
+    </mat-card>
+</div>
+
+<!-- Diagram Example 2-->
+<div class="content">
+    <mat-card>
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-card-title>Andamento Annuale</mat-card-title>
+        </mat-card-header>
+        <div class="chart-container">
+            <app-order-chart></app-order-chart>
+        </div>
+    </mat-card>
+</div>

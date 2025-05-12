@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>ThePrivilege</h1>
+<div mat-dialog-content>
+    <mat-card>
+        <!-- Card Header -->
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-card-title>Lista thePrivilege</mat-card-title>
+            <button mat-icon-button (click)="openDialogResid()" matTooltip="Ricerca Avanzata con Resid" [color]="filters === '' ? 'basic' : 'warn'">
+                <!-- Advanced Search Button -->
+                <mat-icon matBadgeSize="small" [matBadge]="filters === '' ? '' : '!'" matBadgeColor="accent"> filter_list </mat-icon>
+            </button>
+        </mat-card-header>
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Numero ThePrivilege trovati -->
+            <!-- Elementi totali: {{totalRows}} -->
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+            <!-- Tabella tipo Privilege -->
+            <table aria-label="privilege's table" mat-table [dataSource]="dataSource" matSort>
+                <!-- Privilege Id -->
+                <ng-container matColumnDef="privilegeId">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Privilege Id</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let privilege">{{ privilege.privilegeId }}</td>
+                </ng-container>
+                <!-- Name -->
+                <ng-container matColumnDef="name">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let privilege">{{ privilege.name }}</td>
+                </ng-container>
+                <!-- Description -->
+                <ng-container matColumnDef="description">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let privilege">{{ privilege.description }}</td>
+                </ng-container>
+                <th mat-header-row *matHeaderRowDef="displayedColumns"></th>
+                <tr mat-row [mat-dialog-close]="row" *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </mat-card-content>
+        <!-- Card Footer -->
+        <mat-card-footer>
+            <!-- Pagination Component -->
+            <mat-paginator
+                #paginator
+                [length]="totalRows"
+                [pageIndex]="currentPage"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="pageChanged($event)"
+                aria-label="Select page"
+                showFirstLastButtons
+            >
+            </mat-paginator>
+        </mat-card-footer>
+    </mat-card>
+</div>
+<div mat-dialog-actions>
+    <!-- Cancel -->
+    <button mat-button (click)="onNoClick()">Annulla</button>
+</div>

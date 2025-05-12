@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>ThePrivilegePerRole</h1>
+<div mat-dialog-content>
+    <mat-card>
+        <!-- Card Header -->
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-card-title>Lista thePrivilegePerRole</mat-card-title>
+            <button mat-icon-button (click)="openDialogResid()" matTooltip="Ricerca Avanzata con Resid" [color]="filters === '' ? 'basic' : 'warn'">
+                <!-- Advanced Search Button -->
+                <mat-icon matBadgeSize="small" [matBadge]="filters === '' ? '' : '!'" matBadgeColor="accent"> filter_list </mat-icon>
+            </button>
+        </mat-card-header>
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Numero ThePrivilegePerRole trovati -->
+            <!-- Elementi totali: {{totalRows}} -->
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+            <!-- Tabella tipo PrivilegePerRole -->
+            <table aria-label="privilegePerRole's table" mat-table [dataSource]="dataSource" matSort>
+                <th mat-header-row *matHeaderRowDef="displayedColumns"></th>
+                <tr mat-row [mat-dialog-close]="row" *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </mat-card-content>
+        <!-- Card Footer -->
+        <mat-card-footer>
+            <!-- Pagination Component -->
+            <mat-paginator
+                #paginator
+                [length]="totalRows"
+                [pageIndex]="currentPage"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="pageChanged($event)"
+                aria-label="Select page"
+                showFirstLastButtons
+            >
+            </mat-paginator>
+        </mat-card-footer>
+    </mat-card>
+</div>
+<div mat-dialog-actions>
+    <!-- Cancel -->
+    <button mat-button (click)="onNoClick()">Annulla</button>
+</div>

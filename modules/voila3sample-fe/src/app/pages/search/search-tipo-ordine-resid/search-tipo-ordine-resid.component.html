@@ -1,0 +1,57 @@
+<div fxLayout="column">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span>Filtra TipoOrdine</span>
+            <button mat-icon-button color="basic" mat-dialog-close (click)="close()"><mat-icon>close</mat-icon></button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="mat-dialog-content" fxLayout="column">
+        <form name="searchTipoOrdineForm" [formGroup]="searchTipoOrdineForm" (keyup.enter)="onSubmit()" fxLayout="column" fxLayoutGap="20" fxFlex>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- idTipoOrdine From -->
+                <rsd-input-number formControlName="idTipoOrdineDa" label="Id Tipo Ordine {{ 'search.from' | translate }}..."></rsd-input-number>
+                <!-- idTipoOrdine To -->
+                <rsd-input-number formControlName="idTipoOrdineA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- annoTipologia From -->
+                <rsd-input-number formControlName="annoTipologiaDa" label="Anno Tipologia {{ 'search.from' | translate }}..."></rsd-input-number>
+                <!-- annoTipologia To -->
+                <rsd-input-number formControlName="annoTipologiaA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- idCategoriaOrdine From -->
+                <rsd-input-number formControlName="idCategoriaOrdineDa" label="Id Categoria Ordine {{ 'search.from' | translate }}..."></rsd-input-number>
+                <!-- idCategoriaOrdine To -->
+                <rsd-input-number formControlName="idCategoriaOrdineA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Nome Ordine -->
+                <rsd-input-text formControlName="nomeOrdine"></rsd-input-text>
+            </div>
+
+            <!-- Categoria Ordine -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Categoria Ordine</mat-label>
+                    <mat-select formControlName="idCategoriaOrdine">
+                        <mat-option *ngFor="let categoriaOrdine of categoriaOrdineList" [value]="categoriaOrdine.objectKey">
+                            {{ categoriaOrdine.objectTitle }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div mat-dialog-actions fxLayoutAlign="space-between center">
+        <!-- Reset button -->
+        <button type="reset" mat-raised-button (click)="clear()" class="button-reset-white">Reset</button>
+        <!-- Search button -->
+        <button type="submit" [mat-dialog-close]="data" (click)="onSubmit()" mat-raised-button color="primary">Cerca</button>
+    </div>
+</div>

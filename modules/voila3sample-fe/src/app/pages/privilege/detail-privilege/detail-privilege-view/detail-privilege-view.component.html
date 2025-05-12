@@ -1,0 +1,50 @@
+<div>
+    <mat-card class="mat-elevation-z8">
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Name -->
+            <div *ngIf="privilege?.name">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Privilege.name' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ privilege!.name }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Description -->
+            <div *ngIf="privilege?.description">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Privilege.description' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ privilege!.description }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privilege Id -->
+            <div *ngIf="privilege?.privilegeId">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <div fxLayout="column" fxFlex="30">
+                        <!-- Label -->
+                        <label>ID</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ privilege!.privilegeId }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tabs privilege -->
+            <app-tabs-privilege [formGroup]="privilegeForm" [entity]="privilege" [pageStatus]="pageStatus"></app-tabs-privilege>
+        </mat-card-content>
+    </mat-card>
+</div>

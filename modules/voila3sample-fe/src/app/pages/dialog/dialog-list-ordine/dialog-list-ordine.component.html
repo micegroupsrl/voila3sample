@@ -1,0 +1,92 @@
+<h1 mat-dialog-title>TheOrdine</h1>
+<div mat-dialog-content>
+    <mat-card>
+        <!-- Card Header -->
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-card-title>Lista theOrdine</mat-card-title>
+            <button mat-icon-button (click)="openDialogResid()" matTooltip="Ricerca Avanzata con Resid" [color]="filters === '' ? 'basic' : 'warn'">
+                <!-- Advanced Search Button -->
+                <mat-icon matBadgeSize="small" [matBadge]="filters === '' ? '' : '!'" matBadgeColor="accent"> filter_list </mat-icon>
+            </button>
+        </mat-card-header>
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Numero TheOrdine trovati -->
+            <!-- Elementi totali: {{totalRows}} -->
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+            <!-- Tabella tipo Ordine -->
+            <table aria-label="ordine's table" mat-table [dataSource]="dataSource" matSort>
+                <!-- Id Ordine -->
+                <ng-container matColumnDef="idOrdine">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Id Ordine</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.idOrdine }}</td>
+                </ng-container>
+                <!-- Data Ordine -->
+                <ng-container matColumnDef="dataOrdine">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Ordine</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.dataOrdine | date: 'dd/MM/yyyy' }}</td>
+                </ng-container>
+                <!-- Tempo Ordine -->
+                <ng-container matColumnDef="tempoOrdine">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tempo Ordine</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.tempoOrdine }}</td>
+                </ng-container>
+                <!-- Created By -->
+                <ng-container matColumnDef="createdBy">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Created By</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.createdBy }}</td>
+                </ng-container>
+                <!-- Last Modified By -->
+                <ng-container matColumnDef="lastModifiedBy">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Modified By</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.lastModifiedBy }}</td>
+                </ng-container>
+                <!-- Created Date -->
+                <ng-container matColumnDef="createdDate">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Created Date</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                </ng-container>
+                <!-- Last Modified Date -->
+                <ng-container matColumnDef="lastModifiedDate">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Modified Date</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.lastModifiedDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                </ng-container>
+                <th mat-header-row *matHeaderRowDef="displayedColumns"></th>
+                <tr mat-row [mat-dialog-close]="row" *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </mat-card-content>
+        <!-- Card Footer -->
+        <mat-card-footer>
+            <!-- Pagination Component -->
+            <mat-paginator
+                #paginator
+                [length]="totalRows"
+                [pageIndex]="currentPage"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="pageChanged($event)"
+                aria-label="Select page"
+                showFirstLastButtons
+            >
+            </mat-paginator>
+        </mat-card-footer>
+    </mat-card>
+</div>
+<div mat-dialog-actions>
+    <!-- Cancel -->
+    <button mat-button (click)="onNoClick()">Annulla</button>
+</div>

@@ -1,0 +1,17 @@
+<!-- All the tabs of Prodotto -->
+
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" #tabgroup>
+    <!-- theRigaOrdine -->
+    <mat-tab label="Riga Ordine">
+        <!-- View -->
+        <app-tab-riga-ordine-view [entity]="entity" *ngIf="pageStatus | hasPageStatus: 'view'"></app-tab-riga-ordine-view>
+        <!-- Edit -->
+        <app-tab-riga-ordine-edit-fe
+            [formGroup]="formGroup"
+            [entity]="entity"
+            [tab]="activeTab"
+            *ngIf="pageStatus | hasPageStatus: ['new', 'edit']"
+            #tabeditrigaOrdine
+        ></app-tab-riga-ordine-edit-fe>
+    </mat-tab>
+</mat-tab-group>

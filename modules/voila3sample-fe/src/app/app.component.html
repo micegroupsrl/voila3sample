@@ -1,0 +1,28 @@
+<!-- Responsive app -->
+<div fxLayout="column" class="custom-container" [class.is-mobile]="mobileQuery.matches">
+    <app-header (snav)="snav.toggle()"></app-header>
+
+    <!-- [mode] cambia la modalità di visualizzazione se mobile (over) o desktop (side)
+       [opened] in mobile la sidenav è chiusa di default -->
+    <mat-sidenav-container class="custom-flex-sidenav-container" autosize>
+        <!-- Sidenav laterale -->
+        <mat-sidenav
+            #snav
+            [mode]="mobileQuery.matches ? 'over' : 'side'"
+            [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56"
+            [opened]="mobileQuery.matches ? 'false' : 'true'"
+        >
+            <div mat-drawer-inner-container>
+                <app-sidenav></app-sidenav>
+                <!-- Contenuto della sidenav laterale (componenti) -->
+            </div>
+        </mat-sidenav>
+
+        <!-- Contenuto -->
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+            <!-- Routing  -->
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

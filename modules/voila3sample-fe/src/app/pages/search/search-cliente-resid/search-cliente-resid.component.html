@@ -1,0 +1,70 @@
+<div fxLayout="column">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span>Filtra Cliente</span>
+            <button mat-icon-button color="basic" mat-dialog-close (click)="close()"><mat-icon>close</mat-icon></button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="mat-dialog-content" fxLayout="column">
+        <form name="searchClienteForm" [formGroup]="searchClienteForm" (keyup.enter)="onSubmit()" fxLayout="column" fxLayoutGap="20" fxFlex>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- idPersona From -->
+                <rsd-input-number formControlName="idPersonaDa" label="Id Persona {{ 'search.from' | translate }}..."></rsd-input-number>
+                <!-- idPersona To -->
+                <rsd-input-number formControlName="idPersonaA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Codice Fiscale -->
+                <rsd-input-text formControlName="codiceFiscale"></rsd-input-text>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Email -->
+                <rsd-input-text formControlName="email"></rsd-input-text>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Telefono -->
+                <rsd-input-text formControlName="telefono"></rsd-input-text>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Indirizzo -->
+                <rsd-input-text formControlName="indirizzo"></rsd-input-text>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Created By -->
+                <rsd-input-text formControlName="createdBy"></rsd-input-text>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Last Modified By -->
+                <rsd-input-text formControlName="lastModifiedBy"></rsd-input-text>
+            </div>
+
+            <!-- Created Date From -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <datetimepicker formControlName="createdDateDa" label="Created Date {{ 'search.from' | translate }}..."></datetimepicker>
+                <!-- Created Date To -->
+                <datetimepicker formControlName="createdDateA" label="...{{ 'search.to' | translate }}"></datetimepicker>
+            </div>
+
+            <!-- Last Modified Date From -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <datetimepicker formControlName="lastModifiedDateDa" label="Last Modified Date {{ 'search.from' | translate }}..."></datetimepicker>
+                <!-- Last Modified Date To -->
+                <datetimepicker formControlName="lastModifiedDateA" label="...{{ 'search.to' | translate }}"></datetimepicker>
+            </div>
+        </form>
+    </div>
+
+    <div mat-dialog-actions fxLayoutAlign="space-between center">
+        <!-- Reset button -->
+        <button type="reset" mat-raised-button (click)="clear()" class="button-reset-white">Reset</button>
+        <!-- Search button -->
+        <button type="submit" [mat-dialog-close]="data" (click)="onSubmit()" mat-raised-button color="primary">Cerca</button>
+    </div>
+</div>

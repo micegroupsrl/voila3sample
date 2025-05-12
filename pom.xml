@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2010 The MICE Project Team. Licensed under the MICE s.r.l. 
+	End User License Agreement you may not use this file except in compliance 
+	with the License. You may obtain a copy of the License at http://www.micegroup.it/voila/license.html -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- ARTIFACT INFO -->
+	<groupId>it.micegroup</groupId>
+	<artifactId>voila3sample</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>voila3sample</name>
+	<description>Sample Project</description>	
+	<packaging>pom</packaging>
+
+	<!-- MODULES -->
+	<modules>
+		<module>modules/voila3sample-fe</module>
+		<module>modules/voila3sample-be</module>
+	</modules>
+	
+	<!-- PROPERTIES -->
+	<properties>
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<voila2.runtime.version>1.10</voila2.runtime.version>
+		<spring-starter.version>3.1.12</spring-starter.version>
+		<spring-boot-maven-plugin.version>3.1.12</spring-boot-maven-plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<modelmapper.version>2.3.9</modelmapper.version>
+		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot-maven-plugin.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-starter.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

@@ -1,0 +1,30 @@
+<!-- All the tabs of Ordine -->
+
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" #tabgroup>
+    <!-- theRigaOrdine -->
+    <mat-tab label="Riga Ordine">
+        <!-- View -->
+        <app-tab-riga-ordine-view [entity]="entity" *ngIf="pageStatus | hasPageStatus: 'view'"></app-tab-riga-ordine-view>
+        <!-- Edit -->
+        <app-tab-riga-ordine-edit-fe
+            [formGroup]="formGroup"
+            [entity]="entity"
+            [tab]="activeTab"
+            *ngIf="pageStatus | hasPageStatus: ['new', 'edit']"
+            #tabeditrigaOrdine
+        ></app-tab-riga-ordine-edit-fe>
+    </mat-tab>
+    <!-- theOrdineFiglio -->
+    <mat-tab label="Ordine Figlio">
+        <!-- View -->
+        <app-tab-ordine-figlio-view [entity]="entity" *ngIf="pageStatus | hasPageStatus: 'view'"></app-tab-ordine-figlio-view>
+        <!-- Edit -->
+        <app-tab-ordine-figlio-edit-fe
+            [formGroup]="formGroup"
+            [entity]="entity"
+            [tab]="activeTab"
+            *ngIf="pageStatus | hasPageStatus: ['new', 'edit']"
+            #tabeditordineFiglio
+        ></app-tab-ordine-figlio-edit-fe>
+    </mat-tab>
+</mat-tab-group>

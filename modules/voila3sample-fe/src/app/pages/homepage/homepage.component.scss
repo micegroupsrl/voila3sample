@@ -1,0 +1,27 @@
+.example-card {
+    //max-width: 300px;
+    //max-height: 500px;
+    .text{
+      font-size: 50px;
+      font-weight: bold;
+    }
+    .desc{
+      font-size: 22px;
+      color: rgb(43, 234, 26);
+    }
+    .sub{
+      font-size: 12px;
+      color: rgba(38, 38, 38, 0.629);
+    }
+
+  }
+
+  mat-card {
+    margin-bottom: 10px;
+  }
+  
+  .mr-10 {
+    margin-right: 10px;
+  }
+  
+  

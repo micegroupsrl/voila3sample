@@ -1,0 +1,135 @@
+<mat-card>
+    <!-- Card Body -->
+
+    <!-- Edit Mode -->
+
+    <mat-card-content class="overflow" autosize>
+        <!-- Numero clienti trovati -->
+        <!-- {{ 'RigaOrdine' | tableInfo: totalElements: page: pageSize }} -->
+        <!-- Tabella tipo ordine -->
+        <form [formGroup]="form">
+            <ng-container formArrayName="theRigaOrdine">
+                <table aria-label="theRigaOrdine's tab" mat-table [dataSource]="getTheRigaOrdine.controls.slice(currentPage * pageSize, (currentPage + 1) * pageSize)" matSort>
+                    <!-- Quantita -->
+                    <ng-container matColumnDef="quantita">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.quantita' | translate }}</th>
+                        <td mat-cell *matCellDef="let rigaOrdine" [formGroup]="rigaOrdine">
+                            <!-- Quantita Input-->
+                            <rsd-input-number formControlName="quantita" appearance="fill"></rsd-input-number>
+                        </td>
+                    </ng-container>
+                    <!-- Prodotto -->
+                    <ng-container matColumnDef="theProdottoObjectKey">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.theProdottoObjectKey' | translate }}</th>
+                        <td mat-cell *matCellDef="let rigaOrdine" [formGroup]="rigaOrdine">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Prodotto</mat-label>
+                                <mat-select formControlName="theProdottoObjectKey">
+                                    <!-- Dropdown Prodotto -->
+                                    <mat-option *ngFor="let prodotto of prodottoList" [value]="prodotto.objectKey">
+                                        {{ prodotto.objectTitle | camelCaseToText }}
+                                    </mat-option>
+                                </mat-select>
+                                <!-- End Dropdown Prodotto -->
+                            </mat-form-field>
+                        </td>
+                    </ng-container>
+                    <!-- Remove RigaOrdine -->
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let rigaOrdine">
+                            <button mat-icon-button color="warn" *ngIf="!(rigaOrdine.get('entityState')?.value | hasEntityState: 'D')" (click)="eliminaRigaOrdine(rigaOrdine)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <!-- Delete Button -->
+                            <button mat-icon-button color="primary" *ngIf="rigaOrdine.get('entityState')?.value | hasEntityState: 'D'" (click)="ripristinaRigaOrdine(rigaOrdine)">
+                                <mat-icon>settings_backup_restore</mat-icon>
+                            </button>
+                            <!-- Restore Button -->
+                        </td>
+                    </ng-container>
+
+                    <!-- EntityStatus -->
+                    <ng-container matColumnDef="entityState">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let rigaOrdine" [formGroup]="rigaOrdine">
+                            <rsd-input-text formControlName="entityState" appearance="fill"></rsd-input-text>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+            </ng-container>
+        </form>
+    </mat-card-content>
+
+    <!-- New Mode -->
+
+    <mat-card-content class="overflow" autosize *ngIf="newTheRigaOrdine.controls.length != 0">
+        <!-- Tabella tipo ordine -->
+        <form [formGroup]="formNewEntities">
+            <ng-container formArrayName="theRigaOrdine">
+                <table aria-label="theRigaOrdine's tab" mat-table [dataSource]="newTheRigaOrdine.controls" matSort>
+                    <!-- Quantita -->
+                    <ng-container matColumnDef="quantita">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.quantita' | translate }}</th>
+                        <td mat-cell *matCellDef="let rigaOrdine" [formGroup]="rigaOrdine">
+                            <rsd-input-number formControlName="quantita" appearance="fill"></rsd-input-number>
+                        </td>
+                    </ng-container>
+                    <!-- Prodotto -->
+                    <ng-container matColumnDef="theProdottoObjectKey">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.theProdottoObjectKey' | translate }}</th>
+                        <td mat-cell *matCellDef="let rigaOrdine" [formGroup]="rigaOrdine">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Prodotto</mat-label>
+                                <mat-select formControlName="theProdottoObjectKey">
+                                    <!-- Dropdown Prodotto -->
+                                    <mat-option *ngFor="let prodotto of prodottoList" [value]="prodotto.objectKey">
+                                        {{ prodotto.objectTitle | camelCaseToText }}
+                                    </mat-option>
+                                </mat-select>
+                                <!-- End Dropdown Prodotto -->
+                            </mat-form-field>
+                        </td>
+                    </ng-container>
+                    <!-- Remove RigaOrdine -->
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let rigaOrdine">
+                            <button mat-icon-button color="warn" (click)="eliminaRigaNuovoRigaOrdine(rigaOrdine)"><mat-icon>delete</mat-icon></button
+                            ><!-- Delete Button -->
+                        </td>
+                    </ng-container>
+
+                    <!-- EntityStatus -->
+                    <ng-container matColumnDef="entityState">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let rigaOrdine" [formGroup]="rigaOrdine">
+                            <rsd-input-text formControlName="entityState" appearance="fill"></rsd-input-text>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+            </ng-container>
+        </form>
+    </mat-card-content>
+
+    <!-- Card Footer -->
+    <mat-card-footer>
+        <button mat-raised-button class="margin-8" color="primary" (click)="aggiungiRigaOrdine()">Nuovo</button>
+        <mat-paginator
+            #paginator
+            [length]="totalRows"
+            [pageIndex]="currentPage"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageChanged($event)"
+            aria-label="Select page"
+            showFirstLastButtons
+        >
+        </mat-paginator>
+    </mat-card-footer>
+</mat-card>

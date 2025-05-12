@@ -1,0 +1,106 @@
+spring.profiles.include: 'acl'
+
+server:
+  port: ${PORT:8080}
+  servlet:
+   context-path: /voila3sample
+
+
+# Variabile che abilita la security web
+websecurity:
+  enabled: true
+  jwt:
+    jwtCookieName: voila3sampleCookie
+    jwtSecret: ======================Voila3sample=Spring===========================
+    jwtExpirationMs: 86400000
+  cors:
+    ports:
+      enabled: ${WEBSECURITY_CORS_PORTS_ENABLED:http://localhost:4200}
+      disabled: ${WEBSECURITY_CORS_PORTS_DISABLED:*}
+    headers: ${WEBSECURITY_CORS_HEADERS:*}
+    methods: ${WEBSECURITY_CORS_METHODS:HEAD, GET, POST, PUT, DELETE, PATCH, OPTIONS}
+
+spring:
+  cache:
+    jcache:
+      config: 'classpath:ehcache.xml'
+  application:
+    name: voila3sample-service
+  liquibase:
+    enabled: false
+  messages:
+     basename: i18n/res
+#  data:
+#    rest:
+#      basePath: /voila3sample
+  jpa:
+     hibernate:
+       show-sql: true
+     database-platform: org.hibernate.dialect.H2Dialect
+     #Usare questo dialect x MYSQL     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+       
+  datasource:
+    security:
+      driverClassName: ${DATASOURCE_SECURITY_DRIVERCLASSNAME:org.h2.Driver}
+      jdbcUrl: ${DATASOURCE_SECURITY_JDBCURL:jdbc:h2:mem:security;MODE=MYSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}
+      username: ${DATASOURCE_SECURITY_USERNAME:security}
+      password: ${DATASOURCE_SECURITY_PASSWORD:}
+      liquibase:
+        changeLog: classpath:db/liquibase/security/update.xml
+    primary:
+      driverClassName: ${DATASOURCE_PRIMARY_DRIVERCLASSNAME:org.h2.Driver}
+      jdbcUrl: ${DATASOURCE_PRIMARY_JDBCURL:jdbc:h2:mem:primary;MODE=MYSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}
+      username: ${DATASOURCE_PRIMARY_USERNAME:primary}
+      password: ${DATASOURCE_PRIMARY_PASSWORD:}
+      liquibase:
+        changeLog: classpath:db/liquibase/primary/update.xml
+  h2:
+   console:
+    enabled: true
+    settings:
+      web-allow-others: true
+    path: /h2-console
+
+  devtools:
+    livereload:
+      port: 35830
+#    boot:
+#      admin:
+#        client:
+#          url: ${SBA_URL:http://localhost}:${SBA_PORT:8015}/admin
+#           username: ${SBA_SERVER_USER:admin}
+#           password: ${SBA_SERVER_PASS:admin}
+#           instance:
+#             metadata:
+#               user:
+#                 name: ${spring.security.user.name}
+#                 password: ${spring.security.user.password}
+
+
+#logging:
+#  level:
+#    root: INFO
+#    org.hibernate.SQL: TRACE
+#    org.springframework: DEBUG
+LOGS_DIR: /temp
+
+gateway:
+  baseuri: http://localhost:8080
+
+jasperreports:
+  dir: reports
+  debug: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  swagger-ui:
+    path: /api/swagger-ui.html
+  show-actuator: true    

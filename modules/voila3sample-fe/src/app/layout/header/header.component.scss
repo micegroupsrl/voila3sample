@@ -1,0 +1,133 @@
+// Padding laterale sinistro al titolo della toolbar
+button.no-hover-effect {
+    margin-left: 8px;
+    font-size: 20px !important;
+}
+.mat-mdc-button, .mat-mdc-outlined-button {
+    --mat-mdc-button-persistent-ripple-color: none;
+    --mat-mdc-button-ripple-color: none;
+}
+
+.user{
+    display: flex;
+
+}
+
+.usr{
+    font-size: 20px;
+}
+
+.bttn{
+    text-align: left !important;
+    font-size: 10px;
+    width: 24px !important;
+
+}
+
+.bttn:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+.icn{
+    transform: scale(1.5);
+    margin-top: 8px;
+}
+
+
+// Padding alla toolbar
+mat-toolbar-row {
+    padding-left: 5px;
+    padding-right: 8px;
+}
+::ng-deep .header-dropdown .mat-select-panel.auto-height {
+    min-height: none !important;
+  }
+.header-dropdown{
+    height: auto;
+    width: 65px;
+    color: white;
+}
+::ng-deep .header-dropdown .mdc-notched-outline {
+    display: flex;
+    position: absolute;
+    top: 5px !important;
+    box-sizing: border-box;
+    width: 100;
+    max-width: 100%;
+    height: 80% !important;
+    text-align: left;
+    pointer-events: none;
+}
+::ng-deep .header-dropdown .mdc-line-ripple {
+    display: none;
+  }
+.header-dropdown .mat-mdc-select{
+font-size: 15px
+
+}
+::ng-deep .dropdown .mdc-list-item__primary-text{
+    font-size: 15px !important
+}
+
+.dropdown .mat-mdc-option:hover:not(.mdc-list-item--disabled), .mat-mdc-option:focus:not(.mdc-list-item--disabled), .mat-mdc-option.mat-mdc-option-active, .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
+    background: rgba(0,0,0,.07);
+}
+
+::ng-deep .dropdown .mat-pseudo-checkbox{
+    display: none !important;
+}
+::ng-deep .header-dropdown .mat-mdc-select-arrow {
+    transform: scale(0.7) !important;
+    width: 0px !important;
+    margin-right: 6px;
+}
+
+::ng-deep .header-dropdown .mat-mdc-select-value, ::ng-deep .header-dropdown .mat-mdc-select-arrow{
+    color: white;
+}
+
+::ng-deep .header-dropdown .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch, ::ng-deep .header-dropdown .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+    border-color: white;
+}
+
+::ng-deep .header-dropdown .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__notch, ::ng-deep .header-dropdown .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__trailing {
+    border-color: rgba(255, 255, 255, 0.38)
+}
+
+.title-container {
+    display: flex;
+    margin-left:auto;
+}
+
+
+::ng-deep .header-dropdown-log .mat-mdc-select-value, ::ng-deep .header-dropdown-log .mat-mdc-select-arrow{
+  display: none;
+}
+
+.header-dropdown-log{
+    width: -10%;
+} 
+
+::ng-deep .header-dropdown-log .mdc-menu-surface.mat-mdc-select-panel {
+    min-width: 200px !important;
+}
+
+.chat{
+    display: flex;
+    margin-left:auto;
+    top: 5px;
+    transform: scale(0.9);
+}
+
+.cdk-overlay-pane{
+    width: unset !important;
+    height: unset !important;
+    max-width: 100% !important;
+}
+  
+.mat-dialog-container{
+    max-width: 100%;
+    max-height: 100% !important;
+    resize: both;
+}

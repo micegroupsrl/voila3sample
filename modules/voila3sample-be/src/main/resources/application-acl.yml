@@ -1,0 +1,26 @@
+#Le ACL vengono concatenate tramite ' AND '!!!
+voila:
+  acl:
+    #ACL applicate a livello generale di MS
+    application:
+      #ACL applicate a livello generale di MS ma nell'ambito di OrdineController any methods'
+      ordine:
+        #ACL applicate a livello generale di MS ma nell'ambito di OrdineController metodo search'
+        #search: 'idOrdine >: 0'
+    #ACL applicate a livello di singolo profilo
+    profile:
+      #ANY rappresenta qualsiasi profilo incluso anonymous
+      ANY:
+        ordine:
+          #search: 'idOrdine <: 9999'
+      #ACL applicate a livello di profilo ANONYMOUS
+      ROLE_ANONYMOUS:
+        ordine:
+          #search: 'idOrdine <: 6'
+      ROLE_SUPER:
+        #clear viene utilizzato per ripulire le ACL nell'ambito del contesto selezionato (nell'esempio verranno resettate le ACL di OrdineController)
+        #ordine: 'clear'
+        #any: 'clear'
+      ROLE_GESTORE_UTENTI:
+      ROLE_ALL:
+        any: 'clear'

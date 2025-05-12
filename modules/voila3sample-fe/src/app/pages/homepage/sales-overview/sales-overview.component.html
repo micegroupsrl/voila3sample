@@ -1,0 +1,6 @@
+<div class="content" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <button mat-raised-button color="primary" class="margin-8" (click)="theme = 'dark'">Dark</button>
+    <button mat-raised-button color="primary" class="margin-8" (click)="theme = 'macarons'">Colorfull</button>
+    <button mat-raised-button color="primary" class="margin-8" (click)="theme = coolTheme">Cool</button>
+</div>
+<div echarts [options]="options" [theme]="theme" class="demo-chart"></div>

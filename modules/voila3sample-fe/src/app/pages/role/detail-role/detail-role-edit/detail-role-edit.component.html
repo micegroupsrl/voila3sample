@@ -1,0 +1,52 @@
+<div>
+    <!--Form-->
+    <form [formGroup]="roleForm">
+        <mat-card class="mat-elevation-z8">
+            <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
+                <!--Role Id-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <!--In new mode show roleId as required field-->
+                        <label *ngIf="pageStatus | hasPageStatus: 'new'">{{ 'voila3sample.detail.Role.roleId' | translate }}*</label>
+                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">{{ 'voila3sample.detail.Role.roleId' | translate }}</label>
+                    </div>
+                    <rsd-input-text formControlName="roleId"></rsd-input-text>
+                </div>
+                <!--End Role Id-->
+
+                <!--Name-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Role.name' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="name"></rsd-input-text>
+                </div>
+                <!--End Name-->
+                <!-- Role Role Group-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <mat-label>{{ 'voila3sample.detail.Role.theRoleRoleGroupObjectKey' | translate }}</mat-label>
+                    </div>
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>{{ 'voila3sample.detail.Role.theRoleRoleGroupObjectKey' | translate }}</mat-label>
+                        <!--Input-->
+                        <mat-select formControlName="theRoleRoleGroupObjectKey">
+                            <mat-option *ngFor="let roleRoleGroup of roleRoleGroupList" [value]="roleRoleGroup.objectKey">
+                                {{ roleRoleGroup.objectTitle }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!--Tabs role -->
+                <div class="tabs">
+                    <app-tabs-role [formGroup]="roleForm" [entity]="role" [pageStatus]="pageStatus"></app-tabs-role>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

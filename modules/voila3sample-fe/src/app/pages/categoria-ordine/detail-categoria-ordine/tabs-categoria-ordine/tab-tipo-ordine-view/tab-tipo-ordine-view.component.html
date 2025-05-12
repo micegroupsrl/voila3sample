@@ -1,0 +1,45 @@
+<mat-card>
+    <!-- Card Content -->
+    <mat-card-content class="overflow" autosize>
+        <!-- View Mode -->
+        <!-- Numero theTipoOrdine trovati -->
+        <!-- {{ TipoOrdine | tableInfo: totalElements: page: pageSize }} -->
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
+        <!-- Tabella tipo theTipoOrdine -->
+        <table aria-label="theTipoOrdine's tab" mat-table [dataSource]="dataSource" matSort>
+            <!-- Id Tipo Ordine -->
+            <ng-container matColumnDef="theTipoOrdineKey.idTipoOrdine">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.TipoOrdine.idTipoOrdine' | translate }}</th>
+                <td mat-cell *matCellDef="let tipoOrdine">{{ tipoOrdine.idTipoOrdine }}</td>
+            </ng-container>
+            <!-- Anno Tipologia -->
+            <ng-container matColumnDef="theTipoOrdineKey.annoTipologia">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.TipoOrdine.annoTipologia' | translate }}</th>
+                <td mat-cell *matCellDef="let tipoOrdine">{{ tipoOrdine.annoTipologia }}</td>
+            </ng-container>
+            <!-- Nome Ordine -->
+            <ng-container matColumnDef="nomeOrdine">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.TipoOrdine.nomeOrdine' | translate }}</th>
+                <td mat-cell *matCellDef="let tipoOrdine">{{ tipoOrdine.nomeOrdine }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+    </mat-card-content>
+    <!-- Footer -->
+    <mat-card-footer>
+        <mat-paginator
+            #paginator
+            [length]="totalRows"
+            [pageIndex]="currentPage"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageChanged($event)"
+            aria-label="Select page"
+            showFirstLastButtons
+        >
+        </mat-paginator>
+    </mat-card-footer>
+</mat-card>

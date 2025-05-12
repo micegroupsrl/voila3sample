@@ -1,0 +1,99 @@
+<div
+    mat-dialog-container
+    cdkDrag
+    (cdkDragEnded)="onDragEnded($event)"
+    [cdkDragFreeDragPosition]="position"
+    cdkDragBoundary=".cdk-overlay-container"
+    cdkDragRootElement=".cdk-overlay-pane"
+    *ngIf="isOpen"
+>
+    <div mat-dialog-title *ngIf="isOpen" cdkDragHandle>
+        <img class="icon" alt="logo" src="assets/intellivize.png" width="30px" />
+
+        <div class="title">Intellivize ChatBot</div>
+        <div class="frame-top">
+            <button mat-icon-button class="img4" color="primary" (click)="refresh()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+            <button mat-icon-button class="img3" color="primary" (click)="windowed()">
+                <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <button mat-icon-button class="img" color="primary" (click)="close()">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div mat-dialog-content *ngIf="isOpen" class="content" (scroll)="scrolled($event)" #scrollframe>
+        <div>
+            <div>
+                <ul class="possibleAnswers">
+                    <ng-container *ngFor="let message of messages" #message>
+                        <li class="message" [ngClass]="{ from: message.author === 'bot', to: message.author === 'user' }">
+                            {{ message.content }}
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+            <div *ngIf="isLoading" class="loading">
+                <div
+                    *ngFor="let version of versions"
+                    class="pulse-loader"
+                    [style.margin]="'70px auto'"
+                    [style.width]="version.width"
+                    [style.height]="version.height"
+                    [style.color]="version.color"
+                >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div mat-dialog-actions *ngIf="isOpen" class="bottom-bar">
+        <div class="frame">
+            <input
+                matInput
+                placeholder="Ask something..."
+                #chatInput
+                class="text-wrapper"
+                [formControl]="getForm"
+                (keyup.enter)="this.getForm.value == '' ? null : sendMessage()"
+                matTextareaAutosize
+                matAutosizeMinRows="2"
+                matAutosizeMaxRows="5"
+            />
+            <button *ngIf="this.getForm.value != ''" mat-icon-button [disabled]="false" class="img-2" (click)="sendMessage()">
+                <mat-icon>send</mat-icon>
+            </button>
+            <button *ngIf="this.getForm.value == ''" mat-icon-button [disabled]="true" class="img-2-2" (click)="sendMessage()">
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div
+    mat-dialog-title
+    class="window"
+    cdkDrag
+    [cdkDragDisabled]="true"
+    (cdkDragEnded)="onDragEnded($event)"
+    [cdkDragFreeDragPosition]="position"
+    cdkDragBoundary=".cdk-overlay-container"
+    cdkDragRootElement=".cdk-overlay-pane"
+    *ngIf="!isOpen"
+>
+    <img class="icon" alt="logo" src="assets/intellivize.png" width="30px" />
+    <div class="title">Intellivize ChatBot</div>
+    <div class="frame-top-win">
+        <button mat-icon-button class="img3" color="primary" (click)="openWindow()">
+            <mat-icon>keyboard_arrow_up</mat-icon>
+        </button>
+        <button mat-icon-button class="img" color="primary" (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+</div>

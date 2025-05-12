@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="start center">
+        <button *ngIf="!disableMenuButton" mat-icon-button (click)="snavClick()"><mat-icon>menu</mat-icon></button>
+        <!--Title of the SPA-->
+        <button mat-button class="no-hover-effect" (click)="goHome()">voila3sample</button>
+
+        <!--Language selector-->
+        <div class="title-container">
+            <button mat-icon-button class="chat" (click)="openNewChat()" [disabled]="chat" aria-label="Open Chatbot">
+                <mat-icon>chat</mat-icon>
+            </button>
+            <mat-form-field class="header-dropdown">
+                <mat-select [value]="defaultLanguage.language">
+                    <mat-option class="dropdown" (onSelectionChange)="changeLanguage($event)" *ngFor="let language of langaugeArray" [value]="language.language">
+                        {{ language.language | uppercase }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="user">
+            <button *ngIf="cookie" mat-icon-button aria-hidden="false" (click)="OpenModal()">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

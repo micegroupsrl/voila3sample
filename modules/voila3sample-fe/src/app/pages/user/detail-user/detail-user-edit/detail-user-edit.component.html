@@ -1,0 +1,44 @@
+<div>
+    <!--Form-->
+    <form [formGroup]="userForm">
+        <mat-card class="mat-elevation-z8">
+            <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
+                <!--Email-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.User.email' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="email"></rsd-input-text>
+                </div>
+                <!--End Email-->
+                <!--Password-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.User.password' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-password formControlName="password"></rsd-password>
+                </div>
+                <!--End Password-->
+                <!--Username-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.User.username' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="username"></rsd-input-text>
+                </div>
+                <!--End Username-->
+
+                <!--Tabs user -->
+                <div class="tabs">
+                    <app-tabs-user [formGroup]="userForm" [entity]="user" [pageStatus]="pageStatus"></app-tabs-user>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

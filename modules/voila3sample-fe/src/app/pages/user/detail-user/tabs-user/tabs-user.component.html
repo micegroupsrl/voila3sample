@@ -1,0 +1,17 @@
+<!-- All the tabs of User -->
+
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" #tabgroup>
+    <!-- theRolePerUser -->
+    <mat-tab label="Role Per User">
+        <!-- View -->
+        <app-tab-role-per-user-view [entity]="entity" *ngIf="pageStatus | hasPageStatus: 'view'"></app-tab-role-per-user-view>
+        <!-- Edit -->
+        <app-tab-role-per-user-edit-fe
+            [formGroup]="formGroup"
+            [entity]="entity"
+            [tab]="activeTab"
+            *ngIf="pageStatus | hasPageStatus: ['new', 'edit']"
+            #tabeditrolePerUser
+        ></app-tab-role-per-user-edit-fe>
+    </mat-tab>
+</mat-tab-group>

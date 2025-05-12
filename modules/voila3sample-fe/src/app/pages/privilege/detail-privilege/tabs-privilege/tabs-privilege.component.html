@@ -1,0 +1,17 @@
+<!-- All the tabs of Privilege -->
+
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" #tabgroup>
+    <!-- thePrivilegePerRole -->
+    <mat-tab label="Privilege Per Role">
+        <!-- View -->
+        <app-tab-privilege-per-role-view [entity]="entity" *ngIf="pageStatus | hasPageStatus: 'view'"></app-tab-privilege-per-role-view>
+        <!-- Edit -->
+        <app-tab-privilege-per-role-edit-fe
+            [formGroup]="formGroup"
+            [entity]="entity"
+            [tab]="activeTab"
+            *ngIf="pageStatus | hasPageStatus: ['new', 'edit']"
+            #tabeditprivilegePerRole
+        ></app-tab-privilege-per-role-edit-fe>
+    </mat-tab>
+</mat-tab-group>

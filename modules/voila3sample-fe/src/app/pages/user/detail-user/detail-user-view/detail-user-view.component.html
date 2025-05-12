@@ -1,0 +1,63 @@
+<div>
+    <mat-card class="mat-elevation-z8">
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Email -->
+            <div *ngIf="user?.email">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.User.email' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ user!.email }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Password -->
+            <div *ngIf="user?.password">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.User.password' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ user!.password }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Username -->
+            <div *ngIf="user?.username">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.User.username' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ user!.username }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Id -->
+            <div *ngIf="user?.userId">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <div fxLayout="column" fxFlex="30">
+                        <!-- Label -->
+                        <label>ID</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ user!.userId }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tabs user -->
+            <app-tabs-user [formGroup]="userForm" [entity]="user" [pageStatus]="pageStatus"></app-tabs-user>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,89 @@
+<div>
+    <mat-card class="mat-elevation-z8">
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Data Ordine -->
+            <div *ngIf="ordine?.dataOrdine">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Ordine.dataOrdine' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ ordine!.dataOrdine }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Tempo Ordine -->
+            <div *ngIf="ordine?.tempoOrdine">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Ordine.tempoOrdine' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ ordine!.tempoOrdine }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Id Ordine -->
+            <div *ngIf="ordine?.idOrdine">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <div fxLayout="column" fxFlex="30">
+                        <!-- Label -->
+                        <label>ID</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ ordine!.idOrdine }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Cliente -->
+            <div *ngIf="ordine?.theClienteObjectKey">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Ordine.theClienteObjectKey' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ ordine!.theClienteObjectTitle }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Tipo Ordine -->
+            <div *ngIf="ordine?.theTipoOrdineObjectKey">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Ordine.theTipoOrdineObjectKey' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ ordine!.theTipoOrdineObjectTitle }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Ordine Aggregato -->
+            <div *ngIf="ordine?.theOrdineAggregatoObjectKey">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Ordine.theOrdineAggregatoObjectKey' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ ordine!.theOrdineAggregatoObjectTitle }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tabs ordine -->
+            <app-tabs-ordine [formGroup]="ordineForm" [entity]="ordine" [pageStatus]="pageStatus"></app-tabs-ordine>
+        </mat-card-content>
+    </mat-card>
+</div>
