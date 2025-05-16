@@ -1,7 +1,8 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, OnDestroy, Output, ViewChild } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { NgbTimepicker, NgbTimepickerConfig, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'rsd-input-time-ngb',
@@ -21,7 +22,7 @@ import { NgbTimepicker, NgbTimepickerConfig, NgbTimeStruct } from '@ng-bootstrap
         <ngb-timepicker class="bootstrap-style form-control ngb-tp" [formControl]="control" [seconds]="true" [spinners]="false"> </ngb-timepicker>
     `
 })
-export class TimepickerBootstrapComponent implements OnInit, ControlValueAccessor {
+export class TimepickerBootstrapComponent implements OnInit, OnDestroy, ControlValueAccessor {
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
 
@@ -42,6 +43,7 @@ export class TimepickerBootstrapComponent implements OnInit, ControlValueAccesso
     onChange = (value: string | null) => {};
     // onChange!: (value: string) => void;
     onTouched = () => {};
+    private subscriptions = new Subscription();
 
     addEventTime(event: any) {
         this.time = event;
@@ -69,13 +71,15 @@ export class TimepickerBootstrapComponent implements OnInit, ControlValueAccesso
 
         let isUpdatingValue = false;
 
-        this.control.valueChanges.subscribe(value => {
-            if (!isUpdatingValue && value) {
-                isUpdatingValue = true;
-                this.addEventTime(value!);
-                isUpdatingValue = false;
-            }
-        });
+        this.subscriptions.add(
+            this.control.valueChanges.subscribe(value => {
+                if (!isUpdatingValue && value) {
+                    isUpdatingValue = true;
+                    this.addEventTime(value!);
+                    isUpdatingValue = false;
+                }
+            })
+        );
     }
 
     ngAfterViewInit() {
@@ -141,5 +145,10 @@ export class TimepickerBootstrapComponent implements OnInit, ControlValueAccesso
 
     setDisabledState(isDisabled: boolean): void {
         this.formControlDirective.valueAccessor?.setDisabledState?.(isDisabled);
+    }
+    
+    ngOnDestroy() {
+        // Unsubscribe from all subscriptions
+        this.subscriptions.unsubscribe();
     }
 }

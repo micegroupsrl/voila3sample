@@ -1,7 +1,8 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, OnDestroy, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormControlDirective, FormControl, ControlContainer, NG_VALUE_ACCESSOR, FormBuilder, FormGroup } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'datetimepicker',
@@ -20,7 +21,7 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
         </div>
     `
 })
-export class DataTimePickerBaseComponent implements OnInit, ControlValueAccessor {
+export class DataTimePickerBaseComponent implements OnInit, OnDestroy, ControlValueAccessor {
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
 
@@ -42,6 +43,7 @@ export class DataTimePickerBaseComponent implements OnInit, ControlValueAccessor
 
     onChange = (value: string | null) => {};
     onTouched = () => {};
+    private subscriptions = new Subscription();
 
     constructor(
         public controlContainer: ControlContainer,
@@ -63,16 +65,20 @@ export class DataTimePickerBaseComponent implements OnInit, ControlValueAccessor
         });
 
         // Osservatore per catturare le modifiche al datapicker
-        this.formDatetime.get('selectedDate')?.valueChanges.subscribe(date => {
-            this.selectedDate = date;
-            this.emitDateTime();
-        });
+        this.subscriptions.add(
+            this.formDatetime.get('selectedDate')?.valueChanges.subscribe(date => {
+                this.selectedDate = date;
+                this.emitDateTime();
+            })
+        );
 
         // Osservatore per catturare le modifiche al timepicker
-        this.formDatetime.get('selectedTime')?.valueChanges.subscribe(time => {
-            this.selectedTime = time;
-            this.emitDateTime();
-        });
+        this.subscriptions.add(
+            this.formDatetime.get('selectedTime')?.valueChanges.subscribe(time => {
+                this.selectedTime = time;
+                this.emitDateTime();
+            })
+        );
     }
 
     get control() {
@@ -106,5 +112,10 @@ export class DataTimePickerBaseComponent implements OnInit, ControlValueAccessor
 
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
+    }
+    
+    ngOnDestroy() {
+        // Unsubscribe from all subscriptions
+        this.subscriptions.unsubscribe();
     }
 }

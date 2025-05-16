@@ -1,19 +1,21 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { LoginGroupApiService } from 'src/app/pages/services/services-login/login-group-api.service';
 import { OverlaysService } from 'src/app/utilities/services/overlays.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'profile-dialog',
     templateUrl: './profile-dialog.component.html'
 })
-export class ProfileDialog {
+export class ProfileDialog implements OnDestroy {
     user: any = {
         email: String,
         username: String
     };
     protected logged: boolean = false;
+    private subscriptions = new Subscription();
 
     constructor(
         private loginGroupApiService: LoginGroupApiService,
@@ -38,16 +40,24 @@ export class ProfileDialog {
     CloseDialog() {
         this._mdr.close(false);
     }
+    
     public logout() {
-        this.loginGroupApiService.login.doLogout().subscribe((loginResult: String) => {
-            if (loginResult == "You've been signed out!") {
-                this.overlaysService.toast.showMessage('Logout effettuato');
-                console.log(loginResult);
-                this.cookieService.deleteAll();
-                //.delete('voila3sampleCookie', '/', 'localhost', undefined, 'Lax');
-                window.location.reload();
-                //this.router.navigate(['/login'])
-            }
-        });
+        this.subscriptions.add(
+            this.loginGroupApiService.login.doLogout().subscribe((loginResult: String) => {
+                if (loginResult == "You've been signed out!") {
+                    this.overlaysService.toast.showMessage('Logout effettuato');
+                    console.log(loginResult);
+                    this.cookieService.deleteAll();
+                    //.delete('voila3sampleCookie', '/', 'localhost', undefined, 'Lax');
+                    window.location.reload();
+                    //this.router.navigate(['/login'])
+                }
+            })
+        );
+    }
+
+    ngOnDestroy() {
+        // Unsubscribe from all subscriptions
+        this.subscriptions.unsubscribe();
     }
 }

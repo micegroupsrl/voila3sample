@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild, forwardRef } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild, forwardRef } from '@angular/core';
 import { ControlContainer, FormControl, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbTimepicker, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import { first } from 'rxjs';
+import { first, Subscription } from 'rxjs';
 
 @Component({
     selector: 'timepicker',
@@ -15,7 +15,7 @@ import { first } from 'rxjs';
     templateUrl: './timepicker-base.component.html',
     styleUrls: ['./timepicker-base.component.scss']
 })
-export class TimepickerTestComponent implements OnInit {
+export class TimepickerTestComponent implements OnInit, OnDestroy {
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
     @ViewChild(NgbTimepicker) picker!: NgbTimepicker;
@@ -25,6 +25,7 @@ export class TimepickerTestComponent implements OnInit {
     @Input() formControlName!: string;
     @Input() label!: string;
     timePickerControl: FormControl = new FormControl();
+    private subscriptions = new Subscription();
 
     //time!: NgbTimeStruct;
 
@@ -36,15 +37,20 @@ export class TimepickerTestComponent implements OnInit {
     ngOnInit() {
         this.label = this.label || this.formControlName;
         this.timePickerControl.setValue(this.writeValue(this.control.value));
-        this.control.valueChanges.pipe(first()).subscribe(value => {
-            if (value) {
-                this.timePickerControl.setValue(this.writeValue(value));
-            }
-        });
+        
+        this.subscriptions.add(
+            this.control.valueChanges.pipe(first()).subscribe(value => {
+                if (value) {
+                    this.timePickerControl.setValue(this.writeValue(value));
+                }
+            })
+        );
 
-        this.timePickerControl.valueChanges.subscribe(value => {
-            this.control.setValue(this.timeToString(value));
-        });
+        this.subscriptions.add(
+            this.timePickerControl.valueChanges.subscribe(value => {
+                this.control.setValue(this.timeToString(value));
+            })
+        );
     }
 
     get control() {
@@ -92,5 +98,10 @@ export class TimepickerTestComponent implements OnInit {
 
     setDisabledState(isDisabled: boolean): void {
         this.formControlDirective.valueAccessor?.setDisabledState?.(isDisabled);
+    }
+    
+    ngOnDestroy() {
+        // Unsubscribe from all subscriptions
+        this.subscriptions.unsubscribe();
     }
 }
