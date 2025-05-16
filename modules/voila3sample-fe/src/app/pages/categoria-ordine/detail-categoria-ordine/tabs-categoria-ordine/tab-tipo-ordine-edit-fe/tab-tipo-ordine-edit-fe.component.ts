@@ -1,10 +1,10 @@
 import { HttpParams } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { TipoOrdineApiService } from 'src/app/pages/services/services-tipo-ordine/tipo-ordine-api.service';
 import { TipoOrdineGroupApiService } from 'src/app/pages/services/services-tipo-ordine/tipo-ordine-group-api.service';
 import { getListForDropdowns } from 'src/app/shared/base/base.helper';
@@ -19,7 +19,7 @@ import { BaseTabComponent } from 'src/app/shared/base/base-tab.component';
     templateUrl: './tab-tipo-ordine-edit-fe.component.html',
     styleUrls: ['./tab-tipo-ordine-edit-fe.component.scss']
 })
-export class TabTipoOrdineEditFeComponent extends BaseTabComponent implements OnInit, OnChanges {
+export class TabTipoOrdineEditFeComponent extends BaseTabComponent implements OnInit, OnChanges, OnDestroy {
     isLoading = false;
     totalRows = 0;
     pageSize = 3;
@@ -48,6 +48,8 @@ export class TabTipoOrdineEditFeComponent extends BaseTabComponent implements On
   in object.page so a che pagina sono e in object.pageSize so quanti oggetti ho per una pagina
   quindi, controllo prima se in itemPerPageMap.get(object.page) ho qualcosa, poi 
   */
+    private subscriptions = new Subscription();
+
     constructor(
         private fb: FormBuilder,
         private tipoOrdineApiService: TipoOrdineApiService,
@@ -71,7 +73,9 @@ export class TabTipoOrdineEditFeComponent extends BaseTabComponent implements On
         this.loadData(object);
     }
     ngAfterViewInit() {
-        this.sort.sortChange.subscribe(data => this.onSortChange(data));
+        this.subscriptions.add(
+            this.sort.sortChange.subscribe(data => this.onSortChange(data))
+        );
     }
     ngAfterContentChecked(): void {
         this.changeDetector.detectChanges();
@@ -130,24 +134,28 @@ export class TabTipoOrdineEditFeComponent extends BaseTabComponent implements On
 
         const options: HttpParams = setOptions(pageObject);
         if (this.entity) {
-            this.tipoOrdineApiService.getTipoOrdineByCategoriaOrdine(this.entity?.objectKey!, options).subscribe(
-                (data: any) => {
-                    const formArray = new FormArray(data.content.map(this.createFormGroup));
-                    const fgs: Observable<FormArray> = of(formArray);
-                    fgs.subscribe(theTipoOrdine => {
-                        this.form.setControl('theTipoOrdine', theTipoOrdine);
-                    });
-                    setTimeout(() => {
-                        this.paginator.pageIndex = this.currentPage;
-                        this.paginator.length = data.totalElements;
-                    });
-                    this.totalElements = data.totalElements;
-                    this.isLoading = false;
-                },
-                () => {},
-                () => {
-                    this.isLoading = false;
-                }
+            this.subscriptions.add(
+                this.tipoOrdineApiService.getTipoOrdineByCategoriaOrdine(this.entity?.objectKey!, options).subscribe(
+                    (data: any) => {
+                        const formArray = new FormArray(data.content.map(this.createFormGroup));
+                        const fgs: Observable<FormArray> = of(formArray);
+                        this.subscriptions.add(
+                            fgs.subscribe(theTipoOrdine => {
+                                this.form.setControl('theTipoOrdine', theTipoOrdine);
+                            })
+                        );
+                        setTimeout(() => {
+                            this.paginator.pageIndex = this.currentPage;
+                            this.paginator.length = data.totalElements;
+                        });
+                        this.totalElements = data.totalElements;
+                        this.isLoading = false;
+                    },
+                    () => {},
+                    () => {
+                        this.isLoading = false;
+                    }
+                )
             );
         }
     }
@@ -241,5 +249,11 @@ export class TabTipoOrdineEditFeComponent extends BaseTabComponent implements On
             valueForm = valueForm.concat(this.formNewEntities.getRawValue().theTipoOrdine);
         }
         return valueForm;
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscriptions) {
+            this.subscriptions.unsubscribe();
+        }
     }
 }

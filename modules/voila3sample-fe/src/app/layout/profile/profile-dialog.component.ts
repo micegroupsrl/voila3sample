@@ -1,25 +1,29 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { LoginGroupApiService } from 'src/app/pages/services/services-login/login-group-api.service';
 import { OverlaysService } from 'src/app/utilities/services/overlays.service';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
-    selector: 'profile-dialog',
-    templateUrl: './profile-dialog.component.html'
+    selector: 'app-profile-dialog',
+    templateUrl: './profile-dialog.component.html',
+    styleUrls: ['./profile-dialog.component.scss']
 })
-export class ProfileDialog {
+export class ProfileDialogComponent implements OnInit, OnDestroy {
     user: any = {
         email: String,
         username: String
     };
     protected logged: boolean = false;
 
+    private subscriptions = new Subscription();
+
     constructor(
         private loginGroupApiService: LoginGroupApiService,
         private cookieService: CookieService,
         private overlaysService: OverlaysService,
-        private _mdr: MatDialogRef<ProfileDialog>,
+        private _mdr: MatDialogRef<ProfileDialogComponent>,
         @Inject(MAT_DIALOG_DATA) data: any
     ) {
         let user = cookieService.get('user').split('/');
@@ -38,16 +42,26 @@ export class ProfileDialog {
     CloseDialog() {
         this._mdr.close(false);
     }
-    public logout() {
-        this.loginGroupApiService.login.doLogout().subscribe((loginResult: String) => {
-            if (loginResult == "You've been signed out!") {
-                this.overlaysService.toast.showMessage('Logout effettuato');
-                console.log(loginResult);
-                this.cookieService.deleteAll();
-                //.delete('voila3sampleCookie', '/', 'localhost', undefined, 'Lax');
-                window.location.reload();
-                //this.router.navigate(['/login'])
-            }
-        });
+
+    logout() {
+        this.subscriptions.add(
+            this.loginGroupApiService.logout().subscribe(
+                () => {
+                    this.overlaysService.toast.showMessage('Logout effettuato');
+                    console.log(loginResult);
+                    this.cookieService.deleteAll();
+                    window.location.reload();
+                },
+                () => {
+                    // Handle error
+                }
+            )
+        );
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscriptions) {
+            this.subscriptions.unsubscribe();
+        }
     }
 }

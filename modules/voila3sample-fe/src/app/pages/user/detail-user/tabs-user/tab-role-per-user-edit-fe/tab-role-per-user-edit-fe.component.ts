@@ -1,10 +1,10 @@
 import { HttpParams } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { RolePerUserApiService } from 'src/app/pages/services/services-role-per-user/role-per-user-api.service';
 import { RolePerUserGroupApiService } from 'src/app/pages/services/services-role-per-user/role-per-user-group-api.service';
 import { getListForDropdowns } from 'src/app/shared/base/base.helper';
@@ -20,7 +20,7 @@ import { BaseTabComponent } from 'src/app/shared/base/base-tab.component';
     templateUrl: './tab-role-per-user-edit-fe.component.html',
     styleUrls: ['./tab-role-per-user-edit-fe.component.scss']
 })
-export class TabRolePerUserEditFeComponent extends BaseTabComponent implements OnInit, OnChanges {
+export class TabRolePerUserEditFeComponent extends BaseTabComponent implements OnInit, OnChanges, OnDestroy {
     isLoading = false;
     totalRows = 0;
     pageSize = 3;
@@ -45,6 +45,8 @@ export class TabRolePerUserEditFeComponent extends BaseTabComponent implements O
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
+
+    private subscriptions = new Subscription();
 
     /** Quando faccio loadData(object)
   in object.page so a che pagina sono e in object.pageSize so quanti oggetti ho per una pagina
@@ -73,7 +75,9 @@ export class TabRolePerUserEditFeComponent extends BaseTabComponent implements O
         this.loadData(object);
     }
     ngAfterViewInit() {
-        this.sort.sortChange.subscribe(data => this.onSortChange(data));
+        this.subscriptions.add(
+            this.sort.sortChange.subscribe(data => this.onSortChange(data))
+        );
     }
     ngAfterContentChecked(): void {
         this.changeDetector.detectChanges();
@@ -128,24 +132,28 @@ export class TabRolePerUserEditFeComponent extends BaseTabComponent implements O
 
         const options: HttpParams = setOptions(pageObject);
         if (this.entity) {
-            this.rolePerUserApiService.getRolePerUserByUser(this.entity?.objectKey!, options).subscribe(
-                (data: any) => {
-                    const formArray = new FormArray(data.content.map(this.createFormGroup));
-                    const fgs: Observable<FormArray> = of(formArray);
-                    fgs.subscribe(theRolePerUser => {
-                        this.form.setControl('theRolePerUser', theRolePerUser);
-                    });
-                    setTimeout(() => {
-                        this.paginator.pageIndex = this.currentPage;
-                        this.paginator.length = data.totalElements;
-                    });
-                    this.totalElements = data.totalElements;
-                    this.isLoading = false;
-                },
-                () => {},
-                () => {
-                    this.isLoading = false;
-                }
+            this.subscriptions.add(
+                this.rolePerUserApiService.getRolePerUserByUser(this.entity?.objectKey!, options).subscribe(
+                    (data: any) => {
+                        const formArray = new FormArray(data.content.map(this.createFormGroup));
+                        const fgs: Observable<FormArray> = of(formArray);
+                        this.subscriptions.add(
+                            fgs.subscribe(theRolePerUser => {
+                                this.form.setControl('theRolePerUser', theRolePerUser);
+                            })
+                        );
+                        setTimeout(() => {
+                            this.paginator.pageIndex = this.currentPage;
+                            this.paginator.length = data.totalElements;
+                        });
+                        this.totalElements = data.totalElements;
+                        this.isLoading = false;
+                    },
+                    () => {},
+                    () => {
+                        this.isLoading = false;
+                    }
+                )
             );
         }
     }
@@ -193,9 +201,11 @@ export class TabRolePerUserEditFeComponent extends BaseTabComponent implements O
 
     public getRoleList(): void {
         if (!this.roleList) {
-            this.rolePerUserGroupApiService.role.getRoleByCriteria().subscribe(data => {
-                this.roleList = getListForDropdowns(data);
-            });
+            this.subscriptions.add(
+                this.rolePerUserGroupApiService.role.getRoleByCriteria().subscribe(data => {
+                    this.roleList = getListForDropdowns(data);
+                })
+            );
         }
     }
 
@@ -249,5 +259,11 @@ export class TabRolePerUserEditFeComponent extends BaseTabComponent implements O
             valueForm = valueForm.concat(this.formNewEntities.getRawValue().theRolePerUser);
         }
         return valueForm;
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscriptions) {
+            this.subscriptions.unsubscribe();
+        }
     }
 }
