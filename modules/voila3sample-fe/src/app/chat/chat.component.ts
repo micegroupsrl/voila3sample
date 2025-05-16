@@ -1,17 +1,18 @@
-import { Component, ElementRef, NgZone, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, OnDestroy, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ChatService, Message } from 'src/app/utilities/services/chat.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProfileDialog } from 'src/app/layout/profile/profile-dialog.component';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CdkDrag, CdkDragEnd } from '@angular/cdk/drag-drop';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
     styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
     @ViewChild('scrollframe', { static: false }) scrollFrame!: ElementRef;
     @ViewChildren('message') itemElements!: QueryList<any>;
 
@@ -36,6 +37,9 @@ export class ChatComponent implements OnInit {
         }
     ];
     mobileQuery: MediaQueryList;
+    
+    // Subscriptions
+    private subscriptions = new Subscription();
 
     constructor(
         public chatService: ChatService,
@@ -63,35 +67,39 @@ export class ChatComponent implements OnInit {
             thePrivilegePerRole: ''
         });
 
-        this.chatService.conversation.subscribe(val => {
-            if (val.at(0)!.author == 'user') {
-                this.messages = this.messages.concat(val);
-                this.index++;
-                this.firstMsg = true;
-                this.isLoading = true;
-                this.isMessageStarted = true;
-            }
-
-            if (val.at(0)!.author == 'bot' && this.firstMsg) {
-                this.isLoading = false;
-                this.messages = this.messages.concat(val);
-                this.index++;
-                this.firstMsg = false;
-                this.scrollToBottom();
-            } else if (val.at(0)!.author == 'bot' && this.firstMsg === false) {
-                this.messages.at(this.index - 1)!.content = this.messages.at(this.index - 1)!.content + val.at(0)!.content;
-                if (this.isMessageStarted === true) {
-                    this.playFile();
+        this.subscriptions.add(
+            this.chatService.conversation.subscribe(val => {
+                if (val.at(0)!.author == 'user') {
+                    this.messages = this.messages.concat(val);
+                    this.index++;
+                    this.firstMsg = true;
+                    this.isLoading = true;
+                    this.isMessageStarted = true;
                 }
-                this.scrollToBottom();
-                this.isMessageStarted = false;
-            }
-        });
+
+                if (val.at(0)!.author == 'bot' && this.firstMsg) {
+                    this.isLoading = false;
+                    this.messages = this.messages.concat(val);
+                    this.index++;
+                    this.firstMsg = false;
+                    this.scrollToBottom();
+                } else if (val.at(0)!.author == 'bot' && this.firstMsg === false) {
+                    this.messages.at(this.index - 1)!.content = this.messages.at(this.index - 1)!.content + val.at(0)!.content;
+                    if (this.isMessageStarted === true) {
+                        this.playFile();
+                    }
+                    this.scrollToBottom();
+                    this.isMessageStarted = false;
+                }
+            })
+        );
     }
 
     ngAfterViewInit() {
         this.scrollContainer = this.scrollFrame.nativeElement;
-        this.itemElements.changes.subscribe(_ => this.onItemElementsChanged());
+        this.subscriptions.add(
+            this.itemElements.changes.subscribe(_ => this.onItemElementsChanged())
+        );
     }
 
     get getForm() {
@@ -158,5 +166,10 @@ export class ChatComponent implements OnInit {
 
     changePosition() {
         this.position = { x: this.position.x, y: this.position.y };
+    }
+
+    ngOnDestroy() {
+        // Unsubscribe from all subscriptions
+        this.subscriptions.unsubscribe();
     }
 }

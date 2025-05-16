@@ -1,7 +1,8 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, OnDestroy, Output, ViewChild } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'rsd-input-data',
@@ -22,7 +23,7 @@ import * as moment from 'moment';
         </mat-form-field>
     `
 })
-export class DatepickerComponent implements OnInit, ControlValueAccessor {
+export class DatepickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
 
@@ -39,6 +40,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
 
     onChange = (value: string) => {};
     onTouched = () => {};
+    private subscriptions = new Subscription();
 
     addEventDate(event: any) {
         this.date = event;
@@ -60,13 +62,15 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
 
         let isUpdatingValue = false;
 
-        this.control.valueChanges.subscribe(value => {
-            if (!isUpdatingValue && value) {
-                isUpdatingValue = true;
-                this.addEventDate(value!);
-                isUpdatingValue = false;
-            }
-        });
+        this.subscriptions.add(
+            this.control.valueChanges.subscribe(value => {
+                if (!isUpdatingValue && value) {
+                    isUpdatingValue = true;
+                    this.addEventDate(value!);
+                    isUpdatingValue = false;
+                }
+            })
+        );
     }
 
     get control() {
@@ -91,5 +95,10 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
 
     setDisabledState(isDisabled: boolean): void {
         this.formControlDirective.valueAccessor?.setDisabledState?.(isDisabled);
+    }
+    
+    ngOnDestroy() {
+        // Unsubscribe from all subscriptions
+        this.subscriptions.unsubscribe();
     }
 }

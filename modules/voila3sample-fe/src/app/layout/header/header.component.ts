@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { LANGUAGE, LANGUAGE_START } from './header.constant';
 import { VoilaTranslateService } from 'src/app/utilities/services/voila-translate.service';
 import { environment } from 'src/environments/environment';
@@ -7,13 +7,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ChatComponent } from 'src/app/chat/chat.component';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
     @Output() snav: EventEmitter<void> = new EventEmitter<void>();
     public langaugeArray: any = LANGUAGE;
     public defaultLanguage: any = LANGUAGE_START;
@@ -23,10 +24,10 @@ export class HeaderComponent {
     protected cookie: boolean = false;
     chat = false;
     public disableMenuButton: boolean = false;
+    private subscriptions = new Subscription();
 
     constructor(
         private translateService: VoilaTranslateService,
-
         private cookieService: CookieService,
         protected router: Router,
         private matDialog: MatDialog
@@ -45,6 +46,7 @@ export class HeaderComponent {
     public snavClick() {
         this.snav.emit();
     }
+    
     public changeLanguage(langauge: any): void {
         if (langauge.isUserInput || this.first) {
             this.translateService.setDefaultLang(langauge.source.value);
@@ -61,18 +63,20 @@ export class HeaderComponent {
     }
 
     openNewChat() {
-        this.matDialog
-            .open(ChatComponent, {
-                backdropClass: 'cdk-overlay-transparent-backdrop',
-                hasBackdrop: false,
-                disableClose: true,
-                height: 'auto',
-                width: 'auto'
-            })
-            .afterClosed()
-            .subscribe(() => {
+        const dialogRef = this.matDialog.open(ChatComponent, {
+            backdropClass: 'cdk-overlay-transparent-backdrop',
+            hasBackdrop: false,
+            disableClose: true,
+            height: 'auto',
+            width: 'auto'
+        });
+        
+        this.subscriptions.add(
+            dialogRef.afterClosed().subscribe(() => {
                 this.chat = false;
-            });
+            })
+        );
+        
         this.chat = true;
     }
 
@@ -80,5 +84,10 @@ export class HeaderComponent {
         if (this.cookieService.check('voila3sampleCookie') && environment.securityOn) {
             this.router.navigate(['/home']);
         }
+    }
+    
+    ngOnDestroy() {
+        // Unsubscribe from all subscriptions
+        this.subscriptions.unsubscribe();
     }
 }
