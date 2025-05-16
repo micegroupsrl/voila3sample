@@ -1,11 +1,12 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnDestroy, OnInit } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { MENU_HOME } from 'src/app/home-menu';
 import { MENU_MS_VOILA3SAMPLE } from '../../pages/voila3sample-menu';
 import { MenuElement } from 'src/app/shared/base/base.menu-element';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
+import { Subscription } from 'rxjs';
 
 /**
  * You can add here the menu of a MicroService.
@@ -18,7 +19,7 @@ const MS_MENU_ITEMS: MenuElement[] = [...MENU_HOME, ...MENU_MS_VOILA3SAMPLE];
     templateUrl: './sidenav.component.html',
     styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent {
+export class SidenavComponent implements OnInit, OnDestroy {
     @Output() snav: EventEmitter<void> = new EventEmitter<void>();
     @Input() mobile: any;
     @Input() roles: any;
@@ -28,6 +29,7 @@ export class SidenavComponent {
     treeControl = new NestedTreeControl<MenuElement>(node => node.children);
     dataSource = new MatTreeNestedDataSource<MenuElement>();
     rolesList: string[] | undefined;
+    private subscriptions = new Subscription();
 
     constructor(private cookieService: CookieService) {
         if (this.cookieService.check('voila3sampleCookie') && this.cookieService.check('user')) {
@@ -82,5 +84,11 @@ export class SidenavComponent {
             .filter(filteredNode => filteredNode !== null) // Rimuovi i nodi senza privilegi
             .filter(node => node?.children !== null); // Rimuovi i nodi padri senza figli
         return result;
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscriptions) {
+            this.subscriptions.unsubscribe();
+        }
     }
 }

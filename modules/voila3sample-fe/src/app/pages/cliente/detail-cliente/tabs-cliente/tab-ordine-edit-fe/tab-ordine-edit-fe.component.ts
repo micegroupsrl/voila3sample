@@ -1,10 +1,10 @@
 import { HttpParams } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { OrdineApiService } from 'src/app/pages/services/services-ordine/ordine-api.service';
 import { OrdineGroupApiService } from 'src/app/pages/services/services-ordine/ordine-group-api.service';
 import { getListForDropdowns } from 'src/app/shared/base/base.helper';
@@ -20,7 +20,7 @@ import { BaseTabComponent } from 'src/app/shared/base/base-tab.component';
     templateUrl: './tab-ordine-edit-fe.component.html',
     styleUrls: ['./tab-ordine-edit-fe.component.scss']
 })
-export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit, OnChanges {
+export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit, OnChanges, OnDestroy {
     isLoading = false;
     totalRows = 0;
     pageSize = 3;
@@ -46,6 +46,8 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
+
+    private subscriptions = new Subscription();
 
     /** Quando faccio loadData(object)
   in object.page so a che pagina sono e in object.pageSize so quanti oggetti ho per una pagina
@@ -73,9 +75,13 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
         const object: PageObject = { page: 0, pageSize: this.pageSize };
         this.loadData(object);
     }
+
     ngAfterViewInit() {
-        this.sort.sortChange.subscribe(data => this.onSortChange(data));
+        this.subscriptions.add(
+            this.sort.sortChange.subscribe(data => this.onSortChange(data))
+        );
     }
+
     ngAfterContentChecked(): void {
         this.changeDetector.detectChanges();
     }
@@ -90,6 +96,7 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
         this.object.page = 0;
         this.getTheOrdine.patchValue(sortFormArray(this.getTheOrdine, data.active, data.direction));
     }
+
     /**
      * Get form.
      */
@@ -143,24 +150,28 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
 
         const options: HttpParams = setOptions(pageObject);
         if (this.entity) {
-            this.ordineApiService.getOrdineByCliente(this.entity?.objectKey!, options).subscribe(
-                (data: any) => {
-                    const formArray = new FormArray(data.content.map(this.createFormGroup));
-                    const fgs: Observable<FormArray> = of(formArray);
-                    fgs.subscribe(theOrdine => {
-                        this.form.setControl('theOrdine', theOrdine);
-                    });
-                    setTimeout(() => {
-                        this.paginator.pageIndex = this.currentPage;
-                        this.paginator.length = data.totalElements;
-                    });
-                    this.totalElements = data.totalElements;
-                    this.isLoading = false;
-                },
-                () => {},
-                () => {
-                    this.isLoading = false;
-                }
+            this.subscriptions.add(
+                this.ordineApiService.getOrdineByCliente(this.entity?.objectKey!, options).subscribe(
+                    (data: any) => {
+                        const formArray = new FormArray(data.content.map(this.createFormGroup));
+                        const fgs: Observable<FormArray> = of(formArray);
+                        this.subscriptions.add(
+                            fgs.subscribe(theOrdine => {
+                                this.form.setControl('theOrdine', theOrdine);
+                            })
+                        );
+                        setTimeout(() => {
+                            this.paginator.pageIndex = this.currentPage;
+                            this.paginator.length = data.totalElements;
+                        });
+                        this.totalElements = data.totalElements;
+                        this.isLoading = false;
+                    },
+                    () => {},
+                    () => {
+                        this.isLoading = false;
+                    }
+                )
             );
         }
     }
@@ -169,6 +180,7 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
         this.pageSize = event.pageSize;
         this.currentPage = event.pageIndex;
     }
+
     private managePageStatusChanges(changes: SimpleChanges): void {
         const pageStatusChanges: SimpleChange = changes['pageStatus'];
         if (pageStatusChanges?.currentValue) {
@@ -188,6 +200,7 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
             this.loadData(object);
         }
     }
+
     /**
      * Set entity changes.
      */
@@ -208,19 +221,24 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
 
     public getTipoOrdineList(): void {
         if (!this.tipoOrdineList) {
-            this.ordineGroupApiService.tipoOrdine.getTipoOrdineByCriteria().subscribe(data => {
-                this.tipoOrdineList = getListForDropdowns(data);
-            });
+            this.subscriptions.add(
+                this.ordineGroupApiService.tipoOrdine.getTipoOrdineByCriteria().subscribe(data => {
+                    this.tipoOrdineList = getListForDropdowns(data);
+                })
+            );
         }
     }
 
     public getOrdineAggregatoList(): void {
         if (!this.ordineAggregatoList) {
-            this.ordineGroupApiService.ordine.getOrdineByCriteria().subscribe(data => {
-                this.ordineAggregatoList = getListForDropdowns(data);
-            });
+            this.subscriptions.add(
+                this.ordineGroupApiService.ordine.getOrdineByCriteria().subscribe(data => {
+                    this.ordineAggregatoList = getListForDropdowns(data);
+                })
+            );
         }
     }
+
     /**
      * Parent List.
      */
@@ -272,5 +290,11 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
             valueForm = valueForm.concat(this.formNewEntities.getRawValue().theOrdine);
         }
         return valueForm;
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscriptions) {
+            this.subscriptions.unsubscribe();
+        }
     }
 }
