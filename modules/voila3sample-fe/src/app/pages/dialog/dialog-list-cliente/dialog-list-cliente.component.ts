@@ -22,17 +22,7 @@ export class DialogListClienteComponent {
     currentPage = 0;
     pageSizeOptions: number[] = [5, 10, 25, 100];
 
-    displayedColumns: string[] = [
-        'idPersona.idPersona',
-        'idPersona.codiceFiscale',
-        'email',
-        'telefono',
-        'indirizzo',
-        'createdBy',
-        'lastModifiedBy',
-        'createdDate',
-        'lastModifiedDate'
-    ];
+    displayedColumns: string[] = ['idPersona.idPersona', 'idPersona.cf', 'punti', 'nome', 'cognome', 'email', 'telefono'];
     dataSource: MatTableDataSource<ICliente> = new MatTableDataSource();
     clickedRows = new Set<ICliente>();
 
@@ -40,14 +30,12 @@ export class DialogListClienteComponent {
 
     public dataForm = {
         idPersona: null,
-        codiceFiscale: null,
+        cf: null,
+        punti: null,
+        nome: '',
+        cognome: '',
         email: '',
-        telefono: '',
-        indirizzo: '',
-        createdBy: '',
-        lastModifiedBy: '',
-        createdDate: null,
-        lastModifiedDate: null
+        telefono: ''
     };
 
     filters = '';

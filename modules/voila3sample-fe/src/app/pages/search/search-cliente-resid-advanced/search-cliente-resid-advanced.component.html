@@ -59,10 +59,6 @@
 
                                 <!-- Input number -->
                                 <rsd-input-number *ngIf="getTypeSelected(i).type == 'number'" formControlName="value" label="{{ 'buttons.value' | translate }}"></rsd-input-number>
-
-                                <!-- Input date time -->
-
-                                <datetimepicker *ngIf="getTypeSelected(i).type == 'datetime'" formControlName="value"> </datetimepicker>
                             </div>
                             <!-- Remove Filters -->
                             <button mat-icon-button color="warn" (click)="removeFilterFromFiltersFormArray(i)" fxFlex="nogrow" class="padding-top-bottom-5">

@@ -16,19 +16,31 @@
             </div>
 
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <!-- dataOrdine From -->
-                <rsd-input-data formControlName="dataOrdineDa" label="Data Ordine {{ 'search.from' | translate }}..."></rsd-input-data>
-                <!-- Data Ordine To -->
-                <rsd-input-data formControlName="dataOrdineA" label="...{{ 'search.to' | translate }}"></rsd-input-data>
+                <!-- Descrizione -->
+                <rsd-input-text formControlName="descrizione"></rsd-input-text>
+            </div>
+
+            <!-- Datetime From -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <datetimepicker formControlName="datetimeDa" label="Datetime {{ 'search.from' | translate }}..."></datetimepicker>
+                <!-- Datetime To -->
+                <datetimepicker formControlName="datetimeA" label="...{{ 'search.to' | translate }}"></datetimepicker>
             </div>
 
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <!-- tempoOrdine From -->
-                <mat-label class="lbl">Tempo Ordine {{ 'search.from' | translate }}...</mat-label>
-                <timepicker formControlName="tempoOrdineDa"></timepicker>
-                <!-- Tempo Ordine To -->
+                <!-- date From -->
+                <rsd-input-data formControlName="dateDa" label="Date {{ 'search.from' | translate }}..."></rsd-input-data>
+                <!-- Date To -->
+                <rsd-input-data formControlName="dateA" label="...{{ 'search.to' | translate }}"></rsd-input-data>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- time From -->
+                <mat-label class="lbl">Time {{ 'search.from' | translate }}...</mat-label>
+                <timepicker formControlName="timeDa"></timepicker>
+                <!-- Time To -->
                 <mat-label class="lbl">...{{ 'search.to' | translate }}</mat-label>
-                <timepicker formControlName="tempoOrdineA"></timepicker>
+                <timepicker formControlName="timeA"></timepicker>
             </div>
 
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
@@ -55,13 +67,13 @@
                 <datetimepicker formControlName="lastModifiedDateA" label="...{{ 'search.to' | translate }}"></datetimepicker>
             </div>
 
-            <!-- Cliente -->
+            <!-- Stato Ordine -->
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
                 <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Cliente</mat-label>
-                    <mat-select formControlName="theCliente">
-                        <mat-option *ngFor="let cliente of clienteList" [value]="cliente.objectKey">
-                            {{ cliente.objectTitle }}
+                    <mat-label>Stato Ordine</mat-label>
+                    <mat-select formControlName="idStatoOrdine">
+                        <mat-option *ngFor="let statoOrdine of statoOrdineList" [value]="statoOrdine.objectKey">
+                            {{ statoOrdine.objectTitle }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -73,6 +85,17 @@
                     <mat-select formControlName="theTipoOrdine">
                         <mat-option *ngFor="let tipoOrdine of tipoOrdineList" [value]="tipoOrdine.objectKey">
                             {{ tipoOrdine.objectTitle }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- Cliente -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Cliente</mat-label>
+                    <mat-select formControlName="theCliente">
+                        <mat-option *ngFor="let cliente of clienteList" [value]="cliente.objectKey">
+                            {{ cliente.objectTitle }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

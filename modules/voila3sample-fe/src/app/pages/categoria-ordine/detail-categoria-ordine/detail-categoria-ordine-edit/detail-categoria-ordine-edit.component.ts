@@ -69,8 +69,8 @@ export class DetailCategoriaOrdineEditComponent extends BaseDetailComponent impl
 
     public patchValueForm(categoriaOrdine: ICategoriaOrdine) {
         this.categoriaOrdineForm.patchValue({
-            idCategoriaOrdine: categoriaOrdine.idCategoriaOrdine
+            idCatOrdine: categoriaOrdine.idCatOrdine
         });
-        this.categoriaOrdineForm.get('idCategoriaOrdine')?.disable();
+        this.categoriaOrdineForm.get('idCatOrdine')?.disable();
     }
 }

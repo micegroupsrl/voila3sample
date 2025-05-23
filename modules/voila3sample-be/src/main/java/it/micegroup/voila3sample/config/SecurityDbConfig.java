@@ -15,26 +15,31 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(entityManagerFactoryRef = "securityEntityManagerFactory", basePackages = {
-		"it.micegroup.voila3sample.repository.security" }, transactionManagerRef = "securityTransactionManager")
+@EnableJpaRepositories(
+    entityManagerFactoryRef = "securityEntityManagerFactory",
+    basePackages = {"it.micegroup.voila3sample.repository.security"},
+    transactionManagerRef = "securityTransactionManager")
 public class SecurityDbConfig {
-	@Bean(name = "SecurityDataSource")
-	@ConfigurationProperties(prefix = "spring.datasource.security")
-	public DataSource dataSource() {
-		return DataSourceBuilder.create().build();
-	}
+  @Bean(name = "SecurityDataSource")
+  @ConfigurationProperties(prefix = "spring.datasource.security")
+  public DataSource dataSource() {
+    return DataSourceBuilder.create().build();
+  }
 
-	@Bean(name = "securityEntityManagerFactory")
-	public LocalContainerEntityManagerFactoryBean securityEntityManagerFactory(EntityManagerFactoryBuilder builder,
-			@Qualifier("SecurityDataSource") DataSource dataSource) {
-		return builder.dataSource(dataSource).packages("it.micegroup.voila3sample.domain.security")
-				.persistenceUnit("security") // ??
-				.build();
-	}
+  @Bean(name = "securityEntityManagerFactory")
+  public LocalContainerEntityManagerFactoryBean securityEntityManagerFactory(
+      EntityManagerFactoryBuilder builder, @Qualifier("SecurityDataSource") DataSource dataSource) {
+    return builder
+        .dataSource(dataSource)
+        .packages("it.micegroup.voila3sample.domain.security")
+        .persistenceUnit("security") // ??
+        .build();
+  }
 
-	@Bean(name = "securityTransactionManager")
-	public PlatformTransactionManager securityTransactionManager(
-			@Qualifier("securityEntityManagerFactory") EntityManagerFactory securityEntityManagerFactory) {
-		return new JpaTransactionManager(securityEntityManagerFactory);
-	}
+  @Bean(name = "securityTransactionManager")
+  public PlatformTransactionManager securityTransactionManager(
+      @Qualifier("securityEntityManagerFactory")
+          EntityManagerFactory securityEntityManagerFactory) {
+    return new JpaTransactionManager(securityEntityManagerFactory);
+  }
 }

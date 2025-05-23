@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RolePerUser" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b9a674e0-296c-33fe-9dc5-18c1efa5b14f">
+<template><![CDATA[$P{REPORT_DIR} + "/templates/default.jrtx"]]></template>
+<style name="RowLeft" hTextAlign="Left" vTextAlign="Middle">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9"/>
+  </conditionalStyle>
+</style>
+<style name="RowRight" hTextAlign="Right" vTextAlign="Middle">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9"/>
+  </conditionalStyle>
+</style>
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+<queryString>
+  <![CDATA[]]>
+</queryString>
+
+<field name="theUser.objectKey" class="java.lang.String"/>
+<field name="theUser.objectTitle" class="java.lang.String"/>
+<background>
+  <band splitType="Stretch"/>
+</background>
+<title>
+  <band splitType="Stretch"/>
+</title>
+<pageHeader>
+  <band height="20" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="TableHeader" x="0" y="0" width="555" height="20" uuid="9c2962ff-7297-3b1a-befa-4c809e894f24"/>
+      <textFieldExpression><![CDATA[$R{rolePerUser.jasperReports.tableHeader}]]></textFieldExpression>
+    </textField>
+  </band>
+</pageHeader>
+<columnHeader>
+  <band height="30" splitType="Stretch">
+    
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Label" x="0
+    " y="0" width="277" height="30" uuid="87c1743e-511c-395f-a6be-2e12e16a1243"/>
+      <textFieldExpression><![CDATA[$R{user.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Label" x="277
+    " y="0" width="277" height="30" uuid="a5304b12-ded8-33d3-a916-b6f93b22617e"/>
+      <textFieldExpression><![CDATA[$R{user.objectTitle}]]></textFieldExpression>
+    </textField>
+  </band>
+</columnHeader>
+<detail>
+  <band height="15" splitType="Stretch">
+    
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="RowLeft" x="0
+    " y="0" width="277" height="15" uuid="c1adbc40-581a-39f4-acc3-edc27ddbc873"/> 
+    <textFieldExpression><![CDATA[$F{theUser.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="RowLeft" x="277
+    " y="0" width="277" height="15" uuid="36cc7eaa-8cb1-3a17-b2b6-d443945d0416"/>  
+    <textFieldExpression><![CDATA[$F{theUser.objectTitle}]]></textFieldExpression>
+    </textField>
+  </band>
+</detail>
+<columnFooter>
+  <band splitType="Stretch"/>
+</columnFooter>
+<pageFooter>
+  <band splitType="Stretch"/>
+</pageFooter>
+<summary>
+  <band splitType="Stretch"/>
+</summary>
+</jasperReport>

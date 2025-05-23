@@ -2,6 +2,45 @@
     <mat-card class="mat-elevation-z8">
         <!-- Card Body -->
         <mat-card-content class="overflow" autosize>
+            <!-- Punti -->
+            <div *ngIf="cliente?.punti">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Cliente.punti' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ cliente!.punti }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Nome -->
+            <div *ngIf="cliente?.nome">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Cliente.nome' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ cliente!.nome }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Cognome -->
+            <div *ngIf="cliente?.cognome">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Cliente.cognome' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ cliente!.cognome }}</strong>
+                    </div>
+                </div>
+            </div>
             <!-- Email -->
             <div *ngIf="cliente?.email">
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
@@ -28,19 +67,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Indirizzo -->
-            <div *ngIf="cliente?.indirizzo">
-                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
-                    <!-- Label -->
-                    <div fxLayout="column" fxFlex="30">
-                        <label>{{ 'voila3sample.detail.Cliente.indirizzo' | translate }}</label>
-                    </div>
-                    <!-- Value -->
-                    <div fxLayout="column">
-                        <strong>{{ cliente!.indirizzo }}</strong>
-                    </div>
-                </div>
-            </div>
 
             <!-- Id Persona -->
             <div *ngIf="cliente?.idPersona">
@@ -55,16 +81,16 @@
                     </div>
                 </div>
             </div>
-            <!-- Codice Fiscale -->
-            <div *ngIf="cliente?.codiceFiscale">
+            <!-- Cf -->
+            <div *ngIf="cliente?.cf">
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
                     <div fxLayout="column" fxFlex="30">
                         <!-- Label -->
-                        <label>{{ 'voila3sample.detail.Cliente.codiceFiscale' | translate }}</label>
+                        <label>{{ 'voila3sample.detail.Cliente.cf' | translate }}</label>
                     </div>
                     <!-- Value -->
                     <div fxLayout="column">
-                        <strong>{{ cliente!.codiceFiscale }}</strong>
+                        <strong>{{ cliente!.cf }}</strong>
                     </div>
                 </div>
             </div>

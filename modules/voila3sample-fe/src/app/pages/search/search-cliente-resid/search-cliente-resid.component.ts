@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 
@@ -13,11 +13,6 @@ import { BaseSearchComponent } from 'src/app/shared/base/base-search.component';
 export class SearchClienteResidComponent extends BaseSearchComponent implements OnInit {
     searchClienteForm!: FormGroup;
 
-    // Variabili per abilitare/disabilitare l'ora
-    public createdDateDaDisabled: boolean = true;
-    public createdDateADisabled: boolean = true;
-    public lastModifiedDateDaDisabled: boolean = true;
-    public lastModifiedDateADisabled: boolean = true;
     constructor(
         public dialogRef: MatDialogRef<SearchClienteResidComponent>,
         private fb: FormBuilder,
@@ -30,37 +25,27 @@ export class SearchClienteResidComponent extends BaseSearchComponent implements 
         this.searchClienteForm = this.fb.group({
             idPersonaDa: [],
             idPersonaA: [],
-            codiceFiscale: [],
+            cf: [],
+            puntiDa: [],
+            puntiA: [],
+            nome: [],
+            cognome: [],
             email: [],
-            telefono: [],
-            indirizzo: [],
-            createdBy: [],
-            lastModifiedBy: [],
-            createdDateDa: [],
-            createdDateA: [],
-            lastModifiedDateDa: [],
-            lastModifiedDateA: []
+            telefono: []
         });
 
         const formValues = {
             idPersonaDa: this.data.idPersonaDa,
             idPersonaA: this.data.idPersonaA,
-            codiceFiscale: this.data.codiceFiscale,
+            cf: this.data.cf,
 
+            puntiDa: this.data.puntiDa,
+            puntiA: this.data.puntiA,
+            nome: this.data.nome,
+            cognome: this.data.cognome,
             email: this.data.email,
-            telefono: this.data.telefono,
-            indirizzo: this.data.indirizzo,
-            createdBy: this.data.createdBy,
-            lastModifiedBy: this.data.lastModifiedBy,
-            createdDateDa: this.data.createdDateDa,
-            createdDateA: this.data.createdDateA,
-            lastModifiedDateDa: this.data.lastModifiedDateDa,
-            lastModifiedDateA: this.data.lastModifiedDateA
+            telefono: this.data.telefono
         };
-        this.changeTimeCreatedDateDa(this.searchClienteForm.get('createdDateDa'));
-        this.changeTimeCreatedDateA(this.searchClienteForm.get('createdDateA'));
-        this.changeTimeLastModifiedDateDa(this.searchClienteForm.get('lastModifiedDateDa'));
-        this.changeTimeLastModifiedDateA(this.searchClienteForm.get('lastModifiedDateA'));
 
         this.searchClienteForm.patchValue(formValues);
     }
@@ -76,15 +61,13 @@ export class SearchClienteResidComponent extends BaseSearchComponent implements 
         if (searchCliente) {
             filterBuild = filterBuild
                 .andBetween('idPersona.idPersona', searchCliente.idPersonaDa, searchCliente.idPersonaA)
-                .andLike('idPersona.codiceFiscale', searchCliente.codiceFiscale)
+                .andLike('idPersona.cf', searchCliente.cf)
 
+                .andBetween('punti', searchCliente.puntiDa, searchCliente.puntiA)
+                .andLike('nome', searchCliente.nome)
+                .andLike('cognome', searchCliente.cognome)
                 .andLike('email', searchCliente.email)
-                .andLike('telefono', searchCliente.telefono)
-                .andLike('indirizzo', searchCliente.indirizzo)
-                .andLike('createdBy', searchCliente.createdBy)
-                .andLike('lastModifiedBy', searchCliente.lastModifiedBy)
-                .andBetween('createdDate', searchCliente.createdDateDa, searchCliente.createdDateA)
-                .andBetween('lastModifiedDate', searchCliente.lastModifiedDateDa, searchCliente.lastModifiedDateA);
+                .andLike('telefono', searchCliente.telefono);
         }
         return filterBuild.value();
     }
@@ -112,39 +95,5 @@ export class SearchClienteResidComponent extends BaseSearchComponent implements 
         };
 
         this.dialogRef.close(result);
-    }
-
-    // Metodi che abilitano/disabilitano il toggle dell'ora
-    changeTimeCreatedDateDa(date: AbstractControl<any, any> | null) {
-        date?.statusChanges.subscribe(result => {
-            this.createdDateDaDisabled = this.onDateChange(result, date);
-        });
-    }
-
-    changeTimeCreatedDateA(date: AbstractControl<any, any> | null) {
-        date?.statusChanges.subscribe(result => {
-            this.createdDateADisabled = this.onDateChange(result, date);
-        });
-    }
-    changeTimeLastModifiedDateDa(date: AbstractControl<any, any> | null) {
-        date?.statusChanges.subscribe(result => {
-            this.lastModifiedDateDaDisabled = this.onDateChange(result, date);
-        });
-    }
-
-    changeTimeLastModifiedDateA(date: AbstractControl<any, any> | null) {
-        date?.statusChanges.subscribe(result => {
-            this.lastModifiedDateADisabled = this.onDateChange(result, date);
-        });
-    }
-    // Metodo che controlla lo stato della form data
-    onDateChange(result: string, fullDate: AbstractControl<any, any> | null): boolean {
-        if (result == 'VALID' && fullDate?.get('date')?.value != null) {
-            fullDate?.get('time')?.enable({ emitEvent: false });
-            return false;
-        } else {
-            fullDate?.get('time')?.disable({ emitEvent: false });
-            return true;
-        }
     }
 }

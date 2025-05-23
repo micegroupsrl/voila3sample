@@ -22,17 +22,16 @@ export class DialogListTipoOrdineComponent {
     currentPage = 0;
     pageSizeOptions: number[] = [5, 10, 25, 100];
 
-    displayedColumns: string[] = ['theTipoOrdineKey.idTipoOrdine', 'theTipoOrdineKey.annoTipologia', 'nomeOrdine'];
+    displayedColumns: string[] = ['theTipoOrdineKey.anno', 'theTipoOrdineKey.idTipoOrdine'];
     dataSource: MatTableDataSource<ITipoOrdine> = new MatTableDataSource();
     clickedRows = new Set<ITipoOrdine>();
 
     public object: PageObject = {};
 
     public dataForm = {
+        anno: null,
         idTipoOrdine: null,
-        annoTipologia: null,
-        idCategoriaOrdine: null,
-        nomeOrdine: ''
+        idCatOrdine: null
     };
 
     filters = '';

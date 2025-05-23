@@ -23,6 +23,10 @@ export class ProdottoApiService extends BaseApiService<IProdotto> {
         return this.getEntityListByCriteria(this.url, options);
     }
 
+    public getProdottoByFornitore(key: string, options?: HttpParams): Observable<BaseApiResponse<IProdotto>> {
+        return this.getProdottoByCriteria(this.addFilter(options!, 'theFornitore', key));
+    }
+
     public addProdotto(prodotto: IProdotto): Observable<IProdotto> {
         return this.addEntityInstance(prodotto, this.url);
     }

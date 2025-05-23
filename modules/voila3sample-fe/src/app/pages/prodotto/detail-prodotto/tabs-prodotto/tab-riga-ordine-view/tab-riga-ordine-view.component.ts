@@ -23,23 +23,23 @@ import { setOptions } from 'src/app/utilities/function/helper';
 export class TabRigaOrdineViewComponent implements OnChanges {
     isLoading = false;
     totalRows = 0;
-    pageSize = 3;
+    pageSize = 5;
     currentPage = 0;
-    pageSizeOptions: number[] = [3, 6, 15, 60];
+    pageSizeOptions: number[] = [5, 10, 25, 100];
 
     /**
      * Columns displayed in the tab.
      */
     displayedColumns: string[] = [
-        'quantita',
-        /**
-         * Key for Prodotto.
-         */
-
+        'qta',
         /**
          * Key for Ordine.
          */
         'theOrdine.idOrdine'
+
+        /**
+         * Key for Prodotto.
+         */
     ];
     dataSource: MatTableDataSource<IRigaOrdine> = new MatTableDataSource();
 

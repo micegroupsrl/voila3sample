@@ -23,11 +23,14 @@ export class OrdineApiService extends BaseApiService<IOrdine> {
         return this.getEntityListByCriteria(this.url, options);
     }
 
-    public getOrdineByCliente(key: string, options?: HttpParams): Observable<BaseApiResponse<IOrdine>> {
-        return this.getOrdineByCriteria(this.addFilter(options!, 'theCliente', key));
+    public getOrdineByStatoOrdine(key: string, options?: HttpParams): Observable<BaseApiResponse<IOrdine>> {
+        return this.getOrdineByCriteria(this.addFilter(options!, 'theStatoOrdine', key));
     }
     public getOrdineByTipoOrdine(key: string, options?: HttpParams): Observable<BaseApiResponse<IOrdine>> {
         return this.getOrdineByCriteria(this.addFilter(options!, 'theTipoOrdine', key));
+    }
+    public getOrdineByCliente(key: string, options?: HttpParams): Observable<BaseApiResponse<IOrdine>> {
+        return this.getOrdineByCriteria(this.addFilter(options!, 'theCliente', key));
     }
     public getOrdineByOrdineAggregato(key: string, options?: HttpParams): Observable<BaseApiResponse<IOrdine>> {
         return this.getOrdineByCriteria(this.addFilter(options!, 'theOrdineAggregato', key));

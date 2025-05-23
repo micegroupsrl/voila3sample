@@ -6,6 +6,9 @@ import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 import { ProdottoGroupApiService } from 'src/app/pages/services/services-prodotto/prodotto-group-api.service';
 import { BaseSearchResidAdvancedComponent } from 'src/app/shared/base/base.search-resid-advanced.component';
 
+import { IFornitore } from 'src/app/pages/interfaces/fornitore.interface';
+import { getListForDropdowns } from 'src/app/shared/base/base.helper';
+
 @Component({
     selector: 'app-search-prodotto-resid-advanced',
     templateUrl: './search-prodotto-resid-advanced.component.html',
@@ -15,8 +18,14 @@ export class SearchProdottoResidAdvancedComponent extends BaseSearchResidAdvance
     override attributeList = [
         // Definition of the object's list that will be used for build the filter
         { name: 'idProdotto', type: 'number', api: ['minoreDi', 'uguale', 'maggioreDi'] },
-        { name: 'nomeProdotto', type: 'string', api: ['contiene'] }
+        { name: 'descrizione', type: 'string', api: ['contiene'] },
+        { name: 'createdBy', type: 'string', api: ['contiene'] },
+        { name: 'lastModifiedBy', type: 'string', api: ['contiene'] },
+        { name: 'createdDate', type: 'datetime', api: ['precedenteA', 'uguale', 'successivaA'] },
+        { name: 'lastModifiedDate', type: 'datetime', api: ['precedenteA', 'uguale', 'successivaA'] },
+        { name: 'idFornitore', type: 'select', api: ['uguale'], parentList: [], parent: 'fornitore' }
     ];
+    public fornitoreList: IFornitore[] = [];
 
     constructor(
         public prodottoDialogRef: MatDialogRef<SearchProdottoResidAdvancedComponent>,
@@ -36,6 +45,7 @@ export class SearchProdottoResidAdvancedComponent extends BaseSearchResidAdvance
                 event.preventDefault();
             }
         });
+        this.getParentsList();
     }
 
     // Get the filter value and define when get them
@@ -51,6 +61,7 @@ export class SearchProdottoResidAdvancedComponent extends BaseSearchResidAdvance
         for (let i = 0; i < filters.length; i++) {
             const { filterType, apiType, orAnd, value } = this.getFilterGroupAtIndex(i).value;
             filterBuild = this.apiTypeSwitchCase(filterBuild, filterType, apiType, orAnd, value);
+            filterBuild = this.filterTypeCase(filterBuild, filterType, apiType, orAnd, value);
         }
         return filterBuild.value();
     }
@@ -68,12 +79,29 @@ export class SearchProdottoResidAdvancedComponent extends BaseSearchResidAdvance
                 filterBuild[orAnd ? 'andGreaterOrEqual' : 'orGreaterOrEqual'](filterType, value);
                 break;
             case 'uguale':
-                filterBuild[orAnd ? 'andEquals' : 'orEquals'](filterType, value);
-
+                if (filterType != 'idFornitore') {
+                    filterBuild[orAnd ? 'andEquals' : 'orEquals'](filterType, value);
+                }
                 break;
             default:
                 break;
         }
         return filterBuild;
+    }
+    public filterTypeCase(filterBuild: FilterBuilder, filterType: string, apiType: string, orAnd: string, value: string): FilterBuilder {
+        if (filterType == 'idFornitore') {
+            filterBuild[orAnd ? 'andEquals' : 'orEquals']('theFornitore', value);
+        }
+        return filterBuild;
+    }
+    public getFornitoreList(): void {
+        this.prodottoGroupApiService.fornitore.getFornitoreByCriteria().subscribe(data => {
+            this.fornitoreList = getListForDropdowns(data);
+            this.addListToAttribute('fornitore', this.fornitoreList);
+        });
+    }
+
+    private getParentsList(): void {
+        this.getFornitoreList();
     }
 }

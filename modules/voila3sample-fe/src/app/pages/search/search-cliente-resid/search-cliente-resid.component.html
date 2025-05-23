@@ -16,8 +16,25 @@
             </div>
 
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <!-- Codice Fiscale -->
-                <rsd-input-text formControlName="codiceFiscale"></rsd-input-text>
+                <!-- Cf -->
+                <rsd-input-text formControlName="cf"></rsd-input-text>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- punti From -->
+                <rsd-input-number formControlName="puntiDa" label="Punti {{ 'search.from' | translate }}..."></rsd-input-number>
+                <!-- Punti To -->
+                <rsd-input-number formControlName="puntiA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Nome -->
+                <rsd-input-text formControlName="nome"></rsd-input-text>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Cognome -->
+                <rsd-input-text formControlName="cognome"></rsd-input-text>
             </div>
 
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
@@ -28,35 +45,6 @@
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
                 <!-- Telefono -->
                 <rsd-input-text formControlName="telefono"></rsd-input-text>
-            </div>
-
-            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <!-- Indirizzo -->
-                <rsd-input-text formControlName="indirizzo"></rsd-input-text>
-            </div>
-
-            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <!-- Created By -->
-                <rsd-input-text formControlName="createdBy"></rsd-input-text>
-            </div>
-
-            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <!-- Last Modified By -->
-                <rsd-input-text formControlName="lastModifiedBy"></rsd-input-text>
-            </div>
-
-            <!-- Created Date From -->
-            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <datetimepicker formControlName="createdDateDa" label="Created Date {{ 'search.from' | translate }}..."></datetimepicker>
-                <!-- Created Date To -->
-                <datetimepicker formControlName="createdDateA" label="...{{ 'search.to' | translate }}"></datetimepicker>
-            </div>
-
-            <!-- Last Modified Date From -->
-            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <datetimepicker formControlName="lastModifiedDateDa" label="Last Modified Date {{ 'search.from' | translate }}..."></datetimepicker>
-                <!-- Last Modified Date To -->
-                <datetimepicker formControlName="lastModifiedDateA" label="...{{ 'search.to' | translate }}"></datetimepicker>
             </div>
         </form>
     </div>

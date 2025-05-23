@@ -7,14 +7,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 export function clienteForm(formBuilder: FormBuilder) {
     return formBuilder.group({
         idPersona: [null, Validators.required],
-        codiceFiscale: [null, Validators.compose([Validators.maxLength(80), Validators.required])],
+        cf: [null, Validators.compose([Validators.maxLength(80), Validators.required])],
+        punti: [null, Validators.maxLength(11)],
+        nome: [null, Validators.maxLength(80)],
+        cognome: [null, Validators.maxLength(80)],
         email: [null, Validators.compose([Validators.maxLength(80), Validators.email])],
         telefono: [null, Validators.maxLength(80)],
-        indirizzo: [null, Validators.maxLength(80)],
-        createdBy: [null, Validators.maxLength(80)],
-        lastModifiedBy: [null, Validators.maxLength(80)],
-        createdDate: [null],
-        lastModifiedDate: [null],
         theOrdine: [[]]
     });
 }

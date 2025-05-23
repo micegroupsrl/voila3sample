@@ -15,14 +15,12 @@ export class SearchClienteResidAdvancedComponent extends BaseSearchResidAdvanced
     override attributeList = [
         // Definition of the object's list that will be used for build the filter
         { name: 'idPersona.idPersona', type: 'number', api: ['minoreDi', 'uguale', 'maggioreDi'], parent: 'idPersona' },
-        { name: 'idPersona.codiceFiscale', type: 'string', api: ['contiene'], parent: 'codiceFiscale' },
+        { name: 'idPersona.cf', type: 'string', api: ['contiene'], parent: 'cf' },
+        { name: 'punti', type: 'number', api: ['minoreDi', 'uguale', 'maggioreDi'] },
+        { name: 'nome', type: 'string', api: ['contiene'] },
+        { name: 'cognome', type: 'string', api: ['contiene'] },
         { name: 'email', type: 'string', api: ['contiene'] },
-        { name: 'telefono', type: 'string', api: ['contiene'] },
-        { name: 'indirizzo', type: 'string', api: ['contiene'] },
-        { name: 'createdBy', type: 'string', api: ['contiene'] },
-        { name: 'lastModifiedBy', type: 'string', api: ['contiene'] },
-        { name: 'createdDate', type: 'datetime', api: ['precedenteA', 'uguale', 'successivaA'] },
-        { name: 'lastModifiedDate', type: 'datetime', api: ['precedenteA', 'uguale', 'successivaA'] }
+        { name: 'telefono', type: 'string', api: ['contiene'] }
     ];
 
     constructor(

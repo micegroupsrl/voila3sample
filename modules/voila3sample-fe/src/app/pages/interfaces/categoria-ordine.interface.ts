@@ -6,6 +6,6 @@ import { ITipoOrdine } from '../interfaces/tipo-ordine.interface';
  */
 
 export interface ICategoriaOrdine extends BaseEntity {
-    idCategoriaOrdine: number;
+    idCatOrdine: number;
     theTipoOrdine: ITipoOrdine[];
 }

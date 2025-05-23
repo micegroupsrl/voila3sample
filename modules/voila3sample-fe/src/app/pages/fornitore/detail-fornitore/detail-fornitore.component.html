@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="header" fxLayout="row" fxLayoutAlign="start center">
+        <!--Back Button-->
+        <button *ngIf="(pageStatus | hasPageStatus: 'edit') || (pageStatus | hasPageStatus: 'new')" mat-icon-button (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+        <!--List Button-->
+        <button *ngIf="pageStatus | hasPageStatus: 'view'" mat-icon-button (click)="goList()"><mat-icon>arrow_back</mat-icon></button>
+        <!--Title-->
+        <!-- Title will change with PageStatus -->
+        <mat-card-title *ngIf="pageStatus | hasPageStatus: 'view'">{{ 'voila3sample.detail.Fornitore.labelDetail' | translate }}</mat-card-title>
+        <mat-card-title *ngIf="pageStatus | hasPageStatus: 'edit'">{{ 'voila3sample.detail.Fornitore.labelEdit' | translate }}</mat-card-title>
+        <mat-card-title *ngIf="pageStatus | hasPageStatus: 'new'">{{ 'voila3sample.detail.Fornitore.labelNew' | translate }}</mat-card-title>
+    </div>
+    <div class="content">
+        <!-- View Component -->
+        <app-detail-fornitore-view
+            *ngIf="pageStatus | hasPageStatus: 'view'"
+            [fornitore]="fornitore"
+            [pageStatus]="pageStatus"
+            [fornitoreForm]="fornitoreForm"
+        ></app-detail-fornitore-view>
+        <!-- Edit/New Component -->
+        <app-detail-fornitore-edit
+            *ngIf="pageStatus | hasPageStatus: ['edit', 'new']"
+            [fornitore]="fornitore"
+            [pageStatus]="pageStatus"
+            [fornitoreForm]="fornitoreForm"
+        ></app-detail-fornitore-edit>
+    </div>
+    <div class="footer" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="15px">
+        <!--New Button-->
+
+        <!--Edit Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'view') && (Privileges?.FORNITORE_UPDATE | Permission)"
+            (click)="editFornitore()"
+        >
+            {{ 'buttons.edit' | translate }}
+        </button>
+        <!--Delete Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'view') && (Privileges?.FORNITORE_DELETE | Permission)"
+            (click)="confirmDeleteFornitore()"
+        >
+            {{ 'buttons.delete' | translate }}
+        </button>
+        <!--Save Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'new') && (Privileges?.FORNITORE_CREATE | Permission)"
+            (click)="insertFornitore()"
+        >
+            {{ 'buttons.save' | translate }}
+        </button>
+        <!--Update Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'edit') && (Privileges?.FORNITORE_UPDATE | Permission)"
+            (click)="updateFornitore()"
+        >
+            {{ 'buttons.update' | translate }}
+        </button>
+        <!--PDF Export Button-->
+        <button
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            *ngIf="(pageStatus | hasPageStatus: 'view') && (Privileges?.FORNITORE_REPORT | Permission)"
+            (click)="printPdfReport()"
+        >
+            {{ 'buttons.export.pdf' | translate }}
+        </button>
+    </div>
+</div>

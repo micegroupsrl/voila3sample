@@ -8,9 +8,13 @@ import { IRigaOrdine } from '../interfaces/riga-ordine.interface';
 export interface IOrdine extends BaseEntity {
     idOrdine: number;
 
-    dataOrdine: Date;
+    descrizione: string;
 
-    tempoOrdine: Date;
+    datetime: Date;
+
+    date: Date;
+
+    time: Date;
 
     createdBy: string;
 
@@ -20,10 +24,12 @@ export interface IOrdine extends BaseEntity {
 
     lastModifiedDate: Date;
 
-    theClienteObjectKey: string;
-    theClienteObjectTitle: string;
+    theStatoOrdineObjectKey: string;
+    theStatoOrdineObjectTitle: string;
     theTipoOrdineObjectKey: string;
     theTipoOrdineObjectTitle: string;
+    theClienteObjectKey: string;
+    theClienteObjectTitle: string;
     theOrdineAggregatoObjectKey: string;
     theOrdineAggregatoObjectTitle: string;
     theRigaOrdine: IRigaOrdine[];

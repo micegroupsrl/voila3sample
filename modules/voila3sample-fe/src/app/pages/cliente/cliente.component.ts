@@ -45,14 +45,12 @@ export class ClienteComponent implements OnInit {
 
     displayedColumns: string[] = [
         'idPersona.idPersona',
-        'idPersona.codiceFiscale',
+        'idPersona.cf',
+        'punti',
+        'nome',
+        'cognome',
         'email',
-        'telefono',
-        'indirizzo',
-        'createdBy',
-        'lastModifiedBy',
-        'createdDate',
-        'lastModifiedDate'
+        'telefono'
         /**
          * Parent.
          */
@@ -65,14 +63,12 @@ export class ClienteComponent implements OnInit {
     //Dati della form
     public dataForm = {
         idPersona: null,
-        codiceFiscale: null,
+        cf: null,
+        punti: null,
+        nome: '',
+        cognome: '',
         email: '',
-        telefono: '',
-        indirizzo: '',
-        createdBy: '',
-        lastModifiedBy: '',
-        createdDate: null,
-        lastModifiedDate: null
+        telefono: ''
     };
 
     /**
@@ -98,7 +94,7 @@ export class ClienteComponent implements OnInit {
         this.loadData(this.object);
 
         this.searchClienteForm = this.fb.group({
-            email: []
+            nome: []
         });
     }
 
@@ -229,7 +225,7 @@ export class ClienteComponent implements OnInit {
         const searchCliente = this.searchClienteForm.value;
 
         if (searchCliente) {
-            filterBuild = filterBuild.andLike('email', searchCliente.email);
+            filterBuild = filterBuild.andLike('nome', searchCliente.nome);
         }
         return filterBuild.value();
     }

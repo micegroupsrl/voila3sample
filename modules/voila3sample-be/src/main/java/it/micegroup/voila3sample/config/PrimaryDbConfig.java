@@ -16,29 +16,33 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(entityManagerFactoryRef = "primaryEntityManagerFactory", basePackages = {
-		"it.micegroup.voila3sample.repository.primary" }, transactionManagerRef = "primaryTransactionManager")
+@EnableJpaRepositories(
+    entityManagerFactoryRef = "primaryEntityManagerFactory",
+    basePackages = {"it.micegroup.voila3sample.repository.primary"},
+    transactionManagerRef = "primaryTransactionManager")
 public class PrimaryDbConfig {
-	@Primary
-	@Bean(name = "PrimaryDataSource")
-	@ConfigurationProperties(prefix = "spring.datasource.primary")
-	public DataSource dataSource() {
-		return DataSourceBuilder.create().build();
-	}
+  @Primary
+  @Bean(name = "PrimaryDataSource")
+  @ConfigurationProperties(prefix = "spring.datasource.primary")
+  public DataSource dataSource() {
+    return DataSourceBuilder.create().build();
+  }
 
-	@Primary
-	@Bean(name = "primaryEntityManagerFactory")
-	public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(EntityManagerFactoryBuilder builder,
-			@Qualifier("PrimaryDataSource") DataSource dataSource) {
-		return builder.dataSource(dataSource).packages("it.micegroup.voila3sample.domain.primary")
-				.persistenceUnit("primary") // ??
-				.build();
-	}
+  @Primary
+  @Bean(name = "primaryEntityManagerFactory")
+  public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(
+      EntityManagerFactoryBuilder builder, @Qualifier("PrimaryDataSource") DataSource dataSource) {
+    return builder
+        .dataSource(dataSource)
+        .packages("it.micegroup.voila3sample.domain.primary")
+        .persistenceUnit("primary") // ??
+        .build();
+  }
 
-	@Primary
-	@Bean(name = "primaryTransactionManager")
-	public PlatformTransactionManager primaryTransactionManager(
-			@Qualifier("primaryEntityManagerFactory") EntityManagerFactory primaryEntityManagerFactory) {
-		return new JpaTransactionManager(primaryEntityManagerFactory);
-	}
+  @Primary
+  @Bean(name = "primaryTransactionManager")
+  public PlatformTransactionManager primaryTransactionManager(
+      @Qualifier("primaryEntityManagerFactory") EntityManagerFactory primaryEntityManagerFactory) {
+    return new JpaTransactionManager(primaryEntityManagerFactory);
+  }
 }

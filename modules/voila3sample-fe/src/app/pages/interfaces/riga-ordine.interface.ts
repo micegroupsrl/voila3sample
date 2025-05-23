@@ -5,13 +5,13 @@ import { BaseEntity } from 'src/app/shared/base/base.interface';
  */
 
 export interface IRigaOrdine extends BaseEntity {
-    idProdotto: number;
     idOrdine: number;
+    idProdotto: number;
 
-    quantita: number;
+    qta: number;
 
-    theProdottoObjectKey: string;
-    theProdottoObjectTitle: string;
     theOrdineObjectKey: string;
     theOrdineObjectTitle: string;
+    theProdottoObjectKey: string;
+    theProdottoObjectTitle: string;
 }

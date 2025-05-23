@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CategoriaOrdine" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="75955030-ad9d-3407-9974-ecefd7a35931">
+<property name="ireport.zoom" value="1.9487171000000014"/>
+<property name="ireport.x" value="0"/>
+<property name="ireport.y" value="0"/>
+<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+<template><![CDATA[$P{REPORT_DIR} + "/templates/default.jrtx"]]></template>
+<style name="RowLeft" hTextAlign="Left" vTextAlign="Middle" lineSpacing="Single">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9" lineSpacing="Single"/>
+  </conditionalStyle>
+</style>
+<style name="RowRight" hTextAlign="Right" vTextAlign="Middle" lineSpacing="Single">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9" lineSpacing="Single"/>
+  </conditionalStyle>
+</style>
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+<queryString>
+  <![CDATA[]]>
+</queryString>
+<field name="idCatOrdine" class="java.lang.Integer"/>
+
+<background>
+  <band splitType="Stretch"/>
+</background>
+<title>
+  <band splitType="Stretch"/>
+</title>
+<pageHeader>
+  <band height="20" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+      <reportElement style="TableHeader" x="0" y="0" width="555" height="20" uuid="30375d87-243e-368a-83e2-b6930159f053"/>
+      <textElement lineSpacing="Single"/> 
+      <textFieldExpression><![CDATA[$R{categoriaOrdine.jasperReports.tableHeader}]]></textFieldExpression>
+    </textField>
+  </band>
+</pageHeader>
+<columnHeader>
+  <band height="30" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="30" uuid="9f7f3bca-5f7c-3547-a9d3-320dcf60c8e7"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{categoriaOrdine.idCatOrdine}]]></textFieldExpression>
+    </textField>
+    
+  </band>
+</columnHeader>
+<detail>
+  <band height="30" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowRight" stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="30" uuid="877a16e3-5f09-314f-b219-9d778d9d4512">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{idCatOrdine}]]></textFieldExpression>
+    </textField>
+    
+  </band>
+</detail>
+<columnFooter>
+  <band splitType="Stretch"/>
+</columnFooter>
+<pageFooter>
+  <band splitType="Stretch"/>
+</pageFooter>
+<summary>
+  <band splitType="Stretch"/>
+</summary>
+</jasperReport>

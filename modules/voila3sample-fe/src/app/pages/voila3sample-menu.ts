@@ -33,15 +33,15 @@ export const MENU_MS_VOILA3SAMPLE: MenuElement[] = [
         basePath: '/privilege/',
         iconClass: 'list'
     },
-    // {
-    //     label: 'voila3sample.detail.RolePerUser.labels',
-    //     expectedPrivilege: Privileges?.ROLE_PER_USER_SEARCH,
-    //     // path: "/pages/voila3sample/rolePerUser/list-rolePerUser",
-    //     path: '/pages/voila3sample/role-per-user/list-role-per-user',
-    //     // basePath: "/pages/voila3sample/rolePerUser/"
-    //     basePath: '/rolePerUser/',
-    //     iconClass: 'list'
-    // },
+    {
+        label: 'voila3sample.detail.RolePerUser.labels',
+        expectedPrivilege: Privileges?.ROLE_PER_USER_SEARCH,
+        // path: "/pages/voila3sample/rolePerUser/list-rolePerUser",
+        path: '/pages/voila3sample/role-per-user/list-role-per-user',
+        // basePath: "/pages/voila3sample/rolePerUser/"
+        basePath: '/rolePerUser/',
+        iconClass: 'list'
+    },
     {
         label: 'voila3sample.detail.PrivilegePerRole.labels',
         expectedPrivilege: Privileges?.PRIVILEGE_PER_ROLE_SEARCH,
@@ -49,6 +49,24 @@ export const MENU_MS_VOILA3SAMPLE: MenuElement[] = [
         path: '/pages/voila3sample/privilege-per-role/list-privilege-per-role',
         // basePath: "/pages/voila3sample/privilegePerRole/"
         basePath: '/privilegePerRole/',
+        iconClass: 'list'
+    },
+    {
+        label: 'voila3sample.detail.CategoriaOrdine.labels',
+        expectedPrivilege: Privileges?.CATEGORIA_ORDINE_SEARCH,
+        // path: "/pages/voila3sample/categoriaOrdine/list-categoriaOrdine",
+        path: '/pages/voila3sample/categoria-ordine/list-categoria-ordine',
+        // basePath: "/pages/voila3sample/categoriaOrdine/"
+        basePath: '/categoriaOrdine/',
+        iconClass: 'list'
+    },
+    {
+        label: 'voila3sample.detail.StatoOrdine.labels',
+        expectedPrivilege: Privileges?.STATO_ORDINE_SEARCH,
+        // path: "/pages/voila3sample/statoOrdine/list-statoOrdine",
+        path: '/pages/voila3sample/stato-ordine/list-stato-ordine',
+        // basePath: "/pages/voila3sample/statoOrdine/"
+        basePath: '/statoOrdine/',
         iconClass: 'list'
     },
     {
@@ -70,6 +88,15 @@ export const MENU_MS_VOILA3SAMPLE: MenuElement[] = [
         iconClass: 'list'
     },
     {
+        label: 'voila3sample.detail.RigaOrdine.labels',
+        expectedPrivilege: Privileges?.RIGA_ORDINE_SEARCH,
+        // path: "/pages/voila3sample/rigaOrdine/list-rigaOrdine",
+        path: '/pages/voila3sample/riga-ordine/list-riga-ordine',
+        // basePath: "/pages/voila3sample/rigaOrdine/"
+        basePath: '/rigaOrdine/',
+        iconClass: 'list'
+    },
+    {
         label: 'voila3sample.detail.Prodotto.labels',
         expectedPrivilege: Privileges?.PRODOTTO_SEARCH,
         // path: "/pages/voila3sample/prodotto/list-prodotto",
@@ -78,15 +105,6 @@ export const MENU_MS_VOILA3SAMPLE: MenuElement[] = [
         basePath: '/prodotto/',
         iconClass: 'list'
     },
-    // {
-    //     label: 'voila3sample.detail.RigaOrdine.labels',
-    //     expectedPrivilege: Privileges?.RIGA_ORDINE_SEARCH,
-    //     // path: "/pages/voila3sample/rigaOrdine/list-rigaOrdine",
-    //     path: '/pages/voila3sample/riga-ordine/list-riga-ordine',
-    //     // basePath: "/pages/voila3sample/rigaOrdine/"
-    //     basePath: '/rigaOrdine/',
-    //     iconClass: 'list'
-    // },
     {
         label: 'voila3sample.detail.TipoOrdine.labels',
         expectedPrivilege: Privileges?.TIPO_ORDINE_SEARCH,
@@ -96,13 +114,13 @@ export const MENU_MS_VOILA3SAMPLE: MenuElement[] = [
         basePath: '/tipoOrdine/',
         iconClass: 'list'
     },
-    // {
-    //     label: 'voila3sample.detail.CategoriaOrdine.labels',
-    //     expectedPrivilege: Privileges?.CATEGORIA_ORDINE_SEARCH,
-    //     // path: "/pages/voila3sample/categoriaOrdine/list-categoriaOrdine",
-    //     path: '/pages/voila3sample/categoria-ordine/list-categoria-ordine',
-    //     // basePath: "/pages/voila3sample/categoriaOrdine/"
-    //     basePath: '/categoria-ordine/',
-    //     iconClass: 'list'
-    // }
+    {
+        label: 'voila3sample.detail.Fornitore.labels',
+        expectedPrivilege: Privileges?.FORNITORE_SEARCH,
+        // path: "/pages/voila3sample/fornitore/list-fornitore",
+        path: '/pages/voila3sample/fornitore/list-fornitore',
+        // basePath: "/pages/voila3sample/fornitore/"
+        basePath: '/fornitore/',
+        iconClass: 'list'
+    }
 ];

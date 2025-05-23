@@ -147,202 +147,262 @@ INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
 
 
 INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('56790', 'ORDINE_SEARCH', '56790'),
-('56791', 'ORDINE_READ', '56791'),
-('56792', 'ORDINE_CREATE', '56792'),
-('56793', 'ORDINE_UPDATE', '56793'),
-('56794', 'ORDINE_DELETE', '56794'),
-('56795', 'ORDINE_REPORT', '56795');
+('55060', 'CATEGORIA_ORDINE_SEARCH', '55060'),
+('55061', 'CATEGORIA_ORDINE_READ', '55061'),
+('55062', 'CATEGORIA_ORDINE_CREATE', '55062'),
+('55063', 'CATEGORIA_ORDINE_UPDATE', '55063'),
+('55064', 'CATEGORIA_ORDINE_DELETE', '55064'),
+('55065', 'CATEGORIA_ORDINE_REPORT', '55065');
 
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('56790', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('56791', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('56790', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('56791', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('56792', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('56793', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('56794', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('56795', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
-
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('56792346', 'ORDINE_FIND_BY_CLIENTE' , '56792346');
-INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('56792346', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
-('56792346', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('56793964', 'ORDINE_FIND_BY_TIPO_ORDINE' , '56793964');
-INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('56793964', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
-('56793964', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('56793801', 'ORDINE_FIND_BY_ORDINE_AGGREGATO' , '56793801');
-INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('56793801', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
-('56793801', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
-
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('56795448', 'ORDINE_FIND_BY_THE_RIGA_ORDINE_OBJECT_KEY' , '56795448');
-
-INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('56795448', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('56795448', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('56793802', 'ORDINE_FIND_BY_THE_ORDINE_FIGLIO_OBJECT_KEY' , '56793802');
-
-INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('56793802', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('56793802', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
-
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('89460', 'CLIENTE_SEARCH', '89460'),
-('89461', 'CLIENTE_READ', '89461'),
-('89462', 'CLIENTE_CREATE', '89462'),
-('89463', 'CLIENTE_UPDATE', '89463'),
-('89464', 'CLIENTE_DELETE', '89464'),
-('89465', 'CLIENTE_REPORT', '89465');
-
-INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('89460', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('89461', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('89460', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89461', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89462', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89463', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89464', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89465', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+('55060', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('55061', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('55060', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('55061', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('55062', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('55063', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('55064', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('55065', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
 
 
 INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('89462379', 'CLIENTE_FIND_BY_THE_ORDINE_OBJECT_KEY' , '89462379');
+('55063495', 'CATEGORIA_ORDINE_FIND_BY_THE_TIPO_ORDINE_OBJECT_KEY' , '55063495');
 
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('89462379', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('89462379', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+('55063495', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('55063495', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
 
 INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('85280', 'PERSONA_SEARCH', '85280'),
-('85281', 'PERSONA_READ', '85281'),
-('85282', 'PERSONA_CREATE', '85282'),
-('85283', 'PERSONA_UPDATE', '85283'),
-('85284', 'PERSONA_DELETE', '85284'),
-('85285', 'PERSONA_REPORT', '85285');
+('62630', 'STATO_ORDINE_SEARCH', '62630'),
+('62631', 'STATO_ORDINE_READ', '62631'),
+('62632', 'STATO_ORDINE_CREATE', '62632'),
+('62633', 'STATO_ORDINE_UPDATE', '62633'),
+('62634', 'STATO_ORDINE_DELETE', '62634'),
+('62635', 'STATO_ORDINE_REPORT', '62635');
 
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('85280', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('85281', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('85280', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('85281', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('85282', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('85283', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('85284', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('85285', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
-
-
-
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('89430', 'PRODOTTO_SEARCH', '89430'),
-('89431', 'PRODOTTO_READ', '89431'),
-('89432', 'PRODOTTO_CREATE', '89432'),
-('89433', 'PRODOTTO_UPDATE', '89433'),
-('89434', 'PRODOTTO_DELETE', '89434'),
-('89435', 'PRODOTTO_REPORT', '89435');
-
-INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('89430', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('89431', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('89430', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89431', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89432', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89433', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89434', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89435', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+('62630', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('62631', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('62630', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('62631', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('62632', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('62633', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('62634', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('62635', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
 
 
 INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('89438648', 'PRODOTTO_FIND_BY_THE_RIGA_ORDINE_OBJECT_KEY' , '89438648');
+('62638366', 'STATO_ORDINE_FIND_BY_THE_ORDINE_OBJECT_KEY' , '62638366');
 
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('89438648', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('89438648', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+('62638366', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('62638366', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
 
 INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('89480', 'RIGA_ORDINE_SEARCH', '89480'),
-('89481', 'RIGA_ORDINE_READ', '89481'),
-('89482', 'RIGA_ORDINE_CREATE', '89482'),
-('89483', 'RIGA_ORDINE_UPDATE', '89483'),
-('89484', 'RIGA_ORDINE_DELETE', '89484'),
-('89485', 'RIGA_ORDINE_REPORT', '89485');
+('66660', 'ORDINE_SEARCH', '66660'),
+('66661', 'ORDINE_READ', '66661'),
+('66662', 'ORDINE_CREATE', '66662'),
+('66663', 'ORDINE_UPDATE', '66663'),
+('66664', 'ORDINE_DELETE', '66664'),
+('66665', 'ORDINE_REPORT', '66665');
 
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('89480', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('89481', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('89480', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89481', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89482', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89483', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89484', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('89485', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+('66660', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('66661', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('66660', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('66661', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('66662', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('66663', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('66664', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('66665', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
 
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('89488643', 'RIGA_ORDINE_FIND_BY_PRODOTTO' , '89488643');
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('66668363', 'ORDINE_FIND_BY_STATO_ORDINE' , '66668363');
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('89488643', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
-('89488643', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('89485479', 'RIGA_ORDINE_FIND_BY_ORDINE' , '89485479');
+('66668363', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
+('66668363', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('66662495', 'ORDINE_FIND_BY_TIPO_ORDINE' , '66662495');
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('89485479', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
-('89485479', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
-
+('66662495', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
+('66662495', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('66661317', 'ORDINE_FIND_BY_CLIENTE' , '66661317');
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('66661317', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
+('66661317', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('66662301', 'ORDINE_FIND_BY_ORDINE_AGGREGATO' , '66662301');
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('66662301', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
+('66662301', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
 
 INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('18640', 'TIPO_ORDINE_SEARCH', '18640'),
-('18641', 'TIPO_ORDINE_READ', '18641'),
-('18642', 'TIPO_ORDINE_CREATE', '18642'),
-('18643', 'TIPO_ORDINE_UPDATE', '18643'),
-('18644', 'TIPO_ORDINE_DELETE', '18644'),
-('18645', 'TIPO_ORDINE_REPORT', '18645');
+('66669871', 'ORDINE_FIND_BY_THE_RIGA_ORDINE_OBJECT_KEY' , '66669871');
 
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('18640', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('18641', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('18640', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('18641', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('18642', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('18643', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('18644', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('18645', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+('66669871', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('66669871', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
+('66662302', 'ORDINE_FIND_BY_THE_ORDINE_FIGLIO_OBJECT_KEY' , '66662302');
 
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('18643255', 'TIPO_ORDINE_FIND_BY_CATEGORIA_ORDINE' , '18643255');
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('18643255', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
-('18643255', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+('66662302', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('66662302', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
 
 INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('18643979', 'TIPO_ORDINE_FIND_BY_THE_ORDINE_OBJECT_KEY' , '18643979');
+('07170', 'CLIENTE_SEARCH', '07170'),
+('07171', 'CLIENTE_READ', '07171'),
+('07172', 'CLIENTE_CREATE', '07172'),
+('07173', 'CLIENTE_UPDATE', '07173'),
+('07174', 'CLIENTE_DELETE', '07174'),
+('07175', 'CLIENTE_REPORT', '07175');
 
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('18643979', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('18643979', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
-
-INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('34550', 'CATEGORIA_ORDINE_SEARCH', '34550'),
-('34551', 'CATEGORIA_ORDINE_READ', '34551'),
-('34552', 'CATEGORIA_ORDINE_CREATE', '34552'),
-('34553', 'CATEGORIA_ORDINE_UPDATE', '34553'),
-('34554', 'CATEGORIA_ORDINE_DELETE', '34554'),
-('34555', 'CATEGORIA_ORDINE_REPORT', '34555');
-
-INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('34550', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('34551', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('34550', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('34551', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('34552', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('34553', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('34554', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
-('34555', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+('07170', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('07171', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('07170', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('07171', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('07172', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('07173', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('07174', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('07175', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
 
 
 INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
-('34553264', 'CATEGORIA_ORDINE_FIND_BY_THE_TIPO_ORDINE_OBJECT_KEY' , '34553264');
+('07171366', 'CLIENTE_FIND_BY_THE_ORDINE_OBJECT_KEY' , '07171366');
 
 INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
-('34553264', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
-('34553264', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+('07171366', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('07171366', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
+('44770', 'PERSONA_SEARCH', '44770'),
+('44771', 'PERSONA_READ', '44771'),
+('44772', 'PERSONA_CREATE', '44772'),
+('44773', 'PERSONA_UPDATE', '44773'),
+('44774', 'PERSONA_DELETE', '44774'),
+('44775', 'PERSONA_REPORT', '44775');
+
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('44770', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('44771', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('44770', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('44771', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('44772', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('44773', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('44774', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('44775', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
+('39710', 'RIGA_ORDINE_SEARCH', '39710'),
+('39711', 'RIGA_ORDINE_READ', '39711'),
+('39712', 'RIGA_ORDINE_CREATE', '39712'),
+('39713', 'RIGA_ORDINE_UPDATE', '39713'),
+('39714', 'RIGA_ORDINE_DELETE', '39714'),
+('39715', 'RIGA_ORDINE_REPORT', '39715');
+
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('39710', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('39711', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('39710', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('39711', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('39712', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('39713', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('39714', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('39715', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('39719866', 'RIGA_ORDINE_FIND_BY_ORDINE' , '39719866');
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('39719866', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
+('39719866', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('39711808', 'RIGA_ORDINE_FIND_BY_PRODOTTO' , '39711808');
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('39711808', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
+('39711808', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
+('84080', 'PRODOTTO_SEARCH', '84080'),
+('84081', 'PRODOTTO_READ', '84081'),
+('84082', 'PRODOTTO_CREATE', '84082'),
+('84083', 'PRODOTTO_UPDATE', '84083'),
+('84084', 'PRODOTTO_DELETE', '84084'),
+('84085', 'PRODOTTO_REPORT', '84085');
+
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('84080', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('84081', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('84080', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('84081', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('84082', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('84083', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('84084', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('84085', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('84081218', 'PRODOTTO_FIND_BY_FORNITORE' , '84081218');
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('84081218', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
+('84081218', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
+('84081871', 'PRODOTTO_FIND_BY_THE_RIGA_ORDINE_OBJECT_KEY' , '84081871');
+
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('84081871', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('84081871', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
+('60950', 'TIPO_ORDINE_SEARCH', '60950'),
+('60951', 'TIPO_ORDINE_READ', '60951'),
+('60952', 'TIPO_ORDINE_CREATE', '60952'),
+('60953', 'TIPO_ORDINE_UPDATE', '60953'),
+('60954', 'TIPO_ORDINE_DELETE', '60954'),
+('60955', 'TIPO_ORDINE_REPORT', '60955');
+
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('60950', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('60951', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('60950', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('60951', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('60952', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('60953', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('60954', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('60955', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES ('60953406', 'TIPO_ORDINE_FIND_BY_CATEGORIA_ORDINE' , '60953406');
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('60953406', 'cfb65df7-9c94-439f-a2af-99e832d502d3'), 
+('60953406', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
+('60952466', 'TIPO_ORDINE_FIND_BY_THE_ORDINE_OBJECT_KEY' , '60952466');
+
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('60952466', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('60952466', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
+('29180', 'FORNITORE_SEARCH', '29180'),
+('29181', 'FORNITORE_READ', '29181'),
+('29182', 'FORNITORE_CREATE', '29182'),
+('29183', 'FORNITORE_UPDATE', '29183'),
+('29184', 'FORNITORE_DELETE', '29184'),
+('29185', 'FORNITORE_REPORT', '29185');
+
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('29180', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('29181', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('29180', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('29181', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('29182', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('29183', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('29184', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a'),
+('29185', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
+
+
+INSERT INTO `privilege` (`privilege_id`, `description`, `name`) VALUES
+('29181208', 'FORNITORE_FIND_BY_THE_PRODOTTO_OBJECT_KEY' , '29181208');
+
+INSERT INTO `role_privilege_mapping` (`privilege_id`, `role_id`) VALUES
+('29181208', 'cfb65df7-9c94-439f-a2af-99e832d502d3'),
+('29181208', 'a0e054dc-ff85-4c6a-8c09-56c651ce1d2a');
 

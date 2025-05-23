@@ -22,11 +22,11 @@ import { BaseTabComponent } from 'src/app/shared/base/base-tab.component';
 export class TabTipoOrdineEditFeComponent extends BaseTabComponent implements OnInit, OnChanges {
     isLoading = false;
     totalRows = 0;
-    pageSize = 3;
+    pageSize = 5;
     currentPage = 0;
-    pageSizeOptions: number[] = [3, 6, 15, 60];
+    pageSizeOptions: number[] = [5, 10, 25, 100];
 
-    displayedColumns: string[] = ['idTipoOrdine', 'annoTipologia', 'nomeOrdine', 'delete'];
+    displayedColumns: string[] = ['anno', 'idTipoOrdine', 'delete'];
 
     @Input()
     entity!: any;
@@ -103,9 +103,8 @@ export class TabTipoOrdineEditFeComponent extends BaseTabComponent implements On
 
     createNewFormGroup(): FormGroup {
         return new FormGroup({
+            anno: new FormControl(null),
             idTipoOrdine: new FormControl(null),
-            annoTipologia: new FormControl(null),
-            nomeOrdine: new FormControl(null),
             theCategoriaOrdineObjectKey: new FormControl(this.entity?.objectKey!),
             theCategoriaOrdineObjectTitle: new FormControl(null),
             theOrdine: new FormControl(null),
@@ -115,9 +114,8 @@ export class TabTipoOrdineEditFeComponent extends BaseTabComponent implements On
 
     createFormGroup(data: ITipoOrdine): FormGroup {
         return new FormGroup({
+            anno: new FormControl({ value: data.anno, disabled: true }),
             idTipoOrdine: new FormControl({ value: data.idTipoOrdine, disabled: true }),
-            annoTipologia: new FormControl({ value: data.annoTipologia, disabled: true }),
-            nomeOrdine: new FormControl(data.nomeOrdine),
             theCategoriaOrdineObjectKey: new FormControl(data.theCategoriaOrdineObjectKey),
             theCategoriaOrdineObjectTitle: new FormControl(data.theCategoriaOrdineObjectTitle),
             theOrdine: new FormControl(data.theOrdine),

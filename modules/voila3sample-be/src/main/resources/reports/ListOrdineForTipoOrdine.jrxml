@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ordine" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d62b9335-4fe5-327d-80ac-3bed43a97dd7">
+<template><![CDATA[$P{REPORT_DIR} + "/templates/default.jrtx"]]></template>
+<style name="RowLeft" hTextAlign="Left" vTextAlign="Middle">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9"/>
+  </conditionalStyle>
+</style>
+<style name="RowRight" hTextAlign="Right" vTextAlign="Middle">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9"/>
+  </conditionalStyle>
+</style>
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+<queryString>
+  <![CDATA[]]>
+</queryString>
+<field name="idOrdine" class="java.lang.Integer"/>
+<field name="descrizione" class="java.lang.String"/>
+<field name="datetime" class="java.time.LocalDateTime"/>
+<field name="date" class="java.time.LocalDate"/>
+<field name="time" class="java.time.LocalTime"/>
+<field name="createdBy" class="java.lang.String"/>
+<field name="lastModifiedBy" class="java.lang.String"/>
+<field name="createdDate" class="java.time.LocalDateTime"/>
+<field name="lastModifiedDate" class="java.time.LocalDateTime"/>
+<field name="theStatoOrdine.objectKey" class="java.lang.String"/>
+<field name="theStatoOrdine.objectTitle" class="java.lang.String"/>
+<field name="theCliente.objectKey" class="java.lang.String"/>
+<field name="theCliente.objectTitle" class="java.lang.String"/>
+<field name="theOrdineAggregato.objectKey" class="java.lang.String"/>
+<field name="theOrdineAggregato.objectTitle" class="java.lang.String"/>
+<background>
+  <band splitType="Stretch"/>
+</background>
+<title>
+  <band splitType="Stretch"/>
+</title>
+<pageHeader>
+  <band height="20" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="TableHeader" x="0" y="0" width="555" height="20" uuid="ba45ae54-0f08-32ff-91ef-775676ac8359"/>
+      <textFieldExpression><![CDATA[$R{ordine.jasperReports.tableHeader}]]></textFieldExpression>
+    </textField>
+  </band>
+</pageHeader>
+<columnHeader>
+  <band height="30" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0
+    " y="0" width="37" height="30" uuid="62b94c0a-61c1-38ff-b161-4bd8918f3269"/>
+    <textFieldExpression><![CDATA[$R{ordine.idOrdine}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="37
+    " y="0" width="37" height="30" uuid="d32be0d4-4fd9-34d1-898f-ff476be9e916"/>
+    <textFieldExpression><![CDATA[$R{ordine.descrizione}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="74
+    " y="0" width="37" height="30" uuid="bb4cc1f7-a4be-35f0-b1e6-c7dc7bba04e2"/>
+    <textFieldExpression><![CDATA[$R{ordine.datetime}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="111
+    " y="0" width="37" height="30" uuid="47024a15-f64b-3f82-b11d-6c89117fe108"/>
+    <textFieldExpression><![CDATA[$R{ordine.date}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="148
+    " y="0" width="37" height="30" uuid="e605bda1-335b-346b-beb7-dfb1da007b7b"/>
+    <textFieldExpression><![CDATA[$R{ordine.time}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="185
+    " y="0" width="37" height="30" uuid="12c23a8a-e78b-399a-92ea-3bd3501f5fc6"/>
+    <textFieldExpression><![CDATA[$R{ordine.createdBy}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="222
+    " y="0" width="37" height="30" uuid="2ae8e4fd-f415-3603-b21a-0acf60e215d4"/>
+    <textFieldExpression><![CDATA[$R{ordine.lastModifiedBy}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="259
+    " y="0" width="37" height="30" uuid="882a432d-9c4f-3ece-ae9b-c8d831374097"/>
+    <textFieldExpression><![CDATA[$R{ordine.createdDate}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="296
+    " y="0" width="37" height="30" uuid="aab76f9d-ee3f-3712-a32e-7754981a1db0"/>
+    <textFieldExpression><![CDATA[$R{ordine.lastModifiedDate}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Label" x="333
+    " y="0" width="37" height="30" uuid="72bd1d9c-8f63-3c68-bc5d-fbe0a15bc1d2"/>
+      <textFieldExpression><![CDATA[$R{statoOrdine.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Label" x="370
+    " y="0" width="37" height="30" uuid="b90b840d-0192-32eb-8007-9a34025c54c5"/>
+      <textFieldExpression><![CDATA[$R{statoOrdine.objectTitle}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Label" x="407
+    " y="0" width="37" height="30" uuid="563c3520-9126-3305-a788-b7437fe9f1a5"/>
+      <textFieldExpression><![CDATA[$R{cliente.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Label" x="444
+    " y="0" width="37" height="30" uuid="58ab0687-d8b2-3f73-aaa7-4a6a69bc824d"/>
+      <textFieldExpression><![CDATA[$R{cliente.objectTitle}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Label" x="481
+    " y="0" width="37" height="30" uuid="a36604ff-0b8c-3547-a3c1-3aed0a053ad3"/>
+      <textFieldExpression><![CDATA[$R{ordine.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Label" x="518
+    " y="0" width="37" height="30" uuid="d88887a6-0698-3e31-bde0-381c57027a43"/>
+      <textFieldExpression><![CDATA[$R{ordine.objectTitle}]]></textFieldExpression>
+    </textField>
+  </band>
+</columnHeader>
+<detail>
+  <band height="15" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="RowRight" x="0
+    " y="0" width="37" height="15" uuid="cd5a2948-9d74-3629-b13d-1702ac9f81d1"/>
+      <textFieldExpression><![CDATA[$F{idOrdine}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="RowLeft" x="37
+    " y="0" width="37" height="15" uuid="887f2c71-7dda-3735-ba55-17465c60f959"/>
+      <textFieldExpression><![CDATA[$F{descrizione}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="RowLeft" x="74
+    " y="0" width="37" height="15" uuid="5489b75f-bb02-31c7-ac3e-9b261ac90c76"/>
+      <textFieldExpression><![CDATA[$F{datetime}.format(java.time.format.DateTimeFormatter.ofPattern($R{jasperReports.datetime.format}))]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="RowLeft" x="111
+    " y="0" width="37" height="15" uuid="b05462ef-53b8-30c9-8eb1-e1b351b44bd5"/>
+      <textFieldExpression><![CDATA[$F{date}.format(java.time.format.DateTimeFormatter.ofPattern($R{jasperReports.date.format}))]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="RowLeft" x="148
+    " y="0" width="37" height="15" uuid="8a2ebe6b-d864-3eba-b4b8-722f11d256cc"/>
+      <textFieldExpression><![CDATA[$F{time}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="RowLeft" x="185
+    " y="0" width="37" height="15" uuid="170ea0c9-ed1d-36c4-a57d-9428c4ee0435"/>
+      <textFieldExpression><![CDATA[$F{createdBy}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="RowLeft" x="222
+    " y="0" width="37" height="15" uuid="074c5f66-163a-3440-be19-066d716d7529"/>
+      <textFieldExpression><![CDATA[$F{lastModifiedBy}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="RowLeft" x="259
+    " y="0" width="37" height="15" uuid="4eec30aa-4234-3fda-a902-43f68bd9b7bf"/>
+      <textFieldExpression><![CDATA[$F{createdDate}.format(java.time.format.DateTimeFormatter.ofPattern($R{jasperReports.datetime.format}))]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="RowLeft" x="296
+    " y="0" width="37" height="15" uuid="96b01b7e-deb6-3efe-b2fd-a08e147a19f3"/>
+      <textFieldExpression><![CDATA[$F{lastModifiedDate}.format(java.time.format.DateTimeFormatter.ofPattern($R{jasperReports.datetime.format}))]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="RowLeft" x="333
+    " y="0" width="37" height="15" uuid="15978a4b-dd44-3af0-865a-8278733abd3f"/> 
+    <textFieldExpression><![CDATA[$F{theStatoOrdine.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="RowLeft" x="370
+    " y="0" width="37" height="15" uuid="172839e6-b97a-3f7a-aa14-008a50abd7e0"/>  
+    <textFieldExpression><![CDATA[$F{theStatoOrdine.objectTitle}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="RowLeft" x="407
+    " y="0" width="37" height="15" uuid="a0624e2d-9c85-3a8d-86f9-50ee694341f1"/> 
+    <textFieldExpression><![CDATA[$F{theCliente.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="RowLeft" x="444
+    " y="0" width="37" height="15" uuid="4b7ccbbb-65d3-3364-9024-c769b4f6469e"/>  
+    <textFieldExpression><![CDATA[$F{theCliente.objectTitle}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="RowLeft" x="481
+    " y="0" width="37" height="15" uuid="a481214a-643b-3dea-8957-2059c979df12"/> 
+    <textFieldExpression><![CDATA[$F{theOrdineAggregato.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="RowLeft" x="518
+    " y="0" width="37" height="15" uuid="185e0ae2-44d9-3283-8f68-3e82ac15ea03"/>  
+    <textFieldExpression><![CDATA[$F{theOrdineAggregato.objectTitle}]]></textFieldExpression>
+    </textField>
+  </band>
+</detail>
+<columnFooter>
+  <band splitType="Stretch"/>
+</columnFooter>
+<pageFooter>
+  <band splitType="Stretch"/>
+</pageFooter>
+<summary>
+  <band splitType="Stretch"/>
+</summary>
+</jasperReport>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Prodotto" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="2a09ba75-c533-3330-a9f3-b3ed86539f0a">
+<property name="ireport.zoom" value="1.9487171000000014"/>
+<property name="ireport.x" value="0"/>
+<property name="ireport.y" value="0"/>
+<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+<template><![CDATA[$P{REPORT_DIR} + "/templates/default.jrtx"]]></template>
+<style name="RowLeft" hTextAlign="Left" vTextAlign="Middle" lineSpacing="Single">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9" lineSpacing="Single"/>
+  </conditionalStyle>
+</style>
+<style name="RowRight" hTextAlign="Right" vTextAlign="Middle" lineSpacing="Single">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9" lineSpacing="Single"/>
+  </conditionalStyle>
+</style>
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+<queryString>
+  <![CDATA[]]>
+</queryString>
+<field name="idProdotto" class="java.lang.Integer"/>
+<field name="descrizione" class="java.lang.String"/>
+<field name="createdBy" class="java.lang.String"/>
+<field name="lastModifiedBy" class="java.lang.String"/>
+<field name="createdDate" class="java.time.LocalDateTime"/>
+<field name="lastModifiedDate" class="java.time.LocalDateTime"/>
+<field name="theFornitore.objectKey" class="java.lang.String"/>
+<field name="theFornitore.objectTitle" class="java.lang.String"/>
+<background>
+  <band splitType="Stretch"/>
+</background>
+<title>
+  <band splitType="Stretch"/>
+</title>
+<pageHeader>
+  <band height="20" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+      <reportElement style="TableHeader" x="0" y="0" width="552" height="20" uuid="0bd35dd5-e0ff-3379-9d17-cdedf046f67f"/>
+      <textElement lineSpacing="Single"/> 
+      <textFieldExpression><![CDATA[$R{prodotto.jasperReports.tableHeader}]]></textFieldExpression>
+    </textField>
+  </band>
+</pageHeader>
+<columnHeader>
+  <band height="30" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="0" y="0" width="69" height="30" uuid="13250633-7412-3fe2-8557-2c7636a5ffec"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{prodotto.idProdotto}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="69" y="0" width="69" height="30" uuid="a0d14ee6-cf2c-3cc1-af28-c22027638a43"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{prodotto.descrizione}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="138" y="0" width="69" height="30" uuid="0e55f336-1f77-3b3f-a8bf-968e9e9c1b1a"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{prodotto.createdBy}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="207" y="0" width="69" height="30" uuid="0575ec8a-4548-35c2-bc41-4e135deee2a0"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{prodotto.lastModifiedBy}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="276" y="0" width="69" height="30" uuid="7701b935-5558-3c8a-a407-1b176ed9110b"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{prodotto.createdDate}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="345" y="0" width="69" height="30" uuid="f67c5def-8ba0-3b74-8423-3f03e6d2d885"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{prodotto.lastModifiedDate}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="138" y="0" width="69" height="30" uuid="3993bc87-66a1-3552-8024-8378cb61dc45"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{fornitore.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="207" y="0" width="69" height="30" uuid="964d2b7e-e9a9-3ddb-abc4-3ed26e1876b2"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{fornitore.objectTitle}]]></textFieldExpression>
+    </textField>
+  </band>
+</columnHeader>
+<detail>
+  <band height="30" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowRight" stretchType="RelativeToTallestObject" x="0" y="0" width="69" height="30" uuid="3351daa3-d042-3098-86be-f8ebbfbf3de3">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{idProdotto}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="69" y="0" width="69" height="30" uuid="35b4dae5-f2d4-346e-9094-81ecdee6480f">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{descrizione}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="138" y="0" width="69" height="30" uuid="33e74de6-ddaa-3b33-b4b7-d6f54ae75096">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{createdBy}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="207" y="0" width="69" height="30" uuid="fdcf1551-295d-31ab-8049-fd5f971fcaf2">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{lastModifiedBy}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="276" y="0" width="69" height="30" uuid="362f58cf-5ef0-3e8c-bbe3-822f97bca9e5">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{createdDate}.format(java.time.format.DateTimeFormatter.ofPattern($R{jasperReports.datetime.format}))]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="345" y="0" width="69" height="30" uuid="52d270c6-d3b8-38ca-ac4a-1ca2cef3f9f8">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{lastModifiedDate}.format(java.time.format.DateTimeFormatter.ofPattern($R{jasperReports.datetime.format}))]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="138" y="0" width="69" height="30" uuid="95b07a89-3594-363e-a334-c55b40fed9e1">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/> 
+    <textFieldExpression><![CDATA[$F{theFornitore.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="207" y="0" width="69" height="30" uuid="8e789e30-24a1-3c73-b100-e5f50b45b5ea">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/> 
+    <textFieldExpression><![CDATA[$F{theFornitore.objectTitle}]]></textFieldExpression>
+    </textField>
+  </band>
+</detail>
+<columnFooter>
+  <band splitType="Stretch"/>
+</columnFooter>
+<pageFooter>
+  <band splitType="Stretch"/>
+</pageFooter>
+<summary>
+  <band splitType="Stretch"/>
+</summary>
+</jasperReport>

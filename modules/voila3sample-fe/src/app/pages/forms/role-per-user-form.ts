@@ -9,7 +9,7 @@ export function rolePerUserForm(formBuilder: FormBuilder) {
         roleId: [null, Validators.maxLength(80)],
         theRoleObjectKey: [null, Validators.required],
         theRoleObjectTitle: [null],
-        userId: [null, Validators.maxLength(36)],
+        userId: [null, Validators.maxLength(20)],
         theUserObjectKey: [null, Validators.required],
         theUserObjectTitle: [null]
     });

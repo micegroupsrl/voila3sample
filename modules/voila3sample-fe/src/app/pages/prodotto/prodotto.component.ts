@@ -45,10 +45,15 @@ export class ProdottoComponent implements OnInit {
 
     displayedColumns: string[] = [
         'idProdotto',
-        'nomeProdotto'
+        'descrizione',
+        'createdBy',
+        'lastModifiedBy',
+        'createdDate',
+        'lastModifiedDate',
         /**
          * Parent.
          */
+        'theFornitore.ThePersonaKey'
     ];
     dataSource: MatTableDataSource<IProdotto> = new MatTableDataSource();
     clickedRows = new Set<IProdotto>();
@@ -58,7 +63,11 @@ export class ProdottoComponent implements OnInit {
     //Dati della form
     public dataForm = {
         idProdotto: null,
-        nomeProdotto: ''
+        descrizione: '',
+        createdBy: '',
+        lastModifiedBy: '',
+        createdDate: null,
+        lastModifiedDate: null
     };
 
     /**
@@ -84,7 +93,7 @@ export class ProdottoComponent implements OnInit {
         this.loadData(this.object);
 
         this.searchProdottoForm = this.fb.group({
-            nomeProdotto: []
+            descrizione: []
         });
     }
 
@@ -215,7 +224,7 @@ export class ProdottoComponent implements OnInit {
         const searchProdotto = this.searchProdottoForm.value;
 
         if (searchProdotto) {
-            filterBuild = filterBuild.andLike('nomeProdotto', searchProdotto.nomeProdotto);
+            filterBuild = filterBuild.andLike('descrizione', searchProdotto.descrizione);
         }
         return filterBuild.value();
     }

@@ -22,16 +22,16 @@ export class DialogListRigaOrdineComponent {
     currentPage = 0;
     pageSizeOptions: number[] = [5, 10, 25, 100];
 
-    displayedColumns: string[] = ['quantita'];
+    displayedColumns: string[] = ['qta'];
     dataSource: MatTableDataSource<IRigaOrdine> = new MatTableDataSource();
     clickedRows = new Set<IRigaOrdine>();
 
     public object: PageObject = {};
 
     public dataForm = {
-        idProdotto: null,
         idOrdine: null,
-        quantita: null
+        idProdotto: null,
+        qta: null
     };
 
     filters = '';

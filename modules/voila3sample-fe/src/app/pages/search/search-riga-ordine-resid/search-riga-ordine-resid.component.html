@@ -9,13 +9,6 @@
     <div mat-dialog-content class="mat-dialog-content" fxLayout="column">
         <form name="searchRigaOrdineForm" [formGroup]="searchRigaOrdineForm" (keyup.enter)="onSubmit()" fxLayout="column" fxLayoutGap="20" fxFlex>
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <!-- idProdotto From -->
-                <rsd-input-number formControlName="idProdottoDa" label="Id Prodotto {{ 'search.from' | translate }}..."></rsd-input-number>
-                <!-- idProdotto To -->
-                <rsd-input-number formControlName="idProdottoA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
-            </div>
-
-            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
                 <!-- idOrdine From -->
                 <rsd-input-number formControlName="idOrdineDa" label="Id Ordine {{ 'search.from' | translate }}..."></rsd-input-number>
                 <!-- idOrdine To -->
@@ -23,23 +16,19 @@
             </div>
 
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <!-- quantita From -->
-                <rsd-input-number formControlName="quantitaDa" label="Quantita {{ 'search.from' | translate }}..."></rsd-input-number>
-                <!-- Quantita To -->
-                <rsd-input-number formControlName="quantitaA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
+                <!-- idProdotto From -->
+                <rsd-input-number formControlName="idProdottoDa" label="Id Prodotto {{ 'search.from' | translate }}..."></rsd-input-number>
+                <!-- idProdotto To -->
+                <rsd-input-number formControlName="idProdottoA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
             </div>
 
-            <!-- Prodotto -->
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Prodotto</mat-label>
-                    <mat-select formControlName="idProdotto">
-                        <mat-option *ngFor="let prodotto of prodottoList" [value]="prodotto.objectKey">
-                            {{ prodotto.objectTitle }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <!-- qta From -->
+                <rsd-input-number formControlName="qtaDa" label="Qta {{ 'search.from' | translate }}..."></rsd-input-number>
+                <!-- Qta To -->
+                <rsd-input-number formControlName="qtaA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
             </div>
+
             <!-- Ordine -->
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
                 <mat-form-field appearance="outline" fxFlex>
@@ -47,6 +36,17 @@
                     <mat-select formControlName="idOrdine">
                         <mat-option *ngFor="let ordine of ordineList" [value]="ordine.objectKey">
                             {{ ordine.objectTitle }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- Prodotto -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Prodotto</mat-label>
+                    <mat-select formControlName="idProdotto">
+                        <mat-option *ngFor="let prodotto of prodottoList" [value]="prodotto.objectKey">
+                            {{ prodotto.objectTitle }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

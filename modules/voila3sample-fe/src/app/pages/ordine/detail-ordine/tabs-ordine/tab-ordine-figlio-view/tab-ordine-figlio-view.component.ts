@@ -11,8 +11,9 @@ import { OrdineGroupApiService } from 'src/app/pages/services/services-ordine/or
 import { ORDINE } from 'src/app/pages/costants/ordine.constant';
 import { PageObject } from 'src/app/shared/page-object.interface';
 import { IOrdine } from 'src/app/pages/interfaces/ordine.interface';
-import { ICliente } from 'src/app/pages/interfaces/cliente.interface';
+import { IStatoOrdine } from 'src/app/pages/interfaces/stato-ordine.interface';
 import { ITipoOrdine } from 'src/app/pages/interfaces/tipo-ordine.interface';
+import { ICliente } from 'src/app/pages/interfaces/cliente.interface';
 import { setOptions } from 'src/app/utilities/function/helper';
 import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 
@@ -24,9 +25,9 @@ import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 export class TabOrdineFiglioViewComponent implements OnChanges {
     isLoading = false;
     totalRows = 0;
-    pageSize = 3;
+    pageSize = 5;
     currentPage = 0;
-    pageSizeOptions: number[] = [3, 6, 15, 60];
+    pageSizeOptions: number[] = [5, 10, 25, 100];
     searchOrdineForm!: FormGroup;
     /**
      * filter intialization.
@@ -38,21 +39,24 @@ export class TabOrdineFiglioViewComponent implements OnChanges {
      */
     displayedColumns: string[] = [
         'idOrdine',
-        'dataOrdine',
-        'tempoOrdine',
+        'descrizione',
+        'datetime',
+        'date',
+        'time',
+        /**
+         * Key for StatoOrdine.
+         */
+        'theStatoOrdine.idStatoOrdine',
+
+        /**
+         * Key for TipoOrdine.
+         */
+        'theTipoOrdine.TheTipoOrdineKey',
+
         /**
          * Key for Cliente.
          */
         'theCliente.ThePersonaKey',
-
-        /**
-         * Key for TipoOrdine.
-         */
-
-        /**
-         * Key for TipoOrdine.
-         */
-        'theTipoOrdine.TheOrdine.idOrdine',
 
         /**
          * Key for OrdineAggregato.
@@ -70,8 +74,9 @@ export class TabOrdineFiglioViewComponent implements OnChanges {
      * Create form and lists
      */
     public theOrdineFiglio!: FormArray;
-    public clienteList!: ICliente[];
+    public statoOrdineList!: IStatoOrdine[];
     public tipoOrdineList!: ITipoOrdine[];
+    public clienteList!: ICliente[];
     public ordineAggregatoList!: IOrdine[];
     public form: FormGroup = ordineForm(this.formBuilder);
     public smartFormGroup: FormGroup = this.formBuilder.group({});
@@ -158,7 +163,7 @@ export class TabOrdineFiglioViewComponent implements OnChanges {
             this.loadData(object);
         }
         this.searchOrdineForm = this.formBuilder.group({
-            createdBy: []
+            descrizione: []
         });
     }
     /**
@@ -190,7 +195,7 @@ export class TabOrdineFiglioViewComponent implements OnChanges {
         let filterBuild = new FilterBuilder();
         const searchOrdine = this.searchOrdineForm.value;
         if (searchOrdine) {
-            filterBuild = filterBuild.andLike('createdBy', searchOrdine.createdBy);
+            filterBuild = filterBuild.andLike('descrizione', searchOrdine.descrizione);
         }
         return filterBuild.value();
     }

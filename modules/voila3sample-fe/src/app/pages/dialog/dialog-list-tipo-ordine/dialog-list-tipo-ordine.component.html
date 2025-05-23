@@ -16,26 +16,19 @@
             <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
             <!-- Tabella tipo TipoOrdine -->
             <table aria-label="tipoOrdine's table" mat-table [dataSource]="dataSource" matSort>
+                <!-- Anno -->
+                <ng-container matColumnDef="theTipoOrdineKey.anno">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Anno</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let tipoOrdine">{{ tipoOrdine.anno }}</td>
+                </ng-container>
                 <!-- Id Tipo Ordine -->
                 <ng-container matColumnDef="theTipoOrdineKey.idTipoOrdine">
                     <!-- Cell Header -->
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Id Tipo Ordine</th>
                     <!-- Cell Body-->
                     <td mat-cell *matCellDef="let tipoOrdine">{{ tipoOrdine.idTipoOrdine }}</td>
-                </ng-container>
-                <!-- Anno Tipologia -->
-                <ng-container matColumnDef="theTipoOrdineKey.annoTipologia">
-                    <!-- Cell Header -->
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Anno Tipologia</th>
-                    <!-- Cell Body-->
-                    <td mat-cell *matCellDef="let tipoOrdine">{{ tipoOrdine.annoTipologia }}</td>
-                </ng-container>
-                <!-- Nome Ordine -->
-                <ng-container matColumnDef="nomeOrdine">
-                    <!-- Cell Header -->
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome Ordine</th>
-                    <!-- Cell Body-->
-                    <td mat-cell *matCellDef="let tipoOrdine">{{ tipoOrdine.nomeOrdine }}</td>
                 </ng-container>
                 <th mat-header-row *matHeaderRowDef="displayedColumns"></th>
                 <tr mat-row [mat-dialog-close]="row" *matRowDef="let row; columns: displayedColumns"></tr>

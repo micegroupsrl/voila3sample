@@ -2,33 +2,20 @@
     <mat-card class="mat-elevation-z8">
         <!-- Card Body -->
         <mat-card-content class="overflow" autosize>
-            <!-- Quantita -->
-            <div *ngIf="rigaOrdine?.quantita">
+            <!-- Qta -->
+            <div *ngIf="rigaOrdine?.qta">
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
                     <!-- Label -->
                     <div fxLayout="column" fxFlex="30">
-                        <label>{{ 'voila3sample.detail.RigaOrdine.quantita' | translate }}</label>
+                        <label>{{ 'voila3sample.detail.RigaOrdine.qta' | translate }}</label>
                     </div>
                     <!-- Value -->
                     <div fxLayout="column">
-                        <strong>{{ rigaOrdine!.quantita }}</strong>
+                        <strong>{{ rigaOrdine!.qta }}</strong>
                     </div>
                 </div>
             </div>
 
-            <!-- Prodotto -->
-            <div *ngIf="rigaOrdine?.theProdottoObjectKey">
-                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
-                    <!-- Label -->
-                    <div fxLayout="column" fxFlex="30">
-                        <label>{{ 'voila3sample.detail.RigaOrdine.theProdottoObjectKey' | translate }}</label>
-                    </div>
-                    <!-- Value -->
-                    <div fxLayout="column">
-                        <strong>{{ rigaOrdine!.theProdottoObjectTitle }}</strong>
-                    </div>
-                </div>
-            </div>
             <!-- Ordine -->
             <div *ngIf="rigaOrdine?.theOrdineObjectKey">
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
@@ -39,6 +26,19 @@
                     <!-- Value -->
                     <div fxLayout="column">
                         <strong>{{ rigaOrdine!.theOrdineObjectTitle }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Prodotto -->
+            <div *ngIf="rigaOrdine?.theProdottoObjectKey">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.RigaOrdine.theProdottoObjectKey' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ rigaOrdine!.theProdottoObjectTitle }}</strong>
                     </div>
                 </div>
             </div>

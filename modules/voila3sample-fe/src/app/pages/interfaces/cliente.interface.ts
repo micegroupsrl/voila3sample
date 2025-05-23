@@ -7,21 +7,17 @@ import { IPersona } from '../interfaces/persona.interface';
 
 export interface ICliente extends IPersona {
     idPersona: number;
-    codiceFiscale: string;
+    cf: string;
+
+    punti: number;
+
+    nome: string;
+
+    cognome: string;
 
     email: string;
 
     telefono: string;
-
-    indirizzo: string;
-
-    createdBy: string;
-
-    lastModifiedBy: string;
-
-    createdDate: Date;
-
-    lastModifiedDate: Date;
 
     theOrdine: IOrdine[];
 }

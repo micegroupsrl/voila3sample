@@ -14,7 +14,7 @@ import { BaseSearchResidAdvancedComponent } from 'src/app/shared/base/base.searc
 export class SearchCategoriaOrdineResidAdvancedComponent extends BaseSearchResidAdvancedComponent implements OnInit {
     override attributeList = [
         // Definition of the object's list that will be used for build the filter
-        { name: 'idCategoriaOrdine', type: 'number', api: ['minoreDi', 'uguale', 'maggioreDi'] }
+        { name: 'idCatOrdine', type: 'number', api: ['minoreDi', 'uguale', 'maggioreDi'] }
     ];
 
     constructor(

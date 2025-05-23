@@ -16,8 +16,44 @@
             </div>
 
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
-                <!-- Nome Prodotto -->
-                <rsd-input-text formControlName="nomeProdotto"></rsd-input-text>
+                <!-- Descrizione -->
+                <rsd-input-text formControlName="descrizione"></rsd-input-text>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Created By -->
+                <rsd-input-text formControlName="createdBy"></rsd-input-text>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Last Modified By -->
+                <rsd-input-text formControlName="lastModifiedBy"></rsd-input-text>
+            </div>
+
+            <!-- Created Date From -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <datetimepicker formControlName="createdDateDa" label="Created Date {{ 'search.from' | translate }}..."></datetimepicker>
+                <!-- Created Date To -->
+                <datetimepicker formControlName="createdDateA" label="...{{ 'search.to' | translate }}"></datetimepicker>
+            </div>
+
+            <!-- Last Modified Date From -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <datetimepicker formControlName="lastModifiedDateDa" label="Last Modified Date {{ 'search.from' | translate }}..."></datetimepicker>
+                <!-- Last Modified Date To -->
+                <datetimepicker formControlName="lastModifiedDateA" label="...{{ 'search.to' | translate }}"></datetimepicker>
+            </div>
+
+            <!-- Fornitore -->
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Fornitore</mat-label>
+                    <mat-select formControlName="theFornitore">
+                        <mat-option *ngFor="let fornitore of fornitoreList" [value]="fornitore.objectKey">
+                            {{ fornitore.objectTitle }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </form>
     </div>

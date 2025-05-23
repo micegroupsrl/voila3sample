@@ -2,29 +2,55 @@
     <mat-card class="mat-elevation-z8">
         <!-- Card Body -->
         <mat-card-content class="overflow" autosize>
-            <!-- Data Ordine -->
-            <div *ngIf="ordine?.dataOrdine">
+            <!-- Descrizione -->
+            <div *ngIf="ordine?.descrizione">
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
                     <!-- Label -->
                     <div fxLayout="column" fxFlex="30">
-                        <label>{{ 'voila3sample.detail.Ordine.dataOrdine' | translate }}</label>
+                        <label>{{ 'voila3sample.detail.Ordine.descrizione' | translate }}</label>
                     </div>
                     <!-- Value -->
                     <div fxLayout="column">
-                        <strong>{{ ordine!.dataOrdine }}</strong>
+                        <strong>{{ ordine!.descrizione }}</strong>
                     </div>
                 </div>
             </div>
-            <!-- Tempo Ordine -->
-            <div *ngIf="ordine?.tempoOrdine">
+            <!-- Datetime -->
+            <div *ngIf="ordine?.datetime">
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
                     <!-- Label -->
                     <div fxLayout="column" fxFlex="30">
-                        <label>{{ 'voila3sample.detail.Ordine.tempoOrdine' | translate }}</label>
+                        <label>{{ 'voila3sample.detail.Ordine.datetime' | translate }}</label>
                     </div>
                     <!-- Value -->
                     <div fxLayout="column">
-                        <strong>{{ ordine!.tempoOrdine }}</strong>
+                        <strong>{{ ordine!.datetime }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Date -->
+            <div *ngIf="ordine?.date">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Ordine.date' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ ordine!.date }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Time -->
+            <div *ngIf="ordine?.time">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Ordine.time' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ ordine!.time }}</strong>
                     </div>
                 </div>
             </div>
@@ -42,16 +68,16 @@
                     </div>
                 </div>
             </div>
-            <!-- Cliente -->
-            <div *ngIf="ordine?.theClienteObjectKey">
+            <!-- Stato Ordine -->
+            <div *ngIf="ordine?.theStatoOrdineObjectKey">
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
                     <!-- Label -->
                     <div fxLayout="column" fxFlex="30">
-                        <label>{{ 'voila3sample.detail.Ordine.theClienteObjectKey' | translate }}</label>
+                        <label>{{ 'voila3sample.detail.Ordine.theStatoOrdineObjectKey' | translate }}</label>
                     </div>
                     <!-- Value -->
                     <div fxLayout="column">
-                        <strong>{{ ordine!.theClienteObjectTitle }}</strong>
+                        <strong>{{ ordine!.theStatoOrdineObjectTitle }}</strong>
                     </div>
                 </div>
             </div>
@@ -65,6 +91,19 @@
                     <!-- Value -->
                     <div fxLayout="column">
                         <strong>{{ ordine!.theTipoOrdineObjectTitle }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Cliente -->
+            <div *ngIf="ordine?.theClienteObjectKey">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Ordine.theClienteObjectKey' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ ordine!.theClienteObjectTitle }}</strong>
                     </div>
                 </div>
             </div>

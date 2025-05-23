@@ -17,7 +17,6 @@ import { getListForDropdowns } from 'src/app/shared/base/base.helper';
 export class SearchTipoOrdineResidAdvancedComponent extends BaseSearchResidAdvancedComponent implements OnInit {
     override attributeList = [
         // Definition of the object's list that will be used for build the filter
-        { name: 'nomeOrdine', type: 'string', api: ['contiene'] },
         { name: 'idCategoriaOrdine', type: 'select', api: ['uguale'], parentList: [], parent: 'categoriaOrdine' }
     ];
     public categoriaOrdineList: ICategoriaOrdine[] = [];

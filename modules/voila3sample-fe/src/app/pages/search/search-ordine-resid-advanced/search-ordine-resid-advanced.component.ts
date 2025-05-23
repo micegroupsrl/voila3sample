@@ -6,8 +6,9 @@ import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 import { OrdineGroupApiService } from 'src/app/pages/services/services-ordine/ordine-group-api.service';
 import { BaseSearchResidAdvancedComponent } from 'src/app/shared/base/base.search-resid-advanced.component';
 
-import { ICliente } from 'src/app/pages/interfaces/cliente.interface';
+import { IStatoOrdine } from 'src/app/pages/interfaces/stato-ordine.interface';
 import { ITipoOrdine } from 'src/app/pages/interfaces/tipo-ordine.interface';
+import { ICliente } from 'src/app/pages/interfaces/cliente.interface';
 import { IOrdine } from 'src/app/pages/interfaces/ordine.interface';
 import { getListForDropdowns } from 'src/app/shared/base/base.helper';
 
@@ -20,18 +21,22 @@ export class SearchOrdineResidAdvancedComponent extends BaseSearchResidAdvancedC
     override attributeList = [
         // Definition of the object's list that will be used for build the filter
         { name: 'idOrdine', type: 'number', api: ['minoreDi', 'uguale', 'maggioreDi'] },
-        { name: 'dataOrdine', type: 'date', api: ['precedenteA', 'uguale', 'successivaA'] },
-        { name: 'tempoOrdine', type: 'time', api: ['precedenteA', 'uguale', 'successivaA'] },
+        { name: 'descrizione', type: 'string', api: ['contiene'] },
+        { name: 'datetime', type: 'datetime', api: ['precedenteA', 'uguale', 'successivaA'] },
+        { name: 'date', type: 'date', api: ['precedenteA', 'uguale', 'successivaA'] },
+        { name: 'time', type: 'time', api: ['precedenteA', 'uguale', 'successivaA'] },
         { name: 'createdBy', type: 'string', api: ['contiene'] },
         { name: 'lastModifiedBy', type: 'string', api: ['contiene'] },
         { name: 'createdDate', type: 'datetime', api: ['precedenteA', 'uguale', 'successivaA'] },
         { name: 'lastModifiedDate', type: 'datetime', api: ['precedenteA', 'uguale', 'successivaA'] },
-        { name: 'idCliente', type: 'select', api: ['uguale'], parentList: [], parent: 'cliente' },
+        { name: 'idStatoOrdine', type: 'select', api: ['uguale'], parentList: [], parent: 'statoOrdine' },
         { name: 'idTipoOrdine', type: 'select', api: ['uguale'], parentList: [], parent: 'tipoOrdine' },
+        { name: 'idCliente', type: 'select', api: ['uguale'], parentList: [], parent: 'cliente' },
         { name: 'theOrdineAggregato', type: 'select', api: ['uguale'], parentList: [], parent: 'ordineAggregato' }
     ];
-    public clienteList: ICliente[] = [];
+    public statoOrdineList: IStatoOrdine[] = [];
     public tipoOrdineList: ITipoOrdine[] = [];
+    public clienteList: ICliente[] = [];
     public ordineAggregatoList: IOrdine[] = [];
 
     constructor(
@@ -86,7 +91,7 @@ export class SearchOrdineResidAdvancedComponent extends BaseSearchResidAdvancedC
                 filterBuild[orAnd ? 'andGreaterOrEqual' : 'orGreaterOrEqual'](filterType, value);
                 break;
             case 'uguale':
-                if (filterType != 'idCliente' && filterType != 'idTipoOrdine') {
+                if (filterType != 'idStatoOrdine' && filterType != 'idTipoOrdine' && filterType != 'idCliente') {
                     filterBuild[orAnd ? 'andEquals' : 'orEquals'](filterType, value);
                 }
                 break;
@@ -96,27 +101,36 @@ export class SearchOrdineResidAdvancedComponent extends BaseSearchResidAdvancedC
         return filterBuild;
     }
     public filterTypeCase(filterBuild: FilterBuilder, filterType: string, apiType: string, orAnd: string, value: string): FilterBuilder {
-        if (filterType == 'idCliente') {
-            filterBuild[orAnd ? 'andEquals' : 'orEquals']('theCliente', value);
+        if (filterType == 'idStatoOrdine') {
+            filterBuild[orAnd ? 'andEquals' : 'orEquals']('theStatoOrdine', value);
         }
         if (filterType == 'idTipoOrdine') {
             filterBuild[orAnd ? 'andEquals' : 'orEquals']('theTipoOrdine', value);
+        }
+        if (filterType == 'idCliente') {
+            filterBuild[orAnd ? 'andEquals' : 'orEquals']('theCliente', value);
         }
         if (filterType == 'theordineAggregato') {
             filterBuild[orAnd ? 'andEquals' : 'orEquals']('theOrdineAggregato.idOrdine', value);
         }
         return filterBuild;
     }
-    public getClienteList(): void {
-        this.ordineGroupApiService.cliente.getClienteByCriteria().subscribe(data => {
-            this.clienteList = getListForDropdowns(data);
-            this.addListToAttribute('cliente', this.clienteList);
+    public getStatoOrdineList(): void {
+        this.ordineGroupApiService.statoOrdine.getStatoOrdineByCriteria().subscribe(data => {
+            this.statoOrdineList = getListForDropdowns(data);
+            this.addListToAttribute('statoOrdine', this.statoOrdineList);
         });
     }
     public getTipoOrdineList(): void {
         this.ordineGroupApiService.tipoOrdine.getTipoOrdineByCriteria().subscribe(data => {
             this.tipoOrdineList = getListForDropdowns(data);
             this.addListToAttribute('tipoOrdine', this.tipoOrdineList);
+        });
+    }
+    public getClienteList(): void {
+        this.ordineGroupApiService.cliente.getClienteByCriteria().subscribe(data => {
+            this.clienteList = getListForDropdowns(data);
+            this.addListToAttribute('cliente', this.clienteList);
         });
     }
     public getOrdineAggregatoList(): void {
@@ -127,8 +141,9 @@ export class SearchOrdineResidAdvancedComponent extends BaseSearchResidAdvancedC
     }
 
     private getParentsList(): void {
-        this.getClienteList();
+        this.getStatoOrdineList();
         this.getTipoOrdineList();
+        this.getClienteList();
         this.getOrdineAggregatoList();
     }
 }

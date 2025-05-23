@@ -1,1 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RigaOrdine" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9b49555e-16ca-30ba-a606-8e4283642a8f">
+<template><![CDATA[$P{REPORT_DIR} + "/templates/default.jrtx"]]></template>
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+
+<queryString>
+  <![CDATA[]]>
+</queryString>
+<field name="theOrdine.objectTitle" class="java.lang.String"/>
+<field name="theProdotto.objectTitle" class="java.lang.String"/>
+<field name="qta" class="java.math.BigDecimal"/>
+
+<background>
+  <band splitType="Stretch"/>
+</background>
+<title>
+  <band height="50" splitType="Stretch">
+    <image>
+      <reportElement style="ImageLeft" x="0" y="0" width="130" height="50" uuid="26c1f17c-60ce-31ab-b98c-fc3c078308bb"/>
+      <imageExpression><![CDATA[$P{REPORT_DIR} + "/images/" + $R{jasperReports.logo}]]></imageExpression>
+    </image>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Title" x="130" y="0" width="295" height="30" uuid="91547294-d10d-364b-a46b-cdccdc97b69c"/>
+      <textFieldExpression><![CDATA[$R{rigaOrdine.jasperReports.title}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="SubTitle" x="130" y="30" width="295" height="20" uuid="6f710aed-376a-3f63-bc3c-5b760e6bc958"/>
+      <textFieldExpression><![CDATA[$R{rigaOrdine.jasperReports.subTitle}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Date" x="425" y="0" width="130" height="50" uuid="08998e86-e63c-3dda-8528-ce445ff8db4a"/>
+      <textFieldExpression><![CDATA[new SimpleDateFormat($R{jasperReports.date.format}).format(new Date())]]></textFieldExpression>
+    </textField>
+  </band>
+</title>
+<pageHeader>
+  <band height="30" splitType="Stretch"/>
+</pageHeader>
+<columnHeader>
+  <band height="20" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="TableHeader" x="0" y="0" width="555" height="20" uuid="dd7060dc-e4ff-388a-a681-bb82502af1d7"/>
+      <textFieldExpression><![CDATA[$R{rigaOrdine.jasperReports.tableHeader}]]></textFieldExpression>
+    </textField>
+  </band>
+</columnHeader>
+<detail>
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" uuid="6c94e6a4-a42d-3969-9de3-a8bd6debb14d"/>
+    <textFieldExpression><![CDATA[$R{ordine.objectTitle}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="6c94e6a4-a42d-3969-9de3-a8bd6debb14d"/>
+    <textFieldExpression><![CDATA[$F{theOrdine.objectTitle}]]></textFieldExpression>
+  </textField>
+  </band>
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" uuid="03ef49d3-c6a4-386b-b21a-b1e83f64b428"/>
+    <textFieldExpression><![CDATA[$R{prodotto.objectTitle}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="03ef49d3-c6a4-386b-b21a-b1e83f64b428"/>
+    <textFieldExpression><![CDATA[$F{theProdotto.objectTitle}]]></textFieldExpression>
+  </textField>
+  </band>
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" />
+  <textFieldExpression><![CDATA[$R{rigaOrdine.qta}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="908240b6-bd34-3097-8c59-fe0ccdd20f7b"/>
+    <textFieldExpression><![CDATA[$F{qta}]]></textFieldExpression>
+  </textField>
+  </band>
+  
+</detail>
+<columnFooter>
+  <band splitType="Stretch"/>
+</columnFooter>
+<pageFooter>
+  <band height="20" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Footer" x="0" y="0" width="480" height="20" uuid="19649b25-9497-3f2f-8436-e3c4a5decd7e"/>
+      <textFieldExpression><![CDATA[$R{jasperReports.footer.text}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" evaluationTime="Master" isBlankWhenNull="true">
+      <reportElement style="PageNumber" x="480" y="0" width="75" height="20" uuid="62445187-eeaf-3805-a19a-afe1d312eaa4"/>
+      <textFieldExpression><![CDATA[$R{jasperReports.pageNumber.label} + " " + $V{MASTER_CURRENT_PAGE} + " " + $R{jasperReports.pageNumber.separator} + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+    </textField>
+  </band>
+</pageFooter>
+<summary>
+  <band splitType="Stretch"/>
+</summary>
+</jasperReport>

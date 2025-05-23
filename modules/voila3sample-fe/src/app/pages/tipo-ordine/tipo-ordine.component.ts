@@ -44,9 +44,8 @@ export class TipoOrdineComponent implements OnInit {
      */
 
     displayedColumns: string[] = [
+        'theTipoOrdineKey.anno',
         'theTipoOrdineKey.idTipoOrdine',
-        'theTipoOrdineKey.annoTipologia',
-        'nomeOrdine',
         /**
          * Parent.
          */
@@ -59,10 +58,9 @@ export class TipoOrdineComponent implements OnInit {
 
     //Dati della form
     public dataForm = {
+        anno: null,
         idTipoOrdine: null,
-        annoTipologia: null,
-        idCategoriaOrdine: null,
-        nomeOrdine: ''
+        idCatOrdine: null
     };
 
     /**

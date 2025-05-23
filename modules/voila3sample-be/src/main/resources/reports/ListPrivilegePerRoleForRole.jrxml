@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrivilegePerRole" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="151f0511-0523-3de4-ad0a-af7cafbd6bce">
+<template><![CDATA[$P{REPORT_DIR} + "/templates/default.jrtx"]]></template>
+<style name="RowLeft" hTextAlign="Left" vTextAlign="Middle">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9"/>
+  </conditionalStyle>
+</style>
+<style name="RowRight" hTextAlign="Right" vTextAlign="Middle">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9"/>
+  </conditionalStyle>
+</style>
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+<queryString>
+  <![CDATA[]]>
+</queryString>
+
+<field name="thePrivilege.objectKey" class="java.lang.String"/>
+<field name="thePrivilege.objectTitle" class="java.lang.String"/>
+<background>
+  <band splitType="Stretch"/>
+</background>
+<title>
+  <band splitType="Stretch"/>
+</title>
+<pageHeader>
+  <band height="20" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="TableHeader" x="0" y="0" width="555" height="20" uuid="714204b1-baaf-3aa0-a125-e775a1eda96c"/>
+      <textFieldExpression><![CDATA[$R{privilegePerRole.jasperReports.tableHeader}]]></textFieldExpression>
+    </textField>
+  </band>
+</pageHeader>
+<columnHeader>
+  <band height="30" splitType="Stretch">
+    
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Label" x="0
+    " y="0" width="277" height="30" uuid="9dc761d9-98a3-3a69-abdb-ec57e15ff25b"/>
+      <textFieldExpression><![CDATA[$R{privilege.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Label" x="277
+    " y="0" width="277" height="30" uuid="d68bd7b8-2f34-3d96-9bb1-c3bfa5b41ade"/>
+      <textFieldExpression><![CDATA[$R{privilege.objectTitle}]]></textFieldExpression>
+    </textField>
+  </band>
+</columnHeader>
+<detail>
+  <band height="15" splitType="Stretch">
+    
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="RowLeft" x="0
+    " y="0" width="277" height="15" uuid="69a1a1ba-5fc7-343f-9f34-4bf7fdf3fb25"/> 
+    <textFieldExpression><![CDATA[$F{thePrivilege.objectKey}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="RowLeft" x="277
+    " y="0" width="277" height="15" uuid="ec7ec81a-8b30-360c-a3fc-23a7d3c30aae"/>  
+    <textFieldExpression><![CDATA[$F{thePrivilege.objectTitle}]]></textFieldExpression>
+    </textField>
+  </band>
+</detail>
+<columnFooter>
+  <band splitType="Stretch"/>
+</columnFooter>
+<pageFooter>
+  <band splitType="Stretch"/>
+</pageFooter>
+<summary>
+  <band splitType="Stretch"/>
+</summary>
+</jasperReport>

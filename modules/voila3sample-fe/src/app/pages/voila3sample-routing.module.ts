@@ -26,6 +26,14 @@ const routes: Routes = [
                 loadChildren: () => import('./privilege-per-role/privilege-per-role.module').then(m => m.PrivilegePerRoleModule)
             },
             {
+                path: 'categoria-ordine',
+                loadChildren: () => import('./categoria-ordine/categoria-ordine.module').then(m => m.CategoriaOrdineModule)
+            },
+            {
+                path: 'stato-ordine',
+                loadChildren: () => import('./stato-ordine/stato-ordine.module').then(m => m.StatoOrdineModule)
+            },
+            {
                 path: 'ordine',
                 loadChildren: () => import('./ordine/ordine.module').then(m => m.OrdineModule)
             },
@@ -34,20 +42,20 @@ const routes: Routes = [
                 loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule)
             },
             {
-                path: 'prodotto',
-                loadChildren: () => import('./prodotto/prodotto.module').then(m => m.ProdottoModule)
-            },
-            {
                 path: 'riga-ordine',
                 loadChildren: () => import('./riga-ordine/riga-ordine.module').then(m => m.RigaOrdineModule)
+            },
+            {
+                path: 'prodotto',
+                loadChildren: () => import('./prodotto/prodotto.module').then(m => m.ProdottoModule)
             },
             {
                 path: 'tipo-ordine',
                 loadChildren: () => import('./tipo-ordine/tipo-ordine.module').then(m => m.TipoOrdineModule)
             },
             {
-                path: 'categoria-ordine',
-                loadChildren: () => import('./categoria-ordine/categoria-ordine.module').then(m => m.CategoriaOrdineModule)
+                path: 'fornitore',
+                loadChildren: () => import('./fornitore/fornitore.module').then(m => m.FornitoreModule)
             }
         ]
     }

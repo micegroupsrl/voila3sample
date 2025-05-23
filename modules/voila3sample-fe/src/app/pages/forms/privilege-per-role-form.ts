@@ -9,7 +9,7 @@ export function privilegePerRoleForm(formBuilder: FormBuilder) {
         roleId: [null, Validators.maxLength(80)],
         theRoleObjectKey: [null, Validators.required],
         theRoleObjectTitle: [null],
-        privilegeId: [null],
+        privilegeId: [null, Validators.maxLength(20)],
         thePrivilegeObjectKey: [null, Validators.required],
         thePrivilegeObjectTitle: [null]
     });

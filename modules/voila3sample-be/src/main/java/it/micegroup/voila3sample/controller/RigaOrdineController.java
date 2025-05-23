@@ -37,8 +37,8 @@ import it.micegroup.voila3sample.exception.ResourceNotFoundException;
 import it.micegroup.voila3sample.mapper.RigaOrdineMapper;
 
 import it.micegroup.voila3sample.service.RigaOrdineService;
-import it.micegroup.voila3sample.domain.primary.Prodotto;
 import it.micegroup.voila3sample.domain.primary.Ordine;
+import it.micegroup.voila3sample.domain.primary.Prodotto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,170 +50,187 @@ import jakarta.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping(value = "/riga-ordine", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RigaOrdineController extends BaseController<RigaOrdine> {
-	/// ENTITY SERVICE
-	private final RigaOrdineService rigaOrdineService;
-	private final RigaOrdineMapper rigaOrdineMapper;
+  /// ENTITY SERVICE
+  private final RigaOrdineService rigaOrdineService;
+  private final RigaOrdineMapper rigaOrdineMapper;
 
-	// API
-	/**
-	 * {@code GET /riga-ordine} : Get all riga-ordine.
-	 * 
-	 * @param pageable
-	 * @return Page of all RigaOrdine.
-	 */
-	@GetMapping
-	@Operation(summary = "Get all RigaOrdine")
-	@PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_SEARCH.toString())")
-	public ResponseEntity<Page<ViewRigaOrdineDto>> findAll(Pageable pageable) {
-		Page<ViewRigaOrdineDto> collModel = rigaOrdineMapper.map(rigaOrdineService.findAll(pageable));
-		return toResponseEntityPaged(collModel, null);
-	}
+  // API
+  /**
+   * {@code GET /riga-ordine} : Get all riga-ordine.
+   *
+   * @param pageable
+   * @return Page of all RigaOrdine.
+   */
+  @GetMapping
+  @Operation(summary = "Get all RigaOrdine")
+  @PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_SEARCH.toString())")
+  public ResponseEntity<Page<ViewRigaOrdineDto>> findAll(Pageable pageable) {
+    Page<ViewRigaOrdineDto> collModel = rigaOrdineMapper.map(rigaOrdineService.findAll(pageable));
+    return toResponseEntityPaged(collModel, null);
+  }
 
-	/**
-	 * {@code POST  /riga-ordine} : Create a new RigaOrdine.
-	 *
-	 * @param requestBody the RigaOrdine to create.
-	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
-	 *         body the new RigaOrdine, or with status {@code 400 (Bad Request)} if
-	 *         the requestBody is invalid.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
-	 */
-	@PostMapping
-	@Operation(summary = "Create a new RigaOrdine")
-	@PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_CREATE.toString())")
-	public ResponseEntity<ViewRigaOrdineDto> insert(@RequestBody @Valid EditRigaOrdineDto requestBody) {
-		RigaOrdine entity = rigaOrdineMapper.map(requestBody);
-		if (rigaOrdineService.findByObjectKey(entity.getObjectKey()).isPresent()) {
-			throw new ResourceAlreadyFoundException(RigaOrdine.class.getSimpleName(), entity.getObjectKey());
-		} else {
+  /**
+   * {@code POST /riga-ordine} : Create a new RigaOrdine.
+   *
+   * @param requestBody the RigaOrdine to create.
+   * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new
+   *     RigaOrdine, or with status {@code 400 (Bad Request)} if the requestBody is invalid.
+   * @throws URISyntaxException if the Location URI syntax is incorrect.
+   */
+  @PostMapping
+  @Operation(summary = "Create a new RigaOrdine")
+  @PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_CREATE.toString())")
+  public ResponseEntity<ViewRigaOrdineDto> insert(
+      @RequestBody @Valid EditRigaOrdineDto requestBody) {
+    RigaOrdine entity = rigaOrdineMapper.map(requestBody);
+    if (rigaOrdineService.findByObjectKey(entity.getObjectKey()).isPresent()) {
+      throw new ResourceAlreadyFoundException(
+          RigaOrdine.class.getSimpleName(), entity.getObjectKey());
+    } else {
 
-			entity = rigaOrdineService.insert(entity);
+      entity = rigaOrdineService.insert(entity);
 
-			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-					.buildAndExpand(entity.getTheRigaOrdineKey()).toUri();
-			ViewRigaOrdineDto dto = rigaOrdineMapper.map(entity);
-			return ResponseEntity.created(location).body(dto);
-		}
-	}
+      URI location =
+          ServletUriComponentsBuilder.fromCurrentRequest()
+              .path("/{id}")
+              .buildAndExpand(entity.getTheRigaOrdineKey())
+              .toUri();
+      ViewRigaOrdineDto dto = rigaOrdineMapper.map(entity);
+      return ResponseEntity.created(location).body(dto);
+    }
+  }
 
-	/**
-	 * {@code GET  /riga-ordine/:objectKey} : Get the riga-ordine with given
-	 * objectKey.
-	 *
-	 * @param objectKey the objectKey of the riga-ordine to retrieve.
-	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
-	 *         the riga-ordine, or with status {@code 404 (Not Found)}.
-	 */
-	@GetMapping("/{objectKey:.+}")
-	@Operation(summary = "Get the RigaOrdine with given objectKey")
-	@PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_READ.toString())")
-	public ResponseEntity<ViewRigaOrdineDto> read(@PathVariable String objectKey) {
-		Optional<RigaOrdine> opt = Optional.of(rigaOrdineService.findByObjectKey(objectKey)
-				.orElseThrow(() -> new ResourceNotFoundException(RigaOrdine.class.getSimpleName(), objectKey)));
-		return toResponseEntity(opt, null, HttpStatus.OK);
-	}
+  /**
+   * {@code GET /riga-ordine/:objectKey} : Get the riga-ordine with given objectKey.
+   *
+   * @param objectKey the objectKey of the riga-ordine to retrieve.
+   * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the riga-ordine,
+   *     or with status {@code 404 (Not Found)}.
+   */
+  @GetMapping("/{objectKey:.+}")
+  @Operation(summary = "Get the RigaOrdine with given objectKey")
+  @PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_READ.toString())")
+  public ResponseEntity<ViewRigaOrdineDto> read(@PathVariable String objectKey) {
+    Optional<RigaOrdine> opt =
+        Optional.of(
+            rigaOrdineService
+                .findByObjectKey(objectKey)
+                .orElseThrow(
+                    () ->
+                        new ResourceNotFoundException(
+                            RigaOrdine.class.getSimpleName(), objectKey)));
+    return toResponseEntity(opt, null, HttpStatus.OK);
+  }
 
-	/**
-	 * {@code PUT  /riga-ordine} : Updates an existing RigaOrdine.
-	 *
-	 * @param requestBody the RigaOrdine to update.
-	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
-	 *         the updated RigaOrdine, or with status {@code 400 (Bad Request)} if
-	 *         the requestBody is not valid, or with status
-	 *         {@code 500 (Internal Server Error)} if the RigaOrdine couldn't be
-	 *         updated.
-	 */
-	@PutMapping
-	@Operation(summary = "Update an existing RigaOrdine")
-	@PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_UPDATE.toString())")
-	public ResponseEntity<ViewRigaOrdineDto> update(@RequestBody @Valid EditRigaOrdineDto requestBody) {
-		RigaOrdine entity = rigaOrdineMapper.map(requestBody);
-		entity = rigaOrdineService.bulkUpdate(entity);
-		ViewRigaOrdineDto dto = rigaOrdineMapper.map(entity);
-		return ResponseEntity.ok(dto);
-	}
+  /**
+   * {@code PUT /riga-ordine} : Updates an existing RigaOrdine.
+   *
+   * @param requestBody the RigaOrdine to update.
+   * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated
+   *     RigaOrdine, or with status {@code 400 (Bad Request)} if the requestBody is not valid, or
+   *     with status {@code 500 (Internal Server Error)} if the RigaOrdine couldn't be updated.
+   */
+  @PutMapping
+  @Operation(summary = "Update an existing RigaOrdine")
+  @PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_UPDATE.toString())")
+  public ResponseEntity<ViewRigaOrdineDto> update(
+      @RequestBody @Valid EditRigaOrdineDto requestBody) {
+    RigaOrdine entity = rigaOrdineMapper.map(requestBody);
+    entity = rigaOrdineService.bulkUpdate(entity);
+    ViewRigaOrdineDto dto = rigaOrdineMapper.map(entity);
+    return ResponseEntity.ok(dto);
+  }
 
-	/**
-	 * {@code DELETE  /riga-ordine/:objectKey} : Delete the riga-ordine with given
-	 * objectKey.
-	 *
-	 * @param objectKey the objectKey of the RigaOrdine to delete.
-	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-	 */
-	@DeleteMapping("/{objectKey:.+}")
-	@Operation(summary = "Delete the RigaOrdine with given objectKey")
-	@PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_DELETE.toString())")
-	public ResponseEntity<ViewRigaOrdineDto> delete(@PathVariable String objectKey) {
-		Optional<RigaOrdine> opt = Optional.of(rigaOrdineService.delete(objectKey)
-				.orElseThrow(() -> new ResourceNotFoundException(RigaOrdine.class.getSimpleName(), objectKey)));
-		return toResponseEntity(opt, null, HttpStatus.OK);
-	}
+  /**
+   * {@code DELETE /riga-ordine/:objectKey} : Delete the riga-ordine with given objectKey.
+   *
+   * @param objectKey the objectKey of the RigaOrdine to delete.
+   * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+   */
+  @DeleteMapping("/{objectKey:.+}")
+  @Operation(summary = "Delete the RigaOrdine with given objectKey")
+  @PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_DELETE.toString())")
+  public ResponseEntity<ViewRigaOrdineDto> delete(@PathVariable String objectKey) {
+    Optional<RigaOrdine> opt =
+        Optional.of(
+            rigaOrdineService
+                .delete(objectKey)
+                .orElseThrow(
+                    () ->
+                        new ResourceNotFoundException(
+                            RigaOrdine.class.getSimpleName(), objectKey)));
+    return toResponseEntity(opt, null, HttpStatus.OK);
+  }
 
-	/**
-	 * {@code GET  /riga-ordine/search?filter=:query} : Get the riga-ordine filtered
-	 * by given query.
-	 *
-	 * @param query the query to execute filtering the RigaOrdine to retrieve.
-	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
-	 *         the riga-ordine.
-	 */
-	@GetMapping("/search")
-	@Operation(summary = "Get the RigaOrdine filtered by given query")
-	@PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_SEARCH.toString())")
-	public ResponseEntity<Page<ViewRigaOrdineDto>> search(@Filter Specification<RigaOrdine> specification,
-			Pageable page) {
-		Page<ViewRigaOrdineDto> collModel = rigaOrdineMapper.map(rigaOrdineService.search(specification, page));
-		return toResponseEntityPaged(collModel, null);
-	}
+  /**
+   * {@code GET /riga-ordine/search?filter=:query} : Get the riga-ordine filtered by given query.
+   *
+   * @param query the query to execute filtering the RigaOrdine to retrieve.
+   * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the riga-ordine.
+   */
+  @GetMapping("/search")
+  @Operation(summary = "Get the RigaOrdine filtered by given query")
+  @PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_SEARCH.toString())")
+  public ResponseEntity<Page<ViewRigaOrdineDto>> search(
+      @Filter Specification<RigaOrdine> specification, Pageable page) {
+    Page<ViewRigaOrdineDto> collModel =
+        rigaOrdineMapper.map(rigaOrdineService.search(specification, page));
+    return toResponseEntityPaged(collModel, null);
+  }
 
-	// PDF Report
-	/**
-	 * GET: /pdf/{objectKey:.+}: Print PDF for RigaOrdine by object key.
-	 * 
-	 * @param objectKey
-	 * @return PDF document or null.
-	 */
-	@ResponseBody
-	@GetMapping(value = "/pdf/{objectKey:.+}", produces = "application/pdf")
-	@Operation(summary = "Print PDF for RigaOrdine by object key")
-	@PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_REPORT.toString())")
-	public ResponseEntity<byte[]> printPdfReport(@PathVariable String objectKey) {
-		return super.genJasperReportPdf(rigaOrdineService.printPdfReport(objectKey));
-	}
+  // PDF Report
+  /**
+   * GET: /pdf/{objectKey:.+}: Print PDF for RigaOrdine by object key.
+   *
+   * @param objectKey
+   * @return PDF document or null.
+   */
+  @ResponseBody
+  @GetMapping(value = "/pdf/{objectKey:.+}", produces = "application/pdf")
+  @Operation(summary = "Print PDF for RigaOrdine by object key")
+  @PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_REPORT.toString())")
+  public ResponseEntity<byte[]> printPdfReport(@PathVariable String objectKey) {
+    return super.genJasperReportPdf(rigaOrdineService.printPdfReport(objectKey));
+  }
 
-	// Xls Report
-	/**
-	 * GET: /print/xlsx-list: Return the XLS list report for RigaOrdine filtered by
-	 * specification in input GET.
-	 * 
-	 * @param criteria
-	 * @return XLS document or null.
-	 */
-	@ResponseBody
-	@GetMapping(value = "/print/xlsx-list", produces = "application/vnd.ms-excel")
-	@Operation(summary = "Return the XLS list report for RigaOrdine filtered by criteria in input GET")
-	@PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_REPORT.toString())")
-	public void printXlsxList(@Filter Specification<RigaOrdine> specification, HttpServletResponse response) {
-		byte[] body = rigaOrdineService.printXLSList(specification);
-		prepareReportResponse("Elenco RigaOrdine.xlsx", body, response,
-				MediaType.parseMediaType("application/vnd.ms-excel"), "application/octet-stream");
-	}
+  // Xls Report
+  /**
+   * GET: /print/xlsx-list: Return the XLS list report for RigaOrdine filtered by specification in
+   * input GET.
+   *
+   * @param criteria
+   * @return XLS document or null.
+   */
+  @ResponseBody
+  @GetMapping(value = "/print/xlsx-list", produces = "application/vnd.ms-excel")
+  @Operation(
+      summary = "Return the XLS list report for RigaOrdine filtered by criteria in input GET")
+  @PreAuthorize("hasRole(@permissionHolder.RIGA_ORDINE_REPORT.toString())")
+  public void printXlsxList(
+      @Filter Specification<RigaOrdine> specification, HttpServletResponse response) {
+    byte[] body = rigaOrdineService.printXLSList(specification);
+    prepareReportResponse(
+        "Elenco RigaOrdine.xlsx",
+        body,
+        response,
+        MediaType.parseMediaType("application/vnd.ms-excel"),
+        "application/octet-stream");
+  }
 
-	/**
-	 * Returns a ResponseEntity containing a ViewRigaOrdineDto mapped by the
-	 * Optional<RigaOrdine>, header and status passed in input
-	 */
-	private ResponseEntity<ViewRigaOrdineDto> toResponseEntity(Optional<RigaOrdine> maybeResponse, HttpHeaders header,
-			HttpStatus status) {
-		return maybeResponse.map(response -> new ResponseEntity<>(rigaOrdineMapper.map(response), header, status))
-				.orElseGet(() -> ResponseEntity.notFound().build());
-	}
+  /**
+   * Returns a ResponseEntity containing a ViewRigaOrdineDto mapped by the Optional<RigaOrdine>,
+   * header and status passed in input
+   */
+  private ResponseEntity<ViewRigaOrdineDto> toResponseEntity(
+      Optional<RigaOrdine> maybeResponse, HttpHeaders header, HttpStatus status) {
+    return maybeResponse
+        .map(response -> new ResponseEntity<>(rigaOrdineMapper.map(response), header, status))
+        .orElseGet(() -> ResponseEntity.notFound().build());
+  }
 
-	/**
-	 * Returns a ResponseEntity containing a Page of the Object and header passed in
-	 * input
-	 */
-	private static <T> ResponseEntity<Page<T>> toResponseEntityPaged(Page<T> collModel, HttpHeaders header) {
-		return ResponseEntity.ok().headers(header).body(collModel);
-	}
+  /** Returns a ResponseEntity containing a Page of the Object and header passed in input */
+  private static <T> ResponseEntity<Page<T>> toResponseEntityPaged(
+      Page<T> collModel, HttpHeaders header) {
+    return ResponseEntity.ok().headers(header).body(collModel);
+  }
 }

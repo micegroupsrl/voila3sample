@@ -22,9 +22,9 @@ import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 export class TabRoleRoleChildViewComponent implements OnChanges {
     isLoading = false;
     totalRows = 0;
-    pageSize = 3;
+    pageSize = 5;
     currentPage = 0;
-    pageSizeOptions: number[] = [3, 6, 15, 60];
+    pageSizeOptions: number[] = [5, 10, 25, 100];
     searchRoleForm!: FormGroup;
     /**
      * filter intialization.

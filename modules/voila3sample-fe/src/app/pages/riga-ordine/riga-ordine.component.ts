@@ -44,13 +44,13 @@ export class RigaOrdineComponent implements OnInit {
      */
 
     displayedColumns: string[] = [
-        'quantita',
+        'qta',
         /**
          * Parent.
          */
-        'theProdotto.idProdotto',
+        'theOrdine.idOrdine',
 
-        'theOrdine.idOrdine'
+        'theProdotto.idProdotto'
     ];
     dataSource: MatTableDataSource<IRigaOrdine> = new MatTableDataSource();
     clickedRows = new Set<IRigaOrdine>();
@@ -59,9 +59,9 @@ export class RigaOrdineComponent implements OnInit {
 
     //Dati della form
     public dataForm = {
-        idProdotto: null,
         idOrdine: null,
-        quantita: null
+        idProdotto: null,
+        qta: null
     };
 
     /**

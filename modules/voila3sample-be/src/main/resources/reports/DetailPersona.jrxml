@@ -1,1 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Persona" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc83c049-73df-3d77-9f53-c3346fc98445">
+<template><![CDATA[$P{REPORT_DIR} + "/templates/default.jrtx"]]></template>
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+
+<queryString>
+  <![CDATA[]]>
+</queryString>
+
+<field name="nome" class="java.lang.String"/>
+<field name="cognome" class="java.lang.String"/>
+<field name="email" class="java.lang.String"/>
+<field name="telefono" class="java.lang.String"/>
+<field name="idPersona" class="java.lang.Integer"/>
+<field name="cf" class="java.lang.String"/>
+<field name="createdBy" class="java.lang.String"/>
+<field name="lastModifiedBy" class="java.lang.String"/>
+<field name="createdDate" class="java.time.LocalDateTime"/>
+<field name="lastModifiedDate" class="java.time.LocalDateTime"/>
+
+<background>
+  <band splitType="Stretch"/>
+</background>
+<title>
+  <band height="50" splitType="Stretch">
+    <image>
+      <reportElement style="ImageLeft" x="0" y="0" width="130" height="50" uuid="e760260b-73db-3b42-ae41-b45842f42177"/>
+      <imageExpression><![CDATA[$P{REPORT_DIR} + "/images/" + $R{jasperReports.logo}]]></imageExpression>
+    </image>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Title" x="130" y="0" width="295" height="30" uuid="3aaa2e22-423f-398b-9925-fc600379d558"/>
+      <textFieldExpression><![CDATA[$R{persona.jasperReports.title}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="SubTitle" x="130" y="30" width="295" height="20" uuid="d2e1909b-2b61-3e2e-9d49-f43b76efa66c"/>
+      <textFieldExpression><![CDATA[$R{persona.jasperReports.subTitle}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Date" x="425" y="0" width="130" height="50" uuid="0c601184-d158-3750-ab6b-241c2a418856"/>
+      <textFieldExpression><![CDATA[new SimpleDateFormat($R{jasperReports.date.format}).format(new Date())]]></textFieldExpression>
+    </textField>
+  </band>
+</title>
+<pageHeader>
+  <band height="30" splitType="Stretch"/>
+</pageHeader>
+<columnHeader>
+  <band height="20" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="TableHeader" x="0" y="0" width="555" height="20" uuid="bb1486d1-966c-33ca-aa4e-eb90361844ae"/>
+      <textFieldExpression><![CDATA[$R{persona.jasperReports.tableHeader}]]></textFieldExpression>
+    </textField>
+  </band>
+</columnHeader>
+<detail>
+  
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" />
+  <textFieldExpression><![CDATA[$R{persona.nome}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="5a4ba6aa-bfba-3b55-a68c-28654cd69387"/>
+    <textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+  </textField>
+  </band>
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" />
+  <textFieldExpression><![CDATA[$R{persona.cognome}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="097f96d5-ffe5-30de-ae2b-e7afa57e75e0"/>
+    <textFieldExpression><![CDATA[$F{cognome}]]></textFieldExpression>
+  </textField>
+  </band>
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" />
+  <textFieldExpression><![CDATA[$R{persona.email}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="c508c7bb-324e-39b1-b40b-017bde531006"/>
+    <textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+  </textField>
+  </band>
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" />
+  <textFieldExpression><![CDATA[$R{persona.telefono}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="1d2ab0e9-08db-3f6f-ae80-c603a41c7c5e"/>
+    <textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+  </textField>
+  </band>
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" />
+  <textFieldExpression><![CDATA[$R{persona.idPersona}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="c2cf6d74-dd4e-31a1-b263-9ef1334217b0"/>
+    <textFieldExpression><![CDATA[$F{idPersona}]]></textFieldExpression>
+  </textField>
+  </band>
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" />
+  <textFieldExpression><![CDATA[$R{persona.cf}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="41466c6a-0106-32d0-ad46-100005a6988a"/>
+    <textFieldExpression><![CDATA[$F{cf}]]></textFieldExpression>
+  </textField>
+  </band>
+  
+</detail>
+<columnFooter>
+  <band splitType="Stretch"/>
+</columnFooter>
+<pageFooter>
+  <band height="20" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Footer" x="0" y="0" width="480" height="20" uuid="f39a8f60-4d0f-337c-8318-e48e46310270"/>
+      <textFieldExpression><![CDATA[$R{jasperReports.footer.text}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" evaluationTime="Master" isBlankWhenNull="true">
+      <reportElement style="PageNumber" x="480" y="0" width="75" height="20" uuid="9e2e19e1-3fb0-364c-93c8-0ddca6730543"/>
+      <textFieldExpression><![CDATA[$R{jasperReports.pageNumber.label} + " " + $V{MASTER_CURRENT_PAGE} + " " + $R{jasperReports.pageNumber.separator} + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+    </textField>
+  </band>
+</pageFooter>
+<summary>
+  <band splitType="Stretch"/>
+</summary>
+</jasperReport>

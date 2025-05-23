@@ -1,0 +1,102 @@
+<div>
+    <mat-card class="mat-elevation-z8">
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Piva -->
+            <div *ngIf="fornitore?.piva">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Fornitore.piva' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ fornitore!.piva }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Nome -->
+            <div *ngIf="fornitore?.nome">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Fornitore.nome' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ fornitore!.nome }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Cognome -->
+            <div *ngIf="fornitore?.cognome">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Fornitore.cognome' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ fornitore!.cognome }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Email -->
+            <div *ngIf="fornitore?.email">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Fornitore.email' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ fornitore!.email }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Telefono -->
+            <div *ngIf="fornitore?.telefono">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Fornitore.telefono' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ fornitore!.telefono }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Id Persona -->
+            <div *ngIf="fornitore?.idPersona">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <div fxLayout="column" fxFlex="30">
+                        <!-- Label -->
+                        <label>ID</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ fornitore!.idPersona }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Cf -->
+            <div *ngIf="fornitore?.cf">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <div fxLayout="column" fxFlex="30">
+                        <!-- Label -->
+                        <label>{{ 'voila3sample.detail.Fornitore.cf' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ fornitore!.cf }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tabs fornitore -->
+            <app-tabs-fornitore [formGroup]="fornitoreForm" [entity]="fornitore" [pageStatus]="pageStatus"></app-tabs-fornitore>
+        </mat-card-content>
+    </mat-card>
+</div>

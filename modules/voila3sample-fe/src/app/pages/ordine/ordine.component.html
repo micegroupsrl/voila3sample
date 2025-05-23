@@ -9,8 +9,8 @@
                 <mat-card-title>{{ 'voila3sample.detail.Ordine.label' | translate }}</mat-card-title>
                 <!-- Quick Filter -->
                 <form class="quick" name="searchOrdineForm" [formGroup]="searchOrdineForm" (keyup)="onUp()" fxLayout="column" fxLayoutGap="20" fxFlex>
-                    <!-- Full Text Search based on Created By -->
-                    <rsd-input-text formControlName="createdBy" iconSuffix="search"></rsd-input-text>
+                    <!-- Full Text Search based on Descrizione -->
+                    <rsd-input-text formControlName="descrizione" iconSuffix="search"></rsd-input-text>
                 </form>
                 <!-- Search Dialog Button -->
                 <button mat-icon-button (click)="openDialogResid()" matTooltip="Ricerca Avanzata con Resid" [color]="filters === '' ? 'basic' : 'warn'">
@@ -34,15 +34,25 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.idOrdine' | translate }}</th>
                         <td mat-cell *matCellDef="let ordine">{{ ordine.idOrdine }}</td>
                     </ng-container>
-                    <!-- Data Ordine -->
-                    <ng-container matColumnDef="dataOrdine">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.dataOrdine' | translate }}</th>
-                        <td mat-cell *matCellDef="let ordine">{{ ordine.dataOrdine | date: 'dd/MM/yyyy' }}</td>
+                    <!-- Descrizione -->
+                    <ng-container matColumnDef="descrizione">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.descrizione' | translate }}</th>
+                        <td mat-cell *matCellDef="let ordine">{{ ordine.descrizione }}</td>
                     </ng-container>
-                    <!-- Tempo Ordine -->
-                    <ng-container matColumnDef="tempoOrdine">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.tempoOrdine' | translate }}</th>
-                        <td mat-cell *matCellDef="let ordine">{{ ordine.tempoOrdine }}</td>
+                    <!-- Datetime -->
+                    <ng-container matColumnDef="datetime">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.datetime' | translate }}</th>
+                        <td mat-cell *matCellDef="let ordine">{{ ordine.datetime | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                    </ng-container>
+                    <!-- Date -->
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.date' | translate }}</th>
+                        <td mat-cell *matCellDef="let ordine">{{ ordine.date | date: 'dd/MM/yyyy' }}</td>
+                    </ng-container>
+                    <!-- Time -->
+                    <ng-container matColumnDef="time">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.time' | translate }}</th>
+                        <td mat-cell *matCellDef="let ordine">{{ ordine.time }}</td>
                     </ng-container>
                     <!-- Created By -->
                     <ng-container matColumnDef="createdBy">
@@ -64,15 +74,20 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.lastModifiedDate' | translate }}</th>
                         <td mat-cell *matCellDef="let ordine">{{ ordine.lastModifiedDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
                     </ng-container>
+                    <!-- Stato Ordine-->
+                    <ng-container matColumnDef="theStatoOrdine.idStatoOrdine">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.theStatoOrdineObjectKey' | translate }}</th>
+                        <td mat-cell *matCellDef="let ordine">{{ ordine.theStatoOrdineObjectTitle }}</td>
+                    </ng-container>
+                    <!-- Tipo Ordine-->
+                    <ng-container matColumnDef="theTipoOrdine.TheTipoOrdineKey">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.theTipoOrdineObjectKey' | translate }}</th>
+                        <td mat-cell *matCellDef="let ordine">{{ ordine.theTipoOrdineObjectTitle }}</td>
+                    </ng-container>
                     <!-- Cliente-->
                     <ng-container matColumnDef="theCliente.ThePersonaKey">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.theClienteObjectKey' | translate }}</th>
                         <td mat-cell *matCellDef="let ordine">{{ ordine.theClienteObjectTitle }}</td>
-                    </ng-container>
-                    <!-- Tipo Ordine-->
-                    <ng-container matColumnDef="theTipoOrdine.TheOrdine.idOrdine">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Ordine.theTipoOrdineObjectKey' | translate }}</th>
-                        <td mat-cell *matCellDef="let ordine">{{ ordine.theTipoOrdineObjectTitle }}</td>
                     </ng-container>
                     <!-- Ordine Aggregato-->
                     <ng-container matColumnDef="theOrdineAggregato.idOrdine">

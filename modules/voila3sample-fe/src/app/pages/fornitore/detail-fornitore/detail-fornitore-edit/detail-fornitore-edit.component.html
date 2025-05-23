@@ -1,0 +1,87 @@
+<div>
+    <!--Form-->
+    <form [formGroup]="fornitoreForm">
+        <mat-card class="mat-elevation-z8">
+            <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
+                <!--Id Persona-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <!--In new mode show the ID as required field-->
+                        <label *ngIf="pageStatus | hasPageStatus: 'new'">ID*</label>
+                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">ID</label>
+                    </div>
+                    <rsd-input-number formControlName="idPersona"></rsd-input-number>
+                </div>
+                <!--End Id Persona-->
+                <!--Cf-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <!--In new mode show cf as required field-->
+                        <label *ngIf="pageStatus | hasPageStatus: 'new'">{{ 'voila3sample.detail.Fornitore.cf' | translate }}*</label>
+                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">{{ 'voila3sample.detail.Fornitore.cf' | translate }}</label>
+                    </div>
+                    <rsd-input-text formControlName="cf"></rsd-input-text>
+                </div>
+                <!--End Cf-->
+
+                <!--Piva-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Fornitore.piva' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="piva"></rsd-input-text>
+                </div>
+                <!--End Piva-->
+                <!--Nome-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Fornitore.nome' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="nome"></rsd-input-text>
+                </div>
+                <!--End Nome-->
+                <!--Cognome-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Fornitore.cognome' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="cognome"></rsd-input-text>
+                </div>
+                <!--End Cognome-->
+                <!--Email-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Fornitore.email' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="email"></rsd-input-text>
+                </div>
+                <!--End Email-->
+                <!--Telefono-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Fornitore.telefono' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="telefono"></rsd-input-text>
+                </div>
+                <!--End Telefono-->
+
+                <!--Tabs fornitore -->
+                <div class="tabs">
+                    <app-tabs-fornitore [formGroup]="fornitoreForm" [entity]="fornitore" [pageStatus]="pageStatus"></app-tabs-fornitore>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

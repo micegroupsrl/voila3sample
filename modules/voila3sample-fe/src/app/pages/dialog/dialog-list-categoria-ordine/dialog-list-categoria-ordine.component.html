@@ -16,12 +16,12 @@
             <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
             <!-- Tabella tipo CategoriaOrdine -->
             <table aria-label="categoriaOrdine's table" mat-table [dataSource]="dataSource" matSort>
-                <!-- Id Categoria Ordine -->
-                <ng-container matColumnDef="idCategoriaOrdine">
+                <!-- Id Cat Ordine -->
+                <ng-container matColumnDef="idCatOrdine">
                     <!-- Cell Header -->
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Id Categoria Ordine</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Id Cat Ordine</th>
                     <!-- Cell Body-->
-                    <td mat-cell *matCellDef="let categoriaOrdine">{{ categoriaOrdine.idCategoriaOrdine }}</td>
+                    <td mat-cell *matCellDef="let categoriaOrdine">{{ categoriaOrdine.idCatOrdine }}</td>
                 </ng-container>
                 <th mat-header-row *matHeaderRowDef="displayedColumns"></th>
                 <tr mat-row [mat-dialog-close]="row" *matRowDef="let row; columns: displayedColumns"></tr>

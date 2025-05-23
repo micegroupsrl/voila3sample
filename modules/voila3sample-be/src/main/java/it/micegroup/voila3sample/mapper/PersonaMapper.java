@@ -1,44 +1,1 @@
-package it.micegroup.voila3sample.mapper;
-
-import it.micegroup.voila3sample.dto.EditPersonaDto;
-import it.micegroup.voila3sample.dto.ViewPersonaDto;
-import it.micegroup.voila3sample.domain.primary.Persona;
-import org.mapstruct.AfterMapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.springframework.data.domain.Page;
-import java.util.Optional;
-
-/**
- * Interface used to map DTO Classes to Entity Classes. Usefull to manage object
- * transfered through this application.
- */
-@Mapper
-public interface PersonaMapper {
-	/**
-	 * Maps an EditPersonaDto to an entity getEntityClassName(aClass)/]
-	 */
-
-	@Mapping(source = "entityState", target = "entityState")
-	Persona map(EditPersonaDto personaDto);
-
-	/**
-	 * Maps an entity Persona to a ViewPersonaDto
-	 */
-	ViewPersonaDto map(Persona persona);
-
-	/**
-	 * Maps a Page<Persona> to a Page<ViewPersonaDto>
-	 */
-	default Page<ViewPersonaDto> map(Page<Persona> page) {
-		return page.map(this::map);
-	}
-
-	/*
-	 * Maps an Optional<Persona> to an Optional<ViewPersonaDto>
-	 */
-	default Optional<ViewPersonaDto> map(Optional<Persona> read) {
-		return read.map(this::map);
-	}
-}
+package it.micegroup.voila3sample.mapper;import it.micegroup.voila3sample.dto.EditPersonaDto;import it.micegroup.voila3sample.dto.ViewPersonaDto;import it.micegroup.voila3sample.domain.primary.Persona;import org.mapstruct.AfterMapping;import org.mapstruct.MappingTarget;import org.mapstruct.Mapper;import org.mapstruct.Mapping;import org.springframework.data.domain.Page;import java.util.Optional;/** * Interface used to map DTO Classes to Entity Classes. Usefull to manage object transfered through * this application. */@Mapperpublic interface PersonaMapper {  /** Maps an EditPersonaDto to an entity getEntityClassName(aClass)/] */  @Mapping(source = "entityState", target = "entityState")  Persona map(EditPersonaDto personaDto);  /** Maps an entity Persona to a ViewPersonaDto */  ViewPersonaDto map(Persona persona);  /** Maps a Page<Persona> to a Page<ViewPersonaDto> */  default Page<ViewPersonaDto> map(Page<Persona> page) {    return page.map(this::map);  }  /*   * Maps an Optional<Persona> to an Optional<ViewPersonaDto>   */  default Optional<ViewPersonaDto> map(Optional<Persona> read) {    return read.map(this::map);  }}

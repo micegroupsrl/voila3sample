@@ -1,4 +1,4 @@
-# Voila3 Sample
+# Training Card
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin http://devops.micegroup.it/gitlab/voila3/voila3-sample.git
+git remote add origin http://devops.micegroup.it/gitlab/voila3/training-card.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](http://devops.micegroup.it/gitlab/voila3/voila3-sample/-/settings/integrations)
+- [ ] [Set up project integrations](http://devops.micegroup.it/gitlab/voila3/training-card/-/settings/integrations)
 
 ## Collaborate with your team
 

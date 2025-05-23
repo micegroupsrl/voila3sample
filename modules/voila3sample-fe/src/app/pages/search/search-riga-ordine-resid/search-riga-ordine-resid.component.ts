@@ -5,9 +5,9 @@ import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 
 import { RigaOrdineGroupApiService } from 'src/app/pages/services/services-riga-ordine/riga-ordine-group-api.service';
 
-import { IProdotto } from 'src/app/pages/interfaces/prodotto.interface';
-
 import { IOrdine } from 'src/app/pages/interfaces/ordine.interface';
+
+import { IProdotto } from 'src/app/pages/interfaces/prodotto.interface';
 
 import { getListForDropdowns } from 'src/app/shared/base/base.helper';
 import { BaseSearchComponent } from 'src/app/shared/base/base-search.component';
@@ -20,8 +20,8 @@ import { BaseSearchComponent } from 'src/app/shared/base/base-search.component';
 export class SearchRigaOrdineResidComponent extends BaseSearchComponent implements OnInit {
     searchRigaOrdineForm!: FormGroup;
 
-    public prodottoList: IProdotto[] = [];
     public ordineList: IOrdine[] = [];
+    public prodottoList: IProdotto[] = [];
     constructor(
         public dialogRef: MatDialogRef<SearchRigaOrdineResidComponent>,
         private rigaOrdineGroupApiService: RigaOrdineGroupApiService,
@@ -33,27 +33,27 @@ export class SearchRigaOrdineResidComponent extends BaseSearchComponent implemen
 
     ngOnInit(): void {
         this.searchRigaOrdineForm = this.fb.group({
-            idProdottoDa: [],
-            idProdottoA: [],
             idOrdineDa: [],
             idOrdineA: [],
-            quantitaDa: [],
-            quantitaA: [],
+            idProdottoDa: [],
+            idProdottoA: [],
+            qtaDa: [],
+            qtaA: [],
 
-            idProdotto: [],
-            idOrdine: []
+            idOrdine: [],
+            idProdotto: []
         });
         this.getParentsList();
 
         const formValues = {
-            idProdottoDa: this.data.idProdottoDa,
-            idProdottoA: this.data.idProdottoA,
             idOrdineDa: this.data.idOrdineDa,
             idOrdineA: this.data.idOrdineA,
-            quantitaDa: this.data.quantitaDa,
-            quantitaA: this.data.quantitaA,
-            idProdotto: this.data.idProdotto,
-            idOrdine: this.data.idOrdine
+            idProdottoDa: this.data.idProdottoDa,
+            idProdottoA: this.data.idProdottoA,
+            qtaDa: this.data.qtaDa,
+            qtaA: this.data.qtaA,
+            idOrdine: this.data.idOrdine,
+            idProdotto: this.data.idProdotto
         };
 
         this.searchRigaOrdineForm.patchValue(formValues);
@@ -70,11 +70,11 @@ export class SearchRigaOrdineResidComponent extends BaseSearchComponent implemen
         if (searchRigaOrdine) {
             filterBuild = filterBuild
 
-                .andBetween('rigaOrdineKey.idProdotto', searchRigaOrdine.idProdottoDa, searchRigaOrdine.idProdottoA)
                 .andBetween('rigaOrdineKey.idOrdine', searchRigaOrdine.idOrdineDa, searchRigaOrdine.idOrdineA)
-                .andBetween('quantita', searchRigaOrdine.quantitaDa, searchRigaOrdine.quantitaA)
-                .andEquals('theProdotto.idProdotto', searchRigaOrdine.idProdotto)
-                .andEquals('theOrdine.idOrdine', searchRigaOrdine.idOrdine);
+                .andBetween('rigaOrdineKey.idProdotto', searchRigaOrdine.idProdottoDa, searchRigaOrdine.idProdottoA)
+                .andBetween('qta', searchRigaOrdine.qtaDa, searchRigaOrdine.qtaA)
+                .andEquals('theOrdine.idOrdine', searchRigaOrdine.idOrdine)
+                .andEquals('theProdotto.idProdotto', searchRigaOrdine.idProdotto);
         }
         return filterBuild.value();
     }
@@ -103,20 +103,20 @@ export class SearchRigaOrdineResidComponent extends BaseSearchComponent implemen
 
         this.dialogRef.close(result);
     }
-    public getProdottoList(): void {
-        this.rigaOrdineGroupApiService.prodotto.getProdottoByCriteria().subscribe(data => {
-            this.prodottoList = getListForDropdowns(data);
-        });
-    }
     public getOrdineList(): void {
         this.rigaOrdineGroupApiService.ordine.getOrdineByCriteria().subscribe(data => {
             this.ordineList = getListForDropdowns(data);
         });
     }
+    public getProdottoList(): void {
+        this.rigaOrdineGroupApiService.prodotto.getProdottoByCriteria().subscribe(data => {
+            this.prodottoList = getListForDropdowns(data);
+        });
+    }
 
     private getParentsList(): void {
-        this.getProdottoList();
-
         this.getOrdineList();
+
+        this.getProdottoList();
     }
 }

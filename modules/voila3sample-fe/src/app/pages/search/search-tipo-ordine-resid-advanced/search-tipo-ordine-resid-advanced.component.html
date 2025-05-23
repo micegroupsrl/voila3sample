@@ -54,9 +54,6 @@
                         </div>
                         <div fxLayout="row" fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutAlign.xs="center stretch" fxLayoutGap="10" fxFlex="grow">
                             <div *ngIf="filter.get('value')" class="padding-top-bottom-5" fxLayout.xs="column" fxFlex="grow">
-                                <!-- Input text -->
-                                <rsd-input-text *ngIf="getTypeSelected(i).type == 'string'" formControlName="value" label="{{ 'buttons.value' | translate }}"></rsd-input-text>
-
                                 <!-- Input number -->
                                 <rsd-input-number *ngIf="getTypeSelected(i).type == 'number'" formControlName="value" label="{{ 'buttons.value' | translate }}"></rsd-input-number>
 

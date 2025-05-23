@@ -1,0 +1,17 @@
+<!-- All the tabs of Fornitore -->
+
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" #tabgroup>
+    <!-- theProdotto -->
+    <mat-tab label="Prodotto">
+        <!-- View -->
+        <app-tab-prodotto-view [entity]="entity" *ngIf="pageStatus | hasPageStatus: 'view'"></app-tab-prodotto-view>
+        <!-- Edit -->
+        <app-tab-prodotto-edit-fe
+            [formGroup]="formGroup"
+            [entity]="entity"
+            [tab]="activeTab"
+            *ngIf="pageStatus | hasPageStatus: ['new', 'edit']"
+            #tabeditprodotto
+        ></app-tab-prodotto-edit-fe>
+    </mat-tab>
+</mat-tab-group>

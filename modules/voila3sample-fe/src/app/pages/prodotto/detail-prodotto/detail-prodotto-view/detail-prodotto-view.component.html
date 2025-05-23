@@ -2,16 +2,16 @@
     <mat-card class="mat-elevation-z8">
         <!-- Card Body -->
         <mat-card-content class="overflow" autosize>
-            <!-- Nome Prodotto -->
-            <div *ngIf="prodotto?.nomeProdotto">
+            <!-- Descrizione -->
+            <div *ngIf="prodotto?.descrizione">
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
                     <!-- Label -->
                     <div fxLayout="column" fxFlex="30">
-                        <label>{{ 'voila3sample.detail.Prodotto.nomeProdotto' | translate }}</label>
+                        <label>{{ 'voila3sample.detail.Prodotto.descrizione' | translate }}</label>
                     </div>
                     <!-- Value -->
                     <div fxLayout="column">
-                        <strong>{{ prodotto!.nomeProdotto }}</strong>
+                        <strong>{{ prodotto!.descrizione }}</strong>
                     </div>
                 </div>
             </div>
@@ -26,6 +26,19 @@
                     <!-- Value -->
                     <div fxLayout="column">
                         <strong>{{ prodotto!.idProdotto }}</strong>
+                    </div>
+                </div>
+            </div>
+            <!-- Fornitore -->
+            <div *ngIf="prodotto?.theFornitoreObjectKey">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.Prodotto.theFornitoreObjectKey' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ prodotto!.theFornitoreObjectTitle }}</strong>
                     </div>
                 </div>
             </div>

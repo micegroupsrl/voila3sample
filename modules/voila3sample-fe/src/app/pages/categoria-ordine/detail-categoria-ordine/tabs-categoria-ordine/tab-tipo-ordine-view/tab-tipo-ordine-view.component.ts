@@ -22,17 +22,16 @@ import { setOptions } from 'src/app/utilities/function/helper';
 export class TabTipoOrdineViewComponent implements OnChanges {
     isLoading = false;
     totalRows = 0;
-    pageSize = 3;
+    pageSize = 5;
     currentPage = 0;
-    pageSizeOptions: number[] = [3, 6, 15, 60];
+    pageSizeOptions: number[] = [5, 10, 25, 100];
 
     /**
      * Columns displayed in the tab.
      */
     displayedColumns: string[] = [
-        'theTipoOrdineKey.idTipoOrdine',
-        'theTipoOrdineKey.annoTipologia',
-        'nomeOrdine'
+        'theTipoOrdineKey.anno',
+        'theTipoOrdineKey.idTipoOrdine'
         /**
          * Key for CategoriaOrdine.
          */

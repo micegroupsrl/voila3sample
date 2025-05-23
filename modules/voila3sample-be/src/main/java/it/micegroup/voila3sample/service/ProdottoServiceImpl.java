@@ -35,7 +35,16 @@ import lombok.extern.slf4j.Slf4j;
 
 import it.micegroup.voila3sample.domain.primary.Prodotto;
 
+import it.micegroup.voila3sample.domain.primary.Fornitore;
+
 import it.micegroup.voila3sample.repository.primary.ProdottoRepository;
+
+import it.micegroup.voila3sample.domain.primary.Ordine;
+import it.micegroup.voila3sample.repository.primary.OrdineRepository;
+
+import it.micegroup.voila3sample.domain.primary.PersonaKey;
+import it.micegroup.voila3sample.repository.primary.FornitoreRepository;
+import org.apache.commons.lang3.StringUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -52,212 +61,254 @@ import it.micegroup.voila2runtime.utils.AclUtils;
 @Service
 public class ProdottoServiceImpl extends BaseServiceImpl implements ProdottoService {
 
-	private static final String LIST_PRODOTTO = "ListProdotto";
-	private static final String DETAIL_PRODOTTO = "DetailProdotto";
+  private static final String LIST_PRODOTTO = "ListProdotto";
+  private static final String DETAIL_PRODOTTO = "DetailProdotto";
 
-	private final ProdottoRepository prodottoRepository;
-	// CHILD SERVICES
-	private final RigaOrdineService rigaOrdineService;
-	private final AclService aclService;
+  private final ProdottoRepository prodottoRepository;
 
-	/**
-	 * Return a Page of entities of a given Prodotto
-	 *
-	 * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
-	 *
-	 * @param pageable Pagination object
-	 * @return Return a Page of entities of a given Prodotto
-	 */
-	@Override
-	@Transactional(readOnly = true)
-	public Page<Prodotto> findAll(Pageable pageable) {
-		return prodottoRepository.findAll(pageable);
-	}
+  private final OrdineRepository ordineRepository;
+  private final FornitoreRepository fornitoreRepository;
 
-	/**
-	 * Return all entities of a given Prodotto
-	 *
-	 * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
-	 *
-	 * @return Return all entities of a given Prodotto
-	 */
-	@Override
-	@Transactional(readOnly = true)
-	public List<Prodotto> findAll() {
-		return prodottoRepository.findAll();
-	}
+  // CHILD SERVICES
+  private final RigaOrdineService rigaOrdineService;
+  private final AclService aclService;
 
-	/**
-	 * Return the entity found by its objectKey
-	 *
-	 * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
-	 *
-	 * @param objectKey of entity to find
-	 * @return Return the entity found by its objectKey
-	 */
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<Prodotto> findByObjectKey(String objectKey) {
-		Prodotto prodotto = new Prodotto(objectKey);
-		return prodottoRepository.findByIdProdotto(prodotto.getIdProdotto());
-	}
+  /**
+   * Return a Page of entities of a given Prodotto
+   *
+   * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
+   * @param pageable Pagination object
+   * @return Return a Page of entities of a given Prodotto
+   */
+  @Override
+  @Transactional(readOnly = true)
+  public Page<Prodotto> findAll(Pageable pageable) {
+    return prodottoRepository.findAll(pageable);
+  }
 
-	/**
-	 * Check if id with given id exists
-	 *
-	 * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
-	 *
-	 * @param id of entity to check
-	 * @return true if exists
-	 */
-	@Override
-	@Transactional(readOnly = true)
-	public boolean exists(Integer id) {
-		return prodottoRepository.existsById(id);
-	}
+  /**
+   * Return all entities of a given Prodotto
+   *
+   * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
+   * @return Return all entities of a given Prodotto
+   */
+  @Override
+  @Transactional(readOnly = true)
+  public List<Prodotto> findAll() {
+    return prodottoRepository.findAll();
+  }
 
-	/**
-	 * Persiste the given entity
-	 *
-	 * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
-	 *
-	 * @param entity to insert
-	 * @return entity saved
-	 */
-	@Override
-	@Transactional
-	public Prodotto insert(@Valid Prodotto entity) {
-		return prodottoRepository.save(entity);
-	}
+  /**
+   * Return the entity found by its objectKey
+   *
+   * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
+   * @param objectKey of entity to find
+   * @return Return the entity found by its objectKey
+   */
+  @Override
+  @Transactional(readOnly = true)
+  public Optional<Prodotto> findByObjectKey(String objectKey) {
+    Prodotto prodotto = new Prodotto(objectKey);
+    return prodottoRepository.findByIdProdotto(prodotto.getIdProdotto());
+  }
 
-	/**
-	 * Update the given entity
-	 *
-	 * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
-	 *
-	 * @param entity : to updated
-	 * @return entity saved
-	 */
-	@Override
-	@Transactional
-	public Prodotto update(@Valid Prodotto entity) {
-		return prodottoRepository.save(entity);
-	}
+  /**
+   * Check if id with given id exists
+   *
+   * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
+   * @param id of entity to check
+   * @return true if exists
+   */
+  @Override
+  @Transactional(readOnly = true)
+  public boolean exists(Integer id) {
+    return prodottoRepository.existsById(id);
+  }
 
-	/**
-	 * Delete an entity by its objectkey and returns the deleted Prodotto, if it was
-	 * present
-	 * 
-	 * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
-	 * @param objectKey of entity to delete
-	 */
-	@Override
-	@Transactional
-	public Optional<Prodotto> delete(String objectKey) {
-		return findByObjectKey(objectKey).map(prodotto -> {
-			prodottoRepository.delete(prodotto);
-			return Optional.of(prodotto);
-		}).orElseGet(Optional::empty);
-	}
+  @Override
+  @Transactional
+  public Prodotto insert(@Valid Prodotto entity) {
+    // --- Inizio Blocco Risoluzione Referenze ---
+    // 1. Risolvi Riferimenti ai Genitori (ManyToOne, OneToOne where aClass is dependent)
+    // Risolvi riferimento a Fornitore
+    if (entity.getTheFornitore() != null) {
+      PersonaKey parentId = entity.getTheFornitore().getThePersonaKey();
+      try {
+        Fornitore parentRef = fornitoreRepository.getReferenceById(parentId);
+        entity.setTheFornitore(parentRef);
+      } catch (jakarta.persistence.EntityNotFoundException e) {
+        throw new jakarta.persistence.EntityNotFoundException(
+            "Fornitore referenziato non trovato con ID/key: " + parentId, e);
+      }
+    }
+    // 2. Risolvi Riferimenti *DENTRO* le Entità Figlie (OneToMany, OneToOne where aClass is
+    // principal)
+    // Itera sulla collezione di figli RigaOrdine
+    if (entity.getTheRigaOrdine() != null) {
+      for (RigaOrdine childEntity : entity.getTheRigaOrdine()) {
+        // Assicura riferimento bidirezionale (Figlio -> Padre)
+        childEntity.setTheProdotto(entity);
+        // Ora, risolvi i *genitori* del figlio (ESCLUSO il riferimento a 'entity' stessa)
+        // Risolvi riferimento a Ordine dentro RigaOrdine
+        if (childEntity.getTheOrdine() != null) {
+          if (childEntity.getTheOrdine().getIdOrdine() != null) {
+            Integer childsParentId = childEntity.getTheOrdine().getIdOrdine();
+            try {
+              Ordine childsParentRef = ordineRepository.getReferenceById(childsParentId);
+              childEntity.setTheOrdine(childsParentRef);
+            } catch (jakarta.persistence.EntityNotFoundException e) {
+              throw new jakarta.persistence.EntityNotFoundException(
+                  "Ordine referenziato dentro RigaOrdine non trovato con ID/key: " + childsParentId,
+                  e);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Riferimento Ordine in RigaOrdine presente ma senza ID valido.");
+          }
+        } // Fine if (childEntity.getTheOrdine() != null)
+      } // Fine for (childEntity : collection)
+    } // Fine if (collection != null)
+    // --- Fine Blocco Risoluzione Referenze ---
+    // 3. Persisti l'entità (ora con riferimenti gestiti)
+    return prodottoRepository.save(entity);
+  }
 
-	/**
-	 * Returns the Page of the Prodotto following the specification in input
-	 * 
-	 * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
-	 * @param specification to use to filter Prodotto
-	 * @param pageable
-	 */
-	@Override
-	@Transactional(readOnly = true)
-	public Page<Prodotto> search(Specification<Prodotto> specification, Pageable pageable) {
-		specification = aclService.applyAcl(specification, "prodotto.search");
-		return prodottoRepository.findAll(specification, pageable);
-	}
+  /**
+   * Update the given entity
+   *
+   * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
+   * @param entity : to updated
+   * @return entity saved
+   */
+  @Override
+  @Transactional
+  public Prodotto update(@Valid Prodotto entity) {
+    return prodottoRepository.save(entity);
+  }
 
-	/**
-	 * Delete an entity by its id
-	 *
-	 * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
-	 *
-	 * @param id of entity to delete
-	 */
-	@Override
-	@Transactional
-	public void deleteById(Integer id) {
-		prodottoRepository.deleteById(id);
-	}
+  /**
+   * Delete an entity by its objectkey and returns the deleted Prodotto, if it was present
+   *
+   * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
+   * @param objectKey of entity to delete
+   */
+  @Override
+  @Transactional
+  public Optional<Prodotto> delete(String objectKey) {
+    return findByObjectKey(objectKey)
+        .map(
+            prodotto -> {
+              prodottoRepository.delete(prodotto);
+              return Optional.of(prodotto);
+            })
+        .orElseGet(Optional::empty);
+  }
 
-	/**
-	 * Executes the bulk update of a Prodotto
-	 * 
-	 * @param prodotto
-	 * @return updated Prodotto
-	 */
-	@Override
-	@Transactional
-	public Prodotto bulkUpdate(Prodotto prodotto) {
-		if (prodotto.getTheRigaOrdine() != null) {
-			List<RigaOrdine> updateTheRigaOrdine = prodotto.getTheRigaOrdine().stream()
-					.filter(child -> !child.isDeletedEntityState()).collect(Collectors.toList());
-			List<RigaOrdine> deleteTheRigaOrdine = prodotto.getTheRigaOrdine().stream()
-					.filter(GenericEntity::isDeletedEntityState).collect(Collectors.toList());
-			prodotto.setTheRigaOrdine(updateTheRigaOrdine);
-			deleteTheRigaOrdine.forEach(child -> rigaOrdineService.deleteById(child.getTheRigaOrdineKey()));
-		}
-		return this.update(prodotto);
-	}
+  /**
+   * Returns the Page of the Prodotto following the specification in input
+   *
+   * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
+   * @param specification to use to filter Prodotto
+   * @param pageable
+   */
+  @Override
+  @Transactional(readOnly = true)
+  public Page<Prodotto> search(Specification<Prodotto> specification, Pageable pageable) {
+    specification = aclService.applyAcl(specification, "prodotto.search");
+    return prodottoRepository.findAll(specification, pageable);
+  }
 
-	@Transactional(readOnly = true)
-	public JasperPrint getJasperPrint(String reportName, Collection<?> collection) throws BusinessException {
-		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(collection);
-		Map<String, Object> parameters = new HashMap<>();
-		// Adds to the collection the compiled master report dependency (for subreport)
-		// and return the compiled master report.
-		List<String> fileNames = Arrays.asList(reportName, "ListRigaOrdineForProdotto");
-		JasperReport report = prepareJasperReport(reportName, parameters, fileNames);
-		// Add report dir.
-		parameters.put("REPORT_DIR", super.jasperReportsDir);
-		// Add locale.
-		Locale locale = LocaleContextHolder.getLocale();
-		parameters.put(JRParameter.REPORT_LOCALE, locale);
-		// Add resource boundle.
-		ResourceBundle resourceBoundle = ResourceBundle.getBundle("applicationResources", locale);
-		parameters.put(JRParameter.REPORT_RESOURCE_BUNDLE, resourceBoundle);
-		// return PDF document.
-		JasperPrint jasperPrint = null;
-		try {
-			return JasperFillManager.fillReport(report, parameters, dataSource);
-		} catch (JRException e) {
-			log.error(LOG_ERROR, e);
-		}
-		return jasperPrint;
-	}
+  /**
+   * Delete an entity by its id
+   *
+   * @author Vittorio Niespolo vittorio.niespolo@micegroup.it
+   * @param id of entity to delete
+   */
+  @Override
+  @Transactional
+  public void deleteById(Integer id) {
+    prodottoRepository.deleteById(id);
+  }
 
-	@Transactional(readOnly = true)
-	public byte[] printPdfReport(String objectKey) {
-		Collection<Prodotto> prodottoCollection = new ArrayList<>();
-		Optional<Prodotto> optionalProdotto = findByObjectKey(objectKey);
-		if (optionalProdotto.isPresent()) {
-			Prodotto prodotto = optionalProdotto.get();
-			prodottoCollection.add(prodotto);
-			try {
-				return JasperExportManager.exportReportToPdf(getJasperPrint(DETAIL_PRODOTTO, prodottoCollection));
-			} catch (JRException e) {
-				log.error(LOG_ERROR, e);
-			}
-		}
-		return new byte[0];
-	}
+  /**
+   * Executes the bulk update of a Prodotto
+   *
+   * @param prodotto
+   * @return updated Prodotto
+   */
+  @Override
+  @Transactional
+  public Prodotto bulkUpdate(Prodotto prodotto) {
+    if (prodotto.getTheRigaOrdine() != null) {
+      List<RigaOrdine> updateTheRigaOrdine =
+          prodotto.getTheRigaOrdine().stream()
+              .filter(child -> !child.isDeletedEntityState())
+              .collect(Collectors.toList());
+      List<RigaOrdine> deleteTheRigaOrdine =
+          prodotto.getTheRigaOrdine().stream()
+              .filter(GenericEntity::isDeletedEntityState)
+              .collect(Collectors.toList());
+      prodotto.setTheRigaOrdine(updateTheRigaOrdine);
+      deleteTheRigaOrdine.forEach(
+          child -> rigaOrdineService.deleteById(child.getTheRigaOrdineKey()));
+    }
+    return this.update(prodotto);
+  }
 
-	@Transactional(readOnly = true)
-	public byte[] printXLSList(Specification<Prodotto> specification) {
-		Collection<Prodotto> prodottoCollection = search(specification, Pageable.unpaged()).getContent();
-		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-		try {
-			byteArrayOutputStream = exportXlsReport(getJasperPrint(LIST_PRODOTTO, prodottoCollection));
-		} catch (JRException e) {
-			log.error(LOG_ERROR, e);
-		}
-		return byteArrayOutputStream.toByteArray();
-	}
+  @Transactional(readOnly = true)
+  public JasperPrint getJasperPrint(String reportName, Collection<?> collection)
+      throws BusinessException {
+    JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(collection);
+    Map<String, Object> parameters = new HashMap<>();
+    // Adds to the collection the compiled master report dependency (for subreport) and return the
+    // compiled master report.
+    List<String> fileNames = Arrays.asList(reportName, "ListRigaOrdineForProdotto");
+    JasperReport report = prepareJasperReport(reportName, parameters, fileNames);
+    // Add report dir.
+    parameters.put("REPORT_DIR", super.jasperReportsDir);
+    // Add locale.
+    Locale locale = LocaleContextHolder.getLocale();
+    parameters.put(JRParameter.REPORT_LOCALE, locale);
+    // Add resource boundle.
+    ResourceBundle resourceBoundle = ResourceBundle.getBundle("applicationResources", locale);
+    parameters.put(JRParameter.REPORT_RESOURCE_BUNDLE, resourceBoundle);
+    // return PDF document.
+    JasperPrint jasperPrint = null;
+    try {
+      return JasperFillManager.fillReport(report, parameters, dataSource);
+    } catch (JRException e) {
+      log.error(LOG_ERROR, e);
+    }
+    return jasperPrint;
+  }
+
+  @Transactional(readOnly = true)
+  public byte[] printPdfReport(String objectKey) {
+    Collection<Prodotto> prodottoCollection = new ArrayList<>();
+    Optional<Prodotto> optionalProdotto = findByObjectKey(objectKey);
+    if (optionalProdotto.isPresent()) {
+      Prodotto prodotto = optionalProdotto.get();
+      prodottoCollection.add(prodotto);
+      try {
+        return JasperExportManager.exportReportToPdf(
+            getJasperPrint(DETAIL_PRODOTTO, prodottoCollection));
+      } catch (JRException e) {
+        log.error(LOG_ERROR, e);
+      }
+    }
+    return new byte[0];
+  }
+
+  @Transactional(readOnly = true)
+  public byte[] printXLSList(Specification<Prodotto> specification) {
+    Collection<Prodotto> prodottoCollection =
+        search(specification, Pageable.unpaged()).getContent();
+    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    try {
+      byteArrayOutputStream = exportXlsReport(getJasperPrint(LIST_PRODOTTO, prodottoCollection));
+    } catch (JRException e) {
+      log.error(LOG_ERROR, e);
+    }
+    return byteArrayOutputStream.toByteArray();
+  }
 }

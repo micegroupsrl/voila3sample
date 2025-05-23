@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
 import java.util.Objects;
 import jakarta.persistence.Entity;
-import it.micegroup.voila3sample.domain.BaseEntity;
+import it.micegroup.voila3sample.domain.Auditable;
 
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -30,122 +30,121 @@ import jakarta.persistence.MapsId;
 @Entity
 @ToString
 @Table(name = "persona")
-public class Persona extends BaseEntity implements Serializable {
+public class Persona extends Auditable implements Serializable {
 
-	// Generated SERIAL VERSION UID
-	private static final long serialVersionUID = 2621278788L;
+  // Generated SERIAL VERSION UID
+  private static final long serialVersionUID = 2189577881L;
 
-	// COMPOSITE PRIMARY KEY
-	@EmbeddedId
-	protected PersonaKey thePersonaKey = new PersonaKey();
+  // COMPOSITE PRIMARY KEY
+  @EmbeddedId protected PersonaKey thePersonaKey = new PersonaKey();
 
-	// ATTRIBUTES
+  // ATTRIBUTES
+  /** Attribute nome */
+  @Column(name = "nome", columnDefinition = "VARCHAR(80)")
+  private String nome;
 
-	// PARENTS
+  /** Attribute cognome */
+  @Column(name = "cognome", columnDefinition = "VARCHAR(80)")
+  private String cognome;
 
-	// CHILDREN
+  /** Attribute email */
+  @Column(name = "email", columnDefinition = "VARCHAR(80)")
+  private String email;
 
-	// CONSTRUCTORS
-	/**
-	 * Constructor of the class Persona
-	 */
-	public Persona(String objectKey) {
-		super();
-		setObjectKey(objectKey);
-	}
+  /** Attribute telefono */
+  @Column(name = "telefono", columnDefinition = "VARCHAR(80)")
+  private String telefono;
 
-	// CHILD GETTER/SETTER
+  // PARENTS
 
-	// ADD CHILD
+  // CHILDREN
 
-	// PARENT GETTER/SETTER
-	/**
-	 * Get the property Id Persona of the internal composite key
-	 *
-	 * @return the Id Persona
-	 */
-	public Integer getIdPersona() {
-		return thePersonaKey.getIdPersona();
-	}
+  // CONSTRUCTORS
+  /** Constructor of the class Persona */
+  public Persona(String objectKey) {
+    super();
+    setObjectKey(objectKey);
+  }
 
-	/**
-	 * Set the value of the property Id Persona of the internal composite key
-	 *
-	 * @param idPersona the Id Persona to set
-	 */
-	public void setIdPersona(Integer idPersona) {
-		thePersonaKey.setIdPersona(idPersona);
-	}
+  // CHILD GETTER/SETTER
 
-	/**
-	 * Get the property Codice Fiscale of the internal composite key
-	 *
-	 * @return the Codice Fiscale
-	 */
-	public String getCodiceFiscale() {
-		return thePersonaKey.getCodiceFiscale();
-	}
+  // ADD CHILD
 
-	/**
-	 * Set the value of the property Codice Fiscale of the internal composite key
-	 *
-	 * @param codiceFiscale the Codice Fiscale to set
-	 */
-	public void setCodiceFiscale(String codiceFiscale) {
-		thePersonaKey.setCodiceFiscale(codiceFiscale);
-	}
+  // PARENT GETTER/SETTER
+  /**
+   * Get the property Id Persona of the internal composite key
+   *
+   * @return the Id Persona
+   */
+  public Integer getIdPersona() {
+    return thePersonaKey.getIdPersona();
+  }
 
-	// PARENT ID GETTER/SETTER
+  /**
+   * Set the value of the property Id Persona of the internal composite key
+   *
+   * @param idPersona the Id Persona to set
+   */
+  public void setIdPersona(Integer idPersona) {
+    thePersonaKey.setIdPersona(idPersona);
+  }
 
-	// PARENT OBJECT TITLE
+  /**
+   * Get the property Cf of the internal composite key
+   *
+   * @return the Cf
+   */
+  public String getCf() {
+    return thePersonaKey.getCf();
+  }
 
-	// PARENT OBJECT KEY
+  /**
+   * Set the value of the property Cf of the internal composite key
+   *
+   * @param cf the Cf to set
+   */
+  public void setCf(String cf) {
+    thePersonaKey.setCf(cf);
+  }
 
-	// OBJECT KEY
-	/**
-	 * Restituisce l'identificativo della chiave composita in formato stringa
-	 *
-	 */
-	public String getObjectKey() {
-		return thePersonaKey.getObjectKey();
-	}
+  // PARENT ID GETTER/SETTER
 
-	/**
-	 * Inizializza la parte identificativa chiamando il setter della chiave
-	 * composita
-	 *
-	 */
-	public void setObjectKey(String key) {
-		thePersonaKey.setObjectKey(key);
-	}
+  // PARENT OBJECT TITLE
 
-	// OBJECT TITLE
-	public String getObjectTitle() {
-		StringBuilder output = new StringBuilder();
-		output.append(getCodiceFiscale());
-		return output.toString();
-	}
+  // PARENT OBJECT KEY
 
-	// Equals / HashCode
-	/**
-	 * Overrides equals method to compare two Persona objects
-	 */
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
-			return false;
-		Persona that = (Persona) o;
+  // OBJECT KEY
+  /** Restituisce l'identificativo della chiave composita in formato stringa */
+  public String getObjectKey() {
+    return thePersonaKey.getObjectKey();
+  }
 
-		return thePersonaKey != null && Objects.equals(thePersonaKey, that.thePersonaKey);
-	}
+  /** Inizializza la parte identificativa chiamando il setter della chiave composita */
+  public void setObjectKey(String key) {
+    thePersonaKey.setObjectKey(key);
+  }
 
-	/**
-	 * Overrides hashCode method to compute hash code of Persona object
-	 */
-	@Override
-	public int hashCode() {
-		return Objects.hash(thePersonaKey);
-	}
+  // OBJECT TITLE
+  public String getObjectTitle() {
+    StringBuilder output = new StringBuilder();
+    output.append(getNome());
+    return output.toString();
+  }
+
+  // Equals / HashCode
+  /** Overrides equals method to compare two Persona objects */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+    Persona that = (Persona) o;
+
+    return thePersonaKey != null && Objects.equals(thePersonaKey, that.thePersonaKey);
+  }
+
+  /** Overrides hashCode method to compute hash code of Persona object */
+  @Override
+  public int hashCode() {
+    return Objects.hash(thePersonaKey);
+  }
 }

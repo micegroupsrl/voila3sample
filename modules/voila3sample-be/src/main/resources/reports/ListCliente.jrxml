@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cliente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="4eb36b67-5095-3cdc-889d-de92984905aa">
+<property name="ireport.zoom" value="1.9487171000000014"/>
+<property name="ireport.x" value="0"/>
+<property name="ireport.y" value="0"/>
+<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+<template><![CDATA[$P{REPORT_DIR} + "/templates/default.jrtx"]]></template>
+<style name="RowLeft" hTextAlign="Left" vTextAlign="Middle" lineSpacing="Single">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9" lineSpacing="Single"/>
+  </conditionalStyle>
+</style>
+<style name="RowRight" hTextAlign="Right" vTextAlign="Middle" lineSpacing="Single">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9" lineSpacing="Single"/>
+  </conditionalStyle>
+</style>
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+<queryString>
+  <![CDATA[]]>
+</queryString>
+<field name="punti" class="java.lang.Integer"/>
+<field name="nome" class="java.lang.String"/>
+<field name="cognome" class="java.lang.String"/>
+<field name="email" class="java.lang.String"/>
+<field name="telefono" class="java.lang.String"/>
+<field name="idPersona" class="java.lang.Integer"/>
+<field name="cf" class="java.lang.String"/>
+
+<background>
+  <band splitType="Stretch"/>
+</background>
+<title>
+  <band splitType="Stretch"/>
+</title>
+<pageHeader>
+  <band height="20" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+      <reportElement style="TableHeader" x="0" y="0" width="553" height="20" uuid="c2ee1b50-3e93-3b45-8cd5-f6ab9dac9aaa"/>
+      <textElement lineSpacing="Single"/> 
+      <textFieldExpression><![CDATA[$R{cliente.jasperReports.tableHeader}]]></textFieldExpression>
+    </textField>
+  </band>
+</pageHeader>
+<columnHeader>
+  <band height="30" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="0" y="0" width="79" height="30" uuid="2e1078e2-5653-32c5-95a2-aa04489f7b91"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{cliente.punti}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="79" y="0" width="79" height="30" uuid="25478fd4-23f2-31be-885f-78588abc88c2"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.nome}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="158" y="0" width="79" height="30" uuid="25a61068-8ec0-357b-9154-b5b73270526d"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.cognome}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="237" y="0" width="79" height="30" uuid="4265a777-71f9-3585-99c4-79652e17cc46"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.email}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="316" y="0" width="79" height="30" uuid="d473a504-cb5f-3322-870b-ab76958574dd"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.telefono}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="395" y="0" width="79" height="30" uuid="fd1500db-854d-391c-9e54-356a7a8c2bd9"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.idPersona}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="474" y="0" width="79" height="30" uuid="d54e2d20-6d1f-35b5-a2f2-3e1efca43020"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.cf}]]></textFieldExpression>
+    </textField>
+    
+  </band>
+</columnHeader>
+<detail>
+  <band height="30" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowRight" stretchType="RelativeToTallestObject" x="0" y="0" width="79" height="30" uuid="78bf2127-cd6e-3196-988b-fd674cd3fb30">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{punti}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="79" y="0" width="79" height="30" uuid="91b2891d-5bad-323c-843f-ff8cd8d2375f">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="158" y="0" width="79" height="30" uuid="6c1d47ca-b523-3517-803c-2b5e16cf4c1d">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{cognome}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="237" y="0" width="79" height="30" uuid="5f42d863-dbcf-32dc-875a-73ea2fd150e1">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="316" y="0" width="79" height="30" uuid="9763b199-e73b-3f37-886a-d86dc7d690f0">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowRight" stretchType="RelativeToTallestObject" x="395" y="0" width="79" height="30" uuid="65e21ab6-1582-31bd-9138-04ff9564401e">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{idPersona}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="474" y="0" width="79" height="30" uuid="83ea1785-4d5a-3732-91ee-6cee6bc860e7">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{cf}]]></textFieldExpression>
+    </textField>
+    
+  </band>
+</detail>
+<columnFooter>
+  <band splitType="Stretch"/>
+</columnFooter>
+<pageFooter>
+  <band splitType="Stretch"/>
+</pageFooter>
+<summary>
+  <band splitType="Stretch"/>
+</summary>
+</jasperReport>

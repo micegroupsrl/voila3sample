@@ -1,0 +1,31 @@
+<div fxLayout="column">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span>Filtra StatoOrdine</span>
+            <button mat-icon-button color="basic" mat-dialog-close (click)="close()"><mat-icon>close</mat-icon></button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="mat-dialog-content" fxLayout="column">
+        <form name="searchStatoOrdineForm" [formGroup]="searchStatoOrdineForm" (keyup.enter)="onSubmit()" fxLayout="column" fxLayoutGap="20" fxFlex>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- idStatoOrdine From -->
+                <rsd-input-number formControlName="idStatoOrdineDa" label="Id Stato Ordine {{ 'search.from' | translate }}..."></rsd-input-number>
+                <!-- idStatoOrdine To -->
+                <rsd-input-number formControlName="idStatoOrdineA" label="...{{ 'search.to' | translate }}"></rsd-input-number>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="24" fxLayoutGap.xs="20">
+                <!-- Descrizione -->
+                <rsd-input-text formControlName="descrizione"></rsd-input-text>
+            </div>
+        </form>
+    </div>
+
+    <div mat-dialog-actions fxLayoutAlign="space-between center">
+        <!-- Reset button -->
+        <button type="reset" mat-raised-button (click)="clear()" class="button-reset-white">Reset</button>
+        <!-- Search button -->
+        <button type="submit" [mat-dialog-close]="data" (click)="onSubmit()" mat-raised-button color="primary">Cerca</button>
+    </div>
+</div>

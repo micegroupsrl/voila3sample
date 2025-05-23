@@ -18,34 +18,28 @@ import it.micegroup.voila3sample.domain.security.Privilege;
 import it.micegroup.voila3sample.repository.BaseRepository;
 
 @Repository
-public interface PrivilegePerRoleRepository extends BaseRepository<PrivilegePerRole, PrivilegePerRoleKey> {
+public interface PrivilegePerRoleRepository
+    extends BaseRepository<PrivilegePerRole, PrivilegePerRoleKey> {
 
-	/**
-	 * Finds all PrivilegePerRole following the specification in input and return
-	 * them in a Page
-	 */
-	@EntityGraph(value = PrivilegePerRole.DEFAULT_ENTITY_GRAPH)
-	@Override
-	Page<PrivilegePerRole> findAll(Specification<PrivilegePerRole> spec, Pageable pageable);
+  /** Finds all PrivilegePerRole following the specification in input and return them in a Page */
+  @EntityGraph(value = PrivilegePerRole.DEFAULT_ENTITY_GRAPH)
+  @Override
+  Page<PrivilegePerRole> findAll(Specification<PrivilegePerRole> spec, Pageable pageable);
 
-	/**
-	 * Finds, if present, a PrivilegePerRole by its id
-	 */
-	@EntityGraph(value = PrivilegePerRole.DEFAULT_ENTITY_GRAPH)
-	Optional<PrivilegePerRole> findByThePrivilegePerRoleKey(PrivilegePerRoleKey id);
+  /** Finds, if present, a PrivilegePerRole by its id */
+  @EntityGraph(value = PrivilegePerRole.DEFAULT_ENTITY_GRAPH)
+  Optional<PrivilegePerRole> findByThePrivilegePerRoleKey(PrivilegePerRoleKey id);
 
-	/**
-	 * Finds all PrivilegePerRole that are children of the TheRole in input and
-	 * return them in a Page
-	 */
-	@EntityGraph(value = PrivilegePerRole.DEFAULT_ENTITY_GRAPH)
-	Page<PrivilegePerRole> findByTheRole(Role parentEntity, Pageable pageable);
+  /**
+   * Finds all PrivilegePerRole that are children of the TheRole in input and return them in a Page
+   */
+  @EntityGraph(value = PrivilegePerRole.DEFAULT_ENTITY_GRAPH)
+  Page<PrivilegePerRole> findByTheRole(Role parentEntity, Pageable pageable);
 
-	/**
-	 * Finds all PrivilegePerRole that are children of the ThePrivilege in input and
-	 * return them in a Page
-	 */
-	@EntityGraph(value = PrivilegePerRole.DEFAULT_ENTITY_GRAPH)
-	Page<PrivilegePerRole> findByThePrivilege(Privilege parentEntity, Pageable pageable);
-
+  /**
+   * Finds all PrivilegePerRole that are children of the ThePrivilege in input and return them in a
+   * Page
+   */
+  @EntityGraph(value = PrivilegePerRole.DEFAULT_ENTITY_GRAPH)
+  Page<PrivilegePerRole> findByThePrivilege(Privilege parentEntity, Pageable pageable);
 }

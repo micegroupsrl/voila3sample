@@ -6,12 +6,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 export function tipoOrdineForm(formBuilder: FormBuilder) {
     return formBuilder.group({
+        anno: [null, Validators.compose([Validators.maxLength(11), Validators.required])],
         idTipoOrdine: [null, Validators.required],
-        annoTipologia: [null, Validators.required],
-        idCategoriaOrdine: [null],
+        idCatOrdine: [null],
         theCategoriaOrdineObjectKey: [null, Validators.required],
         theCategoriaOrdineObjectTitle: [null],
-        nomeOrdine: [null, Validators.maxLength(80)],
         theOrdine: [[]]
     });
 }

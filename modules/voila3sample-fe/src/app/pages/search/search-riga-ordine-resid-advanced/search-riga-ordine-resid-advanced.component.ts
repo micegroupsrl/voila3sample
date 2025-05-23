@@ -6,8 +6,8 @@ import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 import { RigaOrdineGroupApiService } from 'src/app/pages/services/services-riga-ordine/riga-ordine-group-api.service';
 import { BaseSearchResidAdvancedComponent } from 'src/app/shared/base/base.search-resid-advanced.component';
 
-import { IProdotto } from 'src/app/pages/interfaces/prodotto.interface';
 import { IOrdine } from 'src/app/pages/interfaces/ordine.interface';
+import { IProdotto } from 'src/app/pages/interfaces/prodotto.interface';
 import { getListForDropdowns } from 'src/app/shared/base/base.helper';
 
 @Component({
@@ -18,12 +18,12 @@ import { getListForDropdowns } from 'src/app/shared/base/base.helper';
 export class SearchRigaOrdineResidAdvancedComponent extends BaseSearchResidAdvancedComponent implements OnInit {
     override attributeList = [
         // Definition of the object's list that will be used for build the filter
-        { name: 'quantita', type: 'number', api: ['minoreDi', 'uguale', 'maggioreDi'] },
-        { name: 'idProdotto', type: 'select', api: ['uguale'], parentList: [], parent: 'prodotto' },
-        { name: 'idOrdine', type: 'select', api: ['uguale'], parentList: [], parent: 'ordine' }
+        { name: 'qta', type: 'number', api: ['minoreDi', 'uguale', 'maggioreDi'] },
+        { name: 'idOrdine', type: 'select', api: ['uguale'], parentList: [], parent: 'ordine' },
+        { name: 'idProdotto', type: 'select', api: ['uguale'], parentList: [], parent: 'prodotto' }
     ];
-    public prodottoList: IProdotto[] = [];
     public ordineList: IOrdine[] = [];
+    public prodottoList: IProdotto[] = [];
 
     constructor(
         public rigaOrdineDialogRef: MatDialogRef<SearchRigaOrdineResidAdvancedComponent>,
@@ -77,7 +77,7 @@ export class SearchRigaOrdineResidAdvancedComponent extends BaseSearchResidAdvan
                 filterBuild[orAnd ? 'andGreaterOrEqual' : 'orGreaterOrEqual'](filterType, value);
                 break;
             case 'uguale':
-                if (filterType != 'idProdotto' && filterType != 'idOrdine') {
+                if (filterType != 'idOrdine' && filterType != 'idProdotto') {
                     filterBuild[orAnd ? 'andEquals' : 'orEquals'](filterType, value);
                 }
                 break;
@@ -87,19 +87,13 @@ export class SearchRigaOrdineResidAdvancedComponent extends BaseSearchResidAdvan
         return filterBuild;
     }
     public filterTypeCase(filterBuild: FilterBuilder, filterType: string, apiType: string, orAnd: string, value: string): FilterBuilder {
-        if (filterType == 'idProdotto') {
-            filterBuild[orAnd ? 'andEquals' : 'orEquals']('theProdotto', value);
-        }
         if (filterType == 'idOrdine') {
             filterBuild[orAnd ? 'andEquals' : 'orEquals']('theOrdine', value);
         }
+        if (filterType == 'idProdotto') {
+            filterBuild[orAnd ? 'andEquals' : 'orEquals']('theProdotto', value);
+        }
         return filterBuild;
-    }
-    public getProdottoList(): void {
-        this.rigaOrdineGroupApiService.prodotto.getProdottoByCriteria().subscribe(data => {
-            this.prodottoList = getListForDropdowns(data);
-            this.addListToAttribute('prodotto', this.prodottoList);
-        });
     }
     public getOrdineList(): void {
         this.rigaOrdineGroupApiService.ordine.getOrdineByCriteria().subscribe(data => {
@@ -107,9 +101,15 @@ export class SearchRigaOrdineResidAdvancedComponent extends BaseSearchResidAdvan
             this.addListToAttribute('ordine', this.ordineList);
         });
     }
+    public getProdottoList(): void {
+        this.rigaOrdineGroupApiService.prodotto.getProdottoByCriteria().subscribe(data => {
+            this.prodottoList = getListForDropdowns(data);
+            this.addListToAttribute('prodotto', this.prodottoList);
+        });
+    }
 
     private getParentsList(): void {
-        this.getProdottoList();
         this.getOrdineList();
+        this.getProdottoList();
     }
 }

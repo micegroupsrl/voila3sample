@@ -22,7 +22,7 @@ export class DialogListOrdineComponent {
     currentPage = 0;
     pageSizeOptions: number[] = [5, 10, 25, 100];
 
-    displayedColumns: string[] = ['idOrdine', 'dataOrdine', 'tempoOrdine', 'createdBy', 'lastModifiedBy', 'createdDate', 'lastModifiedDate'];
+    displayedColumns: string[] = ['idOrdine', 'descrizione', 'datetime', 'date', 'time', 'createdBy', 'lastModifiedBy', 'createdDate', 'lastModifiedDate'];
     dataSource: MatTableDataSource<IOrdine> = new MatTableDataSource();
     clickedRows = new Set<IOrdine>();
 
@@ -30,8 +30,10 @@ export class DialogListOrdineComponent {
 
     public dataForm = {
         idOrdine: null,
-        dataOrdine: null,
-        tempoOrdine: null,
+        descrizione: '',
+        datetime: null,
+        date: null,
+        time: null,
         createdBy: '',
         lastModifiedBy: '',
         createdDate: null,

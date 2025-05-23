@@ -13,28 +13,28 @@ import liquibase.integration.spring.SpringLiquibase;
 @Slf4j
 public class CustomSpringLiquibase implements InitializingBean, BeanNameAware, ResourceLoaderAware {
 
-	private SpringLiquibase springLiquibase;
+  private SpringLiquibase springLiquibase;
 
-	public CustomSpringLiquibase(SpringLiquibase liquibase) {
-		springLiquibase = liquibase;
-	}
+  public CustomSpringLiquibase(SpringLiquibase liquibase) {
+    springLiquibase = liquibase;
+  }
 
-	@Override
-	public void afterPropertiesSet() {
-		try {
-			springLiquibase.afterPropertiesSet();
-		} catch (LiquibaseException e) {
-			log.error("LiquibaseConfig ", e);
-		}
-	}
+  @Override
+  public void afterPropertiesSet() {
+    try {
+      springLiquibase.afterPropertiesSet();
+    } catch (LiquibaseException e) {
+      log.error("LiquibaseConfig ", e);
+    }
+  }
 
-	@Override
-	public void setBeanName(String name) {
-		springLiquibase.setBeanName(name);
-	}
+  @Override
+  public void setBeanName(String name) {
+    springLiquibase.setBeanName(name);
+  }
 
-	@Override
-	public void setResourceLoader(ResourceLoader resourceLoader) {
-		springLiquibase.setResourceLoader(resourceLoader);
-	}
+  @Override
+  public void setResourceLoader(ResourceLoader resourceLoader) {
+    springLiquibase.setResourceLoader(resourceLoader);
+  }
 }

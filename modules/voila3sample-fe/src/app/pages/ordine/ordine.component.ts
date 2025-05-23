@@ -45,8 +45,10 @@ export class OrdineComponent implements OnInit {
 
     displayedColumns: string[] = [
         'idOrdine',
-        'dataOrdine',
-        'tempoOrdine',
+        'descrizione',
+        'datetime',
+        'date',
+        'time',
         'createdBy',
         'lastModifiedBy',
         'createdDate',
@@ -54,12 +56,11 @@ export class OrdineComponent implements OnInit {
         /**
          * Parent.
          */
-        'theCliente.ThePersonaKey',
+        'theStatoOrdine.idStatoOrdine',
 
-        /**
-         * Child.
-         */
-        'theTipoOrdine.TheOrdine.idOrdine',
+        'theTipoOrdine.TheTipoOrdineKey',
+
+        'theCliente.ThePersonaKey',
 
         'theOrdineAggregato.idOrdine'
     ];
@@ -71,8 +72,10 @@ export class OrdineComponent implements OnInit {
     //Dati della form
     public dataForm = {
         idOrdine: null,
-        dataOrdine: null,
-        tempoOrdine: null,
+        descrizione: '',
+        datetime: null,
+        date: null,
+        time: null,
         createdBy: '',
         lastModifiedBy: '',
         createdDate: null,
@@ -102,7 +105,7 @@ export class OrdineComponent implements OnInit {
         this.loadData(this.object);
 
         this.searchOrdineForm = this.fb.group({
-            createdBy: []
+            descrizione: []
         });
     }
 
@@ -233,7 +236,7 @@ export class OrdineComponent implements OnInit {
         const searchOrdine = this.searchOrdineForm.value;
 
         if (searchOrdine) {
-            filterBuild = filterBuild.andLike('createdBy', searchOrdine.createdBy);
+            filterBuild = filterBuild.andLike('descrizione', searchOrdine.descrizione);
         }
         return filterBuild.value();
     }

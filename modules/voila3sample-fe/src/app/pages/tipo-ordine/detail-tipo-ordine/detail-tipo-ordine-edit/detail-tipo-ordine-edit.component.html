@@ -3,6 +3,17 @@
     <form [formGroup]="tipoOrdineForm">
         <mat-card class="mat-elevation-z8">
             <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
+                <!--Anno-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <!--In new mode show the ID as required field-->
+                        <label *ngIf="pageStatus | hasPageStatus: 'new'">ID*</label>
+                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">ID</label>
+                    </div>
+                    <rsd-input-number formControlName="anno"></rsd-input-number>
+                </div>
+                <!--End Anno-->
                 <!--Id Tipo Ordine-->
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
                     <!--Label-->
@@ -14,28 +25,7 @@
                     <rsd-input-number formControlName="idTipoOrdine"></rsd-input-number>
                 </div>
                 <!--End Id Tipo Ordine-->
-                <!--Anno Tipologia-->
-                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
-                    <!--Label-->
-                    <div fxLayout="column" fxFlex="30">
-                        <!--In new mode show the ID as required field-->
-                        <label *ngIf="pageStatus | hasPageStatus: 'new'">ID*</label>
-                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">ID</label>
-                    </div>
-                    <rsd-input-number formControlName="annoTipologia"></rsd-input-number>
-                </div>
-                <!--End Anno Tipologia-->
 
-                <!--Nome Ordine-->
-                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
-                    <div fxLayout="column" fxFlex="30">
-                        <!--Label-->
-                        <label>{{ 'voila3sample.detail.TipoOrdine.nomeOrdine' | translate }}</label>
-                    </div>
-                    <!--Input-->
-                    <rsd-input-text formControlName="nomeOrdine"></rsd-input-text>
-                </div>
-                <!--End Nome Ordine-->
                 <!-- Categoria Ordine-->
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
                     <!--Label-->

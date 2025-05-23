@@ -1,1 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Privilege" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6c07733a-62b8-383d-85cb-3fffeb6e5229">
+<template><![CDATA[$P{REPORT_DIR} + "/templates/default.jrtx"]]></template>
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+<parameter name="ListPrivilegePerRoleForPrivilege" class="net.sf.jasperreports.engine.JasperReport"/>
+<queryString>
+  <![CDATA[]]>
+</queryString>
+
+<field name="privilegeId" class="java.lang.Long"/>
+<field name="name" class="java.lang.String"/>
+<field name="description" class="java.lang.String"/>
+<field name="thePrivilegePerRole" class="java.util.Collection"/>
+<background>
+  <band splitType="Stretch"/>
+</background>
+<title>
+  <band height="50" splitType="Stretch">
+    <image>
+      <reportElement style="ImageLeft" x="0" y="0" width="130" height="50" uuid="415a8eef-bb66-31bd-886e-69d0e4a74f45"/>
+      <imageExpression><![CDATA[$P{REPORT_DIR} + "/images/" + $R{jasperReports.logo}]]></imageExpression>
+    </image>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Title" x="130" y="0" width="295" height="30" uuid="01e086bc-d105-3a4f-bed4-b1f87c92123b"/>
+      <textFieldExpression><![CDATA[$R{privilege.jasperReports.title}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="SubTitle" x="130" y="30" width="295" height="20" uuid="e40e1828-80b4-3deb-9fc8-2af6ef4e9f78"/>
+      <textFieldExpression><![CDATA[$R{privilege.jasperReports.subTitle}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Date" x="425" y="0" width="130" height="50" uuid="31d30675-26a7-3e0b-b8d3-1e90e7302ce4"/>
+      <textFieldExpression><![CDATA[new SimpleDateFormat($R{jasperReports.date.format}).format(new Date())]]></textFieldExpression>
+    </textField>
+  </band>
+</title>
+<pageHeader>
+  <band height="30" splitType="Stretch"/>
+</pageHeader>
+<columnHeader>
+  <band height="20" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="TableHeader" x="0" y="0" width="555" height="20" uuid="06b158c9-b971-3007-8e44-bb3494e13cc2"/>
+      <textFieldExpression><![CDATA[$R{privilege.jasperReports.tableHeader}]]></textFieldExpression>
+    </textField>
+  </band>
+</columnHeader>
+<detail>
+  
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" />
+  <textFieldExpression><![CDATA[$R{privilege.privilegeId}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="136dbf95-bfa7-382c-a979-cc7995d0214a"/>
+    <textFieldExpression><![CDATA[$F{privilegeId}]]></textFieldExpression>
+  </textField>
+  </band>
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" />
+  <textFieldExpression><![CDATA[$R{privilege.name}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="434b66a2-721c-3ab5-804a-7afe615d068f"/>
+    <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+  </textField>
+  </band>
+  <band height="15" splitType="Stretch">
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Label" x="0" y="0" width="180" height="15" />
+  <textFieldExpression><![CDATA[$R{privilege.description}]]></textFieldExpression>
+  </textField>
+  <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+    <reportElement style="Field" x="180" y="0" width="375" height="15" uuid="8afd942a-ffb1-33b0-8ce8-e7d4eecb3d4a"/>
+    <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+  </textField>
+  </band>
+  <band height="100" splitType="Stretch">
+  <subreport>
+    <reportElement x="-20" y="0" width="595" height="100" uuid="f83e8a4b-1a8f-33e9-bdf0-0c31e205c0b3"/>
+    <subreportParameter name="REPORT_RESOURCE_BUNDLE">
+      <subreportParameterExpression><![CDATA[$P{REPORT_RESOURCE_BUNDLE}]]></subreportParameterExpression>
+    </subreportParameter>
+    <subreportParameter name="REPORT_DIR">
+      <subreportParameterExpression><![CDATA[$P{REPORT_DIR}]]></subreportParameterExpression>
+    </subreportParameter>
+    <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{thePrivilegePerRole})]]></dataSourceExpression>
+    <subreportExpression><![CDATA[$P{ListPrivilegePerRoleForPrivilege}]]></subreportExpression>
+  </subreport>
+  </band>
+</detail>
+<columnFooter>
+  <band splitType="Stretch"/>
+</columnFooter>
+<pageFooter>
+  <band height="20" splitType="Stretch">
+    <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+      <reportElement style="Footer" x="0" y="0" width="480" height="20" uuid="31cc6760-8fd4-333e-86ef-206a71eb1f77"/>
+      <textFieldExpression><![CDATA[$R{jasperReports.footer.text}]]></textFieldExpression>
+    </textField>
+    <textField textAdjust="StretchHeight" evaluationTime="Master" isBlankWhenNull="true">
+      <reportElement style="PageNumber" x="480" y="0" width="75" height="20" uuid="856c4cbb-7db1-3041-90e8-62b616947367"/>
+      <textFieldExpression><![CDATA[$R{jasperReports.pageNumber.label} + " " + $V{MASTER_CURRENT_PAGE} + " " + $R{jasperReports.pageNumber.separator} + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+    </textField>
+  </band>
+</pageFooter>
+<summary>
+  <band splitType="Stretch"/>
+</summary>
+</jasperReport>

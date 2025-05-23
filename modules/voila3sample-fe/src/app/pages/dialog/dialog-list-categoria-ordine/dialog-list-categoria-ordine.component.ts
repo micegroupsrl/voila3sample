@@ -22,14 +22,14 @@ export class DialogListCategoriaOrdineComponent {
     currentPage = 0;
     pageSizeOptions: number[] = [5, 10, 25, 100];
 
-    displayedColumns: string[] = ['idCategoriaOrdine'];
+    displayedColumns: string[] = ['idCatOrdine'];
     dataSource: MatTableDataSource<ICategoriaOrdine> = new MatTableDataSource();
     clickedRows = new Set<ICategoriaOrdine>();
 
     public object: PageObject = {};
 
     public dataForm = {
-        idCategoriaOrdine: null
+        idCatOrdine: null
     };
 
     filters = '';

@@ -3,8 +3,9 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { IOrdine } from 'src/app/pages/interfaces/ordine.interface';
 import { TabsOrdineComponent } from '../tabs-ordine/tabs-ordine.component';
 import { getListForDropdowns } from 'src/app/shared/base/base.helper';
-import { ICliente } from 'src/app/pages/interfaces/cliente.interface';
+import { IStatoOrdine } from 'src/app/pages/interfaces/stato-ordine.interface';
 import { ITipoOrdine } from 'src/app/pages/interfaces/tipo-ordine.interface';
+import { ICliente } from 'src/app/pages/interfaces/cliente.interface';
 import { OrdineGroupApiService } from '../../../services/services-ordine/ordine-group-api.service';
 import { BaseDetailComponent } from 'src/app/shared/base/base-detail.component';
 
@@ -24,8 +25,9 @@ export class DetailOrdineEditComponent extends BaseDetailComponent implements On
     @Input()
     public ordine!: IOrdine;
 
-    public clienteList!: ICliente[];
+    public statoOrdineList!: IStatoOrdine[];
     public tipoOrdineList!: ITipoOrdine[];
+    public clienteList!: ICliente[];
     public ordineAggregatoList!: IOrdine[];
 
     constructor(
@@ -46,15 +48,16 @@ export class DetailOrdineEditComponent extends BaseDetailComponent implements On
      * Get the list of parents.
      */
     private getParentsList(): void {
-        this.getClienteList();
+        this.getStatoOrdineList();
         this.getTipoOrdineList();
+        this.getClienteList();
         this.getOrdineAggregatoList();
     }
 
-    public getClienteList(): void {
-        if (!this.clienteList) {
-            this.ordineGroupApiService.cliente.getClienteByCriteria().subscribe(data => {
-                this.clienteList = getListForDropdowns(data);
+    public getStatoOrdineList(): void {
+        if (!this.statoOrdineList) {
+            this.ordineGroupApiService.statoOrdine.getStatoOrdineByCriteria().subscribe(data => {
+                this.statoOrdineList = getListForDropdowns(data);
             });
         }
     }
@@ -62,6 +65,13 @@ export class DetailOrdineEditComponent extends BaseDetailComponent implements On
         if (!this.tipoOrdineList) {
             this.ordineGroupApiService.tipoOrdine.getTipoOrdineByCriteria().subscribe(data => {
                 this.tipoOrdineList = getListForDropdowns(data);
+            });
+        }
+    }
+    public getClienteList(): void {
+        if (!this.clienteList) {
+            this.ordineGroupApiService.cliente.getClienteByCriteria().subscribe(data => {
+                this.clienteList = getListForDropdowns(data);
             });
         }
     }
@@ -111,13 +121,17 @@ export class DetailOrdineEditComponent extends BaseDetailComponent implements On
     public patchValueForm(ordine: IOrdine) {
         this.ordineForm.patchValue({
             idOrdine: ordine.idOrdine,
-            dataOrdine: ordine.dataOrdine,
-            tempoOrdine: ordine.tempoOrdine,
+            descrizione: ordine.descrizione,
+            datetime: ordine.datetime,
+            date: ordine.date,
+            time: ordine.time,
 
-            theClienteObjectKey: ordine.theClienteObjectKey,
-            theClienteObjectTitle: ordine.theClienteObjectTitle,
+            theStatoOrdineObjectKey: ordine.theStatoOrdineObjectKey,
+            theStatoOrdineObjectTitle: ordine.theStatoOrdineObjectTitle,
             theTipoOrdineObjectKey: ordine.theTipoOrdineObjectKey,
             theTipoOrdineObjectTitle: ordine.theTipoOrdineObjectTitle,
+            theClienteObjectKey: ordine.theClienteObjectKey,
+            theClienteObjectTitle: ordine.theClienteObjectTitle,
             theOrdineAggregatoObjectKey: ordine.theOrdineAggregatoObjectKey,
             theOrdineAggregatoObjectTitle: ordine.theOrdineAggregatoObjectTitle
         });

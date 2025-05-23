@@ -35,7 +35,7 @@
                                 <mat-select formControlName="filterType">
                                     <!-- Parent Options -->
                                     <mat-option *ngFor="let attribute of attributeList" [value]="attribute.name" (click)="setSelected(attribute, i)">
-                                        {{ attribute.name | camelCaseToText }}
+                                        {{ (attribute.parent ? attribute.parent : attribute.name) | camelCaseToText }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -59,6 +59,21 @@
 
                                 <!-- Input number -->
                                 <rsd-input-number *ngIf="getTypeSelected(i).type == 'number'" formControlName="value" label="{{ 'buttons.value' | translate }}"></rsd-input-number>
+
+                                <!-- Input date time -->
+
+                                <datetimepicker *ngIf="getTypeSelected(i).type == 'datetime'" formControlName="value"> </datetimepicker>
+
+                                <!-- Input Select -->
+                                <mat-form-field *ngIf="getTypeSelected(i).type == 'select'" appearance="outline" style="width: 100%">
+                                    <mat-label>{{ getTypeSelected(i).parent | camelCaseToText }}</mat-label>
+                                    <mat-select formControlName="value">
+                                        <!-- Parent Options -->
+                                        <mat-option *ngFor="let element of getTypeSelected(i).parentList" [value]="element.objectKey">
+                                            {{ element.objectTitle }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
                             <!-- Remove Filters -->
                             <button mat-icon-button color="warn" (click)="removeFilterFromFiltersFormArray(i)" fxFlex="nogrow" class="padding-top-bottom-5">

@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DetailProdottoEditComponent } from './detail-prodotto-edit/detail-prodotto-edit.component';
 import { DetailProdottoViewComponent } from './detail-prodotto-view/detail-prodotto-view.component';
+
 import { isInNewMode, isInViewEditMode } from 'src/app/shared/base/base.helper';
 import { prodottoForm } from '../../forms/prodotto-form';
 import { getPrivilegesEnum } from '@micegroup/voila2-runtime-ng';

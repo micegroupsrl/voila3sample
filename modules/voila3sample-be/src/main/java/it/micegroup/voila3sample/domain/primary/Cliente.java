@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
 import java.util.Objects;
 import jakarta.persistence.Entity;
-import it.micegroup.voila3sample.domain.Auditable;
+import it.micegroup.voila3sample.domain.BaseEntity;
 
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
@@ -35,131 +35,121 @@ import jakarta.persistence.CascadeType;
 @Table(name = "cliente")
 public class Cliente extends Persona implements Serializable {
 
-	// Generated SERIAL VERSION UID
-	private static final long serialVersionUID = 1182646175L;
+  // Generated SERIAL VERSION UID
+  private static final long serialVersionUID = 3563635956L;
 
-	// ATTRIBUTES
-	/**
-	 * Attribute email
-	 */
-	@Column(name = "email", columnDefinition = "VARCHAR(80)")
-	private String email;
-	/**
-	 * Attribute telefono
-	 */
-	@Column(name = "telefono", columnDefinition = "VARCHAR(80)")
-	private String telefono;
-	/**
-	 * Attribute indirizzo
-	 */
-	@Column(name = "indirizzo", columnDefinition = "VARCHAR(80)")
-	private String indirizzo;
+  // ATTRIBUTES
+  /** Attribute nome */
+  @Column(name = "nome", columnDefinition = "VARCHAR(80)")
+  private String nome;
 
-	// PARENTS
+  /** Attribute cognome */
+  @Column(name = "cognome", columnDefinition = "VARCHAR(80)")
+  private String cognome;
 
-	// CHILDREN
-	/**
-	 * Collection of child entity Ordine
-	 */
-	@OneToMany(mappedBy = "theCliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@ToString.Exclude
-	private Collection<Ordine> theOrdine = new ArrayList<>();
+  /** Attribute email */
+  @Column(name = "email", columnDefinition = "VARCHAR(80)")
+  private String email;
 
-	// CONSTRUCTORS
-	/**
-	 * Constructor of the class Cliente
-	 */
-	public Cliente(String objectKey) {
-		super();
-		setObjectKey(objectKey);
-	}
+  /** Attribute telefono */
+  @Column(name = "telefono", columnDefinition = "VARCHAR(80)")
+  private String telefono;
 
-	// CHILD GETTER/SETTER
-	/**
-	 * Get collection of the child Ordine
-	 *
-	 * @return the Ordine
-	 */
-	public Collection<Ordine> getTheOrdine() {
-		return theOrdine;
-	}
+  /** Attribute punti */
+  @Column(name = "punti", columnDefinition = "INTEGER(11)")
+  private Integer punti;
 
-	/**
-	 * Set the value of the collection of the child Ordine
-	 *
-	 * @param aOrdineList to set
-	 */
-	public void setTheOrdine(Collection<Ordine> aOrdineList) {
-		if (aOrdineList != null) {
-			for (Ordine ordine : aOrdineList) {
-				ordine.setTheCliente(this);
-			}
-		}
-		theOrdine = aOrdineList;
-	}
+  // PARENTS
 
-	// ADD CHILD
-	public void addOrdine(Ordine ordine) {
-		theOrdine.add(ordine);
-	}
+  // CHILDREN
+  /** Collection of child entity Ordine */
+  @OneToMany(mappedBy = "theCliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @ToString.Exclude
+  private Collection<Ordine> theOrdine = new ArrayList<>();
 
-	// PARENT GETTER/SETTER
+  // CONSTRUCTORS
+  /** Constructor of the class Cliente */
+  public Cliente(String objectKey) {
+    super();
+    setObjectKey(objectKey);
+  }
 
-	// PARENT ID GETTER/SETTER
+  // CHILD GETTER/SETTER
+  /**
+   * Get collection of the child Ordine
+   *
+   * @return the Ordine
+   */
+  public Collection<Ordine> getTheOrdine() {
+    return theOrdine;
+  }
 
-	// PARENT OBJECT TITLE
+  /**
+   * Set the value of the collection of the child Ordine
+   *
+   * @param aOrdineList to set
+   */
+  public void setTheOrdine(Collection<Ordine> aOrdineList) {
+    if (aOrdineList != null) {
+      for (Ordine ordine : aOrdineList) {
+        ordine.setTheCliente(this);
+      }
+    }
+    theOrdine = aOrdineList;
+  }
 
-	// PARENT OBJECT KEY
+  // ADD CHILD
+  public void addOrdine(Ordine ordine) {
+    theOrdine.add(ordine);
+  }
 
-	// OBJECT KEY
-	/**
-	 * Restituisce l'identificativo della chiave in formato stringa. Ritorna
-	 * conveniente nelle selezioni da lista.
-	 * 
-	 * @return L'identificativo della chiave in formato pk1||pk2||pk3...
-	 */
-	@Override
-	public String getObjectKey() {
-		return thePersonaKey.getObjectKey();
-	}
+  // PARENT GETTER/SETTER
 
-	/**
-	 * Inizializza la parte identificativa chiamando il setter della chiave
-	 * composita
-	 *
-	 */
-	@Override
-	public void setObjectKey(String key) {
-		thePersonaKey.setObjectKey(key);
-	}
+  // PARENT ID GETTER/SETTER
 
-	// OBJECT TITLE
-	public String getObjectTitle() {
-		StringBuilder output = new StringBuilder();
-		output.append(getEmail());
-		return output.toString();
-	}
+  // PARENT OBJECT TITLE
 
-	// Equals / HashCode
-	/**
-	 * Overrides equals method to compare two Cliente objects
-	 */
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
-			return false;
-		Cliente that = (Cliente) o;
+  // PARENT OBJECT KEY
 
-		return thePersonaKey != null && Objects.equals(thePersonaKey, that.thePersonaKey);
-	}
+  // OBJECT KEY
+  /**
+   * Restituisce l'identificativo della chiave in formato stringa. Ritorna conveniente nelle
+   * selezioni da lista.
+   *
+   * @return L'identificativo della chiave in formato pk1||pk2||pk3...
+   */
+  @Override
+  public String getObjectKey() {
+    return thePersonaKey.getObjectKey();
+  }
 
-	/**
-	 * Overrides hashCode method to compute hash code of Cliente object
-	 */
-	@Override
-	public int hashCode() {
-		return Objects.hash(thePersonaKey);
-	}
+  /** Inizializza la parte identificativa chiamando il setter della chiave composita */
+  @Override
+  public void setObjectKey(String key) {
+    thePersonaKey.setObjectKey(key);
+  }
+
+  // OBJECT TITLE
+  public String getObjectTitle() {
+    StringBuilder output = new StringBuilder();
+    output.append(getNome());
+    return output.toString();
+  }
+
+  // Equals / HashCode
+  /** Overrides equals method to compare two Cliente objects */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+    Cliente that = (Cliente) o;
+
+    return thePersonaKey != null && Objects.equals(thePersonaKey, that.thePersonaKey);
+  }
+
+  /** Overrides hashCode method to compute hash code of Cliente object */
+  @Override
+  public int hashCode() {
+    return Objects.hash(thePersonaKey);
+  }
 }

@@ -44,7 +44,7 @@ export class CategoriaOrdineComponent implements OnInit {
      */
 
     displayedColumns: string[] = [
-        'idCategoriaOrdine'
+        'idCatOrdine'
         /**
          * Parent.
          */
@@ -56,7 +56,7 @@ export class CategoriaOrdineComponent implements OnInit {
 
     //Dati della form
     public dataForm = {
-        idCategoriaOrdine: null
+        idCatOrdine: null
     };
 
     /**
@@ -82,7 +82,7 @@ export class CategoriaOrdineComponent implements OnInit {
         this.loadData(this.object);
 
         this.searchCategoriaOrdineForm = this.fb.group({
-            idCategoriaOrdine: []
+            idCatOrdine: []
         });
     }
 
@@ -213,7 +213,7 @@ export class CategoriaOrdineComponent implements OnInit {
         const searchCategoriaOrdine = this.searchCategoriaOrdineForm.value;
 
         if (searchCategoriaOrdine) {
-            filterBuild = filterBuild.andLike('idCategoriaOrdine', searchCategoriaOrdine.idCategoriaOrdine);
+            filterBuild = filterBuild.andLike('idCatOrdine', searchCategoriaOrdine.idCatOrdine);
         }
         return filterBuild.value();
     }

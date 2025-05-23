@@ -27,9 +27,7 @@ import java.util.ArrayList;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 
-/**
- * Entità rappresentativa di un privilegio
- */
+/** Entità rappresentativa di un privilegio */
 @Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
@@ -40,140 +38,126 @@ import jakarta.persistence.CascadeType;
 @Table(name = "privilege")
 public class Privilege extends BaseEntity implements Serializable {
 
-	// Generated SERIAL VERSION UID
-	private static final long serialVersionUID = 769416586L;
+  // Generated SERIAL VERSION UID
+  private static final long serialVersionUID = 27188524L;
 
-	// ATTRIBUTES
-	/**
-	 * Attribute privilegeId
-	 */
-	@Id
-	@NotNull
+  // ATTRIBUTES
+  /** Attribute privilegeId */
+  @Id
+  @NotNull
+  @Column(name = "privilege_id", columnDefinition = "BIGINT(20)")
+  private Long privilegeId;
 
-	@Column(name = "privilege_id", columnDefinition = "INTEGER")
-	private Integer privilegeId;
-	/**
-	 * Attribute name
-	 */
-	@Column(name = "name", columnDefinition = "VARCHAR(80)")
-	private String name;
-	/**
-	 * Attribute description
-	 */
-	@Column(name = "description", columnDefinition = "VARCHAR(80)")
-	private String description;
+  /** Attribute name */
+  @Column(name = "name", columnDefinition = "VARCHAR(80)")
+  private String name;
 
-	// PARENTS
+  /** Attribute description */
+  @Column(name = "description", columnDefinition = "VARCHAR(80)")
+  private String description;
 
-	// CHILDREN
-	/**
-	 * Collection of child entity PrivilegePerRole: Relazione fra Role e Privilege
-	 */
-	@OneToMany(mappedBy = "thePrivilege", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@ToString.Exclude
-	private Collection<PrivilegePerRole> thePrivilegePerRole = new ArrayList<>();
+  // PARENTS
 
-	// CONSTRUCTORS
-	/**
-	 * Constructor of the class Privilege
-	 */
-	public Privilege(String objectKey) {
-		super();
-		setObjectKey(objectKey);
-	}
+  // CHILDREN
+  /** Collection of child entity PrivilegePerRole: Relazione fra Role e Privilege */
+  @OneToMany(mappedBy = "thePrivilege", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @ToString.Exclude
+  private Collection<PrivilegePerRole> thePrivilegePerRole = new ArrayList<>();
 
-	// CHILD GETTER/SETTER
-	/**
-	 * Get collection of the child PrivilegePerRole
-	 *
-	 * @return the PrivilegePerRole
-	 */
-	public Collection<PrivilegePerRole> getThePrivilegePerRole() {
-		return thePrivilegePerRole;
-	}
+  // CONSTRUCTORS
+  /** Constructor of the class Privilege */
+  public Privilege(String objectKey) {
+    super();
+    setObjectKey(objectKey);
+  }
 
-	/**
-	 * Set the value of the collection of the child PrivilegePerRole
-	 *
-	 * @param aPrivilegePerRoleList to set
-	 */
-	public void setThePrivilegePerRole(Collection<PrivilegePerRole> aPrivilegePerRoleList) {
-		if (aPrivilegePerRoleList != null) {
-			for (PrivilegePerRole privilegePerRole : aPrivilegePerRoleList) {
-				privilegePerRole.setThePrivilege(this);
-			}
-		}
-		thePrivilegePerRole = aPrivilegePerRoleList;
-	}
+  // CHILD GETTER/SETTER
+  /**
+   * Get collection of the child PrivilegePerRole
+   *
+   * @return the PrivilegePerRole
+   */
+  public Collection<PrivilegePerRole> getThePrivilegePerRole() {
+    return thePrivilegePerRole;
+  }
 
-	// ADD CHILD
-	public void addPrivilegePerRole(PrivilegePerRole privilegePerRole) {
-		thePrivilegePerRole.add(privilegePerRole);
-	}
+  /**
+   * Set the value of the collection of the child PrivilegePerRole
+   *
+   * @param aPrivilegePerRoleList to set
+   */
+  public void setThePrivilegePerRole(Collection<PrivilegePerRole> aPrivilegePerRoleList) {
+    if (aPrivilegePerRoleList != null) {
+      for (PrivilegePerRole privilegePerRole : aPrivilegePerRoleList) {
+        privilegePerRole.setThePrivilege(this);
+      }
+    }
+    thePrivilegePerRole = aPrivilegePerRoleList;
+  }
 
-	// PARENT GETTER/SETTER
+  // ADD CHILD
+  public void addPrivilegePerRole(PrivilegePerRole privilegePerRole) {
+    thePrivilegePerRole.add(privilegePerRole);
+  }
 
-	// PARENT ID GETTER/SETTER
+  // PARENT GETTER/SETTER
 
-	// PARENT OBJECT TITLE
+  // PARENT ID GETTER/SETTER
 
-	// PARENT OBJECT KEY
+  // PARENT OBJECT TITLE
 
-	// OBJECT KEY
-	/**
-	 * Restituisce l'identificativo della chiave in formato stringa. Ritorna
-	 * conveniente nelle selezioni da lista.
-	 * 
-	 * @return L'identificativo della chiave in formato pk1||pk2||pk3...
-	 */
-	public String getObjectKey() {
-		StringBuilder objectKey = new StringBuilder();
-		objectKey.append(getPrivilegeId());
-		return objectKey.toString();
-	}
+  // PARENT OBJECT KEY
 
-	/**
-	 * Inizializza la parte identificativa del bean in base alla stringa tokenizzata
-	 * da "||" fornita in input.
-	 * 
-	 * @param key L'identificativo della chiave in formato pk1||pk2||pk3...
-	 */
-	public void setObjectKey(String key) {
-		if (key == null || key.trim().length() == 0) {
-			return;
-		}
-		String[] array = StringUtils.splitByWholeSeparatorPreserveAllTokens(key, getRowIdFieldDelimiter());
-		int ctr = 0;
-		setPrivilegeId(getIntegerCheckedAgainstNullContent(array[ctr]));
-	}
+  // OBJECT KEY
+  /**
+   * Restituisce l'identificativo della chiave in formato stringa. Ritorna conveniente nelle
+   * selezioni da lista.
+   *
+   * @return L'identificativo della chiave in formato pk1||pk2||pk3...
+   */
+  public String getObjectKey() {
+    StringBuilder objectKey = new StringBuilder();
+    objectKey.append(getPrivilegeId());
+    return objectKey.toString();
+  }
 
-	// OBJECT TITLE
-	public String getObjectTitle() {
-		StringBuilder output = new StringBuilder();
-		output.append(getName());
-		return output.toString();
-	}
+  /**
+   * Inizializza la parte identificativa del bean in base alla stringa tokenizzata da "||" fornita
+   * in input.
+   *
+   * @param key L'identificativo della chiave in formato pk1||pk2||pk3...
+   */
+  public void setObjectKey(String key) {
+    if (key == null || key.trim().length() == 0) {
+      return;
+    }
+    String[] array =
+        StringUtils.splitByWholeSeparatorPreserveAllTokens(key, getRowIdFieldDelimiter());
+    int ctr = 0;
+    setPrivilegeId(getLongCheckedAgainstNullContent(array[ctr]));
+  }
 
-	// Equals / HashCode
-	/**
-	 * Overrides equals method to compare two Privilege objects
-	 */
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
-			return false;
-		Privilege that = (Privilege) o;
+  // OBJECT TITLE
+  public String getObjectTitle() {
+    StringBuilder output = new StringBuilder();
+    output.append(getName());
+    return output.toString();
+  }
 
-		return privilegeId != null && Objects.equals(privilegeId, that.privilegeId);
-	}
+  // Equals / HashCode
+  /** Overrides equals method to compare two Privilege objects */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+    Privilege that = (Privilege) o;
 
-	/**
-	 * Overrides hashCode method to compute hash code of Privilege object
-	 */
-	@Override
-	public int hashCode() {
-		return Objects.hash(privilegeId);
-	}
+    return privilegeId != null && Objects.equals(privilegeId, that.privilegeId);
+  }
+
+  /** Overrides hashCode method to compute hash code of Privilege object */
+  @Override
+  public int hashCode() {
+    return Objects.hash(privilegeId);
+  }
 }

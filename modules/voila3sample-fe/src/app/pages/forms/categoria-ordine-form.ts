@@ -6,7 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 export function categoriaOrdineForm(formBuilder: FormBuilder) {
     return formBuilder.group({
-        idCategoriaOrdine: [null, Validators.required],
+        idCatOrdine: [null, Validators.required],
         theTipoOrdine: [[]]
     });
 }

@@ -5,15 +5,8 @@
   START WITH 1
   NOCACHE 
   NOCYCLE;*/
-/*CREATE SEQUENCE prodotto_seq 
-  MINVALUE 1 
-  MAXVALUE 999999999 
-  INCREMENT BY 1 
-  START WITH 1
-  NOCACHE 
-  NOCYCLE;*/
 CREATE TABLE security_user (
-  user_id BIGINT(36) NOT NULL COMMENT 'Identificativo dell''utente',
+  user_id BIGINT(20) NOT NULL COMMENT 'Identificativo dell''utente',
   email VARCHAR(80) COMMENT 'L''email dell''utente',
   password VARCHAR(80) COMMENT 'Password',
   username VARCHAR(80) COMMENT 'Il nome utente'
@@ -23,20 +16,20 @@ CREATE TABLE role (
   name VARCHAR(80),
   role_id_role_group VARCHAR(80));
 CREATE TABLE privilege (
-  privilege_id INTEGER NOT NULL,
+  privilege_id BIGINT(20) NOT NULL,
   name VARCHAR(80),
   description VARCHAR(80)
 ) COMMENT 'Entità rappresentativa di un privilegio';
 CREATE TABLE user_role_membership (
-  role_id VARCHAR(80) NOT NULL,    user_id BIGINT(36) NOT NULL) COMMENT 'Relazione fra User e Role';
+  role_id VARCHAR(80) NOT NULL,    user_id BIGINT(20) NOT NULL) COMMENT 'Relazione fra User e Role';
 CREATE TABLE role_privilege_mapping (
-  role_id VARCHAR(80) NOT NULL,    privilege_id INTEGER NOT NULL) COMMENT 'Relazione fra Role e Privilege';
+  role_id VARCHAR(80) NOT NULL,    privilege_id BIGINT(20) NOT NULL) COMMENT 'Relazione fra Role e Privilege';
 
  
 ALTER TABLE security_user
   ADD PRIMARY KEY (user_id);
 ALTER TABLE security_user  
-  MODIFY user_id BIGINT(36) NOT NULL AUTO_INCREMENT;
+  MODIFY user_id BIGINT(20) NOT NULL AUTO_INCREMENT;
  
 ALTER TABLE role
   ADD PRIMARY KEY (role_id);

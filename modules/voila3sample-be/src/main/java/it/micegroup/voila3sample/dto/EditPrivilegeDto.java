@@ -8,36 +8,24 @@ import java.util.Collection;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-/**
- * Data transfer object for edit a data element of type Privilege
- */
+/** Data transfer object for edit a data element of type Privilege */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class EditPrivilegeDto extends BaseDto {
 
-	// Generated SERIAL VERSION UID
-	private static final long serialVersionUID = 769416586L;
+  // Generated SERIAL VERSION UID
+  private static final long serialVersionUID = 27188524L;
 
-	/**
-	 * Attribute privilegeId of the entity Privilege
-	 */
-	@NotNull
-	private Integer privilegeId;
+  /** Attribute privilegeId of the entity Privilege */
+  @NotNull private Long privilegeId;
 
-	/**
-	 * Attribute name of the entity Privilege
-	 */
-	private String name;
+  /** Attribute name of the entity Privilege */
+  private String name;
 
-	/**
-	 * Attribute description of the entity Privilege
-	 */
-	private String description;
+  /** Attribute description of the entity Privilege */
+  private String description;
 
-	/**
-	 * Collection of Edit Dto of PrivilegePerRole, which is child of the entity
-	 * Privilege
-	 */
-	private Collection<EditPrivilegePerRoleDto> thePrivilegePerRole;
+  /** Collection of Edit Dto of PrivilegePerRole, which is child of the entity Privilege */
+  private Collection<EditPrivilegePerRoleDto> thePrivilegePerRole;
 }

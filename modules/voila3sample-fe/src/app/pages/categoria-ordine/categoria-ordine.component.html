@@ -9,8 +9,8 @@
                 <mat-card-title>{{ 'voila3sample.detail.CategoriaOrdine.label' | translate }}</mat-card-title>
                 <!-- Quick Filter -->
                 <form class="quick" name="searchCategoriaOrdineForm" [formGroup]="searchCategoriaOrdineForm" (keyup)="onUp()" fxLayout="column" fxLayoutGap="20" fxFlex>
-                    <!-- Full Text Search based on Id Categoria Ordine -->
-                    <rsd-input-text formControlName="idCategoriaOrdine" iconSuffix="search"></rsd-input-text>
+                    <!-- Full Text Search based on Id Cat Ordine -->
+                    <rsd-input-text formControlName="idCatOrdine" iconSuffix="search"></rsd-input-text>
                 </form>
                 <!-- Search Dialog Button -->
                 <button mat-icon-button (click)="openDialogResid()" matTooltip="Ricerca Avanzata con Resid" [color]="filters === '' ? 'basic' : 'warn'">
@@ -29,10 +29,10 @@
 
                 <!-- Tabella tipo categoriaOrdine -->
                 <table aria-label="categoriaOrdine's table" mat-table [dataSource]="dataSource" matSort>
-                    <!-- Id Categoria Ordine -->
-                    <ng-container matColumnDef="idCategoriaOrdine">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.CategoriaOrdine.idCategoriaOrdine' | translate }}</th>
-                        <td mat-cell *matCellDef="let categoriaOrdine">{{ categoriaOrdine.idCategoriaOrdine }}</td>
+                    <!-- Id Cat Ordine -->
+                    <ng-container matColumnDef="idCatOrdine">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.CategoriaOrdine.idCatOrdine' | translate }}</th>
+                        <td mat-cell *matCellDef="let categoriaOrdine">{{ categoriaOrdine.idCatOrdine }}</td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -8,12 +8,11 @@
 
         <!-- Tabella tipo theRigaOrdine -->
         <table aria-label="theRigaOrdine's tab" mat-table [dataSource]="dataSource" matSort>
-            <!-- Quantita -->
-            <ng-container matColumnDef="quantita">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.quantita' | translate }}</th>
-                <td mat-cell *matCellDef="let rigaOrdine">{{ rigaOrdine.quantita }}</td>
+            <!-- Qta -->
+            <ng-container matColumnDef="qta">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.qta' | translate }}</th>
+                <td mat-cell *matCellDef="let rigaOrdine">{{ rigaOrdine.qta }}</td>
             </ng-container>
-
             <!-- Ordine -->
             <ng-container matColumnDef="theOrdine.idOrdine">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.theOrdineObjectKey' | translate }}</th>

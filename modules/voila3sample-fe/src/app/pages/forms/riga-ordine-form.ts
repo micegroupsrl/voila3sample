@@ -6,12 +6,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 export function rigaOrdineForm(formBuilder: FormBuilder) {
     return formBuilder.group({
-        idProdotto: [null],
-        theProdottoObjectKey: [null, Validators.required],
-        theProdottoObjectTitle: [null],
         idOrdine: [null],
         theOrdineObjectKey: [null, Validators.required],
         theOrdineObjectTitle: [null],
-        quantita: [null, Validators.maxLength(12)]
+        idProdotto: [null],
+        theProdottoObjectKey: [null, Validators.required],
+        theProdottoObjectTitle: [null],
+        qta: [null, Validators.maxLength(12)]
     });
 }

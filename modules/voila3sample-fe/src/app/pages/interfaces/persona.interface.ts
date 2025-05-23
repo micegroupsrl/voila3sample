@@ -6,5 +6,21 @@ import { BaseEntity } from 'src/app/shared/base/base.interface';
 
 export interface IPersona extends BaseEntity {
     idPersona: number;
-    codiceFiscale: string;
+    cf: string;
+
+    nome: string;
+
+    cognome: string;
+
+    email: string;
+
+    telefono: string;
+
+    createdBy: string;
+
+    lastModifiedBy: string;
+
+    createdDate: Date;
+
+    lastModifiedDate: Date;
 }

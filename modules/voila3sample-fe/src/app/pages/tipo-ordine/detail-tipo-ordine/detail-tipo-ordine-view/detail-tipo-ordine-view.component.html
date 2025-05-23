@@ -2,20 +2,19 @@
     <mat-card class="mat-elevation-z8">
         <!-- Card Body -->
         <mat-card-content class="overflow" autosize>
-            <!-- Nome Ordine -->
-            <div *ngIf="tipoOrdine?.nomeOrdine">
+            <!-- Anno -->
+            <div *ngIf="tipoOrdine?.anno">
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
-                    <!-- Label -->
                     <div fxLayout="column" fxFlex="30">
-                        <label>{{ 'voila3sample.detail.TipoOrdine.nomeOrdine' | translate }}</label>
+                        <!-- Label -->
+                        <label>ID</label>
                     </div>
                     <!-- Value -->
                     <div fxLayout="column">
-                        <strong>{{ tipoOrdine!.nomeOrdine }}</strong>
+                        <strong>{{ tipoOrdine!.anno }}</strong>
                     </div>
                 </div>
             </div>
-
             <!-- Id Tipo Ordine -->
             <div *ngIf="tipoOrdine?.idTipoOrdine">
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
@@ -26,19 +25,6 @@
                     <!-- Value -->
                     <div fxLayout="column">
                         <strong>{{ tipoOrdine!.idTipoOrdine }}</strong>
-                    </div>
-                </div>
-            </div>
-            <!-- Anno Tipologia -->
-            <div *ngIf="tipoOrdine?.annoTipologia">
-                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
-                    <div fxLayout="column" fxFlex="30">
-                        <!-- Label -->
-                        <label>ID</label>
-                    </div>
-                    <!-- Value -->
-                    <div fxLayout="column">
-                        <strong>{{ tipoOrdine!.annoTipologia }}</strong>
                     </div>
                 </div>
             </div>

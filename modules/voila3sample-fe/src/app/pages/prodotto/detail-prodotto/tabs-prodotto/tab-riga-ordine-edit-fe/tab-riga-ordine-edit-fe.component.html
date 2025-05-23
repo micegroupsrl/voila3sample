@@ -10,12 +10,12 @@
         <form [formGroup]="form">
             <ng-container formArrayName="theRigaOrdine">
                 <table aria-label="theRigaOrdine's tab" mat-table [dataSource]="getTheRigaOrdine.controls.slice(currentPage * pageSize, (currentPage + 1) * pageSize)" matSort>
-                    <!-- Quantita -->
-                    <ng-container matColumnDef="quantita">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.quantita' | translate }}</th>
+                    <!-- Qta -->
+                    <ng-container matColumnDef="qta">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.qta' | translate }}</th>
                         <td mat-cell *matCellDef="let rigaOrdine" [formGroup]="rigaOrdine">
-                            <!-- Quantita Input-->
-                            <rsd-input-number formControlName="quantita" appearance="fill"></rsd-input-number>
+                            <!-- Qta Input-->
+                            <rsd-input-number formControlName="qta" appearance="fill"></rsd-input-number>
                         </td>
                     </ng-container>
                     <!-- Ordine -->
@@ -71,11 +71,11 @@
         <form [formGroup]="formNewEntities">
             <ng-container formArrayName="theRigaOrdine">
                 <table aria-label="theRigaOrdine's tab" mat-table [dataSource]="newTheRigaOrdine.controls" matSort>
-                    <!-- Quantita -->
-                    <ng-container matColumnDef="quantita">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.quantita' | translate }}</th>
+                    <!-- Qta -->
+                    <ng-container matColumnDef="qta">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.RigaOrdine.qta' | translate }}</th>
                         <td mat-cell *matCellDef="let rigaOrdine" [formGroup]="rigaOrdine">
-                            <rsd-input-number formControlName="quantita" appearance="fill"></rsd-input-number>
+                            <rsd-input-number formControlName="qta" appearance="fill"></rsd-input-number>
                         </td>
                     </ng-container>
                     <!-- Ordine -->

@@ -6,12 +6,9 @@ import { IOrdine } from '../interfaces/ordine.interface';
  */
 
 export interface ITipoOrdine extends BaseEntity {
+    anno: number;
     idTipoOrdine: number;
-    annoTipologia: number;
-    idCategoriaOrdine: number;
-
-    nomeOrdine: string;
-
+    idCatOrdine: number;
     theCategoriaOrdineObjectKey: string;
     theCategoriaOrdineObjectTitle: string;
     theOrdine: IOrdine[];

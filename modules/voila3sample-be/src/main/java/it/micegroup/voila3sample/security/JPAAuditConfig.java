@@ -15,33 +15,33 @@ import org.springframework.security.core.userdetails.UserDetails;
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 public class JPAAuditConfig {
 
-	@Bean
-	public AuditorAware<String> auditorProvider() {
-		return new AuditorAware<String>() {
-			@Override
-			public Optional<String> getCurrentAuditor() {
-				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-				if (auth != null && auth.getPrincipal() != null) {
-					Object principal = auth.getPrincipal();
-					return findSubscriber(principal);
-				}
-				return Optional.of("Unknown");
-			}
+  @Bean
+  public AuditorAware<String> auditorProvider() {
+    return new AuditorAware<String>() {
+      @Override
+      public Optional<String> getCurrentAuditor() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal() != null) {
+          Object principal = auth.getPrincipal();
+          return findSubscriber(principal);
+        }
+        return Optional.of("Unknown");
+      }
 
-			private Optional<String> findSubscriber(Object principal) {
+      private Optional<String> findSubscriber(Object principal) {
 
-				if (principal instanceof UserDetails) {
-					UserDetails subscriber = (UserDetails) principal;
-					return Optional.of(subscriber.getUsername());
-				} else if (principal instanceof String) {
-					return Optional.of((String) principal);
-				} else if (principal instanceof Jwt) {
-					Jwt token = (Jwt) principal;
-					String subscriber = (String) token.getClaims().get("sub");
-					return Optional.of(subscriber);
-				}
-				return Optional.of("Unknown");
-			}
-		};
-	}
+        if (principal instanceof UserDetails) {
+          UserDetails subscriber = (UserDetails) principal;
+          return Optional.of(subscriber.getUsername());
+        } else if (principal instanceof String) {
+          return Optional.of((String) principal);
+        } else if (principal instanceof Jwt) {
+          Jwt token = (Jwt) principal;
+          String subscriber = (String) token.getClaims().get("sub");
+          return Optional.of(subscriber);
+        }
+        return Optional.of("Unknown");
+      }
+    };
+  }
 }

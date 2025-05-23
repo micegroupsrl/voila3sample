@@ -29,87 +29,91 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 import net.sf.jasperreports.export.XlsxExporterConfiguration;
 import net.sf.jasperreports.export.XlsxReportConfiguration;
 
-/**
- * Generic class for services
- */
+/** Generic class for services */
 @Service
 public class BaseServiceImpl {
-	private static final String JASPER_REPORT_EXTENSION = ".jrxml";
+  private static final String JASPER_REPORT_EXTENSION = ".jrxml";
 
-	protected static final String LOG_ERROR = "Error: ";
+  protected static final String LOG_ERROR = "Error: ";
 
-	@Value("${jasperreports.dir}")
-	protected String jasperReportsDir;
+  @Value("${jasperreports.dir}")
+  protected String jasperReportsDir;
 
-	@Autowired
-	private ResourceLoader resourceLoader;
+  @Autowired private ResourceLoader resourceLoader;
 
-	@Value("${jasperreports.debug}")
-	private Boolean jasperReportsDebug;
+  @Value("${jasperreports.debug}")
+  private Boolean jasperReportsDebug;
 
-	@Autowired
-	private JasperReportsCache jasperReportsCache;
+  @Autowired private JasperReportsCache jasperReportsCache;
 
-	protected JasperReport prepareJasperReport(String reportName, Map<String, Object> parameters,
-			List<String> fileNames) throws BusinessException {
-		String jrMainKey = reportName;
-		String jrMainFilename = jrMainKey + JASPER_REPORT_EXTENSION;
-		try {
-			// Find and build all dependency resources except the main (also know as master
-			// report).
-			ResourcePatternResolver resourcePatternResolver = ResourcePatternUtils
-					.getResourcePatternResolver(resourceLoader);
-			List<Resource> jrResources = new ArrayList<>();
-			for (String name : fileNames) {
-				jrResources.add(resourcePatternResolver
-						.getResource("classpath:" + jasperReportsDir + "/" + name + JASPER_REPORT_EXTENSION));
-			}
-			Resource jrMainResource = null;
-			for (Resource resource : jrResources) {
-				String filename = resource.getFilename();
-				if (filename != null && filename.equals(jrMainFilename)) {
-					// Save main report resource (file) and jump the build.
-					jrMainResource = resource;
-					continue;
-				}
-				String jrKey = "";
-				if (filename != null) {
-					jrKey = filename.replaceFirst(JASPER_REPORT_EXTENSION, "");
-				}
-				if (Boolean.TRUE.equals(jasperReportsDebug) || !jasperReportsCache.isSaved(jrKey)) {
-					jasperReportsCache.save(jrKey, JasperCompileManager.compileReport(resource.getInputStream()));
-				}
-				parameters.put(jrKey, jasperReportsCache.load(jrKey));
-			}
-			// Check if main report exist.
-			if (jrMainResource == null) {
-				throw new IllegalArgumentException(jrMainFilename + " not found");
-			}
-			// Compile and return the main report.
-			if (Boolean.TRUE.equals(jasperReportsDebug) || !jasperReportsCache.isSaved(jrMainKey)) {
-				jasperReportsCache.save(jrMainKey, JasperCompileManager.compileReport(jrMainResource.getInputStream()));
-			}
-			return jasperReportsCache.load(jrMainKey);
-		} catch (IOException e) {
-			throw new BusinessException(e);
-		} catch (JRException j) {
-			throw new BusinessException(j);
-		}
-	}
+  protected JasperReport prepareJasperReport(
+      String reportName, Map<String, Object> parameters, List<String> fileNames)
+      throws BusinessException {
+    String jrMainKey = reportName;
+    String jrMainFilename = jrMainKey + JASPER_REPORT_EXTENSION;
+    try {
+      // Find and build all dependency resources except the main (also know as master report).
+      ResourcePatternResolver resourcePatternResolver =
+          ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
+      List<Resource> jrResources = new ArrayList<>();
+      for (String name : fileNames) {
+        jrResources.add(
+            resourcePatternResolver.getResource(
+                "classpath:" + jasperReportsDir + "/" + name + JASPER_REPORT_EXTENSION));
+      }
+      Resource jrMainResource = null;
+      for (Resource resource : jrResources) {
+        String filename = resource.getFilename();
+        if (filename != null && filename.equals(jrMainFilename)) {
+          // Save main report resource (file) and jump the build.
+          jrMainResource = resource;
+          continue;
+        }
+        String jrKey = "";
+        if (filename != null) {
+          jrKey = filename.replaceFirst(JASPER_REPORT_EXTENSION, "");
+        }
+        if (Boolean.TRUE.equals(jasperReportsDebug) || !jasperReportsCache.isSaved(jrKey)) {
+          jasperReportsCache.save(
+              jrKey, JasperCompileManager.compileReport(resource.getInputStream()));
+        }
+        parameters.put(jrKey, jasperReportsCache.load(jrKey));
+      }
+      // Check if main report exist.
+      if (jrMainResource == null) {
+        throw new IllegalArgumentException(jrMainFilename + " not found");
+      }
+      // Compile and return the main report.
+      if (Boolean.TRUE.equals(jasperReportsDebug) || !jasperReportsCache.isSaved(jrMainKey)) {
+        jasperReportsCache.save(
+            jrMainKey, JasperCompileManager.compileReport(jrMainResource.getInputStream()));
+      }
+      return jasperReportsCache.load(jrMainKey);
+    } catch (IOException e) {
+      throw new BusinessException(e);
+    } catch (JRException j) {
+      throw new BusinessException(j);
+    }
+  }
 
-	protected ByteArrayOutputStream exportXlsReport(JasperPrint jasperPrint) throws JRException {
-		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+  protected ByteArrayOutputStream exportXlsReport(JasperPrint jasperPrint) throws JRException {
+    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-		SimpleXlsxReportConfiguration configuration = new SimpleXlsxReportConfiguration();
-		configuration.setOnePagePerSheet(true);
-		configuration.setIgnoreGraphics(false);
+    SimpleXlsxReportConfiguration configuration = new SimpleXlsxReportConfiguration();
+    configuration.setOnePagePerSheet(true);
+    configuration.setIgnoreGraphics(false);
 
-		Exporter<ExporterInput, XlsxReportConfiguration, XlsxExporterConfiguration, OutputStreamExporterOutput> exporter = new JRXlsxExporter();
-		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(byteArrayOutputStream));
-		exporter.setConfiguration(configuration);
-		exporter.exportReport();
+    Exporter<
+            ExporterInput,
+            XlsxReportConfiguration,
+            XlsxExporterConfiguration,
+            OutputStreamExporterOutput>
+        exporter = new JRXlsxExporter();
+    exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+    exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(byteArrayOutputStream));
+    exporter.setConfiguration(configuration);
+    exporter.exportReport();
 
-		return byteArrayOutputStream;
-	}
+    return byteArrayOutputStream;
+  }
 }

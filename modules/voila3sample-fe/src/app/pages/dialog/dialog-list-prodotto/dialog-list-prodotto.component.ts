@@ -22,7 +22,7 @@ export class DialogListProdottoComponent {
     currentPage = 0;
     pageSizeOptions: number[] = [5, 10, 25, 100];
 
-    displayedColumns: string[] = ['idProdotto', 'nomeProdotto'];
+    displayedColumns: string[] = ['idProdotto', 'descrizione', 'createdBy', 'lastModifiedBy', 'createdDate', 'lastModifiedDate'];
     dataSource: MatTableDataSource<IProdotto> = new MatTableDataSource();
     clickedRows = new Set<IProdotto>();
 
@@ -30,7 +30,11 @@ export class DialogListProdottoComponent {
 
     public dataForm = {
         idProdotto: null,
-        nomeProdotto: ''
+        descrizione: '',
+        createdBy: '',
+        lastModifiedBy: '',
+        createdDate: null,
+        lastModifiedDate: null
     };
 
     filters = '';

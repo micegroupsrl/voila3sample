@@ -16,18 +16,10 @@ import it.micegroup.voila3sample.repository.BaseRepository;
 @Repository
 public interface PersonaRepository extends BaseRepository<Persona, PersonaKey> {
 
-	/**
-	 * Finds all Persona following the specification in input and return them in a
-	 * Page
-	 */
+  /** Finds all Persona following the specification in input and return them in a Page */
+  @Override
+  Page<Persona> findAll(Specification<Persona> spec, Pageable pageable);
 
-	@Override
-	Page<Persona> findAll(Specification<Persona> spec, Pageable pageable);
-
-	/**
-	 * Finds, if present, a Persona by its id
-	 */
-
-	Optional<Persona> findByThePersonaKey(PersonaKey id);
-
+  /** Finds, if present, a Persona by its id */
+  Optional<Persona> findByThePersonaKey(PersonaKey id);
 }

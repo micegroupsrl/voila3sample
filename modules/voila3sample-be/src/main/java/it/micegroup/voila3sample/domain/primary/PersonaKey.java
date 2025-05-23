@@ -24,50 +24,49 @@ import it.micegroup.voila2runtime.utils.EntityUtils;
 @EqualsAndHashCode(callSuper = false)
 public class PersonaKey extends BaseEntity implements Serializable {
 
-	// Generated SERIAL VERSION UID
-	private static final long serialVersionUID = 2621278788L;
+  // Generated SERIAL VERSION UID
+  private static final long serialVersionUID = 2189577881L;
 
-	// ATTRIBUTES
-	/**
-	 * Inner id idPersona
-	 */
-	@Column(name = "id_persona", columnDefinition = "INTEGER")
-	private Integer idPersona;
-	/**
-	 * Inner id codiceFiscale
-	 */
-	@Column(name = "codice_fiscale", columnDefinition = "VARCHAR(80)")
-	private String codiceFiscale;
-	// Getter & Setter for parent entity attributes
+  // ATTRIBUTES
+  /** Inner id idPersona */
+  @Column(name = "id_persona", columnDefinition = "INTEGER")
+  private Integer idPersona;
 
-	// Getter & Setter for Object Key
-	/**
-	 * Restituisce l'identificativo della chiave in formato stringa. Ritorna
-	 * conveniente nelle selezioni da lista.
-	 * 
-	 * @return L'identificativo della chiave in formato pk1||pk2||pk3...
-	 */
-	public String getObjectKey() {
-		StringBuilder output = new StringBuilder();
-		output.append(getIdPersona());
-		output.append(getRowIdFieldDelimiter());
-		output.append(getCodiceFiscale());
-		return output.toString();
-	}
+  /** Inner id cf */
+  @Column(name = "cf", columnDefinition = "VARCHAR(80)")
+  private String cf;
 
-	/**
-	 * Inizializza la parte identificativa del bean in base alla stringa tokenizzata
-	 * da "||" fornita in input.
-	 * 
-	 * @param key L'identificativo della chiave in formato pk1||pk2||pk3...
-	 */
-	public void setObjectKey(String key) {
-		if (key == null || key.trim().length() == 0) {
-			return;
-		}
-		String[] array = StringUtils.splitByWholeSeparatorPreserveAllTokens(key, getRowIdFieldDelimiter());
-		int ctr = 0;
-		setIdPersona(getIntegerCheckedAgainstNullContent(array[ctr++]));
-		setCodiceFiscale(getStringCheckedAgainstNullContent(array[ctr]));
-	}
+  // Getter & Setter for parent entity attributes
+
+  // Getter & Setter for Object Key
+  /**
+   * Restituisce l'identificativo della chiave in formato stringa. Ritorna conveniente nelle
+   * selezioni da lista.
+   *
+   * @return L'identificativo della chiave in formato pk1||pk2||pk3...
+   */
+  public String getObjectKey() {
+    StringBuilder output = new StringBuilder();
+    output.append(getIdPersona());
+    output.append(getRowIdFieldDelimiter());
+    output.append(getCf());
+    return output.toString();
+  }
+
+  /**
+   * Inizializza la parte identificativa del bean in base alla stringa tokenizzata da "||" fornita
+   * in input.
+   *
+   * @param key L'identificativo della chiave in formato pk1||pk2||pk3...
+   */
+  public void setObjectKey(String key) {
+    if (key == null || key.trim().length() == 0) {
+      return;
+    }
+    String[] array =
+        StringUtils.splitByWholeSeparatorPreserveAllTokens(key, getRowIdFieldDelimiter());
+    int ctr = 0;
+    setIdPersona(getIntegerCheckedAgainstNullContent(array[ctr++]));
+    setCf(getStringCheckedAgainstNullContent(array[ctr]));
+  }
 }

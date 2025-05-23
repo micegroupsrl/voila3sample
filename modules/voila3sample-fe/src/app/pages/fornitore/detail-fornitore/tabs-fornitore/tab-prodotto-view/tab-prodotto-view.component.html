@@ -1,0 +1,48 @@
+<mat-card>
+    <!-- Card Header -->
+    <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+        <!-- Quick Filter -->
+        <form class="quick" name="searchProdottoForm" [formGroup]="searchProdottoForm" (keyup)="onUp()" fxLayout="column" fxLayoutGap="20" fxFlex>
+            <!-- Full Text Search based on Descrizione -->
+            <rsd-input-text formControlName="descrizione" iconSuffix="search"></rsd-input-text>
+        </form>
+    </mat-card-header>
+    <!-- Card Content -->
+    <mat-card-content class="overflow" autosize>
+        <!-- View Mode -->
+        <!-- Numero theProdotto trovati -->
+        <!-- {{ Prodotto | tableInfo: totalElements: page: pageSize }} -->
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
+        <!-- Tabella tipo theProdotto -->
+        <table aria-label="theProdotto's tab" mat-table [dataSource]="dataSource" matSort>
+            <!-- Id Prodotto -->
+            <ng-container matColumnDef="idProdotto">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Prodotto.idProdotto' | translate }}</th>
+                <td mat-cell *matCellDef="let prodotto">{{ prodotto.idProdotto }}</td>
+            </ng-container>
+            <!-- Descrizione -->
+            <ng-container matColumnDef="descrizione">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Prodotto.descrizione' | translate }}</th>
+                <td mat-cell *matCellDef="let prodotto">{{ prodotto.descrizione }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+    </mat-card-content>
+    <!-- Footer -->
+    <mat-card-footer>
+        <mat-paginator
+            #paginator
+            [length]="totalRows"
+            [pageIndex]="currentPage"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageChanged($event)"
+            aria-label="Select page"
+            showFirstLastButtons
+        >
+        </mat-paginator>
+    </mat-card-footer>
+</mat-card>

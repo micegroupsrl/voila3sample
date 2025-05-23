@@ -23,13 +23,13 @@ export class SearchCategoriaOrdineResidComponent extends BaseSearchComponent imp
 
     ngOnInit(): void {
         this.searchCategoriaOrdineForm = this.fb.group({
-            idCategoriaOrdineDa: [],
-            idCategoriaOrdineA: []
+            idCatOrdineDa: [],
+            idCatOrdineA: []
         });
 
         const formValues = {
-            idCategoriaOrdineDa: this.data.idCategoriaOrdineDa,
-            idCategoriaOrdineA: this.data.idCategoriaOrdineA
+            idCatOrdineDa: this.data.idCatOrdineDa,
+            idCatOrdineA: this.data.idCatOrdineA
         };
 
         this.searchCategoriaOrdineForm.patchValue(formValues);
@@ -44,7 +44,7 @@ export class SearchCategoriaOrdineResidComponent extends BaseSearchComponent imp
         const searchCategoriaOrdine = this.searchCategoriaOrdineForm.value;
 
         if (searchCategoriaOrdine) {
-            filterBuild = filterBuild.andBetween('idCategoriaOrdine', searchCategoriaOrdine.idCategoriaOrdineDa, searchCategoriaOrdine.idCategoriaOrdineA);
+            filterBuild = filterBuild.andBetween('idCatOrdine', searchCategoriaOrdine.idCatOrdineDa, searchCategoriaOrdine.idCatOrdineA);
         }
         return filterBuild.value();
     }

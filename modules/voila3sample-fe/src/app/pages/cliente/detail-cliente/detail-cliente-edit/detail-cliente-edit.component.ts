@@ -70,12 +70,14 @@ export class DetailClienteEditComponent extends BaseDetailComponent implements O
     public patchValueForm(cliente: ICliente) {
         this.clienteForm.patchValue({
             idPersona: cliente.idPersona,
-            codiceFiscale: cliente.codiceFiscale,
+            cf: cliente.cf,
+            punti: cliente.punti,
+            nome: cliente.nome,
+            cognome: cliente.cognome,
             email: cliente.email,
-            telefono: cliente.telefono,
-            indirizzo: cliente.indirizzo
+            telefono: cliente.telefono
         });
         this.clienteForm.get('idPersona')?.disable();
-        this.clienteForm.get('codiceFiscale')?.disable();
+        this.clienteForm.get('cf')?.disable();
     }
 }

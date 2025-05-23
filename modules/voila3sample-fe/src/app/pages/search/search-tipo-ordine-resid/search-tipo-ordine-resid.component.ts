@@ -30,27 +30,25 @@ export class SearchTipoOrdineResidComponent extends BaseSearchComponent implemen
 
     ngOnInit(): void {
         this.searchTipoOrdineForm = this.fb.group({
+            annoDa: [],
+            annoA: [],
             idTipoOrdineDa: [],
             idTipoOrdineA: [],
-            annoTipologiaDa: [],
-            annoTipologiaA: [],
-            idCategoriaOrdineDa: [],
-            idCategoriaOrdineA: [],
-            nomeOrdine: [],
+            idCatOrdineDa: [],
+            idCatOrdineA: [],
 
             idCategoriaOrdine: []
         });
         this.getParentsList();
 
         const formValues = {
+            annoDa: this.data.annoDa,
+            annoA: this.data.annoA,
             idTipoOrdineDa: this.data.idTipoOrdineDa,
             idTipoOrdineA: this.data.idTipoOrdineA,
-            annoTipologiaDa: this.data.annoTipologiaDa,
-            annoTipologiaA: this.data.annoTipologiaA,
 
-            idCategoriaOrdineDa: this.data.idCategoriaOrdineDa,
-            idCategoriaOrdineA: this.data.idCategoriaOrdineA,
-            nomeOrdine: this.data.nomeOrdine,
+            idCatOrdineDa: this.data.idCatOrdineDa,
+            idCatOrdineA: this.data.idCatOrdineA,
             idCategoriaOrdine: this.data.idCategoriaOrdine
         };
 
@@ -67,12 +65,11 @@ export class SearchTipoOrdineResidComponent extends BaseSearchComponent implemen
 
         if (searchTipoOrdine) {
             filterBuild = filterBuild
+                .andBetween('anno', searchTipoOrdine.annoDa, searchTipoOrdine.annoA)
                 .andBetween('idTipoOrdine', searchTipoOrdine.idTipoOrdineDa, searchTipoOrdine.idTipoOrdineA)
-                .andBetween('annoTipologia', searchTipoOrdine.annoTipologiaDa, searchTipoOrdine.annoTipologiaA)
 
-                .andBetween('tipoOrdineKey.idCategoriaOrdine', searchTipoOrdine.idCategoriaOrdineDa, searchTipoOrdine.idCategoriaOrdineA)
-                .andLike('nomeOrdine', searchTipoOrdine.nomeOrdine)
-                .andEquals('theCategoriaOrdine.idCategoriaOrdine', searchTipoOrdine.idCategoriaOrdine);
+                .andBetween('tipoOrdineKey.idCatOrdine', searchTipoOrdine.idCatOrdineDa, searchTipoOrdine.idCatOrdineA)
+                .andEquals('theCategoriaOrdine.idCatOrdine', searchTipoOrdine.idCategoriaOrdine);
         }
         return filterBuild.value();
     }

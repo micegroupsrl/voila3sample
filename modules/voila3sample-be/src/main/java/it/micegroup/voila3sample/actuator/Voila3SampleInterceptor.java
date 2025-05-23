@@ -20,35 +20,35 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @Component
 @Slf4j
-public class Voila3SampleInterceptor implements HandlerInterceptor, ApplicationContextAware {
-	private MeterRegistry registry;
+public class Voila3sampleInterceptor implements HandlerInterceptor, ApplicationContextAware {
+  private MeterRegistry registry;
 
-	@Autowired
-	private EntityManager entityManager;
+  @Autowired private EntityManager entityManager;
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		return HandlerInterceptor.super.preHandle(request, response, handler);
-	}
+  @Override
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+      throws Exception {
+    return HandlerInterceptor.super.preHandle(request, response, handler);
+  }
 
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-		String uri;
-		String pathKey;
-		String method;
-		uri = request.getRequestURI();
-		method = request.getMethod();
-		if (!uri.contains("prometheus")) {
-			log.info(" >> PATH: {} METHOD: {}", uri, method);
-			pathKey = "api_".concat(method.toLowerCase()).concat(uri.replace("/", "_").toLowerCase());
-			this.registry.counter(pathKey).increment();
-		}
-	}
+  @Override
+  public void afterCompletion(
+      HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+      throws Exception {
+    String uri;
+    String pathKey;
+    String method;
+    uri = request.getRequestURI();
+    method = request.getMethod();
+    if (!uri.contains("prometheus")) {
+      log.info(" >> PATH: {} METHOD: {}", uri, method);
+      pathKey = "api_".concat(method.toLowerCase()).concat(uri.replace("/", "_").toLowerCase());
+      this.registry.counter(pathKey).increment();
+    }
+  }
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		entityManager = applicationContext.getBean(EntityManager.class);
-	}
+  @Override
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    entityManager = applicationContext.getBean(EntityManager.class);
+  }
 }

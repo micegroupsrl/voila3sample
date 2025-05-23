@@ -14,18 +14,10 @@ import it.micegroup.voila3sample.repository.BaseRepository;
 @Repository
 public interface CategoriaOrdineRepository extends BaseRepository<CategoriaOrdine, Integer> {
 
-	/**
-	 * Finds all CategoriaOrdine following the specification in input and return
-	 * them in a Page
-	 */
+  /** Finds all CategoriaOrdine following the specification in input and return them in a Page */
+  @Override
+  Page<CategoriaOrdine> findAll(Specification<CategoriaOrdine> spec, Pageable pageable);
 
-	@Override
-	Page<CategoriaOrdine> findAll(Specification<CategoriaOrdine> spec, Pageable pageable);
-
-	/**
-	 * Finds, if present, a CategoriaOrdine by its id
-	 */
-
-	Optional<CategoriaOrdine> findByIdCategoriaOrdine(Integer id);
-
+  /** Finds, if present, a CategoriaOrdine by its id */
+  Optional<CategoriaOrdine> findByIdCatOrdine(Integer id);
 }

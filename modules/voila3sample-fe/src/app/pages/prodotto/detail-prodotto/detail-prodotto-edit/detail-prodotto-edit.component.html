@@ -3,16 +3,44 @@
     <form [formGroup]="prodottoForm">
         <mat-card class="mat-elevation-z8">
             <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
-                <!--Nome Prodotto-->
+                <!--Id Prodotto-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <!--In new mode show the ID as required field-->
+                        <label *ngIf="pageStatus | hasPageStatus: 'new'">ID*</label>
+                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">ID</label>
+                    </div>
+                    <rsd-input-number formControlName="idProdotto"></rsd-input-number>
+                </div>
+                <!--End Id Prodotto-->
+
+                <!--Descrizione-->
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
                     <div fxLayout="column" fxFlex="30">
                         <!--Label-->
-                        <label>{{ 'voila3sample.detail.Prodotto.nomeProdotto' | translate }}</label>
+                        <label>{{ 'voila3sample.detail.Prodotto.descrizione' | translate }}</label>
                     </div>
                     <!--Input-->
-                    <rsd-input-text formControlName="nomeProdotto"></rsd-input-text>
+                    <rsd-input-text formControlName="descrizione"></rsd-input-text>
                 </div>
-                <!--End Nome Prodotto-->
+                <!--End Descrizione-->
+                <!-- Fornitore-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <mat-label>{{ 'voila3sample.detail.Prodotto.theFornitoreObjectKey' | translate }}</mat-label>
+                    </div>
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>{{ 'voila3sample.detail.Prodotto.theFornitoreObjectKey' | translate }}</mat-label>
+                        <!--Input-->
+                        <mat-select formControlName="theFornitoreObjectKey">
+                            <mat-option *ngFor="let fornitore of fornitoreList" [value]="fornitore.objectKey">
+                                {{ fornitore.objectTitle }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
 
                 <!--Tabs prodotto -->
                 <div class="tabs">

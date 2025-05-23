@@ -8,7 +8,17 @@ import { IRigaOrdine } from '../interfaces/riga-ordine.interface';
 export interface IProdotto extends BaseEntity {
     idProdotto: number;
 
-    nomeProdotto: string;
+    descrizione: string;
 
+    createdBy: string;
+
+    lastModifiedBy: string;
+
+    createdDate: Date;
+
+    lastModifiedDate: Date;
+
+    theFornitoreObjectKey: string;
+    theFornitoreObjectTitle: string;
     theRigaOrdine: IRigaOrdine[];
 }

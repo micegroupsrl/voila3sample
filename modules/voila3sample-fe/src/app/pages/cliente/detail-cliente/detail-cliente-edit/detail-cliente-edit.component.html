@@ -14,18 +14,49 @@
                     <rsd-input-number formControlName="idPersona"></rsd-input-number>
                 </div>
                 <!--End Id Persona-->
-                <!--Codice Fiscale-->
+                <!--Cf-->
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
                     <!--Label-->
                     <div fxLayout="column" fxFlex="30">
-                        <!--In new mode show codiceFiscale as required field-->
-                        <label *ngIf="pageStatus | hasPageStatus: 'new'">{{ 'voila3sample.detail.Cliente.codiceFiscale' | translate }}*</label>
-                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">{{ 'voila3sample.detail.Cliente.codiceFiscale' | translate }}</label>
+                        <!--In new mode show cf as required field-->
+                        <label *ngIf="pageStatus | hasPageStatus: 'new'">{{ 'voila3sample.detail.Cliente.cf' | translate }}*</label>
+                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">{{ 'voila3sample.detail.Cliente.cf' | translate }}</label>
                     </div>
-                    <rsd-input-text formControlName="codiceFiscale"></rsd-input-text>
+                    <rsd-input-text formControlName="cf"></rsd-input-text>
                 </div>
-                <!--End Codice Fiscale-->
+                <!--End Cf-->
 
+                <!--Punti-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Cliente.punti' | translate }}</label>
+                    </div>
+                    <!--Input-->
+
+                    <rsd-input-number formControlName="punti"></rsd-input-number>
+                </div>
+                <!--End Punti-->
+                <!--Nome-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Cliente.nome' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="nome"></rsd-input-text>
+                </div>
+                <!--End Nome-->
+                <!--Cognome-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.Cliente.cognome' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="cognome"></rsd-input-text>
+                </div>
+                <!--End Cognome-->
                 <!--Email-->
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
                     <div fxLayout="column" fxFlex="30">
@@ -46,16 +77,6 @@
                     <rsd-input-text formControlName="telefono"></rsd-input-text>
                 </div>
                 <!--End Telefono-->
-                <!--Indirizzo-->
-                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
-                    <div fxLayout="column" fxFlex="30">
-                        <!--Label-->
-                        <label>{{ 'voila3sample.detail.Cliente.indirizzo' | translate }}</label>
-                    </div>
-                    <!--Input-->
-                    <rsd-input-text formControlName="indirizzo"></rsd-input-text>
-                </div>
-                <!--End Indirizzo-->
 
                 <!--Tabs cliente -->
                 <div class="tabs">

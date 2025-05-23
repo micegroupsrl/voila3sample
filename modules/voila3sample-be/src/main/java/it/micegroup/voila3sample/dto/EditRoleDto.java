@@ -9,45 +9,30 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-/**
- * Data transfer object for edit a data element of type Role
- */
+/** Data transfer object for edit a data element of type Role */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class EditRoleDto extends BaseDto {
 
-	// Generated SERIAL VERSION UID
-	private static final long serialVersionUID = 872880077L;
+  // Generated SERIAL VERSION UID
+  private static final long serialVersionUID = 872880077L;
 
-	/**
-	 * Attribute roleId of the entity Role
-	 */
-	@NotBlank
-	private String roleId;
+  /** Attribute roleId of the entity Role */
+  @NotBlank private String roleId;
 
-	/**
-	 * Attribute name of the entity Role
-	 */
-	private String name;
+  /** Attribute name of the entity Role */
+  private String name;
 
-	/**
-	 * ObjectKey of RoleRoleGroup, which is parent of the entity Role
-	 */
-	private String theRoleRoleGroupObjectKey;
+  /** ObjectKey of RoleRoleGroup, which is parent of the entity Role */
+  private String theRoleRoleGroupObjectKey;
 
-	/**
-	 * Collection of Edit Dto of PrivilegePerRole, which is child of the entity Role
-	 */
-	private Collection<EditPrivilegePerRoleDto> thePrivilegePerRole;
+  /** Collection of Edit Dto of PrivilegePerRole, which is child of the entity Role */
+  private Collection<EditPrivilegePerRoleDto> thePrivilegePerRole;
 
-	/**
-	 * Collection of Edit Dto of RolePerUser, which is child of the entity Role
-	 */
-	private Collection<EditRolePerUserDto> theRolePerUser;
+  /** Collection of Edit Dto of RolePerUser, which is child of the entity Role */
+  private Collection<EditRolePerUserDto> theRolePerUser;
 
-	/**
-	 * Collection of Edit Dto of Role, which is child of the entity Role
-	 */
-	private Collection<EditRoleDto> theRoleRoleChild;
+  /** Collection of Edit Dto of Role, which is child of the entity Role */
+  private Collection<EditRoleDto> theRoleRoleChild;
 }

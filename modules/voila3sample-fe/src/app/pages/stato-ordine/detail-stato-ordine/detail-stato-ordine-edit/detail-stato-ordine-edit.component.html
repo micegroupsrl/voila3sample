@@ -1,0 +1,36 @@
+<div>
+    <!--Form-->
+    <form [formGroup]="statoOrdineForm">
+        <mat-card class="mat-elevation-z8">
+            <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
+                <!--Id Stato Ordine-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <!--Label-->
+                    <div fxLayout="column" fxFlex="30">
+                        <!--In new mode show the ID as required field-->
+                        <label *ngIf="pageStatus | hasPageStatus: 'new'">ID*</label>
+                        <label *ngIf="pageStatus | hasPageStatus: 'edit'">ID</label>
+                    </div>
+                    <rsd-input-number formControlName="idStatoOrdine"></rsd-input-number>
+                </div>
+                <!--End Id Stato Ordine-->
+
+                <!--Descrizione-->
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
+                    <div fxLayout="column" fxFlex="30">
+                        <!--Label-->
+                        <label>{{ 'voila3sample.detail.StatoOrdine.descrizione' | translate }}</label>
+                    </div>
+                    <!--Input-->
+                    <rsd-input-text formControlName="descrizione"></rsd-input-text>
+                </div>
+                <!--End Descrizione-->
+
+                <!--Tabs statoOrdine -->
+                <div class="tabs">
+                    <app-tabs-stato-ordine [formGroup]="statoOrdineForm" [entity]="statoOrdine" [pageStatus]="pageStatus"></app-tabs-stato-ordine>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

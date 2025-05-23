@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Persona" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="cc83c049-73df-3d77-9f53-c3346fc98445">
+<property name="ireport.zoom" value="1.9487171000000014"/>
+<property name="ireport.x" value="0"/>
+<property name="ireport.y" value="0"/>
+<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+<template><![CDATA[$P{REPORT_DIR} + "/templates/default.jrtx"]]></template>
+<style name="RowLeft" hTextAlign="Left" vTextAlign="Middle" lineSpacing="Single">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9" lineSpacing="Single"/>
+  </conditionalStyle>
+</style>
+<style name="RowRight" hTextAlign="Right" vTextAlign="Middle" lineSpacing="Single">
+  <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+    <pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+  </box>
+  <conditionalStyle>
+    <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+    <style mode="Opaque" backcolor="#F9F9F9" lineSpacing="Single"/>
+  </conditionalStyle>
+</style>
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+<queryString>
+  <![CDATA[]]>
+</queryString>
+<field name="nome" class="java.lang.String"/>
+<field name="cognome" class="java.lang.String"/>
+<field name="email" class="java.lang.String"/>
+<field name="telefono" class="java.lang.String"/>
+<field name="idPersona" class="java.lang.Integer"/>
+<field name="cf" class="java.lang.String"/>
+<field name="createdBy" class="java.lang.String"/>
+<field name="lastModifiedBy" class="java.lang.String"/>
+<field name="createdDate" class="java.time.LocalDateTime"/>
+<field name="lastModifiedDate" class="java.time.LocalDateTime"/>
+
+<background>
+  <band splitType="Stretch"/>
+</background>
+<title>
+  <band splitType="Stretch"/>
+</title>
+<pageHeader>
+  <band height="20" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+      <reportElement style="TableHeader" x="0" y="0" width="550" height="20" uuid="bb1486d1-966c-33ca-aa4e-eb90361844ae"/>
+      <textElement lineSpacing="Single"/> 
+      <textFieldExpression><![CDATA[$R{persona.jasperReports.tableHeader}]]></textFieldExpression>
+    </textField>
+  </band>
+</pageHeader>
+<columnHeader>
+  <band height="30" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="0" y="0" width="55" height="30" uuid="a807db93-a0c0-3681-a29f-7406f090b63d"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.nome}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="55" y="0" width="55" height="30" uuid="6de92407-a249-35e3-8242-a576009bd686"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.cognome}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="110" y="0" width="55" height="30" uuid="24172e3c-dc85-3562-8f76-d23acbdec258"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.email}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="165" y="0" width="55" height="30" uuid="16260cdb-9c45-3b13-bfcc-e9e98918c9d2"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.telefono}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="220" y="0" width="55" height="30" uuid="4b63d53c-e978-393e-9ecd-5f588958f0f2"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.idPersona}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="275" y="0" width="55" height="30" uuid="de244ff8-4a4f-36b7-9d0d-24a910f07b94"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.cf}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="330" y="0" width="55" height="30" uuid="0a9d30c0-66fa-3d86-a38b-0d2b024e929a"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.createdBy}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="385" y="0" width="55" height="30" uuid="15a7bf52-20ac-33a7-b34d-42c4bfc9fd5a"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.lastModifiedBy}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="440" y="0" width="55" height="30" uuid="48c66406-6a66-32e6-918f-b98effeeec92"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.createdDate}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="Label" stretchType="RelativeToTallestObject" x="495" y="0" width="55" height="30" uuid="868cfe2e-10c9-3d72-8217-7318476517c9"/>
+    <textElement lineSpacing="Single"/>       
+    <textFieldExpression><![CDATA[$R{persona.lastModifiedDate}]]></textFieldExpression>
+    </textField>
+    
+  </band>
+</columnHeader>
+<detail>
+  <band height="30" splitType="Stretch">
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="0" y="0" width="55" height="30" uuid="995dd041-3aa3-34a8-8068-588adefc3d87">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="55" y="0" width="55" height="30" uuid="f0b5e73b-3d48-37fa-9402-b21723fd66bf">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{cognome}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="110" y="0" width="55" height="30" uuid="2ac3527d-d62a-388d-81a0-ff430ed85ac9">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="165" y="0" width="55" height="30" uuid="33f242ba-21a8-34d9-a6c1-cc5432808e0f">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowRight" stretchType="RelativeToTallestObject" x="220" y="0" width="55" height="30" uuid="921a99ea-fe56-3268-9362-f6a967180cd1">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{idPersona}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="275" y="0" width="55" height="30" uuid="649a9150-9e73-30a7-97e3-a94d2efba3a3">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{cf}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="330" y="0" width="55" height="30" uuid="f373edb2-8dee-3cc5-a4d1-4bcb30118f1a">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{createdBy}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="385" y="0" width="55" height="30" uuid="a42f4199-e2ee-3273-bfcc-8ae654c67530">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{lastModifiedBy}]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="440" y="0" width="55" height="30" uuid="f9e1a30a-5b94-3025-bd2d-c9bea99ed33b">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{createdDate}.format(java.time.format.DateTimeFormatter.ofPattern($R{jasperReports.datetime.format}))]]></textFieldExpression>
+    </textField>
+    <textField isBlankWhenNull="true">
+    <reportElement style="RowLeft" stretchType="RelativeToTallestObject" x="495" y="0" width="55" height="30" uuid="6dcb948e-8253-3f44-8a7f-2e85b19ea6e3">
+      <property name="net.sf.jasperreports.export.xls.column.width" value="100"/>
+      <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+    </reportElement>
+    <textElement lineSpacing="Single"/>
+    <textFieldExpression><![CDATA[$F{lastModifiedDate}.format(java.time.format.DateTimeFormatter.ofPattern($R{jasperReports.datetime.format}))]]></textFieldExpression>
+    </textField>
+    
+  </band>
+</detail>
+<columnFooter>
+  <band splitType="Stretch"/>
+</columnFooter>
+<pageFooter>
+  <band splitType="Stretch"/>
+</pageFooter>
+<summary>
+  <band splitType="Stretch"/>
+</summary>
+</jasperReport>

@@ -11,6 +11,7 @@ import { getListForDropdowns } from 'src/app/shared/base/base.helper';
 import { PageObject } from 'src/app/shared/page-object.interface';
 import { ICliente } from 'src/app/pages/interfaces/cliente.interface';
 import { IOrdine } from 'src/app/pages/interfaces/ordine.interface';
+import { IStatoOrdine } from 'src/app/pages/interfaces/stato-ordine.interface';
 import { ITipoOrdine } from 'src/app/pages/interfaces/tipo-ordine.interface';
 import { setOptions, sortFormArray } from 'src/app/utilities/function/helper';
 import { BaseTabComponent } from 'src/app/shared/base/base-tab.component';
@@ -23,11 +24,21 @@ import { BaseTabComponent } from 'src/app/shared/base/base-tab.component';
 export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit, OnChanges {
     isLoading = false;
     totalRows = 0;
-    pageSize = 3;
+    pageSize = 5;
     currentPage = 0;
-    pageSizeOptions: number[] = [3, 6, 15, 60];
+    pageSizeOptions: number[] = [5, 10, 25, 100];
 
-    displayedColumns: string[] = ['idOrdine', 'dataOrdine', 'tempoOrdine', 'theTipoOrdineObjectKey', 'theOrdineAggregatoObjectKey', 'delete'];
+    displayedColumns: string[] = [
+        'idOrdine',
+        'descrizione',
+        'datetime',
+        'date',
+        'time',
+        'theStatoOrdineObjectKey',
+        'theTipoOrdineObjectKey',
+        'theOrdineAggregatoObjectKey',
+        'delete'
+    ];
 
     @Input()
     entity!: any;
@@ -36,6 +47,7 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
 
     public object: PageObject = {};
     public theOrdine!: FormArray;
+    public statoOrdineList!: IStatoOrdine[];
     public tipoOrdineList!: ITipoOrdine[];
     public ordineAggregatoList!: ICliente[];
     public form!: FormGroup;
@@ -107,12 +119,16 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
     createNewFormGroup(): FormGroup {
         return new FormGroup({
             idOrdine: new FormControl(null),
-            dataOrdine: new FormControl(null),
-            tempoOrdine: new FormControl(null),
-            theClienteObjectKey: new FormControl(this.entity?.objectKey!),
-            theClienteObjectTitle: new FormControl(null),
+            descrizione: new FormControl(null),
+            datetime: new FormControl(null),
+            date: new FormControl(null),
+            time: new FormControl(null),
+            theStatoOrdineObjectKey: new FormControl(null),
+            theStatoOrdineObjectTitle: new FormControl(null),
             theTipoOrdineObjectKey: new FormControl(null),
             theTipoOrdineObjectTitle: new FormControl(null),
+            theClienteObjectKey: new FormControl(this.entity?.objectKey!),
+            theClienteObjectTitle: new FormControl(null),
             theOrdineAggregatoObjectKey: new FormControl(null),
             theOrdineAggregatoObjectTitle: new FormControl(null),
             theRigaOrdine: new FormControl(null),
@@ -124,12 +140,16 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
     createFormGroup(data: IOrdine): FormGroup {
         return new FormGroup({
             idOrdine: new FormControl({ value: data.idOrdine, disabled: true }),
-            dataOrdine: new FormControl(data.dataOrdine),
-            tempoOrdine: new FormControl(data.tempoOrdine),
-            theClienteObjectKey: new FormControl(data.theClienteObjectKey),
-            theClienteObjectTitle: new FormControl(data.theClienteObjectTitle),
+            descrizione: new FormControl(data.descrizione),
+            datetime: new FormControl(data.datetime),
+            date: new FormControl(data.date),
+            time: new FormControl(data.time),
+            theStatoOrdineObjectKey: new FormControl(data.theStatoOrdineObjectKey),
+            theStatoOrdineObjectTitle: new FormControl(data.theStatoOrdineObjectTitle),
             theTipoOrdineObjectKey: new FormControl(data.theTipoOrdineObjectKey),
             theTipoOrdineObjectTitle: new FormControl(data.theTipoOrdineObjectTitle),
+            theClienteObjectKey: new FormControl(data.theClienteObjectKey),
+            theClienteObjectTitle: new FormControl(data.theClienteObjectTitle),
             theOrdineAggregatoObjectKey: new FormControl(data.theOrdineAggregatoObjectKey),
             theOrdineAggregatoObjectTitle: new FormControl(data.theOrdineAggregatoObjectTitle),
             theRigaOrdine: new FormControl(data.theRigaOrdine),
@@ -206,6 +226,14 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
      * Cotrollo Dialog.
      */
 
+    public getStatoOrdineList(): void {
+        if (!this.statoOrdineList) {
+            this.ordineGroupApiService.statoOrdine.getStatoOrdineByCriteria().subscribe(data => {
+                this.statoOrdineList = getListForDropdowns(data);
+            });
+        }
+    }
+
     public getTipoOrdineList(): void {
         if (!this.tipoOrdineList) {
             this.ordineGroupApiService.tipoOrdine.getTipoOrdineByCriteria().subscribe(data => {
@@ -225,6 +253,7 @@ export class TabOrdineEditFeComponent extends BaseTabComponent implements OnInit
      * Parent List.
      */
     private getParentsList(): void {
+        this.getStatoOrdineList();
         this.getTipoOrdineList();
         this.getOrdineAggregatoList();
     }

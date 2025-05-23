@@ -1,0 +1,107 @@
+<!-- First Page for Fornitore -->
+<!-- Here you can view element list and use searches to filter them -->
+<div class="container">
+    <div class="content">
+        <!-- Mat Card -->
+        <mat-card>
+            <!-- Card Header -->
+            <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-card-title>{{ 'voila3sample.detail.Fornitore.label' | translate }}</mat-card-title>
+                <!-- Quick Filter -->
+                <form class="quick" name="searchFornitoreForm" [formGroup]="searchFornitoreForm" (keyup)="onUp()" fxLayout="column" fxLayoutGap="20" fxFlex>
+                    <!-- Full Text Search based on Piva -->
+                    <rsd-input-text formControlName="piva" iconSuffix="search"></rsd-input-text>
+                </form>
+                <!-- Search Dialog Button -->
+                <button mat-icon-button (click)="openDialogResid()" matTooltip="Ricerca Avanzata con Resid" [color]="filters === '' ? 'basic' : 'warn'">
+                    <mat-icon matBadgeSize="small" [matBadge]="filters === '' ? '' : '!'" matBadgeColor="accent"> filter_list </mat-icon>
+                </button>
+                <!-- Advanced Search Dialog Button -->
+                <button mat-icon-button (click)="openDialogResidAdvanced()" matTooltip="Ricerca Avanzata con Resid Avanzata" [color]="filters === '' ? 'basic' : 'warn'">
+                    <mat-icon matBadgeSize="small" [matBadge]="filters === '' ? '' : '!'" matBadgeColor="accent"> filter_list </mat-icon>
+                </button>
+            </mat-card-header>
+
+            <mat-card-content class="overflow" autosize>
+                <!-- Numero theFornitore trovati -->
+                <!-- Elementi totali: {{totalRows}} -->
+                <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
+                <!-- Tabella tipo fornitore -->
+                <table aria-label="fornitore's table" mat-table [dataSource]="dataSource" matSort>
+                    <!-- Id Persona -->
+                    <ng-container matColumnDef="idPersona.idPersona">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Fornitore.idPersona' | translate }}</th>
+                        <td mat-cell *matCellDef="let fornitore">{{ fornitore.idPersona }}</td>
+                    </ng-container>
+                    <!-- Cf -->
+                    <ng-container matColumnDef="idPersona.cf">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Fornitore.cf' | translate }}</th>
+                        <td mat-cell *matCellDef="let fornitore">{{ fornitore.cf }}</td>
+                    </ng-container>
+                    <!-- Piva -->
+                    <ng-container matColumnDef="piva">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Fornitore.piva' | translate }}</th>
+                        <td mat-cell *matCellDef="let fornitore">{{ fornitore.piva }}</td>
+                    </ng-container>
+                    <!-- Nome -->
+                    <ng-container matColumnDef="nome">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Fornitore.nome' | translate }}</th>
+                        <td mat-cell *matCellDef="let fornitore">{{ fornitore.nome }}</td>
+                    </ng-container>
+                    <!-- Cognome -->
+                    <ng-container matColumnDef="cognome">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Fornitore.cognome' | translate }}</th>
+                        <td mat-cell *matCellDef="let fornitore">{{ fornitore.cognome }}</td>
+                    </ng-container>
+                    <!-- Email -->
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Fornitore.email' | translate }}</th>
+                        <td mat-cell *matCellDef="let fornitore">{{ fornitore.email }}</td>
+                    </ng-container>
+                    <!-- Telefono -->
+                    <ng-container matColumnDef="telefono">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'voila3sample.detail.Fornitore.telefono' | translate }}</th>
+                        <td mat-cell *matCellDef="let fornitore">{{ fornitore.telefono }}</td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row (click)="isClickable(Privileges?.FORNITORE_READ) && navigateToView(row.objectKey)" *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+            </mat-card-content>
+
+            <!-- Card Footer -->
+            <mat-card-footer>
+                <!-- Pagination component -->
+                <mat-paginator
+                    #paginator
+                    [length]="totalRows"
+                    [pageIndex]="currentPage"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageChanged($event)"
+                    aria-label="Select page"
+                    showFirstLastButtons
+                >
+                </mat-paginator>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+    <div class="footer" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+        <!-- Redirect to Selected Element -->
+        <button
+            *ngIf="Privileges?.FORNITORE_CREATE | Permission"
+            mat-raised-button
+            color="primary"
+            class="margin-8"
+            routerLink="/pages/voila3sample/fornitore/detail-fornitore/new"
+        >
+            {{ 'buttons.new' | translate: { '0': '' | translate } }}
+        </button>
+        <!--Export xlxs-->
+        <button *ngIf="Privileges?.FORNITORE_REPORT | Permission" mat-raised-button color="primary" class="margin-8" (click)="printXlsxReport()">
+            {{ 'buttons.export.xlxs' | translate }}
+        </button>
+    </div>
+</div>

@@ -23,12 +23,40 @@
                     <!-- Cell Body-->
                     <td mat-cell *matCellDef="let prodotto">{{ prodotto.idProdotto }}</td>
                 </ng-container>
-                <!-- Nome Prodotto -->
-                <ng-container matColumnDef="nomeProdotto">
+                <!-- Descrizione -->
+                <ng-container matColumnDef="descrizione">
                     <!-- Cell Header -->
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome Prodotto</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrizione</th>
                     <!-- Cell Body-->
-                    <td mat-cell *matCellDef="let prodotto">{{ prodotto.nomeProdotto }}</td>
+                    <td mat-cell *matCellDef="let prodotto">{{ prodotto.descrizione }}</td>
+                </ng-container>
+                <!-- Created By -->
+                <ng-container matColumnDef="createdBy">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Created By</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let prodotto">{{ prodotto.createdBy }}</td>
+                </ng-container>
+                <!-- Last Modified By -->
+                <ng-container matColumnDef="lastModifiedBy">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Modified By</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let prodotto">{{ prodotto.lastModifiedBy }}</td>
+                </ng-container>
+                <!-- Created Date -->
+                <ng-container matColumnDef="createdDate">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Created Date</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let prodotto">{{ prodotto.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                </ng-container>
+                <!-- Last Modified Date -->
+                <ng-container matColumnDef="lastModifiedDate">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Modified Date</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let prodotto">{{ prodotto.lastModifiedDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
                 </ng-container>
                 <th mat-header-row *matHeaderRowDef="displayedColumns"></th>
                 <tr mat-row [mat-dialog-close]="row" *matRowDef="let row; columns: displayedColumns"></tr>

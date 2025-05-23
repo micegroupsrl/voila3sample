@@ -1,0 +1,37 @@
+<div>
+    <mat-card class="mat-elevation-z8">
+        <!-- Card Body -->
+        <mat-card-content class="overflow" autosize>
+            <!-- Descrizione -->
+            <div *ngIf="statoOrdine?.descrizione">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <!-- Label -->
+                    <div fxLayout="column" fxFlex="30">
+                        <label>{{ 'voila3sample.detail.StatoOrdine.descrizione' | translate }}</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ statoOrdine!.descrizione }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Id Stato Ordine -->
+            <div *ngIf="statoOrdine?.idStatoOrdine">
+                <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5px">
+                    <div fxLayout="column" fxFlex="30">
+                        <!-- Label -->
+                        <label>ID</label>
+                    </div>
+                    <!-- Value -->
+                    <div fxLayout="column">
+                        <strong>{{ statoOrdine!.idStatoOrdine }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tabs statoOrdine -->
+            <app-tabs-stato-ordine [formGroup]="statoOrdineForm" [entity]="statoOrdine" [pageStatus]="pageStatus"></app-tabs-stato-ordine>
+        </mat-card-content>
+    </mat-card>
+</div>

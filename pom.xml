@@ -11,7 +11,7 @@
 	<artifactId>voila3sample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>voila3sample</name>
-	<description>Sample Project</description>	
+	<description>Voila3 Sample Model</description>	
 	<packaging>pom</packaging>
 
 	<!-- MODULES -->

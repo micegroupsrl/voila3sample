@@ -23,19 +23,33 @@
                     <!-- Cell Body-->
                     <td mat-cell *matCellDef="let ordine">{{ ordine.idOrdine }}</td>
                 </ng-container>
-                <!-- Data Ordine -->
-                <ng-container matColumnDef="dataOrdine">
+                <!-- Descrizione -->
+                <ng-container matColumnDef="descrizione">
                     <!-- Cell Header -->
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Ordine</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrizione</th>
                     <!-- Cell Body-->
-                    <td mat-cell *matCellDef="let ordine">{{ ordine.dataOrdine | date: 'dd/MM/yyyy' }}</td>
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.descrizione }}</td>
                 </ng-container>
-                <!-- Tempo Ordine -->
-                <ng-container matColumnDef="tempoOrdine">
+                <!-- Datetime -->
+                <ng-container matColumnDef="datetime">
                     <!-- Cell Header -->
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tempo Ordine</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Datetime</th>
                     <!-- Cell Body-->
-                    <td mat-cell *matCellDef="let ordine">{{ ordine.tempoOrdine }}</td>
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.datetime | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                </ng-container>
+                <!-- Date -->
+                <ng-container matColumnDef="date">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.date | date: 'dd/MM/yyyy' }}</td>
+                </ng-container>
+                <!-- Time -->
+                <ng-container matColumnDef="time">
+                    <!-- Cell Header -->
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
+                    <!-- Cell Body-->
+                    <td mat-cell *matCellDef="let ordine">{{ ordine.time }}</td>
                 </ng-container>
                 <!-- Created By -->
                 <ng-container matColumnDef="createdBy">

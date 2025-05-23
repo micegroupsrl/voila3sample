@@ -3,7 +3,7 @@
     <form [formGroup]="categoriaOrdineForm">
         <mat-card class="mat-elevation-z8">
             <mat-card-content class="overflow" fxLayout="column" fxLayoutGap="10" autosize>
-                <!--Id Categoria Ordine-->
+                <!--Id Cat Ordine-->
                 <div class="p3-m5" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start center" fxLayoutAlign.xs="space-around start">
                     <!--Label-->
                     <div fxLayout="column" fxFlex="30">
@@ -11,9 +11,9 @@
                         <label *ngIf="pageStatus | hasPageStatus: 'new'">ID*</label>
                         <label *ngIf="pageStatus | hasPageStatus: 'edit'">ID</label>
                     </div>
-                    <rsd-input-number formControlName="idCategoriaOrdine"></rsd-input-number>
+                    <rsd-input-number formControlName="idCatOrdine"></rsd-input-number>
                 </div>
-                <!--End Id Categoria Ordine-->
+                <!--End Id Cat Ordine-->
 
                 <!--Tabs categoriaOrdine -->
                 <div class="tabs">

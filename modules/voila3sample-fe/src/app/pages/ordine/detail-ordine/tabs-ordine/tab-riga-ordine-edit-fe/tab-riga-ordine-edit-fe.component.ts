@@ -23,11 +23,11 @@ import { BaseTabComponent } from 'src/app/shared/base/base-tab.component';
 export class TabRigaOrdineEditFeComponent extends BaseTabComponent implements OnInit, OnChanges {
     isLoading = false;
     totalRows = 0;
-    pageSize = 3;
+    pageSize = 5;
     currentPage = 0;
-    pageSizeOptions: number[] = [3, 6, 15, 60];
+    pageSizeOptions: number[] = [5, 10, 25, 100];
 
-    displayedColumns: string[] = ['quantita', 'theProdottoObjectKey', 'delete'];
+    displayedColumns: string[] = ['qta', 'theProdottoObjectKey', 'delete'];
 
     @Input()
     entity!: any;
@@ -105,22 +105,22 @@ export class TabRigaOrdineEditFeComponent extends BaseTabComponent implements On
 
     createNewFormGroup(): FormGroup {
         return new FormGroup({
-            quantita: new FormControl(null),
-            theProdottoObjectKey: new FormControl(null),
-            theProdottoObjectTitle: new FormControl(null),
+            qta: new FormControl(null),
             theOrdineObjectKey: new FormControl(this.entity?.objectKey!),
             theOrdineObjectTitle: new FormControl(null),
+            theProdottoObjectKey: new FormControl(null),
+            theProdottoObjectTitle: new FormControl(null),
             entityState: new FormControl('C')
         });
     }
 
     createFormGroup(data: IRigaOrdine): FormGroup {
         return new FormGroup({
-            quantita: new FormControl(data.quantita),
-            theProdottoObjectKey: new FormControl(data.theProdottoObjectKey),
-            theProdottoObjectTitle: new FormControl(data.theProdottoObjectTitle),
+            qta: new FormControl(data.qta),
             theOrdineObjectKey: new FormControl(data.theOrdineObjectKey),
             theOrdineObjectTitle: new FormControl(data.theOrdineObjectTitle),
+            theProdottoObjectKey: new FormControl(data.theProdottoObjectKey),
+            theProdottoObjectTitle: new FormControl(data.theProdottoObjectTitle),
             entityState: new FormControl(data.entityState)
         });
     }
@@ -200,7 +200,6 @@ export class TabRigaOrdineEditFeComponent extends BaseTabComponent implements On
             });
         }
     }
-
     /**
      * Parent List.
      */

@@ -23,11 +23,11 @@ export class RigaOrdineApiService extends BaseApiService<IRigaOrdine> {
         return this.getEntityListByCriteria(this.url, options);
     }
 
-    public getRigaOrdineByProdotto(key: string, options?: HttpParams): Observable<BaseApiResponse<IRigaOrdine>> {
-        return this.getRigaOrdineByCriteria(this.addFilter(options!, 'theProdotto', key));
-    }
     public getRigaOrdineByOrdine(key: string, options?: HttpParams): Observable<BaseApiResponse<IRigaOrdine>> {
         return this.getRigaOrdineByCriteria(this.addFilter(options!, 'theOrdine', key));
+    }
+    public getRigaOrdineByProdotto(key: string, options?: HttpParams): Observable<BaseApiResponse<IRigaOrdine>> {
+        return this.getRigaOrdineByCriteria(this.addFilter(options!, 'theProdotto', key));
     }
 
     public addRigaOrdine(rigaOrdine: IRigaOrdine): Observable<IRigaOrdine> {

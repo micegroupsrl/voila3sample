@@ -2,6 +2,8 @@ import { Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, Ch
 import { FormArray, FormGroup } from '@angular/forms';
 import { IProdotto } from 'src/app/pages/interfaces/prodotto.interface';
 import { TabsProdottoComponent } from '../tabs-prodotto/tabs-prodotto.component';
+import { getListForDropdowns } from 'src/app/shared/base/base.helper';
+import { IFornitore } from 'src/app/pages/interfaces/fornitore.interface';
 import { ProdottoGroupApiService } from '../../../services/services-prodotto/prodotto-group-api.service';
 import { BaseDetailComponent } from 'src/app/shared/base/base-detail.component';
 
@@ -21,6 +23,8 @@ export class DetailProdottoEditComponent extends BaseDetailComponent implements 
     @Input()
     public prodotto!: IProdotto;
 
+    public fornitoreList!: IFornitore[];
+
     constructor(
         private changeDetector: ChangeDetectorRef,
         private prodottoGroupApiService: ProdottoGroupApiService
@@ -28,9 +32,27 @@ export class DetailProdottoEditComponent extends BaseDetailComponent implements 
         super();
     }
 
+    ngOnInit() {
+        this.getParentsList();
+    }
+
     /**
      * Open Dialog.
      */
+    /**
+     * Get the list of parents.
+     */
+    private getParentsList(): void {
+        this.getFornitoreList();
+    }
+
+    public getFornitoreList(): void {
+        if (!this.fornitoreList) {
+            this.prodottoGroupApiService.fornitore.getFornitoreByCriteria().subscribe(data => {
+                this.fornitoreList = getListForDropdowns(data);
+            });
+        }
+    }
     ngAfterContentChecked(): void {
         this.changeDetector.detectChanges();
     }
@@ -70,7 +92,10 @@ export class DetailProdottoEditComponent extends BaseDetailComponent implements 
     public patchValueForm(prodotto: IProdotto) {
         this.prodottoForm.patchValue({
             idProdotto: prodotto.idProdotto,
-            nomeProdotto: prodotto.nomeProdotto
+            descrizione: prodotto.descrizione,
+
+            theFornitoreObjectKey: prodotto.theFornitoreObjectKey,
+            theFornitoreObjectTitle: prodotto.theFornitoreObjectTitle
         });
         this.prodottoForm.get('idProdotto')?.disable();
     }

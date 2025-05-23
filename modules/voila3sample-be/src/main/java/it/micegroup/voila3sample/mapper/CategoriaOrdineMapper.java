@@ -1,59 +1,1 @@
-package it.micegroup.voila3sample.mapper;
-
-import it.micegroup.voila3sample.dto.EditCategoriaOrdineDto;
-import it.micegroup.voila3sample.dto.ViewCategoriaOrdineDto;
-import it.micegroup.voila3sample.domain.primary.CategoriaOrdine;
-import it.micegroup.voila3sample.domain.primary.TipoOrdine;
-import org.mapstruct.AfterMapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.springframework.data.domain.Page;
-import java.util.Optional;
-
-/**
- * Interface used to map DTO Classes to Entity Classes. Usefull to manage object
- * transfered through this application.
- */
-@Mapper
-public interface CategoriaOrdineMapper {
-	/**
-	 * Maps an EditCategoriaOrdineDto to an entity getEntityClassName(aClass)/]
-	 */
-
-	@Mapping(source = "entityState", target = "entityState")
-	CategoriaOrdine map(EditCategoriaOrdineDto categoriaOrdineDto);
-
-	/**
-	 * Maps an entity CategoriaOrdine to a ViewCategoriaOrdineDto
-	 */
-	ViewCategoriaOrdineDto map(CategoriaOrdine categoriaOrdine);
-
-	/**
-	 * Maps a Page<CategoriaOrdine> to a Page<ViewCategoriaOrdineDto>
-	 */
-	default Page<ViewCategoriaOrdineDto> map(Page<CategoriaOrdine> page) {
-		return page.map(this::map);
-	}
-
-	/*
-	 * Maps an Optional<CategoriaOrdine> to an Optional<ViewCategoriaOrdineDto>
-	 */
-	default Optional<ViewCategoriaOrdineDto> map(Optional<CategoriaOrdine> read) {
-		return read.map(this::map);
-	}
-
-	/**
-	 * After mapping a CategoriaOrdine, it propagates the object key of the entity
-	 * in each child
-	 */
-	@AfterMapping
-	default void propagateKeyInChildren(@MappingTarget CategoriaOrdine bean) {
-		String key = bean.getObjectKey();
-		if (bean.getTheTipoOrdine() != null) {
-			for (TipoOrdine item : bean.getTheTipoOrdine()) {
-				item.setTheCategoriaOrdineObjectKey(key);
-			}
-		}
-	}
-}
+package it.micegroup.voila3sample.mapper;import it.micegroup.voila3sample.dto.EditCategoriaOrdineDto;import it.micegroup.voila3sample.dto.ViewCategoriaOrdineDto;import it.micegroup.voila3sample.domain.primary.CategoriaOrdine;import it.micegroup.voila3sample.domain.primary.TipoOrdine;import org.mapstruct.AfterMapping;import org.mapstruct.MappingTarget;import org.mapstruct.Mapper;import org.mapstruct.Mapping;import org.springframework.data.domain.Page;import java.util.Optional;/** * Interface used to map DTO Classes to Entity Classes. Usefull to manage object transfered through * this application. */@Mapperpublic interface CategoriaOrdineMapper {  /** Maps an EditCategoriaOrdineDto to an entity getEntityClassName(aClass)/] */  @Mapping(source = "entityState", target = "entityState")  CategoriaOrdine map(EditCategoriaOrdineDto categoriaOrdineDto);  /** Maps an entity CategoriaOrdine to a ViewCategoriaOrdineDto */  ViewCategoriaOrdineDto map(CategoriaOrdine categoriaOrdine);  /** Maps a Page<CategoriaOrdine> to a Page<ViewCategoriaOrdineDto> */  default Page<ViewCategoriaOrdineDto> map(Page<CategoriaOrdine> page) {    return page.map(this::map);  }  /*   * Maps an Optional<CategoriaOrdine> to an Optional<ViewCategoriaOrdineDto>   */  default Optional<ViewCategoriaOrdineDto> map(Optional<CategoriaOrdine> read) {    return read.map(this::map);  }  /** After mapping a CategoriaOrdine, it propagates the object key of the entity in each child */  @AfterMapping  default void propagateKeyInChildren(@MappingTarget CategoriaOrdine bean) {    String key = bean.getObjectKey();    if (bean.getTheTipoOrdine() != null) {      for (TipoOrdine item : bean.getTheTipoOrdine()) {        item.setTheCategoriaOrdineObjectKey(key);      }    }  }}

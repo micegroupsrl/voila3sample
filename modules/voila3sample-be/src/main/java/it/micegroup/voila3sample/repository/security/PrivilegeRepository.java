@@ -12,20 +12,12 @@ import it.micegroup.voila3sample.domain.security.Privilege;
 import it.micegroup.voila3sample.repository.BaseRepository;
 
 @Repository
-public interface PrivilegeRepository extends BaseRepository<Privilege, Integer> {
+public interface PrivilegeRepository extends BaseRepository<Privilege, Long> {
 
-	/**
-	 * Finds all Privilege following the specification in input and return them in a
-	 * Page
-	 */
+  /** Finds all Privilege following the specification in input and return them in a Page */
+  @Override
+  Page<Privilege> findAll(Specification<Privilege> spec, Pageable pageable);
 
-	@Override
-	Page<Privilege> findAll(Specification<Privilege> spec, Pageable pageable);
-
-	/**
-	 * Finds, if present, a Privilege by its id
-	 */
-
-	Optional<Privilege> findByPrivilegeId(Integer id);
-
+  /** Finds, if present, a Privilege by its id */
+  Optional<Privilege> findByPrivilegeId(Long id);
 }

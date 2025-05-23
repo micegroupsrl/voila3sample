@@ -10,45 +10,41 @@ import java.util.Optional;
 
 public interface ProdottoService extends BaseEntityService<Prodotto, Integer> {
 
-	/**
-	 * Print Pdf and Xlxs
-	 */
-	public byte[] printPdfReport(String objectKey);
+  /** Print Pdf and Xlxs */
+  public byte[] printPdfReport(String objectKey);
 
-	byte[] printXLSList(Specification<Prodotto> specification);
+  byte[] printXLSList(Specification<Prodotto> specification);
 
-	/**
-	 * Executes the bulk update of a Prodotto
-	 * 
-	 * @param prodotto
-	 * @return updated Prodotto
-	 */
-	Prodotto bulkUpdate(Prodotto prodotto);
+  /**
+   * Executes the bulk update of a Prodotto
+   *
+   * @param prodotto
+   * @return updated Prodotto
+   */
+  Prodotto bulkUpdate(Prodotto prodotto);
 
-	/**
-	 * Executes the update of an Prodotto
-	 * 
-	 * @param prodotto
-	 * @return Prodotto updated
-	 */
-	Prodotto update(Prodotto prodotto);
+  /**
+   * Executes the update of an Prodotto
+   *
+   * @param prodotto
+   * @return Prodotto updated
+   */
+  Prodotto update(Prodotto prodotto);
 
-	/**
-	 * Deletes an Prodotto with the objectKey in input, if it exists
-	 * 
-	 * @param objectKey
-	 * @return Prodotto deleted if it was present
-	 */
-	Optional<Prodotto> delete(String objectKey);
+  /**
+   * Deletes an Prodotto with the objectKey in input, if it exists
+   *
+   * @param objectKey
+   * @return Prodotto deleted if it was present
+   */
+  Optional<Prodotto> delete(String objectKey);
 
-	/**
-	 * Returns the Page of the Prodotto following the specification in input
-	 * 
-	 * @param specification
-	 * @param pageable
-	 * 
-	 * @return Page of Prodotto
-	 */
-	Page<Prodotto> search(Specification<Prodotto> specification, Pageable pageable);
-
+  /**
+   * Returns the Page of the Prodotto following the specification in input
+   *
+   * @param specification
+   * @param pageable
+   * @return Page of Prodotto
+   */
+  Page<Prodotto> search(Specification<Prodotto> specification, Pageable pageable);
 }

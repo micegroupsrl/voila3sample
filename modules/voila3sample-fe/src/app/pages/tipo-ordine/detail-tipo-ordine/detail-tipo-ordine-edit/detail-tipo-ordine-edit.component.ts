@@ -91,14 +91,13 @@ export class DetailTipoOrdineEditComponent extends BaseDetailComponent implement
 
     public patchValueForm(tipoOrdine: ITipoOrdine) {
         this.tipoOrdineForm.patchValue({
+            anno: tipoOrdine.anno,
             idTipoOrdine: tipoOrdine.idTipoOrdine,
-            annoTipologia: tipoOrdine.annoTipologia,
-            nomeOrdine: tipoOrdine.nomeOrdine,
 
             theCategoriaOrdineObjectKey: tipoOrdine.theCategoriaOrdineObjectKey,
             theCategoriaOrdineObjectTitle: tipoOrdine.theCategoriaOrdineObjectTitle
         });
+        this.tipoOrdineForm.get('anno')?.disable();
         this.tipoOrdineForm.get('idTipoOrdine')?.disable();
-        this.tipoOrdineForm.get('annoTipologia')?.disable();
     }
 }

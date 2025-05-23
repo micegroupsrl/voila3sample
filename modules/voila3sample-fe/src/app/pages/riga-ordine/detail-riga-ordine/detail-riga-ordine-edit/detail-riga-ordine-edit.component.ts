@@ -3,8 +3,8 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { IRigaOrdine } from 'src/app/pages/interfaces/riga-ordine.interface';
 import { TabsRigaOrdineComponent } from '../tabs-riga-ordine/tabs-riga-ordine.component';
 import { getListForDropdowns } from 'src/app/shared/base/base.helper';
-import { IProdotto } from 'src/app/pages/interfaces/prodotto.interface';
 import { IOrdine } from 'src/app/pages/interfaces/ordine.interface';
+import { IProdotto } from 'src/app/pages/interfaces/prodotto.interface';
 import { RigaOrdineGroupApiService } from '../../../services/services-riga-ordine/riga-ordine-group-api.service';
 import { BaseDetailComponent } from 'src/app/shared/base/base-detail.component';
 
@@ -24,8 +24,8 @@ export class DetailRigaOrdineEditComponent extends BaseDetailComponent implement
     @Input()
     public rigaOrdine!: IRigaOrdine;
 
-    public prodottoList!: IProdotto[];
     public ordineList!: IOrdine[];
+    public prodottoList!: IProdotto[];
 
     constructor(
         private changeDetector: ChangeDetectorRef,
@@ -45,21 +45,21 @@ export class DetailRigaOrdineEditComponent extends BaseDetailComponent implement
      * Get the list of parents.
      */
     private getParentsList(): void {
-        this.getProdottoList();
         this.getOrdineList();
+        this.getProdottoList();
     }
 
-    public getProdottoList(): void {
-        if (!this.prodottoList) {
-            this.rigaOrdineGroupApiService.prodotto.getProdottoByCriteria().subscribe(data => {
-                this.prodottoList = getListForDropdowns(data);
-            });
-        }
-    }
     public getOrdineList(): void {
         if (!this.ordineList) {
             this.rigaOrdineGroupApiService.ordine.getOrdineByCriteria().subscribe(data => {
                 this.ordineList = getListForDropdowns(data);
+            });
+        }
+    }
+    public getProdottoList(): void {
+        if (!this.prodottoList) {
+            this.rigaOrdineGroupApiService.prodotto.getProdottoByCriteria().subscribe(data => {
+                this.prodottoList = getListForDropdowns(data);
             });
         }
     }
@@ -101,12 +101,12 @@ export class DetailRigaOrdineEditComponent extends BaseDetailComponent implement
 
     public patchValueForm(rigaOrdine: IRigaOrdine) {
         this.rigaOrdineForm.patchValue({
-            quantita: rigaOrdine.quantita,
+            qta: rigaOrdine.qta,
 
-            theProdottoObjectKey: rigaOrdine.theProdottoObjectKey,
-            theProdottoObjectTitle: rigaOrdine.theProdottoObjectTitle,
             theOrdineObjectKey: rigaOrdine.theOrdineObjectKey,
-            theOrdineObjectTitle: rigaOrdine.theOrdineObjectTitle
+            theOrdineObjectTitle: rigaOrdine.theOrdineObjectTitle,
+            theProdottoObjectKey: rigaOrdine.theProdottoObjectKey,
+            theProdottoObjectTitle: rigaOrdine.theProdottoObjectTitle
         });
     }
 }

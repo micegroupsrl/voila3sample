@@ -16,18 +16,10 @@ import it.micegroup.voila3sample.repository.BaseRepository;
 @Repository
 public interface ClienteRepository extends BaseRepository<Cliente, PersonaKey> {
 
-	/**
-	 * Finds all Cliente following the specification in input and return them in a
-	 * Page
-	 */
+  /** Finds all Cliente following the specification in input and return them in a Page */
+  @Override
+  Page<Cliente> findAll(Specification<Cliente> spec, Pageable pageable);
 
-	@Override
-	Page<Cliente> findAll(Specification<Cliente> spec, Pageable pageable);
-
-	/**
-	 * Finds, if present, a Cliente by its id
-	 */
-
-	Optional<Cliente> findByThePersonaKey(PersonaKey id);
-
+  /** Finds, if present, a Cliente by its id */
+  Optional<Cliente> findByThePersonaKey(PersonaKey id);
 }
