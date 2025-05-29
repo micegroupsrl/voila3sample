@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import {Component, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -15,7 +16,9 @@ import { SearchProdottoResidComponent } from '../../search/search-prodotto-resid
     templateUrl: './dialog-list-prodotto.component.html',
     styleUrls: ['./dialog-list-prodotto.component.scss']
 })
-export class DialogListProdottoComponent {
+export class DialogListProdottoComponent implements OnDestroy {
+  private subscriptions = new Subscription();
+
     isLoading = false;
     totalRows = 0;
     pageSize = 5;
@@ -134,4 +137,9 @@ export class DialogListProdottoComponent {
     setSelectedRow(row: any) {
         this.selectedElementKey = row;
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

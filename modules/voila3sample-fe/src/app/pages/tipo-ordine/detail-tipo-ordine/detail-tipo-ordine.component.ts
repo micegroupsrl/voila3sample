@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { ITipoOrdine } from 'src/app/pages/interfaces/tipo-ordine.interface';
@@ -20,7 +21,9 @@ import { getPrivilegesEnum } from '@micegroup/voila2-runtime-ng';
     templateUrl: './detail-tipo-ordine.component.html',
     styleUrls: ['./detail-tipo-ordine.component.scss']
 })
-export class DetailTipoOrdineComponent implements OnInit {
+export class DetailTipoOrdineComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     PATH_EDIT = '/edit';
     PATH_VIEW = '/view';
     MSG_INSERT: string = 'messages.success.insert';
@@ -188,4 +191,9 @@ export class DeleteTipoOrdineDialog {
     onSubmit() {
         this.dialogRef.close(true);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

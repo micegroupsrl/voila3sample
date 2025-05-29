@@ -1,4 +1,5 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { NgbTimepicker, NgbTimepickerConfig, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -21,7 +22,9 @@ import { NgbTimepicker, NgbTimepickerConfig, NgbTimeStruct } from '@ng-bootstrap
         <ngb-timepicker class="bootstrap-style form-control ngb-tp" [formControl]="control" [seconds]="true" [spinners]="false"> </ngb-timepicker>
     `
 })
-export class TimepickerBootstrapComponent implements OnInit, ControlValueAccessor {
+export class TimepickerBootstrapComponent implements OnInit, ControlValueAccessor, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
 
@@ -142,4 +145,9 @@ export class TimepickerBootstrapComponent implements OnInit, ControlValueAccesso
     setDisabledState(isDisabled: boolean): void {
         this.formControlDirective.valueAccessor?.setDisabledState?.(isDisabled);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

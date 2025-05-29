@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { IProdotto } from 'src/app/pages/interfaces/prodotto.interface';
@@ -20,7 +21,9 @@ import { getPrivilegesEnum } from '@micegroup/voila2-runtime-ng';
     templateUrl: './detail-prodotto.component.html',
     styleUrls: ['./detail-prodotto.component.scss']
 })
-export class DetailProdottoComponent implements OnInit {
+export class DetailProdottoComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     PATH_EDIT = '/edit';
     PATH_VIEW = '/view';
     MSG_INSERT: string = 'messages.success.insert';
@@ -188,4 +191,9 @@ export class DeleteProdottoDialog {
     onSubmit() {
         this.dialogRef.close(true);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

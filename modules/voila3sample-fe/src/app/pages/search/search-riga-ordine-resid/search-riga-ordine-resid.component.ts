@@ -1,4 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {Component, Inject, OnInit, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
@@ -17,7 +18,9 @@ import { BaseSearchComponent } from 'src/app/shared/base/base-search.component';
     templateUrl: './search-riga-ordine-resid.component.html',
     styleUrls: ['./search-riga-ordine-resid.component.scss']
 })
-export class SearchRigaOrdineResidComponent extends BaseSearchComponent implements OnInit {
+export class SearchRigaOrdineResidComponent extends BaseSearchComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     searchRigaOrdineForm!: FormGroup;
 
     public ordineList: IOrdine[] = [];
@@ -119,4 +122,9 @@ export class SearchRigaOrdineResidComponent extends BaseSearchComponent implemen
 
         this.getProdottoList();
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

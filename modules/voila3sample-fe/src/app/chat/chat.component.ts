@@ -1,4 +1,5 @@
-import { Component, ElementRef, NgZone, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {Component, ElementRef, NgZone, OnInit, QueryList, ViewChild, ViewChildren, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ChatService, Message } from 'src/app/utilities/services/chat.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProfileDialog } from 'src/app/layout/profile/profile-dialog.component';
@@ -11,7 +12,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
     templateUrl: './chat.component.html',
     styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild('scrollframe', { static: false }) scrollFrame!: ElementRef;
     @ViewChildren('message') itemElements!: QueryList<any>;
 
@@ -159,4 +162,9 @@ export class ChatComponent implements OnInit {
     changePosition() {
         this.position = { x: this.position.x, y: this.position.y };
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

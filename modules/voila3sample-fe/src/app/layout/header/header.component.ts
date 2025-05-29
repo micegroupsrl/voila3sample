@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {Component, EventEmitter, Output, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { LANGUAGE, LANGUAGE_START } from './header.constant';
 import { VoilaTranslateService } from 'src/app/utilities/services/voila-translate.service';
 import { environment } from 'src/environments/environment';
@@ -13,7 +14,9 @@ import { ChatComponent } from 'src/app/chat/chat.component';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
+  private subscriptions = new Subscription();
+
     @Output() snav: EventEmitter<void> = new EventEmitter<void>();
     public langaugeArray: any = LANGUAGE;
     public defaultLanguage: any = LANGUAGE_START;
@@ -81,4 +84,9 @@ export class HeaderComponent {
             this.router.navigate(['/home']);
         }
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ControlValueAccessor, FormControlDirective, FormControl, ControlContainer, NG_VALUE_ACCESSOR, FormBuilder, FormGroup } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
@@ -20,7 +21,9 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
         </div>
     `
 })
-export class DataTimePickerBaseComponent implements OnInit, ControlValueAccessor {
+export class DataTimePickerBaseComponent implements OnInit, ControlValueAccessor, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
 
@@ -107,4 +110,9 @@ export class DataTimePickerBaseComponent implements OnInit, ControlValueAccessor
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

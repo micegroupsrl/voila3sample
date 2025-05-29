@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation, OnDestroy} from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -15,7 +15,7 @@ import { ProdottoApiService } from '../services/services-prodotto/prodotto-api.s
 import { ProdottoGroupApiService } from '../services/services-prodotto/prodotto-group-api.service';
 import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { filter } from 'rxjs';
+import {filter, Subscription} from 'rxjs';
 import { AppAuthGuard } from 'src/app/app.authguard';
 import { getPrivilegesEnum } from '@micegroup/voila2-runtime-ng';
 import { Permission } from 'src/app/utilities/pipe/utility-pipe';
@@ -27,7 +27,9 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./prodotto.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ProdottoComponent implements OnInit {
+export class ProdottoComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     ELEMENT_DATA: IProdotto[] = [];
     searchProdottoForm!: FormGroup;
     isLoading = false;
@@ -71,7 +73,7 @@ export class ProdottoComponent implements OnInit {
     };
 
     /**
-     * filter intialization.
+     *filter, Subscriptionintialization.
      */
     filters = '';
 
@@ -247,4 +249,9 @@ export class ProdottoComponent implements OnInit {
             return permission.transform(privileges);
         } else return true;
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

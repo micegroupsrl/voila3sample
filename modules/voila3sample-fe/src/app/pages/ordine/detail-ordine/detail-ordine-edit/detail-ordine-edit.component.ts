@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormArray, FormGroup } from '@angular/forms';
 import { IOrdine } from 'src/app/pages/interfaces/ordine.interface';
 import { TabsOrdineComponent } from '../tabs-ordine/tabs-ordine.component';
@@ -14,7 +15,9 @@ import { BaseDetailComponent } from 'src/app/shared/base/base-detail.component';
     templateUrl: './detail-ordine-edit.component.html',
     styleUrls: ['./detail-ordine-edit.component.scss']
 })
-export class DetailOrdineEditComponent extends BaseDetailComponent implements OnChanges {
+export class DetailOrdineEditComponent extends BaseDetailComponent implements OnChanges, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(TabsOrdineComponent) tabsOrdine!: TabsOrdineComponent;
 
     @Input()
@@ -137,4 +140,9 @@ export class DetailOrdineEditComponent extends BaseDetailComponent implements On
         });
         this.ordineForm.get('idOrdine')?.disable();
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

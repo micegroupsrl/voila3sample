@@ -1,10 +1,10 @@
 import { HttpParams } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild, OnDestroy} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import { PrivilegePerRoleApiService } from 'src/app/pages/services/services-privilege-per-role/privilege-per-role-api.service';
 import { PrivilegePerRoleGroupApiService } from 'src/app/pages/services/services-privilege-per-role/privilege-per-role-group-api.service';
 import { getListForDropdowns } from 'src/app/shared/base/base.helper';
@@ -20,7 +20,9 @@ import { BaseTabComponent } from 'src/app/shared/base/base-tab.component';
     templateUrl: './tab-privilege-per-role-edit-fe.component.html',
     styleUrls: ['./tab-privilege-per-role-edit-fe.component.scss']
 })
-export class TabPrivilegePerRoleEditFeComponent extends BaseTabComponent implements OnInit, OnChanges {
+export class TabPrivilegePerRoleEditFeComponent extends BaseTabComponent implements OnInit, OnChanges, OnDestroy{
+  private subscriptions = new Subscription();
+
     isLoading = false;
     totalRows = 0;
     pageSize = 5;
@@ -250,4 +252,9 @@ export class TabPrivilegePerRoleEditFeComponent extends BaseTabComponent impleme
         }
         return valueForm;
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild, forwardRef } from '@angular/core';
+import {Component, Input, OnInit, ViewChild, forwardRef, OnDestroy} from '@angular/core';
 import { ControlContainer, FormControl, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CodeModel } from '@ngstack/code-editor';
-import { first } from 'rxjs';
+import {first, Subscription} from 'rxjs';
 
 @Component({
     selector: 'text-editor',
@@ -15,7 +15,9 @@ import { first } from 'rxjs';
     templateUrl: './text-field-editor.component.html',
     styleUrls: ['./text-field-editor.component.scss']
 })
-export class TextFieldEditorComponent implements OnInit {
+export class TextFieldEditorComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
 
@@ -81,4 +83,9 @@ export class TextFieldEditorComponent implements OnInit {
     get control() {
         return this.formControl || this.controlContainer.control!.get(this.formControlName);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

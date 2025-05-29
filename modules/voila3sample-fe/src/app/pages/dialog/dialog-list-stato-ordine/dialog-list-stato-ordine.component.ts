@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import {Component, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -15,7 +16,9 @@ import { SearchStatoOrdineResidComponent } from '../../search/search-stato-ordin
     templateUrl: './dialog-list-stato-ordine.component.html',
     styleUrls: ['./dialog-list-stato-ordine.component.scss']
 })
-export class DialogListStatoOrdineComponent {
+export class DialogListStatoOrdineComponent implements OnDestroy {
+  private subscriptions = new Subscription();
+
     isLoading = false;
     totalRows = 0;
     pageSize = 5;
@@ -130,4 +133,9 @@ export class DialogListStatoOrdineComponent {
     setSelectedRow(row: any) {
         this.selectedElementKey = row;
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { LoginGroupApiService } from '../services/services-login/login-group-api.service';
 import { ILogin } from 'src/app/interfaces/login.interface';
@@ -11,7 +12,9 @@ import { CookieService } from 'ngx-cookie-service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
+  private subscriptions = new Subscription();
+
     profileForm!: FormGroup;
     login!: ILogin;
 
@@ -41,4 +44,9 @@ export class LoginComponent {
             }
         });
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

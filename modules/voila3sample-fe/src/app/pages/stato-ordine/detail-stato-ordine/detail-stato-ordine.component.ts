@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { IStatoOrdine } from 'src/app/pages/interfaces/stato-ordine.interface';
@@ -19,7 +20,9 @@ import { getPrivilegesEnum } from '@micegroup/voila2-runtime-ng';
     templateUrl: './detail-stato-ordine.component.html',
     styleUrls: ['./detail-stato-ordine.component.scss']
 })
-export class DetailStatoOrdineComponent implements OnInit {
+export class DetailStatoOrdineComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     PATH_EDIT = '/edit';
     PATH_VIEW = '/view';
     MSG_INSERT: string = 'messages.success.insert';
@@ -187,4 +190,9 @@ export class DeleteStatoOrdineDialog {
     onSubmit() {
         this.dialogRef.close(true);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

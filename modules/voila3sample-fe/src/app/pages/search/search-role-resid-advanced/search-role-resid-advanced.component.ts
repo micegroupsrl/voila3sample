@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
@@ -14,7 +15,9 @@ import { getListForDropdowns } from 'src/app/shared/base/base.helper';
     templateUrl: './search-role-resid-advanced.component.html',
     styleUrls: ['./search-role-resid-advanced.component.scss']
 })
-export class SearchRoleResidAdvancedComponent extends BaseSearchResidAdvancedComponent implements OnInit {
+export class SearchRoleResidAdvancedComponent extends BaseSearchResidAdvancedComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     override attributeList = [
         // Definition of the object's list that will be used for build the filter
         { name: 'roleId', type: 'string', api: ['contiene'] },
@@ -99,4 +102,9 @@ export class SearchRoleResidAdvancedComponent extends BaseSearchResidAdvancedCom
     private getParentsList(): void {
         this.getRoleRoleGroupList();
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

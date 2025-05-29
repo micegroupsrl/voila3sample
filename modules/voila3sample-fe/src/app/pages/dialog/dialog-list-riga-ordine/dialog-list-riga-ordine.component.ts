@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import {Component, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -15,7 +16,9 @@ import { SearchRigaOrdineResidComponent } from '../../search/search-riga-ordine-
     templateUrl: './dialog-list-riga-ordine.component.html',
     styleUrls: ['./dialog-list-riga-ordine.component.scss']
 })
-export class DialogListRigaOrdineComponent {
+export class DialogListRigaOrdineComponent implements OnDestroy {
+  private subscriptions = new Subscription();
+
     isLoading = false;
     totalRows = 0;
     pageSize = 5;
@@ -131,4 +134,9 @@ export class DialogListRigaOrdineComponent {
     setSelectedRow(row: any) {
         this.selectedElementKey = row;
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }
