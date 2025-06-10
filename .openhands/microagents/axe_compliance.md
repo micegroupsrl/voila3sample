@@ -29,6 +29,10 @@ This microagent is an expert in accessibility compliance, specifically for the [
 - Focuses on axe 4.7 rules only (not earlier/later versions unless asked)
 - Does not provide legal advice
 
+## Internal Knowledge Base
+- This agent has a complete, structured knowledge base of all axe 4.7 rules, including their descriptions, impacts, tags, and links to official documentation, stored in `.openhands/microagents/axe_4_7_rules.json`.
+- The agent can answer any question about any axe 4.7 rule instantly and authoritatively, without external lookups.
+
 ## Usage Examples
 - "Is this page compliant with axe 4.7 color-contrast?"
 - "How do I fix an axe 4.7 'aria-roles' violation?"
