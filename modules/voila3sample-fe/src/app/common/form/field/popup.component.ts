@@ -1,6 +1,6 @@
-import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormControlDirective, FormControl, ControlContainer, NG_VALUE_ACCESSOR, FormBuilder, AbstractControl } from '@angular/forms';
-import { first } from 'rxjs';
+import { first, Subscription } from 'rxjs';
 
 @Component({
     selector: 'popup-test',
@@ -19,7 +19,7 @@ import { first } from 'rxjs';
         </mat-form-field>
     `
 })
-export class PopupBaseComponent implements OnInit, ControlValueAccessor {
+export class PopupBaseComponent implements OnInit, OnDestroy, ControlValueAccessor {
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
 
@@ -31,6 +31,7 @@ export class PopupBaseComponent implements OnInit, ControlValueAccessor {
 
     onChange = (value: string | null) => {};
     onTouched = () => {};
+    private subscriptions = new Subscription();
 
     constructor(
         public controlContainer: ControlContainer,
@@ -39,9 +40,11 @@ export class PopupBaseComponent implements OnInit, ControlValueAccessor {
 
     ngOnInit() {
         this.label = this.label || this.formControlName;
-        this.control.valueChanges.pipe(first()).subscribe(value => {
-            this.name.setValue(value);
-        });
+        this.subscriptions.add(
+            this.control.valueChanges.pipe(first()).subscribe(value => {
+                this.name.setValue(value);
+            })
+        );
     }
 
     get control() {
@@ -66,5 +69,10 @@ export class PopupBaseComponent implements OnInit, ControlValueAccessor {
 
     setDisabledState(isDisabled: boolean): void {
         this.formControlDirective.valueAccessor?.setDisabledState?.(isDisabled);
+    }
+    
+    ngOnDestroy() {
+        // Unsubscribe from all subscriptions
+        this.subscriptions.unsubscribe();
     }
 }
