@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormArray, FormGroup } from '@angular/forms';
 import { IRolePerUser } from 'src/app/pages/interfaces/role-per-user.interface';
 import { TabsRolePerUserComponent } from '../tabs-role-per-user/tabs-role-per-user.component';
@@ -13,7 +14,9 @@ import { BaseDetailComponent } from 'src/app/shared/base/base-detail.component';
     templateUrl: './detail-role-per-user-edit.component.html',
     styleUrls: ['./detail-role-per-user-edit.component.scss']
 })
-export class DetailRolePerUserEditComponent extends BaseDetailComponent implements OnChanges {
+export class DetailRolePerUserEditComponent extends BaseDetailComponent implements OnChanges, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(TabsRolePerUserComponent) tabsRolePerUser!: TabsRolePerUserComponent;
 
     @Input()
@@ -107,4 +110,9 @@ export class DetailRolePerUserEditComponent extends BaseDetailComponent implemen
             theUserObjectTitle: rolePerUser.theUserObjectTitle
         });
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

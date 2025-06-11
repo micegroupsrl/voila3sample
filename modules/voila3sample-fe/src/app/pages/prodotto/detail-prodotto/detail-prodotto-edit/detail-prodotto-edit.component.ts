@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormArray, FormGroup } from '@angular/forms';
 import { IProdotto } from 'src/app/pages/interfaces/prodotto.interface';
 import { TabsProdottoComponent } from '../tabs-prodotto/tabs-prodotto.component';
@@ -12,7 +13,9 @@ import { BaseDetailComponent } from 'src/app/shared/base/base-detail.component';
     templateUrl: './detail-prodotto-edit.component.html',
     styleUrls: ['./detail-prodotto-edit.component.scss']
 })
-export class DetailProdottoEditComponent extends BaseDetailComponent implements OnChanges {
+export class DetailProdottoEditComponent extends BaseDetailComponent implements OnChanges, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(TabsProdottoComponent) tabsProdotto!: TabsProdottoComponent;
 
     @Input()
@@ -99,4 +102,9 @@ export class DetailProdottoEditComponent extends BaseDetailComponent implements 
         });
         this.prodottoForm.get('idProdotto')?.disable();
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

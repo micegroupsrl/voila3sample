@@ -1,4 +1,5 @@
-import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
+import {Component, forwardRef, Input, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ControlValueAccessor, FormControlDirective, FormControl, ControlContainer, NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -17,7 +18,9 @@ import { ControlValueAccessor, FormControlDirective, FormControl, ControlContain
         </mat-form-field>
     `
 })
-export class PopupBaseComponent implements OnInit, ControlValueAccessor {
+export class PopupBaseComponent implements OnInit, ControlValueAccessor, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
 
@@ -64,4 +67,9 @@ export class PopupBaseComponent implements OnInit, ControlValueAccessor {
     setDisabledState(isDisabled: boolean): void {
         this.formControlDirective.valueAccessor?.setDisabledState?.(isDisabled);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

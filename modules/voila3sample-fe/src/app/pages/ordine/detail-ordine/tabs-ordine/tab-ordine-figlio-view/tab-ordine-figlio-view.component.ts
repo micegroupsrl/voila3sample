@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -22,7 +23,9 @@ import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
     templateUrl: './tab-ordine-figlio-view.component.html',
     styleUrls: ['./tab-ordine-figlio-view.component.scss']
 })
-export class TabOrdineFiglioViewComponent implements OnChanges {
+export class TabOrdineFiglioViewComponent implements OnChanges, OnDestroy{
+  private subscriptions = new Subscription();
+
     isLoading = false;
     totalRows = 0;
     pageSize = 5;
@@ -209,4 +212,9 @@ export class TabOrdineFiglioViewComponent implements OnChanges {
         this.object.pageSize = this.pageSize;
         this.loadData(this.object);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

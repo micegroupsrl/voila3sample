@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormArray, FormGroup } from '@angular/forms';
 import { IPrivilegePerRole } from 'src/app/pages/interfaces/privilege-per-role.interface';
 import { TabsPrivilegePerRoleComponent } from '../tabs-privilege-per-role/tabs-privilege-per-role.component';
@@ -13,7 +14,9 @@ import { BaseDetailComponent } from 'src/app/shared/base/base-detail.component';
     templateUrl: './detail-privilege-per-role-edit.component.html',
     styleUrls: ['./detail-privilege-per-role-edit.component.scss']
 })
-export class DetailPrivilegePerRoleEditComponent extends BaseDetailComponent implements OnChanges {
+export class DetailPrivilegePerRoleEditComponent extends BaseDetailComponent implements OnChanges, OnDestroy {
+  private subscriptions = new Subscription();
+
     @ViewChild(TabsPrivilegePerRoleComponent) tabsPrivilegePerRole!: TabsPrivilegePerRoleComponent;
 
     @Input()
@@ -107,4 +110,9 @@ export class DetailPrivilegePerRoleEditComponent extends BaseDetailComponent imp
             thePrivilegeObjectTitle: privilegePerRole.thePrivilegeObjectTitle
         });
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { ICategoriaOrdine } from 'src/app/pages/interfaces/categoria-ordine.interface';
@@ -19,7 +20,9 @@ import { getPrivilegesEnum } from '@micegroup/voila2-runtime-ng';
     templateUrl: './detail-categoria-ordine.component.html',
     styleUrls: ['./detail-categoria-ordine.component.scss']
 })
-export class DetailCategoriaOrdineComponent implements OnInit {
+export class DetailCategoriaOrdineComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     PATH_EDIT = '/edit';
     PATH_VIEW = '/view';
     MSG_INSERT: string = 'messages.success.insert';
@@ -187,4 +190,9 @@ export class DeleteCategoriaOrdineDialog {
     onSubmit() {
         this.dialogRef.close(true);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

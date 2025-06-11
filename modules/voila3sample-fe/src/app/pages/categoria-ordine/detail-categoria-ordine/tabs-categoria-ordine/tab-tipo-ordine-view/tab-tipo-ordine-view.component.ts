@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -19,7 +20,9 @@ import { setOptions } from 'src/app/utilities/function/helper';
     templateUrl: './tab-tipo-ordine-view.component.html',
     styleUrls: ['./tab-tipo-ordine-view.component.scss']
 })
-export class TabTipoOrdineViewComponent implements OnChanges {
+export class TabTipoOrdineViewComponent implements OnChanges, OnDestroy{
+  private subscriptions = new Subscription();
+
     isLoading = false;
     totalRows = 0;
     pageSize = 5;
@@ -154,4 +157,9 @@ export class TabTipoOrdineViewComponent implements OnChanges {
         let pathDetailView = TIPO_ORDINE.PATH.DETAIL + id + PATH_VIEW;
         this.router.navigate([pathDetailView]);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

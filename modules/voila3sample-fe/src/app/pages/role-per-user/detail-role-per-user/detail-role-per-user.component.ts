@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { IRolePerUser } from 'src/app/pages/interfaces/role-per-user.interface';
@@ -20,7 +21,9 @@ import { getPrivilegesEnum } from '@micegroup/voila2-runtime-ng';
     templateUrl: './detail-role-per-user.component.html',
     styleUrls: ['./detail-role-per-user.component.scss']
 })
-export class DetailRolePerUserComponent implements OnInit {
+export class DetailRolePerUserComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     PATH_EDIT = '/edit';
     PATH_VIEW = '/view';
     MSG_INSERT: string = 'messages.success.insert';
@@ -183,4 +186,9 @@ export class DeleteRolePerUserDialog {
     onSubmit() {
         this.dialogRef.close(true);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

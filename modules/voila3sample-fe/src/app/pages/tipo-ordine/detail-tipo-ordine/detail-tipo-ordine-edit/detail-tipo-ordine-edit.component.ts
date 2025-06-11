@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ITipoOrdine } from 'src/app/pages/interfaces/tipo-ordine.interface';
 import { TabsTipoOrdineComponent } from '../tabs-tipo-ordine/tabs-tipo-ordine.component';
@@ -12,7 +13,9 @@ import { BaseDetailComponent } from 'src/app/shared/base/base-detail.component';
     templateUrl: './detail-tipo-ordine-edit.component.html',
     styleUrls: ['./detail-tipo-ordine-edit.component.scss']
 })
-export class DetailTipoOrdineEditComponent extends BaseDetailComponent implements OnChanges {
+export class DetailTipoOrdineEditComponent extends BaseDetailComponent implements OnChanges, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(TabsTipoOrdineComponent) tabsTipoOrdine!: TabsTipoOrdineComponent;
 
     @Input()
@@ -100,4 +103,9 @@ export class DetailTipoOrdineEditComponent extends BaseDetailComponent implement
         this.tipoOrdineForm.get('anno')?.disable();
         this.tipoOrdineForm.get('idTipoOrdine')?.disable();
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

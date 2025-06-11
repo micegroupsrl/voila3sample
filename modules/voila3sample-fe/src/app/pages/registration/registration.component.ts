@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { OverlaysService } from 'src/app/utilities/services/overlays.service';
 import { RegistrationGroupApiService } from '../services/services-registration/registration-group-api.service';
@@ -9,7 +10,9 @@ import { IUser } from '../interfaces/user.interface';
     templateUrl: './registration.component.html',
     styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnDestroy {
+  private subscriptions = new Subscription();
+
     profileForm!: FormGroup;
     regis!: IUser;
 
@@ -40,4 +43,9 @@ export class RegistrationComponent {
         console.log(this.profileForm.get('username')?.value);
         console.log(this.profileForm.get('password')?.value);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

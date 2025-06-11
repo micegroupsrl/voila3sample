@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation, OnDestroy} from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -15,7 +15,7 @@ import { TipoOrdineApiService } from '../services/services-tipo-ordine/tipo-ordi
 import { TipoOrdineGroupApiService } from '../services/services-tipo-ordine/tipo-ordine-group-api.service';
 import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { filter } from 'rxjs';
+import {filter, Subscription} from 'rxjs';
 import { AppAuthGuard } from 'src/app/app.authguard';
 import { getPrivilegesEnum } from '@micegroup/voila2-runtime-ng';
 import { Permission } from 'src/app/utilities/pipe/utility-pipe';
@@ -27,7 +27,9 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./tipo-ordine.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class TipoOrdineComponent implements OnInit {
+export class TipoOrdineComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     ELEMENT_DATA: ITipoOrdine[] = [];
     searchTipoOrdineForm!: FormGroup;
     isLoading = false;
@@ -64,7 +66,7 @@ export class TipoOrdineComponent implements OnInit {
     };
 
     /**
-     * filter intialization.
+     *filter, Subscriptionintialization.
      */
     filters = '';
 
@@ -210,4 +212,9 @@ export class TipoOrdineComponent implements OnInit {
             return permission.transform(privileges);
         } else return true;
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

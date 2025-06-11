@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormArray, FormGroup } from '@angular/forms';
 import { IRigaOrdine } from 'src/app/pages/interfaces/riga-ordine.interface';
 import { TabsRigaOrdineComponent } from '../tabs-riga-ordine/tabs-riga-ordine.component';
@@ -13,7 +14,9 @@ import { BaseDetailComponent } from 'src/app/shared/base/base-detail.component';
     templateUrl: './detail-riga-ordine-edit.component.html',
     styleUrls: ['./detail-riga-ordine-edit.component.scss']
 })
-export class DetailRigaOrdineEditComponent extends BaseDetailComponent implements OnChanges {
+export class DetailRigaOrdineEditComponent extends BaseDetailComponent implements OnChanges, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(TabsRigaOrdineComponent) tabsRigaOrdine!: TabsRigaOrdineComponent;
 
     @Input()
@@ -109,4 +112,9 @@ export class DetailRigaOrdineEditComponent extends BaseDetailComponent implement
             theProdottoObjectTitle: rigaOrdine.theProdottoObjectTitle
         });
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

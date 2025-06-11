@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
@@ -15,7 +16,9 @@ import { getListForDropdowns } from 'src/app/shared/base/base.helper';
     templateUrl: './search-riga-ordine-resid-advanced.component.html',
     styleUrls: ['./search-riga-ordine-resid-advanced.component.scss']
 })
-export class SearchRigaOrdineResidAdvancedComponent extends BaseSearchResidAdvancedComponent implements OnInit {
+export class SearchRigaOrdineResidAdvancedComponent extends BaseSearchResidAdvancedComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     override attributeList = [
         // Definition of the object's list that will be used for build the filter
         { name: 'qta', type: 'number', api: ['minoreDi', 'uguale', 'maggioreDi'] },
@@ -112,4 +115,9 @@ export class SearchRigaOrdineResidAdvancedComponent extends BaseSearchResidAdvan
         this.getOrdineList();
         this.getProdottoList();
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

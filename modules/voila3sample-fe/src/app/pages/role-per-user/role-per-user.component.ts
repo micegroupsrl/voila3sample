@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation, OnDestroy} from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -15,7 +15,7 @@ import { RolePerUserApiService } from '../services/services-role-per-user/role-p
 import { RolePerUserGroupApiService } from '../services/services-role-per-user/role-per-user-group-api.service';
 import { FilterBuilder } from 'src/app/utilities/function/filter-builder';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { filter } from 'rxjs';
+import {filter, Subscription} from 'rxjs';
 import { AppAuthGuard } from 'src/app/app.authguard';
 import { getPrivilegesEnum } from '@micegroup/voila2-runtime-ng';
 import { Permission } from 'src/app/utilities/pipe/utility-pipe';
@@ -27,7 +27,9 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./role-per-user.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class RolePerUserComponent implements OnInit {
+export class RolePerUserComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     ELEMENT_DATA: IRolePerUser[] = [];
     searchRolePerUserForm!: FormGroup;
     isLoading = false;
@@ -63,7 +65,7 @@ export class RolePerUserComponent implements OnInit {
     };
 
     /**
-     * filter intialization.
+     *filter, Subscriptionintialization.
      */
     filters = '';
 
@@ -209,4 +211,9 @@ export class RolePerUserComponent implements OnInit {
             return permission.transform(privileges);
         } else return true;
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ControlValueAccessor, FormControlDirective, FormControl, ControlContainer, NG_VALUE_ACCESSOR, FormBuilder, FormGroup } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
@@ -20,7 +21,9 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
         </div>
     `
 })
-export class DataTimePickerGroupBootstrapComponent implements OnInit, ControlValueAccessor {
+export class DataTimePickerGroupBootstrapComponent implements OnInit, ControlValueAccessor, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
 
@@ -110,4 +113,9 @@ export class DataTimePickerGroupBootstrapComponent implements OnInit, ControlVal
     setDisabledState(isDisabled: boolean): void {
         this.formControlDirective.valueAccessor?.setDisabledState?.(isDisabled);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild, forwardRef } from '@angular/core';
+import {Component, Input, OnInit, ViewChild, forwardRef, OnDestroy} from '@angular/core';
 import { ControlContainer, FormControl, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbTimepicker, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import { first } from 'rxjs';
+import {first, Subscription} from 'rxjs';
 
 @Component({
     selector: 'timepicker',
@@ -15,7 +15,9 @@ import { first } from 'rxjs';
     templateUrl: './timepicker-base.component.html',
     styleUrls: ['./timepicker-base.component.scss']
 })
-export class TimepickerTestComponent implements OnInit {
+export class TimepickerTestComponent implements OnInit, OnDestroy{
+  private subscriptions = new Subscription();
+
     @ViewChild(FormControlDirective, { static: true })
     formControlDirective!: FormControlDirective;
     @ViewChild(NgbTimepicker) picker!: NgbTimepicker;
@@ -93,4 +95,9 @@ export class TimepickerTestComponent implements OnInit {
     setDisabledState(isDisabled: boolean): void {
         this.formControlDirective.valueAccessor?.setDisabledState?.(isDisabled);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

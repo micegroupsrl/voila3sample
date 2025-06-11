@@ -1,4 +1,5 @@
-import { Component, Inject } from '@angular/core';
+import {Component, Inject, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { LoginGroupApiService } from 'src/app/pages/services/services-login/login-group-api.service';
 import { OverlaysService } from 'src/app/utilities/services/overlays.service';
@@ -8,7 +9,9 @@ import { CookieService } from 'ngx-cookie-service';
     selector: 'profile-dialog',
     templateUrl: './profile-dialog.component.html'
 })
-export class ProfileDialog {
+export class ProfileDialog implements OnDestroy {
+  private subscriptions = new Subscription();
+
     user: any = {
         email: String,
         username: String
@@ -50,4 +53,9 @@ export class ProfileDialog {
             }
         });
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }

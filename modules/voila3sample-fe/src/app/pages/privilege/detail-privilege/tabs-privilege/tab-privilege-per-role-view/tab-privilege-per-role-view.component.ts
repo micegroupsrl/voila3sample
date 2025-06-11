@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -20,7 +21,9 @@ import { setOptions } from 'src/app/utilities/function/helper';
     templateUrl: './tab-privilege-per-role-view.component.html',
     styleUrls: ['./tab-privilege-per-role-view.component.scss']
 })
-export class TabPrivilegePerRoleViewComponent implements OnChanges {
+export class TabPrivilegePerRoleViewComponent implements OnChanges, OnDestroy{
+  private subscriptions = new Subscription();
+
     isLoading = false;
     totalRows = 0;
     pageSize = 5;
@@ -159,4 +162,9 @@ export class TabPrivilegePerRoleViewComponent implements OnChanges {
         let pathDetailView = PRIVILEGE_PER_ROLE.PATH.DETAIL + id + PATH_VIEW;
         this.router.navigate([pathDetailView]);
     }
+  ngOnDestroy(): void {
+    // TODO: Add individual subscriptions to this.subscriptions using .add() method
+    this.subscriptions.unsubscribe();
+  }
+
 }
