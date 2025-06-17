@@ -15,7 +15,7 @@ import { first } from 'rxjs';
     template: `
         <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>{{ placeholder | camelCaseToText }}</mat-label>
-            <input matInput [value]="name.value" />
+            <input matInput [value]="name.value" aria-label="Popup input" />
         </mat-form-field>
     `
 })

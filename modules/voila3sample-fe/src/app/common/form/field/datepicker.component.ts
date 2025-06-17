@@ -16,7 +16,7 @@ import * as moment from 'moment';
     template: `
         <mat-form-field [appearance]="appearance">
             <mat-label>{{ label | camelCaseToText }}</mat-label>
-            <input matInput [matDatepicker]="dp" [formControl]="control" />
+            <input matInput [matDatepicker]="dp" [formControl]="control" aria-label="Date picker" />
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp color="primary"></mat-datepicker>
         </mat-form-field>

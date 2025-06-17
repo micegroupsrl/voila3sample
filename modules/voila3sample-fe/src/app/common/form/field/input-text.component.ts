@@ -15,7 +15,7 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
     template: `
         <mat-form-field [appearance]="appearance">
             <mat-label>{{ label | camelCaseToText }}</mat-label>
-            <input matInput [formControl]="$any(control)" type="text" [required]="required" />
+            <input matInput [formControl]="$any(control)" type="text" [required]="required" aria-label="Text input" />
             <mat-icon matSuffix class="secondary-text" *ngIf="iconSuffix">{{ iconSuffix }}</mat-icon>
             <span matSuffix *ngIf="suffix">{{ suffix }}</span>
         </mat-form-field>

@@ -15,7 +15,7 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
     template: `
         <mat-form-field [appearance]="appearance">
             <mat-label>{{ label | camelCaseToText }}</mat-label>
-            <input matInput [formControl]="control" type="number" [required]="required" />
+            <input matInput [formControl]="control" type="number" [required]="required" aria-label="Price" />
             <span matPrefix *ngIf="prefix">{{ prefix }}</span>
         </mat-form-field>
     `

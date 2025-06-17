@@ -15,7 +15,7 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
     template: `
         <mat-form-field [appearance]="appearance">
             <mat-label>{{ label | camelCaseToText }}</mat-label>
-            <input matInput [ngxMatTimepicker]="tp" [formControl]="control" [format]="24" [disableClick]="true" [placeholder]="'00:00'" readonly />
+            <input matInput [ngxMatTimepicker]="tp" [formControl]="control" [format]="24" [disableClick]="true" [placeholder]="'00:00'" readonly aria-label="Time picker" />
 
             <ngx-mat-timepicker-toggle matSuffix (click)="openPicker()" [disabled]="disableToggle"></ngx-mat-timepicker-toggle>
             <ngx-mat-timepicker #tp (timeSet)="updateTime($event)"></ngx-mat-timepicker>

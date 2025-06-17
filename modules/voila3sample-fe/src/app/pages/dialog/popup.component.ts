@@ -13,7 +13,7 @@ import { ControlValueAccessor, FormControlDirective, FormControl, ControlContain
     styles: [],
     template: `
         <mat-form-field appearance="outline" style="width: 100%">
-            <input matInput [value]="name.value" [placeholder]="placeholder" />
+            <input matInput [value]="name.value" [placeholder]="placeholder" aria-label="Popup input" />
         </mat-form-field>
     `
 })

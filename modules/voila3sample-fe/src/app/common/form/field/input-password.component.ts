@@ -15,7 +15,7 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
     template: `
         <mat-form-field [appearance]="appearance">
             <mat-label>{{ label | camelCaseToText }}</mat-label>
-            <input matInput [formControl]="$any(control)" [type]="hide ? 'password' : 'text'" [required]="required" />
+            <input matInput [formControl]="$any(control)" [type]="hide ? 'password' : 'text'" [required]="required" aria-label="Password" />
             <mat-icon matSuffix class="secondary-text" *ngIf="iconSuffix">{{ iconSuffix }}</mat-icon>
             <span matSuffix *ngIf="suffix">{{ suffix }}</span>
             <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
