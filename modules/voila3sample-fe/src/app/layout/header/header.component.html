@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row fxLayout="row" fxLayoutAlign="start center">
-        <button *ngIf="!disableMenuButton" mat-icon-button (click)="snavClick()"><mat-icon>menu</mat-icon></button>
+        <button *ngIf="!disableMenuButton" mat-icon-button aria-label="Open menu" (click)="snavClick()"><mat-icon>menu</mat-icon></button>
         <!--Title of the SPA-->
         <button mat-button class="no-hover-effect" (click)="goHome()">voila3sample</button>
 
@@ -19,7 +19,7 @@
         </div>
 
         <div class="user">
-            <button *ngIf="cookie" mat-icon-button aria-hidden="false" (click)="OpenModal()">
+            <button *ngIf="cookie" mat-icon-button aria-label="Open cookie modal" aria-hidden="false" (click)="OpenModal()">
                 <mat-icon>account_circle</mat-icon>
             </button>
         </div>
