@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
             {{ data }}
         </span>
         <span matSnackBarActions>
-            <button mat-icon-button class="white-icon" matSnackBarAction (click)="snackBarRef.dismissWithAction()"><mat-icon>cancel</mat-icon></button>
+            <button mat-icon-button class="white-icon" matSnackBarAction aria-label="Dismiss notification" (click)="snackBarRef.dismissWithAction()"><mat-icon>cancel</mat-icon></button>
         </span>`,
     styles: [
         `
