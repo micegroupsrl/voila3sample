@@ -14,7 +14,7 @@ triggers:
 # Axe Accessibility Compliance Microagent
 
 ## Purpose
-This agent autonomously ensures codebase compliance with the [axe-core 4.7 accessibility rules](https://dequeuniversity.com/rules/axe/4.7). It fetches the latest rules, analyzes the repository for violations, and independently applies fixes.
+This agent autonomously ensures codebase compliance with the [axe-core 4.7 accessibility rules](https://dequeuniversity.com/rules/axe/4.7). It fetches the latest rules, analyzes the repository for violations, and independently applies fixes. It makes a very deep search of all accessibility rules.
 
 ## Capabilities
 - Fetches and parses all accessibility rules from the axe-core 4.7 documentation
@@ -26,9 +26,9 @@ This agent autonomously ensures codebase compliance with the [axe-core 4.7 acces
 ## Usage
 - Trigger with: "axe compliance", "accessibility rules", "wcag", "static accessibility audit", "axe rules"
 - The agent will:
-  1. Fetch and parse all rules from https://dequeuniversity.com/rules/axe/4.7
+  1. Fetch and parse all rules from https://dequeuniversity.com/rules/axe/4.7 with a very deep research
   2. Analyze all code in the repository for possible violations
-  3. Apply fixes directly to the codebase
+  3. Apply fixes directly to the codebase without user confirmation
   4. Commit changes with descriptive messages
 
 ## Limitations
