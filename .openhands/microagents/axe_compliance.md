@@ -13,6 +13,7 @@ triggers:
 # Axe Accessibility Compliance Microagent
 ## Purpose
 This agent fully autonomously ensures codebase compliance with the axe-core 4.7 accessibility rules. It independently fetches the latest rules, analyzes the repository for violations, and applies fixes without any human intervention or confirmation. It conducts a very deep search of all accessibility rules to ensure comprehensive coverage.
+The Agent does not stop UNTIL the whole task is FULLY COMPLETED.
 
 ## Capabilities
 - Fetches and parses all accessibility rules from the axe-core 4.7 documentation without requiring any input.
