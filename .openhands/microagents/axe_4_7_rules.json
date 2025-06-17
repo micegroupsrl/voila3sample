@@ -1,0 +1,50 @@
+[
+  {
+    "id": "area-alt",
+    "description": "Ensures <area> elements of image maps have alternate text",
+    "impact": "Critical",
+    "tags": ["cat.text-alternatives", "wcag2a", "wcag244", "wcag412", "section508", "section508.22.a", "ACT", "TTv5", "TT6.a"],
+    "issue_type": ["failure", "needs review"],
+    "act_rules": ["c487ae"],
+    "doc_url": "https://dequeuniversity.com/rules/axe/4.7/area-alt"
+  },
+  {
+    "id": "aria-allowed-attr",
+    "description": "Ensures ARIA attributes are allowed for an element's role",
+    "impact": "Serious, Critical",
+    "tags": ["cat.aria", "wcag2a", "wcag412"],
+    "issue_type": ["failure", "needs review"],
+    "act_rules": ["5c01ea"],
+    "doc_url": "https://dequeuniversity.com/rules/axe/4.7/aria-allowed-attr"
+  },
+  {
+    "id": "aria-command-name",
+    "description": "Ensures every ARIA button, link and menuitem has an accessible name",
+    "impact": "Serious",
+    "tags": ["cat.aria", "wcag2a", "wcag412", "ACT", "TTv5", "TT6.a"],
+    "issue_type": ["failure", "needs review"],
+    "act_rules": ["97a4e1"],
+    "doc_url": "https://dequeuniversity.com/rules/axe/4.7/aria-command-name"
+  },
+  {
+    "id": "aria-hidden-body",
+    "description": "Ensures aria-hidden='true' is not present on the document body.",
+    "impact": "Critical",
+    "tags": ["cat.aria", "wcag2a", "wcag412"],
+    "issue_type": ["failure"],
+    "act_rules": [],
+    "doc_url": "https://dequeuniversity.com/rules/axe/4.7/aria-hidden-body"
+  },
+  {
+    "id": "aria-hidden-focus",
+    "description": "Ensures aria-hidden elements are not focusable nor contain focusable elements",
+    "impact": "Serious",
+    "tags": ["cat.name-role-value", "wcag2a", "wcag412", "TTv5", "TT6.a"],
+    "issue_type": ["failure", "needs review"],
+    "act_rules": ["6cfa84"],
+    "doc_url": "https://dequeuniversity.com/rules/axe/4.7/aria-hidden-focus"
+  },
+  { "id": "color-contrast", "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds", "impact": "Serious", "tags": ["cat.color", "wcag2aa", "wcag143", "ACT", "TTv5", "TT13.c"], "issue_type": ["failure", "needs review"], "act_rules": ["afw4f7", "09o5cg"], "doc_url": "https://dequeuniversity.com/rules/axe/4.7/color-contrast" },
+  { "id": "image-alt", "description": "Ensures <img> elements have alternate text or a role of none or presentation", "impact": "Critical", "tags": ["cat.text-alternatives", "wcag2a", "wcag111", "section508", "section508.22.a", "ACT", "TTv5", "TT7.a", "TT7.b"], "issue_type": ["failure", "needs review"], "act_rules": ["23a2a8"], "doc_url": "https://dequeuniversity.com/rules/axe/4.7/image-alt" }
+  // ... (add all other rules in this format)
+]
