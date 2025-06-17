@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @Component
 @Slf4j
-public class Voila3sampleInterceptor implements HandlerInterceptor, ApplicationContextAware {
+public class Voila3SampleInterceptor implements HandlerInterceptor, ApplicationContextAware {
   private MeterRegistry registry;
 
   @Autowired private EntityManager entityManager;
