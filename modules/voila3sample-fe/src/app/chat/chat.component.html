@@ -12,13 +12,13 @@
 
         <div class="title">Intellivize ChatBot</div>
         <div class="frame-top">
-            <button mat-icon-button class="img4" color="primary" (click)="refresh()">
+            <button mat-icon-button class="img4" color="primary" (click)="refresh()" aria-label="Refresh">
                 <mat-icon>refresh</mat-icon>
             </button>
-            <button mat-icon-button class="img3" color="primary" (click)="windowed()">
+            <button mat-icon-button class="img3" color="primary" (click)="windowed()" aria-label="Minimize">
                 <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
-            <button mat-icon-button class="img" color="primary" (click)="close()">
+            <button mat-icon-button class="img" color="primary" (click)="close()" aria-label="Close">
                 <mat-icon>clear</mat-icon>
             </button>
         </div>
@@ -64,11 +64,12 @@
                 matTextareaAutosize
                 matAutosizeMinRows="2"
                 matAutosizeMaxRows="5"
+                aria-label="Chat input"
             />
-            <button *ngIf="this.getForm.value != ''" mat-icon-button [disabled]="false" class="img-2" (click)="sendMessage()">
+            <button *ngIf="this.getForm.value != ''" mat-icon-button [disabled]="false" class="img-2" (click)="sendMessage()" aria-label="Send message">
                 <mat-icon>send</mat-icon>
             </button>
-            <button *ngIf="this.getForm.value == ''" mat-icon-button [disabled]="true" class="img-2-2" (click)="sendMessage()">
+            <button *ngIf="this.getForm.value == ''" mat-icon-button [disabled]="true" class="img-2-2" (click)="sendMessage()" aria-label="Send message (disabled)">
                 <mat-icon>send</mat-icon>
             </button>
         </div>
@@ -89,10 +90,10 @@
     <img class="icon" alt="logo" src="assets/intellivize.png" width="30px" />
     <div class="title">Intellivize ChatBot</div>
     <div class="frame-top-win">
-        <button mat-icon-button class="img3" color="primary" (click)="openWindow()">
+        <button mat-icon-button class="img3" color="primary" (click)="openWindow()" aria-label="Open window">
             <mat-icon>keyboard_arrow_up</mat-icon>
         </button>
-        <button mat-icon-button class="img" color="primary" (click)="close()">
+        <button mat-icon-button class="img" color="primary" (click)="close()" aria-label="Close">
             <mat-icon>clear</mat-icon>
         </button>
     </div>
