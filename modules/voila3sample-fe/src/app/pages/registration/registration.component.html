@@ -5,19 +5,22 @@
             <p>
                 <mat-form-field>
                     <mat-icon matPrefix fontIcon="perm_identity"></mat-icon>
-                    <input matInput maxlength="10" placeholder="Username" formControlName="username" />
+                    <label for="usernameInput" class="sr-only">Username</label>
+<input id="usernameInput" matInput maxlength="10" placeholder="Username" formControlName="username" />
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field>
                     <mat-icon matPrefix fontIcon="lock_outline"></mat-icon>
-                    <input matInput #password maxlength="10" type="password" placeholder="Password" formControlName="password" />
+                    <label for="passwordInput" class="sr-only">Password</label>
+<input id="passwordInput" matInput maxlength="10" type="password" placeholder="Password" formControlName="password" />
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field>
                     <mat-icon matPrefix fontIcon="mail_outline"></mat-icon>
-                    <input matInput maxlength="30" placeholder="Email" formControlName="email" />
+                    <label for="emailInput" class="sr-only">Email</label>
+<input id="emailInput" matInput maxlength="30" placeholder="Email" formControlName="email" />
                 </mat-form-field>
             </p>
             <div class="button">
