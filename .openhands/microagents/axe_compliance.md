@@ -26,9 +26,9 @@ This agent autonomously ensures codebase compliance with the [axe-core 4.7 acces
 ## Usage
 - Trigger with: "axe compliance", "accessibility rules", "wcag", "static accessibility audit", "axe rules"
 - The agent will:
-  1. Fetch and parse all rules from https://dequeuniversity.com/rules/axe/4.7 with a very deep research
+  1. Fetch and parse all rules from https://dequeuniversity.com/rules/axe/4.7 with a very deep research, use fetch until you find all information.
   2. Analyze all code in the repository for possible violations
-  3. Apply fixes directly to the codebase without user confirmation
+  3. Apply full fixes directly to the codebase without user confirmation. If fixes require more steps, do them without confirmation.
   4. Commit changes with descriptive messages
 
 ## Limitations
