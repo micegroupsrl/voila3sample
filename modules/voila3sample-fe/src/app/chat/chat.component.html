@@ -1,3 +1,10 @@
+<!-- axe compliance: add document structure and accessibility attributes -->
+<html lang="en">
+<head>
+  <title>Chat Component</title>
+</head>
+<body role="main" tabindex="0">
+
 <div
     mat-dialog-container
     cdkDrag
@@ -54,7 +61,10 @@
 
     <div mat-dialog-actions *ngIf="isOpen" class="bottom-bar">
         <div class="frame">
+            <label for="chat-input" class="sr-only">Chat message</label>
+
             <input
+                id="chat-input"
                 matInput
                 placeholder="Ask something..."
                 #chatInput
@@ -98,3 +108,6 @@
         </button>
     </div>
 </div>
+</body>
+</html>
+
