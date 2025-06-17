@@ -2,9 +2,9 @@
 <!-- axe:lang=en -->
     <div class="header" fxLayout="row" fxLayoutAlign="start center">
         <!--Back Button-->
-        <button *ngIf="(pageStatus | hasPageStatus: 'edit') || (pageStatus | hasPageStatus: 'new')" mat-icon-button (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+        <button *ngIf="(pageStatus | hasPageStatus: 'edit') || (pageStatus | hasPageStatus: 'new')" mat-icon-button aria-label="Go back" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
         <!--List Button-->
-        <button *ngIf="pageStatus | hasPageStatus: 'view'" mat-icon-button (click)="goList()"><mat-icon>arrow_back</mat-icon></button>
+        <button *ngIf="pageStatus | hasPageStatus: 'view'" mat-icon-button aria-label="Go to list" (click)="goList()"><mat-icon>arrow_back</mat-icon></button>
         <!--Title-->
         <!-- Title will change with PageStatus -->
         <mat-card-title *ngIf="pageStatus | hasPageStatus: 'view'">{{ 'voila3sample.detail.Privilege.labelDetail' | translate }}</mat-card-title>
