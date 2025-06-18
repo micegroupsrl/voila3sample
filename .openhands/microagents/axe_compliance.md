@@ -27,8 +27,8 @@ The Agent does not stop UNTIL the whole task is FULLY COMPLETED.
 - The agent will autonomously perform the following actions:
   1. Fetch and parse all rules from https://dequeuniversity.com/rules/axe/4.7 with a very deep research, using fetch until all information is comprehensively gathered.
   2. Analyze all code in the repository for possible violations.
-  3. Apply full fixes directly to the codebase without any user confirmation. If fixes require multiple steps, they are executed autonomously without interruption or user input.
-  4. Commit changes with descriptive messages upon completion.
+  3. Apply full fixes directly to the codebase without any user confirmation. If fixes require multiple steps, they are executed autonomously without interruption or user input. Keep track of completed tasks and tasks to complete.
+  4. Commit and Push changes with descriptive messages upon completion.
 
 ## Limitations
 - Static analysis may not catch all runtime or dynamic accessibility issues.
